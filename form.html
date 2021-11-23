@@ -54,8 +54,12 @@
 	
 <script type="text/javascript" src="bootstrap-datepicker.js"></script>
 
-
-
+<!-- pop up para mostrar projectso similares-->
+<link rel="stylesheet" type="text/css" href="project.css">
+ <link rel="stylesheet" type="text/css" href="pop.min.css">
+<script type="text/javascript" src="pop.min.js"></script>
+<script type="text/javascript" src="project.js"></script>
+ 
   
 
 	<script>
@@ -489,7 +493,7 @@ body {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="https://felipeomc.github.io/teamplus/form.html" class="nav-link">Home</a>
+        <a href="https://felipeomc.github.io/te/teamplus2.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="form.html" class="nav-link">Form teams</a>
@@ -603,7 +607,7 @@ body {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="https://felipeomc.github.io/teamplus/form.html" class="brand-link">
+    <a href="https://felipeomc.github.io/te/teamplus2.html" class="brand-link">
       <img src="https://as1.ftcdn.net/jpg/02/18/23/06/500_F_218230681_UrFaxawyNMGAN6lRIAk99or1eT9VxMCI.jpg" alt=" Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Team Plus</span>
     </a>
@@ -1128,7 +1132,7 @@ body {
 						<legend class="text-sm text-muted far ">
 						<p>				  
 						<div class="col  form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1">
+							<input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1" >
 								  <label class="form-check-label" for="gridRadios1">
 								 
 									HOMOGENEOUS
@@ -1142,9 +1146,9 @@ body {
 					
 					<div class="col-sm-10"> 
 						<legend class="text-sm text-muted far ">
-										  
+						<p>				  
 						<div class="col  form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios2" value="option2" checked>
+							<input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios2" value="option2"  >
 								  <label class="form-check-label" for="gridRadios2">
 								 
 									HETEROGENEOUS
@@ -1152,6 +1156,7 @@ body {
 								  
 							</input>
 						</div>
+						</p>
 						</legend>
 					</div>
 										  
@@ -1175,7 +1180,7 @@ body {
 						<legend class="text-sm text-muted far ">
 						<p>				  
 						<div class="col  form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios3" value="option3">
+							<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios3" value="option3" >
 								  <label class="form-check-label" for="gridRadios3">
 								 
 									HOMOGENEOUS
@@ -1190,9 +1195,9 @@ body {
 					
 					<div class="col-sm-10"> 
 						<legend class="text-sm text-muted far ">
-										  
+						<p>					  
 						<div class="col  form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios4" value="option4" checked>
+							<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios4" value="option4" >
 								  <label class="form-check-label" for="gridRadios4">
 								 
 									HETEROGENEOUS
@@ -1200,6 +1205,7 @@ body {
 								  
 							</input>
 						</div>
+						</p>
 						</legend>
 					</div>						
 											
@@ -1292,8 +1298,7 @@ body {
 				</div>
 				
 				
-				<div class="col">	
-				</div>
+				
 				
 	</div>
 	 <div class="row">
@@ -1310,7 +1315,27 @@ body {
 								<legend class="col-form-label  "></legend>
 								<button  type="submit" id="botao" class="btn btn-primary"   ><span class="glyphicon glyphicon-user" ></span>View suggestions</button>
 							<legend class="col-form-label  "></legend>
-							</div>
+						</div>
+							
+						<div id="similarprojects" class="col-auto" style="display:none">
+								<legend class="col-form-label  "></legend>
+								<button id="defaultdemo" type="button" class="btn btn-primary">See similar projects</button>
+							<legend class="col-form-label  "></legend>
+						</div>
+						
+							
+							
+							
+							
+					
+				   
+					  
+								
+						
+				   
+					
+							
+						
 				  
 	</div>	
 	
@@ -1371,10 +1396,10 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_kiran" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_kiran" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_kiran" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
@@ -1412,10 +1437,10 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_fred" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_fred" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color:#008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_fred" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
@@ -1424,7 +1449,7 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_fred" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
 								</div>
 								<div id="proatividade_fred" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
@@ -1458,7 +1483,7 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_alice" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_alice" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
@@ -1508,16 +1533,16 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Communication </div></div>
 								</div>
 								<div id="iniciativa_dave" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_dave" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
 								</div>
 								<div id="lideranca_dave" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
 								</div>
 								<div id="proatividade_dave" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 							
@@ -1547,7 +1572,7 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_bob" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_bob" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
@@ -1556,13 +1581,13 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
 								</div>
 								<div id="interacao_bob" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
 								</div>
 								<div id="lideranca_bob" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
 								</div>
 								<div id="proatividade_bob" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 							
@@ -1638,19 +1663,19 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_julia" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width:  60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
 								</div>
 								<div id="iniciativa_julia" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_julia" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_julia" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100">Leadership</div></div>
 								</div>
 								<div id="proatividade_julia" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 							
@@ -1680,19 +1705,19 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_nick" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_nick" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color:  #008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_nick" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_nick" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_nick" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
 								</div>
 								<div id="proatividade_nick" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
@@ -1746,10 +1771,10 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_kiran2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_kiran2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_kiran2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
@@ -1787,10 +1812,10 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_fred2" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_fred2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color:#008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_fred2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
@@ -1799,9 +1824,9 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_fred2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
 								</div>
-								<div id="proatividade_fred2" style="display:none;"  class="Busca_valor">
+								<div id="proatividade_fred2" style="display:none;"  class="Busca_valor">;
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
 								</div>
 							</div>
@@ -1831,7 +1856,7 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_alice2" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_alice2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
@@ -1843,7 +1868,7 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
 								</div>
 								<div id="lideranca_alice2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
 								</div>
 								<div id="proatividade_alice2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
@@ -1881,16 +1906,16 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Communication </div></div>
 								</div>
 								<div id="iniciativa_dave2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_dave2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
 								</div>
 								<div id="lideranca_dave2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
 								</div>
 								<div id="proatividade_dave2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 						</div>
@@ -1919,7 +1944,7 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_bob2" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_bob2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
@@ -1928,13 +1953,13 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
 								</div>
 								<div id="interacao_bob2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
 								</div>
 								<div id="lideranca_bob2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
 								</div>
 								<div id="proatividade_bob2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 						</div>
@@ -1980,6 +2005,7 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
+							
 						</div>
 					  </div>
 					  
@@ -2008,19 +2034,19 @@ body {
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_julia2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width:  60%; background-color: #ff0000; text-align:left;" title="50%">Communication </div></div>
 								</div>
 								<div id="iniciativa_julia2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_julia2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Interaction </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_julia2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100">Leadership</div></div>
 								</div>
 								<div id="proatividade_julia2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Proativity </div></div>
 								</div>
 							</div>
 						</div>
@@ -2048,19 +2074,19 @@ body {
 							</div>
 							<div class="row" style="justify-content: center;">
 								<div id="criatividade_nick2" style="display:none;" class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Creativity</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Creativity</div></div>
 								</div>
 								<div id="comunicacao_nick2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Communication </div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color:  #008500; text-align:left;" title="100%">Communication </div></div>
 								</div>
 								<div id="iniciativa_nick2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Initiative</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Initiative</div></div>
 								</div>
 								<div id="interacao_nick2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color:  #ff0000; text-align:left;" title="50%">Interaction </div></div>
 								</div>
 								<div id="lideranca_nick2" style="display:none;"  class="Busca_valor">
-									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 100%; background-color: #008500; text-align:left;" title="100%">Leadership</div></div>
+									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Leadership</div></div>
 								</div>
 								<div id="proatividade_nick2" style="display:none;"  class="Busca_valor">
 									<div class="insert_busca_width" style="width: 100%; background-color: #b0b0b0;" > <div class="insert_busca_width" style="width: 60%; background-color: #ff0000; text-align:left;" title="50%">Proativity </div></div>
@@ -2824,25 +2850,44 @@ $(function () {
 
 
 
+<div id="jquery-script-menu">
+	<div class="jquery-script-center">
+
+		<div class="jquery-script-ads">
+			
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-2783044520727903";
+			/* jQuery_demo */
+			google_ad_slot = "2780937993";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			//-->
+			</script>
+			
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+
+			</script>
+		</div>
+	<div class="jquery-script-clear"></div>
+	</div>
+</div>
 
 
+<script type="text/javascript">
 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
  
  
   
