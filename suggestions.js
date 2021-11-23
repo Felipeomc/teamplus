@@ -403,12 +403,12 @@ $(document).ready(function() {
 				porc_equipe2 = [];
 				
 						 ig = $('#entrada').val();
-						alert("Technologies: "+ig);
+						
 						$('#txtdigitado').val(ig+' \n');
 						
 						
 						soft = $('#entrada2').val();
-						alert("Soft Skills: "+soft);
+						alert("Technologies: "+ig+"\nSoft Skills: "+soft);
 						$('#txtdigitado2').val(soft+' \n');
 						
 						
@@ -1168,7 +1168,7 @@ $(document).ready(function() {
 									
 									if (softskills_fred[i] == arraysoft[x]){
 										qtd_sof_fred =qtd_sof_fred  +1;
-										alert ('fred tem soft skils');
+										
 										
 											
 									}
@@ -1367,7 +1367,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 	
 }
 						
-alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de soft:'+qtd_soft_skills);					
+//alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de soft:'+qtd_soft_skills);					
 						
 					
 		
@@ -1417,7 +1417,7 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 				// 1. verifica se é homogeneo e homogeneo
 				if ((type_grouping1 == "option1") && (type_grouping2=="option3")){
 					
-					alert('homogeneo e homogeneo');
+					//alert('homogeneo e homogeneo');
 						while (equipe.length <tamanho){	
 							
 							//pega distancia entre valores maximo e minimo no array das porcentagens_hard 
@@ -1530,38 +1530,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -1593,37 +1593,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
@@ -1757,38 +1757,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -1820,37 +1820,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills2.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
@@ -1879,7 +1879,7 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 				if ((type_grouping1 == "option1") && (type_grouping2=="option4")){
 					
 					
-					alert('homogeneo e heterogeneo ');
+					//alert('homogeneo e heterogeneo ');
 						while (equipe.length <tamanho){	
 							
 							//pega distancia entre valores maximo e minimo no array das porcentagens_hard 
@@ -1992,38 +1992,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -2055,37 +2055,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
@@ -2230,38 +2230,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -2293,37 +2293,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills2.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
@@ -2354,7 +2354,7 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 				// 3.  verifica se é heterogeneo e heterogeneo
 				if ((type_grouping1 == "option2") && (type_grouping2=="option4")){
 					
-					alert('heterogeneo e heterogeneo escolhido');
+					//alert('heterogeneo e heterogeneo escolhido');
 
 					// repetir enquanto o tamanho da equipe não é atingido
 					while (equipe.length <tamanho){	
@@ -2470,38 +2470,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																	
 																
 																	//coloca a pessoa de incice i
-																	alert('colocando  '+pessoas[indice_i]);
+																	//alert('colocando  '+pessoas[indice_i]);
 																	equipe.push(pessoas[indice_i]);
 																	//coloca a porcentagem da pessoa de incice i
 																	
-																	alert('colocando  '+porcentagens_hard[indice_i]);
+																	//alert('colocando  '+porcentagens_hard[indice_i]);
 																	porc_equipe.push(porcentagens_hard[indice_i]);
 																	
 																	//coloca a pessoa de incice j
-																	alert('colocando   '+pessoas[indice_j]);
+																	//alert('colocando   '+pessoas[indice_j]);
 																	equipe.push(pessoas[indice_j]);
 																	//coloca a porcentagem da pessoa de incice j
-																	alert('colocando   '+porcentagens_hard[indice_j]);
+																	//alert('colocando   '+porcentagens_hard[indice_j]);
 																	porc_equipe.push(porcentagens_hard[indice_j]);
 																	
 																	
 																	//retira a pessoa de incice i e de indice j
-																	alert('retirando '+pessoas[indice_i]);
+																	//alert('retirando '+pessoas[indice_i]);
 																	pessoas.splice(indice_i,1);
 																	
 																	
-																	alert('retirando '+pessoas[indice_j]);
+																	//alert('retirando '+pessoas[indice_j]);
 																	pessoas.splice(indice_j,1);
 																	
 																	
 																	
 																	
 																		
-																	alert('retirando '+porcentagens_hard[indice_i]);
+																	//alert('retirando '+porcentagens_hard[indice_i]);
 																	porcentagens_hard.splice(indice_i,1);	
 																	
 																	//retira a porcentagem da pessoa de incice i e de indice j
-																	alert('retirando '+porcentagens_hard[indice_j]);
+																	//alert('retirando '+porcentagens_hard[indice_j]);
 																	porcentagens_hard.splice(indice_j,1);
 																
 																	//retira niveis
@@ -2533,37 +2533,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																	novos_soft_skills.push(qtd_soft_skills[indice_j]);
 													
 															//coloca a pessoa de incice i
-																	alert('colocando  '+pessoas[indice_i]);
+																	//alert('colocando  '+pessoas[indice_i]);
 																	equipe.push(pessoas[indice_i]);
 																	//coloca a porcentagem da pessoa de incice i
 																	
-																	alert('colocando  '+porcentagens_hard[indice_i]);
+																	//alert('colocando  '+porcentagens_hard[indice_i]);
 																	porc_equipe.push(porcentagens_hard[indice_i]);
 																	
 																	//coloca a pessoa de incice j
-																	alert('colocando   '+pessoas[indice_j]);
+																	//alert('colocando   '+pessoas[indice_j]);
 																	equipe.push(pessoas[indice_j]);
 																	//coloca a porcentagem da pessoa de incice j
-																	alert('colocando   '+porcentagens_hard[indice_j]);
+																	//alert('colocando   '+porcentagens_hard[indice_j]);
 																	porc_equipe.push(porcentagens_hard[indice_j]);
 																	
 																	
 																	//retira a pessoa de incice i e de indice j
-																	alert('retirando '+pessoas[indice_i]);
+																	//alert('retirando '+pessoas[indice_i]);
 																	pessoas.splice(indice_i,1);
 																	
 																	
-																	alert('retirando '+pessoas[indice_j]);
+																	//alert('retirando '+pessoas[indice_j]);
 																	pessoas.splice(indice_j,1);
 																	
 																	
 																	
 																	
-																	alert('retirando '+porcentagens_hard[indice_i]);
+																	//alert('retirando '+porcentagens_hard[indice_i]);
 																	porcentagens_hard.splice(indice_i,1);	
 																	
 																	//retira a porcentagem da pessoa de incice i e de indice j
-																	alert('retirando '+porcentagens_hard[indice_j]);
+																	//alert('retirando '+porcentagens_hard[indice_j]);
 																	porcentagens_hard.splice(indice_j,1);
 																
 																	
@@ -2696,38 +2696,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -2759,37 +2759,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills2.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
@@ -2817,7 +2817,7 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 					
 						
 						
-						alert('heterogeneo e homogeneo escolhido');
+						//alert('heterogeneo e homogeneo escolhido');
 
 					// repetir enquanto o tamanho da equipe não é atingido
 					while (equipe.length <tamanho){	
@@ -2933,38 +2933,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																	
 																
 																	//coloca a pessoa de incice i
-																	alert('colocando  '+pessoas[indice_i]);
+																	//alert('colocando  '+pessoas[indice_i]);
 																	equipe.push(pessoas[indice_i]);
 																	//coloca a porcentagem da pessoa de incice i
 																	
-																	alert('colocando  '+porcentagens_hard[indice_i]);
+																	//alert('colocando  '+porcentagens_hard[indice_i]);
 																	porc_equipe.push(porcentagens_hard[indice_i]);
 																	
 																	//coloca a pessoa de incice j
-																	alert('colocando   '+pessoas[indice_j]);
+																	//alert('colocando   '+pessoas[indice_j]);
 																	equipe.push(pessoas[indice_j]);
 																	//coloca a porcentagem da pessoa de incice j
-																	alert('colocando   '+porcentagens_hard[indice_j]);
+																	//alert('colocando   '+porcentagens_hard[indice_j]);
 																	porc_equipe.push(porcentagens_hard[indice_j]);
 																	
 																	
 																	//retira a pessoa de incice i e de indice j
-																	alert('retirando '+pessoas[indice_i]);
+																	//alert('retirando '+pessoas[indice_i]);
 																	pessoas.splice(indice_i,1);
 																	
 																	
-																	alert('retirando '+pessoas[indice_j]);
+																	//alert('retirando '+pessoas[indice_j]);
 																	pessoas.splice(indice_j,1);
 																	
 																	
 																	
 																	
 																		
-																	alert('retirando '+porcentagens_hard[indice_i]);
+																	//alert('retirando '+porcentagens_hard[indice_i]);
 																	porcentagens_hard.splice(indice_i,1);	
 																	
 																	//retira a porcentagem da pessoa de incice i e de indice j
-																	alert('retirando '+porcentagens_hard[indice_j]);
+																	//alert('retirando '+porcentagens_hard[indice_j]);
 																	porcentagens_hard.splice(indice_j,1);
 																
 																	//retira niveis
@@ -2996,37 +2996,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																	novos_soft_skills.push(qtd_soft_skills[indice_j]);
 													
 															//coloca a pessoa de incice i
-																	alert('colocando  '+pessoas[indice_i]);
+																	//alert('colocando  '+pessoas[indice_i]);
 																	equipe.push(pessoas[indice_i]);
 																	//coloca a porcentagem da pessoa de incice i
 																	
-																	alert('colocando  '+porcentagens_hard[indice_i]);
+																	//alert('colocando  '+porcentagens_hard[indice_i]);
 																	porc_equipe.push(porcentagens_hard[indice_i]);
 																	
 																	//coloca a pessoa de incice j
-																	alert('colocando   '+pessoas[indice_j]);
+																	//alert('colocando   '+pessoas[indice_j]);
 																	equipe.push(pessoas[indice_j]);
 																	//coloca a porcentagem da pessoa de incice j
-																	alert('colocando   '+porcentagens_hard[indice_j]);
+																	//alert('colocando   '+porcentagens_hard[indice_j]);
 																	porc_equipe.push(porcentagens_hard[indice_j]);
 																	
 																	
 																	//retira a pessoa de incice i e de indice j
-																	alert('retirando '+pessoas[indice_i]);
+																	//alert('retirando '+pessoas[indice_i]);
 																	pessoas.splice(indice_i,1);
 																	
 																	
-																	alert('retirando '+pessoas[indice_j]);
+																	//alert('retirando '+pessoas[indice_j]);
 																	pessoas.splice(indice_j,1);
 																	
 																	
 																	
 																	
-																	alert('retirando '+porcentagens_hard[indice_i]);
+																	//alert('retirando '+porcentagens_hard[indice_i]);
 																	porcentagens_hard.splice(indice_i,1);	
 																	
 																	//retira a porcentagem da pessoa de incice i e de indice j
-																	alert('retirando '+porcentagens_hard[indice_j]);
+																	//alert('retirando '+porcentagens_hard[indice_j]);
 																	porcentagens_hard.splice(indice_j,1);
 																
 																	
@@ -3160,38 +3160,38 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		
 																	
 																		//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
 																			
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		//retira niveis
@@ -3223,37 +3223,37 @@ alert('pessoas: '+pessoas+ '\nporcen hard: '+porcentagens_hard+ '\nQuantidade de
 																		novos_soft_skills2.push(qtd_soft_skills[indice_j]);
 														
 																//coloca a pessoa de incice i
-																		alert('colocando  '+pessoas[indice_i]);
+																		//alert('colocando  '+pessoas[indice_i]);
 																		equipe2.push(pessoas[indice_i]);
 																		//coloca a porcentagem da pessoa de incice i
 																		
-																		alert('colocando  '+porcentagens_hard[indice_i]);
+																		//alert('colocando  '+porcentagens_hard[indice_i]);
 																		porc_equipe2.push(porcentagens_hard[indice_i]);
 																		
 																		//coloca a pessoa de incice j
-																		alert('colocando   '+pessoas[indice_j]);
+																		//alert('colocando   '+pessoas[indice_j]);
 																		equipe2.push(pessoas[indice_j]);
 																		//coloca a porcentagem da pessoa de incice j
-																		alert('colocando   '+porcentagens_hard[indice_j]);
+																		//alert('colocando   '+porcentagens_hard[indice_j]);
 																		porc_equipe2.push(porcentagens_hard[indice_j]);
 																		
 																		
 																		//retira a pessoa de incice i e de indice j
-																		alert('retirando '+pessoas[indice_i]);
+																		//alert('retirando '+pessoas[indice_i]);
 																		pessoas.splice(indice_i,1);
 																		
 																		
-																		alert('retirando '+pessoas[indice_j]);
+																		//alert('retirando '+pessoas[indice_j]);
 																		pessoas.splice(indice_j,1);
 																		
 																		
 																		
 																		
-																		alert('retirando '+porcentagens_hard[indice_i]);
+																		//alert('retirando '+porcentagens_hard[indice_i]);
 																		porcentagens_hard.splice(indice_i,1);	
 																		
 																		//retira a porcentagem da pessoa de incice i e de indice j
-																		alert('retirando '+porcentagens_hard[indice_j]);
+																		//alert('retirando '+porcentagens_hard[indice_j]);
 																		porcentagens_hard.splice(indice_j,1);
 																	
 																		
