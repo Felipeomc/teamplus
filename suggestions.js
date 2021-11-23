@@ -3517,7 +3517,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							}
 					}
 					
-				
+		
+});				
 						
 	
 	$("#defaultdemo").click(function() {
@@ -3582,16 +3583,16 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					
 					
 				function sampleExitTask() {
-				$("#exitTaskOutput").html("Action on Popup Dismissal.<br>This event fired at the time the popup was dismissed based on the function assigned to the 'click-fn' option.");
-				$("#exitTaskOutput").css({padding: "4px", background: "#ff8080"});
-				$("#exitTaskOutput").fadeIn();
-				setTimeout(function(){
-					$("#exitTaskOutput").fadeOut();
-				},6000);
-			}	
+					$("#exitTaskOutput").html("Action on Popup Dismissal.<br>This event fired at the time the popup was dismissed based on the function assigned to the 'click-fn' option.");
+					$("#exitTaskOutput").css({padding: "4px", background: "#ff8080"});
+					$("#exitTaskOutput").fadeIn();
+					setTimeout(function(){
+						$("#exitTaskOutput").fadeOut();
+					},6000);
+				}	
 				
 				
-			});
+	});
 					
 					
 						
@@ -3599,8 +3600,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					
 				
 
-		
-});	
+	
 
 				
 				
