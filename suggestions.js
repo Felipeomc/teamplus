@@ -110,7 +110,13 @@ $(document).ready(function() {
 					var texts = [];
 				
 				$( "#botao" ).click(function() {
+					inicia();
 					
+					});	
+					
+					function inicia(){
+					document.getElementById("sugestao1").style.display = "block";
+					document.getElementById("sugestao2").style.display = "block";
 					
 				//restart var
 
@@ -206,6 +212,7 @@ $(document).ready(function() {
 				
 						
 				document.getElementById("similarprojects").style.display = "none";
+				
 				
 				document.getElementById("criatividade_fred").style.display = "none";
 				document.getElementById("proatividade_fred").style.display = "none";	
@@ -3497,7 +3504,11 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					
 				
 					
-					
+				
+					localStorage.setItem('qtd_mas', qtd_devmaster);	
+					localStorage.setItem('qtd_ple', qtd_devmiddle);	
+					localStorage.setItem('qtd_sen', qtd_devsenior);	
+					localStorage.setItem('qtd_jun', qtd_devjunior);	
 					
 					
 					
@@ -3517,9 +3528,14 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							}
 					}
 					
-		
-});				
-						
+					
+					
+					
+					
+					
+	}
+			
+				
 	
 	$("#defaultdemo").click(function() {
 				var projetoa=0;
@@ -5603,6 +5619,11 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 				//--------------------------------------------------------------------//
 			}
 			
+			
+			
+		
+					
+			
 	}); //equipe1
 		
 		
@@ -5610,21 +5631,29 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 		
 		
     
-
+$( "#salvarequipe" ).click(function() {	
+						alert('salvando');
+						localStorage.setItem('valueTexto', equipe);
+						localStorage.setItem('valueText', ig);
+						
+							
+				
+						
+						
+				});			
 
 			
 				
 				
-	$( "#salvarequipe" ).click(function() {	
-						
-						localStorage.setItem('valueTexto', equipe);
-						localStorage.setItem('valueText', ig);
-						
-						
-				});	
+	
 		
-		
-			 
+					
+					
+
+
+
+
+	
 		
 			
 });

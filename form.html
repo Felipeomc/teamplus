@@ -67,7 +67,7 @@
 			$(function() {
 
 			$('.dates #usr1').datepicker({
-				'format': 'dd-mm-yyyy',
+				'format': 'yyyy',
 				'autoclose': true
 			});
 
@@ -76,7 +76,7 @@
 		$(function() {
 
 			$('.dates #usr2').datepicker({
-				'format': 'dd-mm-yyyy',
+				'format': 'yyyy',
 				'autoclose': true
 			});
 
@@ -1081,12 +1081,12 @@ body {
   <div class="row">
     <div class="col">
       <legend class=" col-form-label ">Project Title:</legend>
-	  <input id="title"   style="width:202px;"  class="form-control"  value="" data-role=""  required >
+	  <input id="title"   style="width:202px;"  class="form-control"  value="" data-role="" >
     </div>
     <div class="col">
       <legend class=" col-form-label ">Nature:</legend> 
 											
-		<select id="natureza"  class="form-control" style="width:206px;" required>
+		<select id="natureza"  class="form-control" style="width:206px;" >
 															<option value="0">Similar technology</option>
 															<option value="1">Project already done</option>
 															<option value="2">New technology</option>
@@ -1097,14 +1097,14 @@ body {
       <legend class=" col-form-label" >Date begin:</legend>
 				<div class="dates" ">
 					
-					<input type="text" style="width:120px;" class="form-control" id="usr1" value="01-12-2021" name="event_date" placeholder="DD-MM-YYYY" autocomplete="off" >
+					<input type="text" style="width:120px;" class="form-control" id="usr1" type="year" value="2021" name="event_date" placeholder="YYYY" autocomplete="off" >
 				 </div>
     </div>
 	<div class="col">
       <legend class=" col-form-label" >Date end:</legend>
 				<div class="dates" ">
 					
-					<input type="text" style="width:120px;" class="form-control" id="usr2"  value="01-12-2022" name="event_date" placeholder="DD-MM-YYYY" autocomplete="off" >
+					<input type="text" style="width:120px;" class="form-control" id="usr2" type="year" value="2022" name="event_date" placeholder="YYYY" autocomplete="off" >
 				 </div>
     </div>
 	<div class="col">	
@@ -1307,13 +1307,19 @@ body {
 				
 							<div class="col-auto">
 								<legend class="col-form-label  "></legend>
-								<button  type="submit" id="salvarprojeto" onclick="salvarprojeto()"   class="btn btn-primary"   ><span class="glyphicon glyphicon-user" ></span>Save project</button>
+								<button  type="submit" id="salvarprojeto" onclick="salvarprojeto()"   class="btn btn-primary"   ><span class="glyphicon glyphicon-user" ></span>Create project</button>
 							<legend class="col-form-label  "></legend>
 							</div>
+							
+							<div  id="atualizar" class="col-auto" style="display:none">
+								<legend class="col-form-label  "></legend>
+								<button  type="submit"class="btn btn-primary"  onclick="update_project_o()"  ><span class="glyphicon glyphicon-user" ></span>Update project</button>
+							<legend class="col-form-label  "></legend>
+						</div>
 						
 						<div class="col-auto">
 								<legend class="col-form-label  "></legend>
-								<button  type="submit" id="botao" class="btn btn-primary"   ><span class="glyphicon glyphicon-user" ></span>View suggestions</button>
+								<button  type="submit" id="botao" class="btn btn-primary"  onclick="botao()"  ><span class="glyphicon glyphicon-user" ></span>View suggestions</button>
 							<legend class="col-form-label  "></legend>
 						</div>
 							
@@ -2148,14 +2154,22 @@ body {
                 
 				<div class="card col-12" id="timeline"></div>
 		
+		
 			
 			<ul>
 				
 				
-				<!--<button class="btn btn-primary btn-rounded" href="#form.html" id="opener" onclick="add_item()">Create a project</button>-->
+				
 				<a class="btn btn-primary btn-rounded" id="create" href="#" onclick="exibirForm()"  >Create a project</a>
 				
+				
+				<button class="btn btn-primary btn-rounded" id="update" href="form.html" onclick="update_project()">Update project</button>
+				
+				
 				<button class="btn btn-primary btn-rounded" href="#" onclick="remove_selected_item()">Delete a project</button>
+				
+				
+				
 			</ul>
 				
 
@@ -2185,33 +2199,46 @@ body {
 
 <script>
 
+
+//======================================================================================
+//======================================================================================
+//                             update projects
+
+
+
+
+				
+
+
+
+
 	function salvarprojeto(){
 		
 		
 		if (localStorage.getItem('valueTexto')==''){
-			var salva2 = confirm("Save project without team?");
+			var salva2 = confirm("Create project without team?");
 			
 			if (salva2==true){
-				alert("Project without team saved sucessfull! ");
+				alert("Project without team created sucessfull! ");
 				add_item(); 
 			}
 			if (salva2!=true){
-				alert("Project without team  don't saved!");
+				alert("Project without team  don't created!");
 				
 			}
 			
 		}
 		if (localStorage.getItem('valueTexto')!=''){
-			var salva = confirm("Save project?");
+			var salva = confirm("Create project?");
 			
 			
 			
 			if (salva==true){
-				alert("Project saved sucessfull! ");
+				alert("Project created sucessfull! ");
 				add_item(); 
 			}
 			if (salva!=true){
-				alert("Project don't saved! ");
+				alert("Project don't created! ");
 				
 			}
 		}
@@ -2221,17 +2248,23 @@ body {
 		function exibirProjetos() {
 			document.getElementById("projects").style.visibility ="visible";
 			document.getElementById("pg1").style.display = "none";
+			clearFields();
+			
 			
 		}
 
 		
 		function exibirForm() {
 			
-			localStorage.setItem('valueTexto', '');
-			localStorage.setItem('valueText', '');
+			//localStorage.setItem('valueTexto', '');
+			//localStorage.setItem('valueText', '');
 			
 			document.getElementById("pg1").style.display = "block";
+			
+			
 			clearFields();
+			
+			
 			document.getElementById("sugestao1").style.display = "none";
 			document.getElementById("sugestao2").style.display = "none";
 			
@@ -2239,16 +2272,59 @@ body {
 			document.getElementById("projects").style.visibility ="hidden";
 			
 		}
-
-		function ocultarForm() {
-		//	document.getElementById("pg1").style.display = "none";
+		
+		function update_project() {
+			    
+				
+				document.getElementById("atualizar").style.display = "block";
+				
+				document.getElementById('title').value = localStorage.getItem('name_update');
+				
+				
+				document.getElementById('natureza').value = localStorage.getItem('nature_update');
+				
+				
+				document.getElementById('entrada').value = localStorage.getItem('technoogies_update');
+				
+				document.getElementById('entrada2').value = localStorage.getItem('soft_skill_update');
+				
+				document.getElementById('usr1').value = localStorage.getItem('date_begin_update');
+				
+				document.getElementById('usr2').value = localStorage.getItem('date_end_update');
+			
+				
+				
+				
+				document.getElementById('DevMast').value = localStorage.getItem('qtd_mas');
+				
+				document.getElementById('DevPleno').value = localStorage.getItem('qtd_ple');
+				
+				document.getElementById('DevSeni').value = localStorage.getItem('qtd_sen');
+				
+				document.getElementById('DevJuni').value = localStorage.getItem('qtd_jun');
+				
+					
+			
+			
+			
+			
+			document.getElementById("pg1").style.display = "block";
+			
+			
+			//inicia();
+			
+			document.getElementById("projects").style.visibility ="hidden";
+			document.getElementById("sugestao1").style.display = "block";
+					document.getElementById("sugestao2").style.display = "block";
+			
+			
 		}
 		
+
+		
+		
 		function clearFields()  
-		{
-			
-			//document.getElementById('#tagsinput').style.display = "none";	
-				
+		{   
 			
 			document.getElementById('title').value = "";
 			document.getElementById('natureza').value = "";
