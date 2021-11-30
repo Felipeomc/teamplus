@@ -9,7 +9,7 @@
 			var data;
 			var options;
 			var nome;
-			var texto;
+			var texto_team;
 			var tech;
 			var natureza;
 			var inicio; 
@@ -79,7 +79,7 @@
 				ano_fim;
 				data = timeline.getTimelineData();
 				nome = $("#title").val();
-				texto = localStorage.getItem('valueTexto');
+				texto_team = localStorage.getItem('valueTexto');
 				tech =  localStorage.getItem('valueText');
 				
 				natureza;
@@ -135,7 +135,7 @@
 						className: 'styleA', 
 						
 					
-						popup_html: '<b>'+nome+'</b><br>Nature: '+natureza+'<br> Date Begin:&ensp;'+ inicio+'<br>  Date end:&ensp;'+ fim+'<br> Team:&ensp;'+texto+' <br>  <br>  Technolgies: '+tag1+'  <br>  Soft Skills: '+tag2+' '
+						popup_html: '<b>'+nome+'</b><br>Nature: '+natureza+'<br> Date Begin:&ensp;'+ inicio+'<br>  Date end:&ensp;'+ fim+'<br> Team:&ensp;'+texto_team+' <br>  <br>  Technolgies: '+tag1+'  <br>  Soft Skills: '+tag2+' '
 					
 					
 						
@@ -145,7 +145,7 @@
 				]);
 				
 				
-				//alert('nova equipe salva! '+texto);
+				//alert('nova equipe salva! '+texto_team);
 				
 				
 								if (natureza.indexOf("Similar") != -1){
@@ -170,7 +170,7 @@
 									localStorage.setItem('soft_skill_update', tag2);
 									
 									
-									localStorage.setItem('team_update', texto);
+									localStorage.setItem('team_update', texto_team);
 									
 				
 				timeline.setTimelineData(data).refreshTimeline();
@@ -197,7 +197,7 @@
 				ano_fim;
 				data = timeline.getTimelineData();
 				nome = $("#title").val();
-				texto = localStorage.getItem('valueTexto');
+				texto_team = localStorage.getItem('valueTexto');
 				tech =  localStorage.getItem('valueText');
 				
 				natureza;
@@ -253,7 +253,7 @@
 						className: 'styleA', 
 						
 					
-						popup_html: '<b>'+nome+'</b><br>Nature: '+natureza+'<br> Date Begin:&ensp;'+ inicio+'<br>  Date end:&ensp;'+ fim+'<br> Team:&ensp;'+texto+' <br>  <br>  Technolgies: '+tag1+'  <br>  Soft Skills: '+tag2+' '
+						popup_html: '<b>'+nome+'</b><br>Nature: '+natureza+'<br> Date Begin:&ensp;'+ inicio+'<br>  Date end:&ensp;'+ fim+'<br> Team:&ensp;'+texto_team+' <br>  <br>  Technolgies: '+tag1+'  <br>  Soft Skills: '+tag2+' '
 					
 					
 						
@@ -285,7 +285,7 @@
 									localStorage.setItem('soft_skill_update', tag2);
 									
 									
-									localStorage.setItem('team_update', texto);
+									localStorage.setItem('team_update', texto_team);
 				
 				
 						timeline.setTimelineData(data).refreshTimeline();

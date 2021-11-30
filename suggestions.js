@@ -2,8 +2,24 @@
 
 
 $(document).ready(function() {
-  $('.tipe').next().hide(); 
-		
+$('.tipe').next().hide(); 
+			
+			
+			
+					var qtd_tags_kiran = 0;
+					var qtd_tags_fred = 0;
+					var qtd_tags_alice = 0;
+					var qtd_tags_dave = 0;
+					
+					
+					
+					var qtd_tags_bob = 0;
+					var qtd_tags_marcos = 0;
+					var qtd_tags_julia = 0;
+					var qtd_tags_nick = 0;
+				
+				
+				
 		//===================================
 				var kiran_perc_hard=0;
 				var bob_perc_hard=0;
@@ -23,8 +39,7 @@ $(document).ready(function() {
 				var qtd_soft_skills = [];
 
 
-				var porc_equipe =[];
-				var porc_equipe2 =[];
+				
 				var menor_dist_hard;
 				var menor_dist_soft;
 
@@ -99,22 +114,27 @@ $(document).ready(function() {
 				
 				
 				var equipe1 = [];
+				var equipe2 = [];
 				var equipe = [];
 				var nova_equipe1  = [];
 				var nova_equipe2  = [];
-					var porc_equipe1 = [];
+				
+				
+				var porc_equipe1 = [];
 					
-					var equipe2 = [];
-					var porc_equipe2 = [];
+					
 					
 					var texts = [];
+					
+				var porc_equipe =[];
+				var porc_equipe2 =[];
 				
 				$( "#botao" ).click(function() {
 					inicia();
 					
 					});	
 					
-					function inicia(){
+				function inicia(){
 					document.getElementById("sugestao1").style.display = "block";
 					document.getElementById("sugestao2").style.display = "block";
 					
@@ -402,12 +422,7 @@ $(document).ready(function() {
 				porcentagem_sugestao2=0;
 				porcentagem_sugestao1=0;
 				
-				equipe1 = [];
 				
-				porc_equipe1 = [];
-					
-				equipe2 = [];
-				porc_equipe2 = [];
 				
 						 ig = $('#entrada').val();
 						
@@ -420,20 +435,20 @@ $(document).ready(function() {
 						
 						
 						
-					var qtd_tags_kiran = 0;
-					var qtd_tags_fred = 0;
-					var qtd_tags_alice = 0;
-					var qtd_tags_dave = 0;
+					 qtd_tags_kiran = 0;
+					 qtd_tags_fred = 0;
+					 qtd_tags_alice = 0;
+					 qtd_tags_dave = 0;
 					
 					porcentagem_kiran = 0;
 					porcentagem_fred = 0;
 					porcentagem_alice = 0;
 					porcentagem_dave = 0;
 					
-					var qtd_tags_bob = 0;
-					var qtd_tags_marcos = 0;
-					var qtd_tags_julia = 0;
-					var qtd_tags_nick = 0;
+					 qtd_tags_bob = 0;
+					 qtd_tags_marcos = 0;
+					 qtd_tags_julia = 0;
+					 qtd_tags_nick = 0;
 					
 					porcentagem_bob = 0;
 					porcentagem_marcos = 0;
@@ -478,7 +493,7 @@ $(document).ready(function() {
 					
 					var softs = $('#txtdigitado2').val().split(/,/);
 					var arraysoft = [];
-					var equipe1_comparacao =[];
+					
 					
 					$("#kiran").css("display", "none");
 					$("#fred").css("display", "none");
@@ -718,6 +733,9 @@ $(document).ready(function() {
 					var qtd_devmiddle = $( "#DevPleno" ).val();
 					var qtd_devsenior = $( "#DevSeni" ).val();
 					var qtd_devjunior = $( "#DevJuni" ).val();
+					
+					
+					
 					
 					var kiranpode=0;
 					var fredpode=0;
@@ -3289,7 +3307,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 	
 
 
-//alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nniveis_equipe:    '+novos_niveis+ '\nqtd de soft skills '+novos_soft_skills);	
+alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+equipe2+ '\nporc_equipe:    '+porc_equipe2);	
 
 	//for (var tame = 0; tame < tamanho; tame++){
 																			//coloca a pessoa de incice i
@@ -3614,7 +3632,19 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 					
 					
+		
+			$( "#salvarequipe" ).click(function() {	
+						alert('saving');
+						
+						localStorage.setItem('valueTexto', equipe);
+						localStorage.setItem('valueText', ig);
+						
+							
 				
+						
+						
+				});			
+		
 
 	
 
@@ -3673,6 +3703,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							porc_equipe.splice(j, 1);
 						} 
 						
+						
 					}
 					porcentagem_sugestao1=0;
 					
@@ -3684,7 +3715,11 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					}
 					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
 					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
 					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
 					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
 							$("#percentual_equipe1").css("background-color", "#eead2d");
 					}
@@ -3705,7 +3740,13 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					}
 					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
 					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
 					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
 					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
 							$("#percentual_equipe2").css("background-color", "#eead2d");
 					}
@@ -3741,7 +3782,10 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 					}
 					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					
 					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
 					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
 					
 					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
@@ -3763,7 +3807,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 					}
 					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					
 					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
 					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
 					
 					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
@@ -3801,7 +3847,10 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 					}
 					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					
 					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
 					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
 					
 					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
@@ -4154,7 +4203,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 						if(equipe2[j]=='kiran'){
 							equipe.push('kiran');
-							equipe.push(porcentagem_kiran);
+							porc_equipe.push(porcentagem_kiran);
 							
 							equipe2.splice(j, 1);
 							porc_equipe2.splice(j, 1);
@@ -4167,7 +4216,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					
 					for (var i=0; i<equipe.length;i++){
 						
-						porcentagem_sugestao1 = porcentagem_sugestao1 + equipe[i];
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
 						
 					}
@@ -5619,7 +5668,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 				//--------------------------------------------------------------------//
 			}
 			
-			
+		
 			
 		
 					
@@ -5627,34 +5676,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 	}); //equipe1
 		
 		
-		
-		
-		
-    
-$( "#salvarequipe" ).click(function() {	
-						alert('salvando');
-						localStorage.setItem('valueTexto', equipe);
-						localStorage.setItem('valueText', ig);
-						
-							
-				
-						
-						
-				});			
 
-			
-				
-				
-	
-		
-					
-					
-
-
-
-
-	
-		
 			
 });
 
