@@ -17,8 +17,18 @@ $('.tipe').next().hide();
 					var qtd_tags_marcos = 0;
 					var qtd_tags_julia = 0;
 					var qtd_tags_nick = 0;
-				
-				
+					
+					var qtd_tags_paul = 0;
+					var qtd_tags_doug = 0;
+					
+					var qtd_tags_ana = 0;
+					var qtd_tags_rita = 0;
+					
+					var qtd_tags_peter = 0;
+					var qtd_tags_claudio = 0;
+					
+					var qtd_tags_livia = 0;
+					var qtd_tags_glaucia = 0;
 				
 		//===================================
 				var kiran_perc_hard=0;
@@ -32,7 +42,20 @@ $('.tipe').next().hide();
 
 				var dave_perc_hard=0;
 				var nick_perc_hard=0;
-								
+				
+				var paul_perc_hard=0;
+				var doug_perc_hard=0;
+				
+				var ana_perc_hard=0;
+				var rita_perc_hard=0;
+				
+				var peter_perc_hard=0;
+				var claudio_perc_hard=0;
+				
+				var livia_perc_hard=0;
+				var glaucia_perc_hard=0;
+				
+				
 				var porcentagens_hard = [];
 				var pessoas = [];
 				var niveis = [];
@@ -89,6 +112,18 @@ $('.tipe').next().hide();
 				var porcentagem_julia;
 				var porcentagem_nick;
 				
+				var porcentagem_paul;
+				var porcentagem_doug;
+				
+				var porcentagem_ana;
+				var porcentagem_rita;
+				
+				var porcentagem_peter;
+				var porcentagem_claudio;
+				
+				var porcentagem_livia;
+				var porcentagem_glaucia;
+				
 				var porcentagem_sugestao2;
 				var porcentagem_sugestao1;
 				
@@ -102,6 +137,18 @@ $('.tipe').next().hide();
 				var julia_sugest1=1;
 				var nick_sugest1=1;
 				
+				var paul_sugest1=1;
+				var doug_sugest1=1;
+				
+				var ana_sugest1=1;
+				var rita_sugest1=1;
+				
+				var peter_sugest1=1;
+				var claudio_sugest1=1;
+				
+				var livia_sugest1=1;
+				var glaucia_sugest1=1;
+				
 				var kiran2_sugest1=1;
 				var fred2_sugest1=1;
 				var alice2_sugest1=1;
@@ -112,6 +159,17 @@ $('.tipe').next().hide();
 				var julia2_sugest1=1;
 				var nick2_sugest1=1;
 				
+				var paul2_sugest1=1;
+				var doug2_sugest1=1;
+
+				var ana2_sugest1=1;
+				var rita2_sugest1=1;
+				
+				var peter2_sugest1=1;
+				var claudio2_sugest1=1;
+				
+				var livia2_sugest1=1;
+				var glaucia2_sugest1=1;
 				
 				var equipe1 = [];
 				var equipe2 = [];
@@ -152,6 +210,18 @@ $('.tipe').next().hide();
 
 				 dave_perc_hard=0;
 				 nick_perc_hard=0;
+				 
+				 paul_perc_hard=0;
+				 doug_perc_hard=0;
+				 
+				 ana_perc_hard=0;
+				 rita_perc_hard=0;
+				 
+				 peter_perc_hard=0;
+				 claudio_perc_hard=0;
+				 
+				 livia_perc_hard=0;
+				 glaucia_perc_hard=0;
 								
 				 porcentagens_hard = [];
 				 pessoas = [];
@@ -204,6 +274,17 @@ $('.tipe').next().hide();
 				 marcos_sugest1=1;
 				 julia_sugest1=1;
 				 nick_sugest1=1;
+				 
+				 paul_sugest1=1;
+				 doug_sugest1=1;
+				 ana_sugest1=1;
+				 rita_sugest1=1;
+				 
+				 peter_sugest1=1;
+				 claudio_sugest1=1;
+				 
+				 livia_sugest1=1;
+				 glaucia_sugest1=1;
 				
 				 kiran2_sugest1=1;
 				 fred2_sugest1=1;
@@ -214,7 +295,18 @@ $('.tipe').next().hide();
 				 marcos2_sugest1=1;
 				 julia2_sugest1=1;
 				 nick2_sugest1=1;
+				 
+				 paul2_sugest1=1;
+				 doug2_sugest1=1;
 				
+  				 ana2_sugest1=1;
+				 rita2_sugest1=1;
+				 
+				 peter2_sugest1=1;
+				 claudio2_sugest1=1;
+				 
+				 livia2_sugest1=1;
+				 glaucia2_sugest1=1;
 				
 				 equipe1 = [];
 				 equipe = [];
@@ -294,6 +386,67 @@ $('.tipe').next().hide();
 				
 				
 				
+				document.getElementById("criatividade_paul").style.display = "none";
+				document.getElementById("proatividade_paul").style.display = "none";	
+				document.getElementById("lideranca_paul").style.display = "none";
+				document.getElementById("interacao_paul").style.display = "none";
+				document.getElementById("iniciativa_paul").style.display = "none";
+				document.getElementById("comunicacao_paul").style.display = "none";
+				
+				document.getElementById("criatividade_doug").style.display = "none";
+				document.getElementById("proatividade_doug").style.display = "none";	
+				document.getElementById("lideranca_doug").style.display = "none";
+				document.getElementById("interacao_doug").style.display = "none";
+				document.getElementById("iniciativa_doug").style.display = "none";
+				document.getElementById("comunicacao_doug").style.display = "none";
+				
+				document.getElementById("criatividade_ana").style.display = "none";
+				document.getElementById("proatividade_ana").style.display = "none";	
+				document.getElementById("lideranca_ana").style.display = "none";
+				document.getElementById("interacao_ana").style.display = "none";
+				document.getElementById("iniciativa_ana").style.display = "none";
+				document.getElementById("comunicacao_ana").style.display = "none";
+				
+				document.getElementById("criatividade_rita").style.display = "none";
+				document.getElementById("proatividade_rita").style.display = "none";	
+				document.getElementById("lideranca_rita").style.display = "none";
+				document.getElementById("interacao_rita").style.display = "none";
+				document.getElementById("iniciativa_rita").style.display = "none";
+				document.getElementById("comunicacao_rita").style.display = "none";
+				
+				
+				
+				document.getElementById("criatividade_peter").style.display = "none";
+				document.getElementById("proatividade_peter").style.display = "none";	
+				document.getElementById("lideranca_peter").style.display = "none";
+				document.getElementById("interacao_peter").style.display = "none";
+				document.getElementById("iniciativa_peter").style.display = "none";
+				document.getElementById("comunicacao_peter").style.display = "none";
+				
+				
+				document.getElementById("criatividade_claudio").style.display = "none";
+				document.getElementById("proatividade_claudio").style.display = "none";	
+				document.getElementById("lideranca_claudio").style.display = "none";
+				document.getElementById("interacao_claudio").style.display = "none";
+				document.getElementById("iniciativa_claudio").style.display = "none";
+				document.getElementById("comunicacao_claudio").style.display = "none";
+				
+				document.getElementById("criatividade_livia").style.display = "none";
+				document.getElementById("proatividade_livia").style.display = "none";	
+				document.getElementById("lideranca_livia").style.display = "none";
+				document.getElementById("interacao_livia").style.display = "none";
+				document.getElementById("iniciativa_livia").style.display = "none";
+				document.getElementById("comunicacao_livia").style.display = "none";
+				
+				document.getElementById("criatividade_glaucia").style.display = "none";
+				document.getElementById("proatividade_glaucia").style.display = "none";	
+				document.getElementById("lideranca_glaucia").style.display = "none";
+				document.getElementById("interacao_glaucia").style.display = "none";
+				document.getElementById("iniciativa_glaucia").style.display = "none";
+				document.getElementById("comunicacao_glaucia").style.display = "none";
+				
+				
+				
 				document.getElementById("criatividade_fred2").style.display = "none";
 				document.getElementById("proatividade_fred2").style.display = "none";	
 				document.getElementById("lideranca_fred2").style.display = "none";
@@ -351,6 +504,66 @@ $('.tipe').next().hide();
 				document.getElementById("interacao_nick2").style.display = "none";
 				document.getElementById("iniciativa_nick2").style.display = "none";
 				document.getElementById("comunicacao_nick2").style.display = "none";
+				
+				document.getElementById("criatividade_paul2").style.display = "none";
+				document.getElementById("proatividade_paul2").style.display = "none";	
+				document.getElementById("lideranca_paul2").style.display = "none";
+				document.getElementById("interacao_paul2").style.display = "none";
+				document.getElementById("iniciativa_paul2").style.display = "none";
+				document.getElementById("comunicacao_paul2").style.display = "none";
+				
+				document.getElementById("criatividade_doug2").style.display = "none";
+				document.getElementById("proatividade_doug2").style.display = "none";	
+				document.getElementById("lideranca_doug2").style.display = "none";
+				document.getElementById("interacao_doug2").style.display = "none";
+				document.getElementById("iniciativa_doug2").style.display = "none";
+				document.getElementById("comunicacao_doug2").style.display = "none";
+				
+				document.getElementById("criatividade_ana2").style.display = "none";
+				document.getElementById("proatividade_ana2").style.display = "none";	
+				document.getElementById("lideranca_ana2").style.display = "none";
+				document.getElementById("interacao_ana2").style.display = "none";
+				document.getElementById("iniciativa_ana2").style.display = "none";
+				document.getElementById("comunicacao_ana2").style.display = "none";
+				
+				document.getElementById("criatividade_rita2").style.display = "none";
+				document.getElementById("proatividade_rita2").style.display = "none";	
+				document.getElementById("lideranca_rita2").style.display = "none";
+				document.getElementById("interacao_rita2").style.display = "none";
+				document.getElementById("iniciativa_rita2").style.display = "none";
+				document.getElementById("comunicacao_rita2").style.display = "none";
+				
+				
+				document.getElementById("criatividade_peter2").style.display = "none";
+				document.getElementById("proatividade_peter2").style.display = "none";	
+				document.getElementById("lideranca_peter2").style.display = "none";
+				document.getElementById("interacao_peter2").style.display = "none";
+				document.getElementById("iniciativa_peter2").style.display = "none";
+				document.getElementById("comunicacao_peter2").style.display = "none";
+				
+				
+				document.getElementById("criatividade_claudio2").style.display = "none";
+				document.getElementById("proatividade_claudio2").style.display = "none";	
+				document.getElementById("lideranca_claudio2").style.display = "none";
+				document.getElementById("interacao_claudio2").style.display = "none";
+				document.getElementById("iniciativa_claudio2").style.display = "none";
+				document.getElementById("comunicacao_claudio2").style.display = "none";
+				
+				document.getElementById("criatividade_livia2").style.display = "none";
+				document.getElementById("proatividade_livia2").style.display = "none";	
+				document.getElementById("lideranca_livia2").style.display = "none";
+				document.getElementById("interacao_livia2").style.display = "none";
+				document.getElementById("iniciativa_livia2").style.display = "none";
+				document.getElementById("comunicacao_livia2").style.display = "none";
+				
+				document.getElementById("criatividade_glaucia2").style.display = "none";
+				document.getElementById("proatividade_glaucia2").style.display = "none";	
+				document.getElementById("lideranca_glaucia2").style.display = "none";
+				document.getElementById("interacao_glaucia2").style.display = "none";
+				document.getElementById("iniciativa_glaucia2").style.display = "none";
+				document.getElementById("comunicacao_glaucia2").style.display = "none";
+				
+				
 				
 						
 						 $("#kiran").animate({
@@ -417,6 +630,87 @@ $('.tipe').next().hide();
 								top:"0",
 								left:"0"
 						}, 200);
+						
+						
+						 $("#paul").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#paul2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						$("#doug").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#doug2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#ana").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#ana2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#rita").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#rita2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#peter").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#peter2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#claudio").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#claudio2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#livia").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#livia2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
+						$("#glaucia").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						 $("#glaucia2").animate({
+								top:"0",
+								left:"0"
+						}, 200);
+						
+						
 				
 				porcentagem_kiran=0;
 				porcentagem_sugestao2=0;
@@ -449,14 +743,33 @@ $('.tipe').next().hide();
 					 qtd_tags_marcos = 0;
 					 qtd_tags_julia = 0;
 					 qtd_tags_nick = 0;
+					 
+					 qtd_tags_paul = 0;
+					 qtd_tags_doug = 0;
+					 qtd_tags_ana = 0;
+					 qtd_tags_rita = 0;
+					 
+					  qtd_tags_peter = 0;
+					  qtd_tags_claudio = 0;
+					  
+					  qtd_tags_livia = 0;
+					  qtd_tags_glaucia = 0;
 					
 					porcentagem_bob = 0;
 					porcentagem_marcos = 0;
 					porcentagem_julia = 0;
 					porcentagem_nick = 0;
 					
+					porcentagem_paul = 0;
+					porcentagem_doug = 0;
+					porcentagem_ana = 0;	
+					porcentagem_rita = 0;
 					
+					porcentagem_peter = 0;
+					porcentagem_claudio = 0;
 					
+					porcentagem_livia = 0;
+					porcentagem_glaucia = 0;
 
 					var tags_kiran = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
 					var tags_fred = ["Mobile","MOBILE", "mobile", "mvc", "MVC","Java","JAVA", "java"];
@@ -468,6 +781,17 @@ $('.tipe').next().hide();
 					var tags_marcos = ["web","WEB", "Web", "mvc", "MVC","Javascript","javascript", "JAVASCRIPT"];
 					var tags_julia = ["Javascript","javascript", "JAVASCRIPT", "Java","JAVA", "java","web","WEB", "Web"];
 					var tags_nick = ["spring","Spring", "SPRING", "ANGULAR", "Angular","angular","mvc", "MVC", "Mvc"];	
+					
+					var tags_paul = ["spring","Spring", "SPRING", "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					var tags_doug = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
+					var tags_ana = ["Javascript","javascript", "JAVASCRIPT","web","WEB", "Web", "ANGULAR", "Angular","angular"];	
+					var tags_rita = ["Javascript","javascript", "JAVASCRIPT","web","WEB", "Web", "mvc", "MVC"];	
+					
+					var tags_peter = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
+					var tags_claudio = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
+					
+					var tags_livia = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
+					var tags_glaucia = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
 					
 					
 					var softskills_kiran = ["Creativity","Communication","Initiative"];	
@@ -482,10 +806,16 @@ $('.tipe').next().hide();
 					var softskills_nick = ["Creativity","Communication","Initiative"];
 					
 					
+					var softskills_paul = ["Creativity","Communication","Initiative"];
+					var softskills_doug = ["Interaction","Proactivity","Initiative"];
+					var softskills_ana = ["Interaction","Proactivity","Initiative"];
+					var softskills_rita = ["Interaction","Proactivity","Initiative"];
 					
+					var softskills_peter = ["Interaction","Proactivity","Initiative"];
+					var softskills_claudio = ["Interaction","Proactivity","Initiative"];
 					
-					
-					
+					var softskills_livia = ["Interaction","Proactivity","Initiative"];
+					var softskills_glaucia = ["Interaction","Proactivity","Initiative"];
 					
 					var lines = $('#txtdigitado').val().split(/,/);
 					
@@ -505,7 +835,16 @@ $('.tipe').next().hide();
 					$("#nick").css("display", "none");
 					
 					
+					$("#paul").css("display", "none");
+					$("#doug").css("display", "none");
+					$("#ana").css("display", "none");
+					$("#rita").css("display", "none");
 					
+					$("#peter").css("display", "none");
+					$("#claudio").css("display", "none");
+					
+					$("#livia").css("display", "none");
+					$("#glaucia").css("display", "none");
 					
 					
 					$("#kiran2").css("display", "none");
@@ -516,6 +855,17 @@ $('.tipe').next().hide();
 					$("#marcos2").css("display", "none");
 					$("#julia2").css("display", "none");
 					$("#nick2").css("display", "none");
+					
+					$("#paul2").css("display", "none");
+					$("#doug2").css("display", "none");
+					$("#ana2").css("display", "none");
+					$("#rita2").css("display", "none");
+					
+					$("#peter2").css("display", "none");
+					$("#claudio2").css("display", "none");
+					
+					$("#livia2").css("display", "none");
+					$("#glaucia2").css("display", "none");
 					
 					for (var i=0; i < lines.length; i++) {
 					// coloca as tags no array TEXTS PARA TODOS.
@@ -726,6 +1076,208 @@ $('.tipe').next().hide();
 					$("#percentual_nick2").html(porcentagem_nick+'%');
 					
 					
+					// verifica se existem as tags COMPATIVEIS COM PAUL e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_paul.length; i++) {
+							var hab=tags_paul[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_paul += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_paul = ((qtd_tags_paul*100)/texts.length);
+					porcentagem_paul = parseFloat(porcentagem_paul.toFixed(1));
+					
+					$("#percentual_paul").html(porcentagem_paul+'%');
+					$("#percentual_paul2").html(porcentagem_paul+'%');	
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM DOUG e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_doug.length; i++) {
+							var hab=tags_doug[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_doug += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_doug = ((qtd_tags_doug*100)/texts.length);
+					porcentagem_doug = parseFloat(porcentagem_doug.toFixed(1));
+					
+					$("#percentual_doug").html(porcentagem_doug+'%');
+					$("#percentual_doug2").html(porcentagem_doug+'%');	
+					
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM ANA e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_ana.length; i++) {
+							var hab=tags_ana[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_ana += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_ana = ((qtd_tags_ana*100)/texts.length);
+					porcentagem_ana = parseFloat(porcentagem_ana.toFixed(1));
+					
+					$("#percentual_ana").html(porcentagem_ana+'%');
+					$("#percentual_ana2").html(porcentagem_ana+'%');	
+					
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM RITA e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_rita.length; i++) {
+							var hab=tags_rita[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_rita += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_rita = ((qtd_tags_rita*100)/texts.length);
+					porcentagem_rita = parseFloat(porcentagem_rita.toFixed(1));
+					
+					$("#percentual_rita").html(porcentagem_rita+'%');
+					$("#percentual_rita2").html(porcentagem_rita+'%');	
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM PETER e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_peter.length; i++) {
+							var hab=tags_peter[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_peter += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_peter = ((qtd_tags_peter*100)/texts.length);
+					porcentagem_peter = parseFloat(porcentagem_peter.toFixed(1));
+					
+					$("#percentual_peter").html(porcentagem_peter+'%');
+					$("#percentual_peter2").html(porcentagem_peter+'%');	
+					
+					
+					
+					
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM CLAUDIO e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_claudio.length; i++) {
+							var hab=tags_claudio[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_claudio += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_claudio = ((qtd_tags_claudio*100)/texts.length);
+					porcentagem_claudio = parseFloat(porcentagem_claudio.toFixed(1));
+					
+					$("#percentual_claudio").html(porcentagem_claudio+'%');
+					$("#percentual_claudio2").html(porcentagem_claudio+'%');	
+					
+					// verifica se existem as tags COMPATIVEIS COM LIVIA e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_livia.length; i++) {
+							var hab=tags_livia[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_livia += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_livia = ((qtd_tags_livia*100)/texts.length);
+					porcentagem_livia = parseFloat(porcentagem_livia.toFixed(1));
+					
+					$("#percentual_livia").html(porcentagem_livia+'%');
+					$("#percentual_livia2").html(porcentagem_livia+'%');
+					
+					
+					// verifica se existem as tags COMPATIVEIS COM GLAUCIA e ativa cada uma.
+					for (var j=0; j < texts.length; j++) {
+							var tag = texts[j];
+							
+						for (var i=0; i < tags_glaucia.length; i++) {
+							var hab=tags_glaucia[i];
+							
+							if( tag == hab ){
+								 
+								 qtd_tags_glaucia += 1;
+								  
+								 
+							}
+											
+						}
+					}
+					
+					porcentagem_glaucia = ((qtd_tags_glaucia*100)/texts.length);
+					porcentagem_glaucia = parseFloat(porcentagem_glaucia.toFixed(1));
+					
+					$("#percentual_glaucia").html(porcentagem_glaucia+'%');
+					$("#percentual_glaucia2").html(porcentagem_glaucia+'%');
+					
+					
+					
+					alert('tags_CLAUDIO '+tags_claudio+'qtd_tags_CLAUDIO '+qtd_tags_claudio+'porcentagem_CLAUDIO '+porcentagem_claudio);
+					alert('tags_LIVIA '+tags_livia+'qtd_tags_livia '+qtd_tags_livia+'porcentagem_livia '+porcentagem_livia);
+					alert('tags_GLAUCIA '+tags_glaucia+'qtd_tags_glaucia '+qtd_tags_glaucia+'porcentagem_glaucia '+porcentagem_glaucia);
+					
 					
 					
 					
@@ -743,15 +1295,27 @@ $('.tipe').next().hide();
 					var davepode=0;
 					
 					
-					var qtd_engmaster = $( "#EngMast" ).val();
-					var qtd_engmiddle = $( "#DevPleno" ).val();
-					var qtd_engsenior = $( "#EngSeni" ).val();
-					var qtd_engjunior = $( "#EngJuni" ).val();
+					//var qtd_engmaster = $( "#EngMast" ).val();
+					//var qtd_engmiddle = $( "#DevPleno" ).val();
+					//var qtd_engsenior = $( "#EngSeni" ).val();
+					//var qtd_engjunior = $( "#EngJuni" ).val();
 					
 					var bobpode=0;
 					var marcospode=0;
 					var juliapode=0;
 					var nickpode=0;
+					
+					
+					var paulpode=0;
+					var dougpode=0;
+					var anapode=0;
+					var ritapode=0;
+					
+					var peterpode=0;
+					var claudiopode=0;
+					
+					var liviapode=0;
+					var glauciapode=0;
 					
 					var tamanho=0;
 					
@@ -771,13 +1335,7 @@ $('.tipe').next().hide();
 					
 					
 					
-					if((tamanho>=1) && (qtd_tags_kiran>0) && (qtd_devmaster>=1)){
-						kiranpode=1;
-					}
-					if((tamanho==0) && (qtd_tags_kiran==0) && (qtd_devmaster==0)) {
-						kiranpode=0;
-						$("#kiran").css("display", "none");
-					}
+					
 					
 					
 					//=================SOFT KIRAN===================
@@ -1085,6 +1643,314 @@ $('.tipe').next().hide();
 						}
 						
 					}
+					//=================SOFT PAUL ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_paul.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_paul").style.display = "block";
+									document.getElementById("criatividade_paul2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_paul").style.display = "block";
+									document.getElementById("proatividade_paul2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_paul").style.display = "block";
+									document.getElementById("iniciativa_paul2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_paul").style.display = "block";	
+									document.getElementById("comunicacao_paul2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_paul").style.display = "block";
+									document.getElementById("interacao_paul2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_paul").style.display = "block";	
+									document.getElementById("lideranca_paul2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					//alert('softskills_doug:  '+softskills_doug);
+					//=================SOFT DOUG ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_doug.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_doug").style.display = "block";
+									document.getElementById("criatividade_doug2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_doug").style.display = "block";
+									document.getElementById("proatividade_doug2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_doug").style.display = "block";
+									document.getElementById("iniciativa_doug2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_doug").style.display = "block";	
+									document.getElementById("comunicacao_doug2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_doug").style.display = "block";
+									document.getElementById("interacao_doug2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_doug").style.display = "block";	
+									document.getElementById("lideranca_doug2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					
+					//=================SOFT ANA ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_ana.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_ana").style.display = "block";
+									document.getElementById("criatividade_ana2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_ana").style.display = "block";
+									document.getElementById("proatividade_ana2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_ana").style.display = "block";
+									document.getElementById("iniciativa_ana2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_ana").style.display = "block";	
+									document.getElementById("comunicacao_ana2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_ana").style.display = "block";
+									document.getElementById("interacao_ana2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_ana").style.display = "block";	
+									document.getElementById("lideranca_ana2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					//=================SOFT RITA JR ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_rita.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_rita").style.display = "block";
+									document.getElementById("criatividade_rita2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_rita").style.display = "block";
+									document.getElementById("proatividade_rita2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_rita").style.display = "block";
+									document.getElementById("iniciativa_rita2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_rita").style.display = "block";	
+									document.getElementById("comunicacao_rita2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_rita").style.display = "block";
+									document.getElementById("interacao_rita2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_rita").style.display = "block";	
+									document.getElementById("lideranca_rita2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					//=================SOFT PETER SENIOR ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_peter.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_peter").style.display = "block";
+									document.getElementById("criatividade_peter2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_peter").style.display = "block";
+									document.getElementById("proatividade_peter2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_peter").style.display = "block";
+									document.getElementById("iniciativa_peter2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_peter").style.display = "block";	
+									document.getElementById("comunicacao_peter2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_peter").style.display = "block";
+									document.getElementById("interacao_peter2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_peter").style.display = "block";	
+									document.getElementById("lideranca_peter2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					
+					
+					//=================SOFT CLAUDIO SENIOR ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_claudio.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_claudio").style.display = "block";
+									document.getElementById("criatividade_claudio2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_claudio").style.display = "block";
+									document.getElementById("proatividade_claudio2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_claudio").style.display = "block";
+									document.getElementById("iniciativa_claudio2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_claudio").style.display = "block";	
+									document.getElementById("comunicacao_claudio2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_claudio").style.display = "block";
+									document.getElementById("interacao_claudio2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_claudio").style.display = "block";	
+									document.getElementById("lideranca_claudio2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					
+					
+					//=================SOFT LIVIA PLENO ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_livia.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_livia").style.display = "block";
+									document.getElementById("criatividade_livia2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_livia").style.display = "block";
+									document.getElementById("proatividade_livia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_livia").style.display = "block";
+									document.getElementById("iniciativa_livia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_livia").style.display = "block";	
+									document.getElementById("comunicacao_livia2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_livia").style.display = "block";
+									document.getElementById("interacao_livia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_livia").style.display = "block";	
+									document.getElementById("lideranca_livia2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					
+					//=================SOFT GLAUCIA PLENO ===================
+					
+					for (var j=0; j < arraysoft.length; j++) {
+						for (var i=0; i < softskills_glaucia.length; i++) {
+					
+								if ((arraysoft[j]) == 'Creativity'){
+									document.getElementById("criatividade_glaucia").style.display = "block";
+									document.getElementById("criatividade_glaucia2").style.display = "block";										
+								}
+								if ((arraysoft[j]) == 'Proactivity'){
+									document.getElementById("proatividade_glaucia").style.display = "block";
+									document.getElementById("proatividade_glaucia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Initiative'){
+									document.getElementById("iniciativa_glaucia").style.display = "block";
+									document.getElementById("iniciativa_glaucia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Communication'){
+									document.getElementById("comunicacao_glaucia").style.display = "block";	
+									document.getElementById("comunicacao_glaucia2").style.display = "block";	
+								}
+							
+								if ((arraysoft[j]) == 'Interaction'){
+									document.getElementById("interacao_glaucia").style.display = "block";
+									document.getElementById("interacao_glaucia2").style.display = "block";
+								}
+								if ((arraysoft[j]) == 'Leadership'){
+									document.getElementById("lideranca_glaucia").style.display = "block";	
+									document.getElementById("lideranca_glaucia2").style.display = "block";	
+								}
+							
+											
+						}
+						
+					}
+					
+					
+					
+					
+					
+					if((tamanho>=1) && (qtd_tags_kiran>0) && (qtd_devmaster>=1)){
+						kiranpode=1;
+					}
+					if((tamanho==0) && (qtd_tags_kiran==0) && (qtd_devmaster==0)) {
+						kiranpode=0;
+						$("#kiran").css("display", "none");
+					}
+					
+					
+					
 					
 					
 					if((tamanho>=1) && (qtd_tags_fred>0) && (qtd_devmiddle>=1)){
@@ -1139,7 +2005,7 @@ $('.tipe').next().hide();
 						$("#julia").css("display", "none");
 					}
 					
-					//alert("qtd_devjunior: "+qtd_devjunior);
+					
 					if((tamanho>=1) && (qtd_tags_nick>0) && (qtd_devjunior>=1)){
 						nickpode=1;
 					}
@@ -1147,6 +2013,85 @@ $('.tipe').next().hide();
 						nickpode=0;
 						$("#nick").css("display", "none");
 					}
+					
+					
+					if((tamanho>=1) && (qtd_tags_paul>0) && (qtd_devmaster>=1)){
+						paulpode=1;
+					}
+					if((tamanho==0) && (qtd_tags_paul==0) && (qtd_devmaster==0)) {
+						paulpode=0;
+						$("#paul").css("display", "none");
+					}
+					
+					
+					if((tamanho>=1) && (qtd_tags_doug>0) && (qtd_devmaster>=1)){
+						dougpode=1;
+					}
+					if((tamanho==0) && (qtd_tags_doug==0) && (qtd_devmaster==0)) {
+						dougpode=0;
+						$("#doug").css("display", "none");
+					}
+					
+					
+					
+					if((tamanho>=1) && (qtd_tags_ana>0) && (qtd_devjunior>=1)){
+						anapode=1;
+					}
+					if((tamanho==0) && (qtd_tags_ana==0) && (qtd_devjunior==0)) {
+						anapode=0;
+						$("#ana").css("display", "none");
+					}
+					
+					
+					
+					if((tamanho>=1) && (qtd_tags_rita>0) && (qtd_devjunior>=1)){
+						ritapode=1;
+					}
+					if((tamanho==0) && (qtd_tags_rita==0) && (qtd_devjunior==0)) {
+						ritapode=0;
+						$("#rita").css("display", "none");
+					}
+					
+					
+					
+					if((tamanho>=1) && (qtd_tags_peter>0) && (qtd_devsenior>=1)){
+						peterpode=1;
+					}
+					if((tamanho==0) && (qtd_tags_peter==0) && (qtd_devsenior==0)) {
+						peterpode=0;
+						$("#peter").css("display", "none");
+					}
+					
+					
+					
+					if((tamanho>=1) && (qtd_tags_claudio>0) && (qtd_devsenior>=1)){
+						claudiopode=1;
+					}
+					if((tamanho==0) && (qtd_tags_claudio==0) && (qtd_devsenior==0)) {
+						claudiopode=0;
+						$("#claudio").css("display", "none");
+					}
+					
+					
+					if((tamanho>=1) && (qtd_tags_livia>0) && (qtd_devmiddle>=1)){
+						liviapode=1;
+					}
+					if((tamanho==0) && (qtd_tags_livia==0) && (qtd_devmiddle==0)) {
+						liviapode=0;
+						$("#livia").css("display", "none");
+					}
+					
+					
+					if((tamanho>=1) && (qtd_tags_glaucia>0) && (qtd_devmiddle>=1)){
+						glauciapode=1;
+					}
+					if((tamanho==0) && (qtd_tags_glaucia==0) && (qtd_devmiddle==0)) {
+						glauciapode=0;
+						$("#glaucia").css("display", "none");
+					}
+					
+					
+					
 					
 //=======================================================
 //             VERIFICA AS  QUANTIDADES DE SOFT Skills
@@ -1165,6 +2110,16 @@ $('.tipe').next().hide();
 				var qtd_sof_julia=0;
 				var qtd_sof_nick=0;
 				
+				var qtd_sof_paul=0;
+				var qtd_sof_doug=0;
+				var qtd_sof_ana=0;
+				var qtd_sof_rita=0;
+				
+				var qtd_sof_peter=0;
+				var qtd_sof_claudio=0;
+				
+				var qtd_sof_livia=0;
+				var qtd_sof_glaucia=0;
 				
 				var array_qtd_soft = []; 
 			
@@ -1294,6 +2249,126 @@ $('.tipe').next().hide();
 								}
 							}
 							array_qtd_soft.push(qtd_sof_nick);
+							
+							
+							
+							
+							
+							for (var i=0; i < softskills_paul.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_paul[i] == arraysoft[x]){
+										qtd_sof_paul = qtd_sof_paul +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_paul);
+							
+							
+							for (var i=0; i < softskills_doug.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_doug[i] == arraysoft[x]){
+										qtd_sof_doug = qtd_sof_doug +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_doug);
+							
+							
+							for (var i=0; i < softskills_ana.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_ana[i] == arraysoft[x]){
+										qtd_sof_ana = qtd_sof_ana +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_ana);
+							
+							
+							
+							for (var i=0; i < softskills_rita.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_rita[i] == arraysoft[x]){
+										qtd_sof_rita = qtd_sof_rita +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_rita);
+							
+							
+							
+							for (var i=0; i < softskills_peter.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_peter[i] == arraysoft[x]){
+										qtd_sof_peter = qtd_sof_peter +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_peter);
+							
+							
+							
+							for (var i=0; i < softskills_claudio.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_claudio[i] == arraysoft[x]){
+										qtd_sof_claudio = qtd_sof_claudio +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_claudio);
+							
+							
+							
+							for (var i=0; i < softskills_livia.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_livia[i] == arraysoft[x]){
+										qtd_sof_livia = qtd_sof_livia +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_livia);
+							
+							
+							for (var i=0; i < softskills_glaucia.length; i++) {
+								for (var x=0; x < arraysoft.length; x++){
+									
+									if (softskills_glaucia[i] == arraysoft[x]){
+										qtd_sof_glaucia = qtd_sof_glaucia +1;
+										
+										
+											
+									}
+								}
+							}
+							array_qtd_soft.push(qtd_sof_glaucia);
+				
 				
 //===================================================================================================================
 
@@ -1327,6 +2402,39 @@ if (davepode==1){
 if (nickpode==1){
 	nick_perc_hard=1;
 }
+
+if (paulpode==1){
+	paul_perc_hard=1;
+}
+
+if (dougpode==1){
+	doug_perc_hard=1;
+}
+
+if (anapode==1){
+	ana_perc_hard=1; 
+}
+
+if (ritapode==1){
+	rita_perc_hard=1; 
+}
+
+if (peterpode==1){
+	peter_perc_hard=1; 
+}
+
+if (claudiopode==1){
+	claudio_perc_hard=1; 
+}
+
+if (liviapode==1){
+	livia_perc_hard=1; 
+}
+
+if (glauciapode==1){
+	glaucia_perc_hard=1; 
+}
+
 //=================
 
 
@@ -1388,6 +2496,71 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 		niveis.push('junior');
 		qtd_soft_skills.push(qtd_sof_nick);
 		nick_perc_hard=0; 
+	}
+	
+	if (paul_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_paul);
+		pessoas.push('paul');
+		niveis.push('master');
+		qtd_soft_skills.push(qtd_sof_paul);
+		paul_perc_hard=0; 
+	}
+	
+	if (doug_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_doug);
+		pessoas.push('doug');
+		niveis.push('master');
+		qtd_soft_skills.push(qtd_sof_doug);
+		doug_perc_hard=0; 
+	}
+	
+	if (ana_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_ana);
+		pessoas.push('ana');
+		niveis.push('junior');
+		qtd_soft_skills.push(qtd_sof_ana);
+		ana_perc_hard=0; 
+	}
+	
+	if (rita_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_rita);
+		pessoas.push('rita');
+		niveis.push('junior');
+		qtd_soft_skills.push(qtd_sof_rita);
+		rita_perc_hard=0; 
+	}
+	
+	if (peter_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_peter);
+		pessoas.push('peter');
+		niveis.push('senior');
+		qtd_soft_skills.push(qtd_sof_peter);
+		peter_perc_hard=0; 
+	}
+	
+	
+	if (claudio_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_claudio);
+		pessoas.push('claudio');
+		niveis.push('senior');
+		qtd_soft_skills.push(qtd_sof_claudio);
+		claudio_perc_hard=0; 
+	}
+	
+	if (livia_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_livia);
+		pessoas.push('livia');
+		niveis.push('pleno');
+		qtd_soft_skills.push(qtd_sof_livia);
+		livia_perc_hard=0; 
+	}
+	
+	if (glaucia_perc_hard==1){ 
+		porcentagens_hard.push(porcentagem_glaucia);
+		pessoas.push('glaucia');
+		niveis.push('pleno');
+		qtd_soft_skills.push(qtd_sof_glaucia);
+		glaucia_perc_hard=0; 
 	}
 	
 }
@@ -3363,6 +4536,32 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 							if ((equipe[i]=='nick') && (nickpode==1)){
 								$("#nick").css("display", "block");
 							}
+							if ((equipe[i]=='paul') && (paulpode==1)){
+								$("#paul").css("display", "block");
+							}
+							if ((equipe[i]=='doug') && (dougpode==1)){
+								$("#doug").css("display", "block");
+							}
+							if ((equipe[i]=='ana') && (anapode==1)){
+								$("#ana").css("display", "block");
+							}
+							if ((equipe[i]=='rita') && (ritapode==1)){
+								$("#rita").css("display", "block");
+							}
+							if ((equipe[i]=='peter') && (peterpode==1)){
+								$("#peter").css("display", "block");
+							}
+							if ((equipe[i]=='claudio') && (claudiopode==1)){
+								$("#claudio").css("display", "block");
+							}
+							
+							
+							if ((equipe[i]=='livia') && (liviapode==1)){
+								$("#livia").css("display", "block");
+							}
+							if ((equipe[i]=='glaucia') && (glauciapode==1)){
+								$("#glaucia").css("display", "block");
+							}
 					}
 					
 					porcentagem_sugestao1 = 0;
@@ -3401,6 +4600,32 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 						
 						if ((equipe[i]=='nick') && ($('#nick').css('display') == 'block')){
 							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_nick);
+						}
+						
+						if ((equipe[i]=='paul') && ($('#paul').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_paul);
+						}
+						if ((equipe[i]=='doug') && ($('#doug').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_doug);
+						}
+						if ((equipe[i]=='ana') && ($('#ana').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_ana);
+						}
+						if ((equipe[i]=='rita') && ($('#rita').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_rita);
+						}
+						if ((equipe[i]=='peter') && ($('#peter').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_peter);
+						}
+						
+						if ((equipe[i]=='claudio') && ($('#claudio').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_claudio);
+						}
+						if ((equipe[i]=='livia') && ($('#livia').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_livia);
+						}
+						if ((equipe[i]=='glaucia') && ($('#glaucia').css('display') == 'block')){
+							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_glaucia);
 						}
 					}
 					
@@ -3455,6 +4680,30 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 							if ((equipe2[i]=='nick') && (nickpode==1)){
 								$("#nick2").css("display", "block");
 							}
+							if ((equipe2[i]=='paul') && (paulpode==1)){
+								$("#paul2").css("display", "block");
+							}
+							if ((equipe2[i]=='doug') && (dougpode==1)){
+								$("#doug2").css("display", "block");
+							}
+							if ((equipe2[i]=='ana') && (anapode==1)){
+								$("#ana2").css("display", "block");
+							}
+							if ((equipe2[i]=='rita') && (ritapode==1)){
+								$("#rita2").css("display", "block");
+							}
+							if ((equipe2[i]=='peter') && (peterpode==1)){
+								$("#peter2").css("display", "block");
+							}
+							if ((equipe2[i]=='claudio') && (claudiopode==1)){
+								$("#claudio2").css("display", "block");
+							}
+							if ((equipe2[i]=='livia') && (liviapode==1)){
+								$("#livia2").css("display", "block");
+							}
+							if ((equipe2[i]=='glaucia') && (glauciapode==1)){
+								$("#glaucia2").css("display", "block");
+							}
 					
 					}
 					
@@ -3496,6 +4745,31 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 						
 						if ((equipe2[i]=='nick') && ($('#nick2').css('display') == 'block')){
 							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_nick);
+						}
+						
+						if ((equipe2[i]=='paul') && ($('#paul2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_paul);
+						}
+						if ((equipe2[i]=='doug') && ($('#doug2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_doug);
+						}
+						if ((equipe2[i]=='ana') && ($('#ana2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_ana);
+						}
+						if ((equipe2[i]=='rita') && ($('#rita2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_rita);
+						}
+						if ((equipe2[i]=='peter') && ($('#peter2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_peter);
+						}
+						if ((equipe2[i]=='claudio') && ($('#claudio2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_claudio);
+						}
+						if ((equipe2[i]=='livia') && ($('#livia2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_livia);
+						}
+						if ((equipe2[i]=='glaucia') && ($('#glaucia2').css('display') == 'block')){
+							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_glaucia);
 						}
 					}
 					
@@ -3563,10 +4837,10 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					 
 					 var tecnolo = texts[j];
 						
-					if ((tecnolo == 'Java') || (tecnolo == 'MVC') || (tecnolo == 'Spring') ){
+					if (((tecnolo == 'Java') || (tecnolo == 'MVC') || (tecnolo == 'Spring')) && ( $( "#natureza" ).val()==0) ){
 						projetoa=1;
 					}
-					if ((tecnolo == 'Java') || (tecnolo == 'Web') || (tecnolo == 'Spring') ){
+					if ((tecnolo == 'Java') || (tecnolo == 'Web') || (tecnolo == 'Spring')   && ( $( "#natureza" ).val()==0) ){
 						projetob=1;
 					}
 					if((projetoa>0) && (projetob==0)){
@@ -3607,7 +4881,21 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 						});
 						
-					}			
+					}	
+					
+					if ((projetoa==0) && (projetob==0)){
+						
+						simplePopup({
+					
+							'pop-title':'Similar Projects', 
+							'pop-body':'&nbsp;&nbsp;<b>new technology?', 
+							'btn-text':'Close',
+							'body-align':'left',
+							'auto-break': 35,
+					
+						});
+						
+					}	
 					
 					
 						
@@ -3683,8 +4971,30 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 		$("#nick").draggable();
 		$("#nick2").draggable();
 		
+		$("#paul").draggable();
+		$("#paul2").draggable();
+		
+		$("#doug").draggable();
+		$("#doug2").draggable();
+		
+		$("#ana").draggable();
+		$("#ana2").draggable();
+		
+		$("#rita").draggable();
+		$("#rita2").draggable();
+		
+		$("#peter").draggable();
+		$("#peter2").draggable();
+		
+		$("#claudio").draggable();
+		$("#claudio2").draggable();
 		
 		
+		$("#livia").draggable();
+		$("#livia2").draggable();
+		
+		$("#glaucia").draggable();
+		$("#glaucia2").draggable();
 		
         $("#sugest2").droppable({
 		
@@ -4190,6 +5500,572 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				}
 				//-------------------------------------------------------------------//				
 				
+				//-------------------------------------------------------------------//			
+				//---------------Verifica se PAUL foi movido para sugestao 2-------------------//
+				if (($("#paul").is('.ui-draggable-dragging')) && (paul_sugest1==1) ){
+					$("#paul").css("z-index", a++);
+					paul_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='paul'){
+							equipe2.push('paul');
+							porc_equipe2.push(porcentagem_paul);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se DOUG foi movido para sugestao 2----------------------//
+				if (($("#doug").is('.ui-draggable-dragging')) && (doug_sugest1==1) ){
+					$("#doug").css("z-index", a++);
+					doug_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='doug'){
+							equipe2.push('doug');
+							porc_equipe2.push(porcentagem_doug);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se ANA foi movido para sugestao 2----------------------//
+				if (($("#ana").is('.ui-draggable-dragging')) && (ana_sugest1==1) ){
+					$("#ana").css("z-index", a++);
+					ana_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='ana'){
+							equipe2.push('ana');
+							porc_equipe2.push(porcentagem_ana);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se RITA foi movido para sugestao 2----------------------//
+				if (($("#rita").is('.ui-draggable-dragging')) && (rita_sugest1==1) ){
+					$("#rita").css("z-index", a++);
+					rita_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='rita'){
+							equipe2.push('rita');
+							porc_equipe2.push(porcentagem_rita);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se PETER foi movido para sugestao 2----------------------//
+				if (($("#peter").is('.ui-draggable-dragging')) && (peter_sugest1==1) ){
+					$("#peter").css("z-index", a++);
+					peter_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='peter'){
+							equipe2.push('peter');
+							porc_equipe2.push(porcentagem_peter);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se CLAUDIO foi movido para sugestao 2----------------------//
+				if (($("#claudio").is('.ui-draggable-dragging')) && (claudio_sugest1==1) ){
+					$("#claudio").css("z-index", a++);
+					claudio_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='claudio'){
+							equipe2.push('claudio');
+							porc_equipe2.push(porcentagem_claudio);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se LIVIA foi movidA para sugestao 2----------------------//
+				if (($("#livia").is('.ui-draggable-dragging')) && (livia_sugest1==1) ){
+					$("#livia").css("z-index", a++);
+					livia_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='livia'){
+							equipe2.push('livia');
+							porc_equipe2.push(porcentagem_livia);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se GLAUCIA foi movidA para sugestao 2----------------------//
+				if (($("#glaucia").is('.ui-draggable-dragging')) && (glaucia_sugest1==1) ){
+					$("#glaucia").css("z-index", a++);
+					glaucia_sugest1=0;
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='glaucia'){
+							equipe2.push('glaucia');
+							porc_equipe2.push(porcentagem_glaucia);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						} 
+						
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					
+					
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					
+					
+					
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				//-------------------------------------------------------------------//
+				
+				
+				
+				
             },
             over: function(event, ui) {
 			
@@ -4678,6 +6554,515 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 				}
 				//--------------------------------------------------------------------//
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se PAUL voltou para sugestao 1 -----------------//
+				if (($("#paul").is('.ui-draggable-dragging')) && (paul_sugest1==0) ){
+					$("#paul").css("z-index", a++);
+					paul_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='paul'){
+							equipe.push('paul');
+							porc_equipe.push(porcentagem_paul);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se DOUG voltou para sugestao 1 -----------------//
+				if (($("#doug").is('.ui-draggable-dragging')) && (doug_sugest1==0) ){
+					$("#doug").css("z-index", a++);
+					doug_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='doug'){
+							equipe.push('doug');
+							porc_equipe.push(porcentagem_doug);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se ANA voltou para sugestao 1 -----------------//
+				if (($("#ana").is('.ui-draggable-dragging')) && (ana_sugest1==0) ){
+					$("#ana").css("z-index", a++);
+					ana_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='ana'){
+							equipe.push('ana');
+							porc_equipe.push(porcentagem_ana);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se RITA voltou para sugestao 1 -----------------//
+				if (($("#rita").is('.ui-draggable-dragging')) && (rita_sugest1==0) ){
+					$("#rita").css("z-index", a++);
+					rita_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='rita'){
+							equipe.push('rita');
+							porc_equipe.push(porcentagem_rita);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se PETER voltou para sugestao 1 -----------------//
+				if (($("#peter").is('.ui-draggable-dragging')) && (peter_sugest1==0) ){
+					$("#peter").css("z-index", a++);
+					peter_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='peter'){
+							equipe.push('peter');
+							porc_equipe.push(porcentagem_peter);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se claudio voltou para sugestao 1 -----------------//
+				if (($("#claudio").is('.ui-draggable-dragging')) && (claudio_sugest1==0) ){
+					$("#claudio").css("z-index", a++);
+					claudio_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='claudio'){
+							equipe.push('claudio');
+							porc_equipe.push(porcentagem_claudio);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				//==========================================================================
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se LIVIA voltou para sugestao 1 -----------------//
+				if (($("#livia").is('.ui-draggable-dragging')) && (livia_sugest1==0) ){
+					$("#livia").css("z-index", a++);
+					livia_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='livia'){
+							equipe.push('livia');
+							porc_equipe.push(porcentagem_livia);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				//==========================================================================
+				
+				
+				//--------------------------------------------------------------------//
+				
+				//-----------------verifica se GLAUCIA voltou para sugestao 1 -----------------//
+				if (($("#glaucia").is('.ui-draggable-dragging')) && (glaucia_sugest1==0) ){
+					$("#glaucia").css("z-index", a++);
+					glaucia_sugest1=1;	
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='glaucia'){
+							equipe.push('glaucia');
+							porc_equipe.push(porcentagem_glaucia);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}	
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}	
+				}
+				
+				//==========================================================================
+				
+				
+				
 			}
 			
 		});
@@ -5173,7 +7558,509 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 						$("#percentual_equipe2").css("background-color", "#ae0000");
 					}
 				}
-				//-------------------------------------------------------------------//				
+				//-------------------------------------------------------------------//		
+
+
+				//-------------------------------------------------------------------//			
+				//---------------Verifica se PAUL foi movido para sugestao 2----------------------//
+				if (($("#paul2").is('.ui-draggable-dragging')) && (paul2_sugest1==1) ){
+					$("#paul2").css("z-index", a++);
+					paul2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='paul'){
+							equipe.push('paul');
+							porc_equipe.push(porcentagem_paul);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se DOUG foi movido para sugestao 1-----------------//
+				if (($("#doug2").is('.ui-draggable-dragging')) && (doug2_sugest1==1) ){
+					$("#doug2").css("z-index", a++);
+					doug2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='doug'){
+							equipe.push('doug');
+							porc_equipe.push(porcentagem_doug);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se ANA foi movido para sugestao 1-----------------//
+				if (($("#ana2").is('.ui-draggable-dragging')) && (ana2_sugest1==1) ){
+					$("#ana2").css("z-index", a++);
+					ana2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='ana'){
+							equipe.push('ana');
+							porc_equipe.push(porcentagem_ana);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se RITA foi movido para sugestao 1-----------------//
+				if (($("#rita2").is('.ui-draggable-dragging')) && (rita2_sugest1==1) ){
+					$("#rita2").css("z-index", a++);
+					rita2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='rita'){
+							equipe.push('rita');
+							porc_equipe.push(porcentagem_rita);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se PETER foi movido para sugestao 1-----------------//
+				if (($("#peter2").is('.ui-draggable-dragging')) && (peter2_sugest1==1) ){
+					$("#peter2").css("z-index", a++);
+					peter2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='peter'){
+							equipe.push('peter');
+							porc_equipe.push(porcentagem_peter);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se CLAUDIO foi movido para sugestao 1-----------------//
+				if (($("#claudio2").is('.ui-draggable-dragging')) && (claudio2_sugest1==1) ){
+					$("#claudio2").css("z-index", a++);
+					claudio2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='claudio'){
+							equipe.push('claudio');
+							porc_equipe.push(porcentagem_claudio);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				//=================================================================
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se LIVIA foi movido para sugestao 1-----------------//
+				if (($("#livia2").is('.ui-draggable-dragging')) && (livia2_sugest1==1) ){
+					$("#livia2").css("z-index", a++);
+					livia2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='livia'){
+							equipe.push('livia');
+							porc_equipe.push(porcentagem_livia);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				//=================================================================
+				
+				
+				
+				//-------------------------------------------------------------------//	
+				//---------------Verifica se GLAUCIA foi movido para sugestao 1-----------------//
+				if (($("#glaucia2").is('.ui-draggable-dragging')) && (glaucia2_sugest1==1) ){
+					$("#glaucia2").css("z-index", a++);
+					glaucia2_sugest1=0;
+					for (var j=0; j<equipe2.length; j++){
+						
+						if(equipe2[j]=='glaucia'){
+							equipe.push('glaucia');
+							porc_equipe.push(porcentagem_glaucia);
+							
+							equipe2.splice(j, 1);
+							porc_equipe2.splice(j, 1);
+						}
+						
+					}
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+						
+						
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				//=================================================================
+				
+				
 				
             },
             over: function(event, ui) {
@@ -5666,6 +8553,519 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 				}
 				//--------------------------------------------------------------------//
+				
+					//--------------------------------------------------------------------//
+				//-----------------verifica se PAUL voltou para sugestao 2 -----------------//
+				if (($("#paul2").is('.ui-draggable-dragging')) && (paul2_sugest1==0) ){
+					$("#paul2").css("z-index", a++);
+					paul2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='paul'){
+							equipe2.push('paul');
+							porc_equipe2.push(porcentagem_paul);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//--------------------------------------------------------------------//
+				//-----------------verifica se DOUG2 voltou para sugestao 2 -----------------//
+				if (($("#doug2").is('.ui-draggable-dragging')) && (doug2_sugest1==0) ){
+					$("#doug2").css("z-index", a++);	
+					doug2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='doug'){
+							equipe2.push('doug');
+							porc_equipe2.push(porcentagem_doug);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se ANA 2 voltou para sugestao 2 -----------------//
+				if (($("#ana2").is('.ui-draggable-dragging')) && (ana2_sugest1==0) ){
+					$("#ana2").css("z-index", a++);	
+					ana2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='ana'){
+							equipe2.push('ana');
+							porc_equipe2.push(porcentagem_ana);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se RITA 2 voltou para sugestao 2 -----------------//
+				if (($("#rita2").is('.ui-draggable-dragging')) && (rita2_sugest1==0) ){
+					$("#rita2").css("z-index", a++);	
+					rita2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='rita'){
+							equipe2.push('rita');
+							porc_equipe2.push(porcentagem_rita);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se PETER 2 voltou para sugestao 2 -----------------//
+				if (($("#peter2").is('.ui-draggable-dragging')) && (peter2_sugest1==0) ){
+					$("#peter2").css("z-index", a++);	
+					peter2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='peter'){
+							equipe2.push('peter');
+							porc_equipe2.push(porcentagem_peter);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se CLAUDIO 2 voltou para sugestao 2 -----------------//
+				if (($("#claudio2").is('.ui-draggable-dragging')) && (claudio2_sugest1==0) ){
+					$("#claudio2").css("z-index", a++);	
+					claudio2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='claudio'){
+							equipe2.push('claudio');
+							porc_equipe2.push(porcentagem_claudio);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//====================================================================/
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se LIVIA 2 voltou para sugestao 2 -----------------//
+				if (($("#livia2").is('.ui-draggable-dragging')) && (livia2_sugest1==0) ){
+					$("#livia2").css("z-index", a++);	
+					livia2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='livia'){
+							equipe2.push('livia');
+							porc_equipe2.push(porcentagem_livia);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//====================================================================/
+				
+				
+				//--------------------------------------------------------------------//
+				//-----------------verifica se GLAUCIA 2 voltou para sugestao 2 -----------------//
+				if (($("#glaucia2").is('.ui-draggable-dragging')) && (glaucia2_sugest1==0) ){
+					$("#glaucia2").css("z-index", a++);	
+					glaucia2_sugest1=1;	
+					for (var j=0; j<equipe.length; j++){
+						
+						if(equipe[j]=='glaucia'){
+							equipe2.push('glaucia');
+							porc_equipe2.push(porcentagem_glaucia);
+							
+							equipe.splice(j, 1);
+							porc_equipe.splice(j, 1);
+						}
+						
+					}
+								
+					
+					porcentagem_sugestao1=0;
+					
+					for (var i=0; i<equipe.length;i++){
+						
+						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
+						
+						
+					}
+					porcentagem_sugestao1 = (porcentagem_sugestao1/equipe.length);
+					porcentagem_sugestao1 = parseFloat(porcentagem_sugestao1.toFixed(1));
+					$("#percentual_equipe1").html(porcentagem_sugestao1+'%');
+					
+					if ((porcentagem_sugestao1>39) && (porcentagem_sugestao1<50)){
+							$("#percentual_equipe1").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao1>49){
+						$("#percentual_equipe1").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao1<40){
+						$("#percentual_equipe1").css("background-color", "#ae0000");
+					}
+					
+					
+					
+					porcentagem_sugestao2=0;
+					
+					for (var i=0; i<equipe2.length;i++){
+						
+						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
+					}
+					porcentagem_sugestao2 = (porcentagem_sugestao2/equipe2.length);
+					porcentagem_sugestao2 = parseFloat(porcentagem_sugestao2.toFixed(1));
+					$("#percentual_equipe2").html(porcentagem_sugestao2+'%');
+					
+					if ((porcentagem_sugestao2>39) && (porcentagem_sugestao2<50)){
+							$("#percentual_equipe2").css("background-color", "#eead2d");
+					}
+					if (porcentagem_sugestao2>49){
+						$("#percentual_equipe2").css("background-color", "#008000");
+						}
+					if (porcentagem_sugestao2<40){
+						$("#percentual_equipe2").css("background-color", "#ae0000");
+					}
+				}
+				//====================================================================/
+				
+				
+				
 			}
 			
 		
