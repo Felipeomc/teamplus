@@ -770,52 +770,63 @@ $('.tipe').next().hide();
 					
 					porcentagem_livia = 0;
 					porcentagem_glaucia = 0;
-
+					
+					//MASTER
 					var tags_kiran = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
-					var tags_fred = ["Mobile","MOBILE", "mobile", "mvc", "MVC","Java","JAVA", "java"];
-					var tags_alice = ["Javascript","javascript", "JAVASCRIPT", "mvc", "MVC","web","WEB", "Web"];
-					var tags_dave = ["spring","Spring", "SPRING", "ANGULAR", "Angular","angular","JAVA","java","Java"];	
-
-
-					var tags_bob = ["spring","Spring", "SPRING", "mvc", "MVC","Java","JAVA", "java"];	
-					var tags_marcos = ["web","WEB", "Web", "mvc", "MVC","Javascript","javascript", "JAVASCRIPT"];
-					var tags_julia = ["Javascript","javascript", "JAVASCRIPT", "Java","JAVA", "java","web","WEB", "Web"];
-					var tags_nick = ["spring","Spring", "SPRING", "ANGULAR", "Angular","angular","mvc", "MVC", "Mvc"];	
-					
-					var tags_paul = ["spring","Spring", "SPRING", "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					var tags_bob = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
+					var tags_paul = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
 					var tags_doug = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
-					var tags_ana = ["Javascript","javascript", "JAVASCRIPT","web","WEB", "Web", "ANGULAR", "Angular","angular"];	
-					var tags_rita = ["Javascript","javascript", "JAVASCRIPT","web","WEB", "Web", "mvc", "MVC"];	
 					
-					var tags_peter = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
-					var tags_claudio = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
+					//SENIOR
+					var tags_alice = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
+					var tags_julia = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
+					var tags_peter = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc" ];	
+					var tags_claudio = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular" ];	
 					
-					var tags_livia = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
-					var tags_glaucia = ["mvc", "MVC","Java","JAVA", "java" , "Mobile","MOBILE", "mobile" ];	
+					//PLENO
+					var tags_fred = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
+					var tags_marcos = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
+					var tags_livia = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					var tags_glaucia = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
+					
+					//JUNIOR
+					var tags_dave = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
+					var tags_nick = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
+					var tags_ana = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					var tags_rita = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
 					
 					
+					
+					//MASTER
 					var softskills_kiran = ["Creativity","Communication","Initiative"];	
-					var softskills_fred = ["Communication","Initiative","Leadership"];
-					var softskills_alice = ["Creativity","Communication","Interaction"];
-					var softskills_dave = ["Initiative", "Interaction", "Proactivity" ];
-
-
 					var softskills_bob = ["Interaction","Leadership", "Proactivity" ];
-					var softskills_marcos = ["Creativity","Interaction", "Proactivity"];
-					var softskills_julia = ["Initiative","Leadership", "Proactivity" ];
-					var softskills_nick = ["Creativity","Communication","Initiative"];
-					
-					
 					var softskills_paul = ["Creativity","Communication","Initiative"];
 					var softskills_doug = ["Interaction","Proactivity","Initiative"];
-					var softskills_ana = ["Interaction","Proactivity","Initiative"];
-					var softskills_rita = ["Interaction","Proactivity","Initiative"];
 					
-					var softskills_peter = ["Interaction","Proactivity","Initiative"];
+					
+					//SENIOR
+					var softskills_alice = ["Creativity","Communication","Initiative"];
+					var softskills_julia = ["Interaction","Leadership", "Proactivity" ];
+					var softskills_peter = ["Creativity","Communication","Initiative"];
 					var softskills_claudio = ["Interaction","Proactivity","Initiative"];
 					
-					var softskills_livia = ["Interaction","Proactivity","Initiative"];
+				
+					//PLENO
+					var softskills_fred = ["Creativity","Communication","Initiative"];
+					var softskills_marcos = ["Interaction","Leadership", "Proactivity" ];
+					var softskills_livia = ["Creativity","Communication","Initiative"];
 					var softskills_glaucia = ["Interaction","Proactivity","Initiative"];
+					
+					
+					//JUNIOR
+					var softskills_dave = ["Creativity","Communication","Initiative"];
+					var softskills_nick = ["Interaction","Leadership", "Proactivity" ];
+					var softskills_ana = ["Creativity","Communication","Initiative"];
+					var softskills_rita = ["Interaction","Proactivity","Initiative"];
+					
+					
+					
+					
 					
 					var lines = $('#txtdigitado').val().split(/,/);
 					
@@ -1274,9 +1285,9 @@ $('.tipe').next().hide();
 					
 					
 					
-					alert('tags_CLAUDIO '+tags_claudio+'qtd_tags_CLAUDIO '+qtd_tags_claudio+'porcentagem_CLAUDIO '+porcentagem_claudio);
-					alert('tags_LIVIA '+tags_livia+'qtd_tags_livia '+qtd_tags_livia+'porcentagem_livia '+porcentagem_livia);
-					alert('tags_GLAUCIA '+tags_glaucia+'qtd_tags_glaucia '+qtd_tags_glaucia+'porcentagem_glaucia '+porcentagem_glaucia);
+					//alert('tags_CLAUDIO '+tags_claudio+'qtd_tags_CLAUDIO '+qtd_tags_claudio+'porcentagem_CLAUDIO '+porcentagem_claudio);
+					//alert('tags_LIVIA '+tags_livia+'qtd_tags_livia '+qtd_tags_livia+'porcentagem_livia '+porcentagem_livia);
+					//alert('tags_GLAUCIA '+tags_glaucia+'qtd_tags_glaucia '+qtd_tags_glaucia+'porcentagem_glaucia '+porcentagem_glaucia);
 					
 					
 					
