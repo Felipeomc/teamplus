@@ -4885,7 +4885,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 						simplePopup({
 					
 							'pop-title':'Similar Projects', 
-							'pop-body':'&nbsp;&nbsp;<b>PROJECT A:</b><br>&nbsp;&nbsp; Nature: Similar Technology <br>&nbsp;&nbsp; Date begin: 01/01/2020 &nbsp;&nbsp; Date end: 10/12/2022 &nbsp;&nbsp;<br>&nbsp;&nbsp;  Team: Claud, Evelyn, Funny, Gregory <br> <br>&nbsp;&nbsp;Technologies: Java, MVC, Spring &nbsp;&nbsp;  &nbsp;&nbsp;Soft Skills: Initiative, Communication &nbsp;&nbsp; <br><br> &nbsp;&nbsp;<b>PROJECT B:</b><br>&nbsp;&nbsp;Nature: Similar Technology <br>&nbsp;&nbsp; Date begin: 01/01/2020 &nbsp;&nbsp;Date end: 10/12/2022 &nbsp;&nbsp;<br>&nbsp;&nbsp; Team: Oliver O., Pedro P., Roberta &nbsp;&nbsp;<br><br>&nbsp;&nbsp;Technologies: Java, WEB, Spring &nbsp;&nbsp; &nbsp;&nbsp;Soft Skills: Creativity, Proactivity &nbsp;&nbsp;', 
+							'pop-body':'&nbsp;&nbsp;<b>PROJECT A:</b><br>&nbsp;&nbsp; Nature: Similar Technology <br>&nbsp;&nbsp; Date begin: 01/01/2020 &nbsp;&nbsp; Date end: 10/12/2021 &nbsp;&nbsp;<br>&nbsp;&nbsp;  Team: Claudio, Evelyn, Funny, Gregory <br> <br>&nbsp;&nbsp;Technologies: Java, MVC, Spring &nbsp;&nbsp;  &nbsp;&nbsp;Soft Skills: Initiative, Communication &nbsp;&nbsp; <br><br> &nbsp;&nbsp;<b>PROJECT B:</b><br>&nbsp;&nbsp;Nature: Similar Technology <br>&nbsp;&nbsp; Date begin: 01/01/2020 &nbsp;&nbsp;Date end: 10/12/2022 &nbsp;&nbsp;<br>&nbsp;&nbsp; Team: Oliver O., Pedro P., Roberta &nbsp;&nbsp;<br><br>&nbsp;&nbsp;Technologies: Java, WEB, Spring &nbsp;&nbsp; &nbsp;&nbsp;Soft Skills: Creativity, Proactivity &nbsp;&nbsp;', 
 							'btn-text':'Close',
 							'body-align':'left',
 							'auto-break': 35,
