@@ -4899,7 +4899,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 						simplePopup({
 					
 							'pop-title':'Similar Projects', 
-							'pop-body':'&nbsp;&nbsp;<b>new technology?', 
+							'pop-body':'&nbsp;&nbsp;<b>&nbsp;similar or new technology?&nbsp;', 
 							'btn-text':'Close',
 							'body-align':'left',
 							'auto-break': 35,
