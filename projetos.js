@@ -38,7 +38,7 @@
 				
 				// note: item 'Lonely' has a popup text attached
 				 data = [
-					[{ id: 'Project A', start:2020, end:2021, className: 'styleB' , popup_html: '<b>Project A:</b><br>Nature: New Technology<br> Date begin: 2020 <br> Date end: 2022 <br> Team: Claud, Evelyn, Funny, Gregory <br> Technologies: <div class="row" style="justify-content: center;"> <p class="skill  btn btn-primary btn-rounded"  style="font-size: 14px"> Java </p>&ensp; <p class="skill btn btn-primary btn-rounded" style="font-size: 14px"> MVC </p>&ensp; <p class="skill  btn btn-primary btn-rounded" style="font-size: 14px"> Spring </p>&ensp;  </div> </div>  </div> Soft Skills: Initiative, Communication '  }],
+					[{ id: 'Project A', start:2020, end:2021, className: 'styleB' , popup_html: '<b>Project A:</b><br>Nature: New Technology<br> Date begin: 2020 <br> Date end: 2021 <br> Team: Claudio, Evelyn, John, Gregory <br> Technologies: <div class="row" style="justify-content: center;"> <p class="skill  btn btn-primary btn-rounded"  style="font-size: 14px"> Java </p>&ensp; <p class="skill btn btn-primary btn-rounded" style="font-size: 14px"> MVC </p>&ensp; <p class="skill  btn btn-primary btn-rounded" style="font-size: 14px"> Spring </p>&ensp;  </div> </div>  </div> Soft Skills: Initiative, Communication '  }],
 					 
 					 
 					
