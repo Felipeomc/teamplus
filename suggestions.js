@@ -4851,7 +4851,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					if (((tecnolo == 'Java') || (tecnolo == 'MVC') || (tecnolo == 'Spring')) && ( $( "#natureza" ).val()==0) ){
 						projetoa=1;
 					}
-					if ((tecnolo == 'Java') || (tecnolo == 'Web') || (tecnolo == 'Spring')   && ( $( "#natureza" ).val()==0) ){
+					if (((tecnolo == 'Java') || (tecnolo == 'Web') || (tecnolo == 'Spring'))   && ( $( "#natureza" ).val()==0) ){
 						projetob=1;
 					}
 					if((projetoa>0) && (projetob==0)){
