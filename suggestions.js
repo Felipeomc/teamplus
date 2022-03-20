@@ -6,186 +6,186 @@ $('.tipe').next().hide();
 			
 			
 			
-					var qtd_tags_kiran = 0;
-					var qtd_tags_fred = 0;
-					var qtd_tags_alice = 0;
-					var qtd_tags_dave = 0;
+					let qtd_tags_kiran = 0;
+					let qtd_tags_fred = 0;
+					let qtd_tags_alice = 0;
+					let qtd_tags_dave = 0;
 					
 					
 					
-					var qtd_tags_bob = 0;
-					var qtd_tags_marcos = 0;
-					var qtd_tags_julia = 0;
-					var qtd_tags_nick = 0;
+					let qtd_tags_bob = 0;
+					let qtd_tags_marcos = 0;
+					let qtd_tags_julia = 0;
+					let qtd_tags_nick = 0;
 					
-					var qtd_tags_paul = 0;
-					var qtd_tags_doug = 0;
+					let qtd_tags_paul = 0;
+					let qtd_tags_doug = 0;
 					
-					var qtd_tags_ana = 0;
-					var qtd_tags_rita = 0;
+					let qtd_tags_ana = 0;
+					let qtd_tags_rita = 0;
 					
-					var qtd_tags_peter = 0;
-					var qtd_tags_claudio = 0;
+					let qtd_tags_peter = 0;
+					let qtd_tags_claudio = 0;
 					
-					var qtd_tags_livia = 0;
-					var qtd_tags_glaucia = 0;
+					let qtd_tags_livia = 0;
+					let qtd_tags_glaucia = 0;
 				
 		//===================================
-				var kiran_perc_hard=0;
-				var bob_perc_hard=0;
+				let kiran_perc_hard=0;
+				let bob_perc_hard=0;
 
-				var fred_perc_hard=0;
-				var marcos_perc_hard=0;
+				let fred_perc_hard=0;
+				let marcos_perc_hard=0;
 
-				var alice_perc_hard=0;
-				var julia_perc_hard=0;
+				let alice_perc_hard=0;
+				let julia_perc_hard=0;
 
-				var dave_perc_hard=0;
-				var nick_perc_hard=0;
+				let dave_perc_hard=0;
+				let nick_perc_hard=0;
 				
-				var paul_perc_hard=0;
-				var doug_perc_hard=0;
+				let paul_perc_hard=0;
+				let doug_perc_hard=0;
 				
-				var ana_perc_hard=0;
-				var rita_perc_hard=0;
+				let ana_perc_hard=0;
+				let rita_perc_hard=0;
 				
-				var peter_perc_hard=0;
-				var claudio_perc_hard=0;
+				let peter_perc_hard=0;
+				let claudio_perc_hard=0;
 				
-				var livia_perc_hard=0;
-				var glaucia_perc_hard=0;
+				let livia_perc_hard=0;
+				let glaucia_perc_hard=0;
 				
 				
-				var porcentagens_hard = [];
-				var pessoas = [];
-				var niveis = [];
-				var qtd_soft_skills = [];
+				let porcentagens_hard = [];
+				let pessoas = [];
+				let niveis = [];
+				let qtd_soft_skills = [];
 
 
 				
-				var menor_dist_hard;
-				var menor_dist_soft;
+				let menor_dist_hard;
+				let menor_dist_soft;
 
-				var maior_dist_hard;
-				var maior_dist_soft;
+				let maior_dist_hard;
+				let maior_dist_soft;
 
-				var novos_niveis = [];
-				var novos_soft_skills = [];
+				let novos_niveis = [];
+				let novos_soft_skills = [];
 				
-				var novos_niveis2 = [];
-				var novos_soft_skills2 = [];
-				var indice_i, indice_j;
+				let novos_niveis2 = [];
+				let novos_soft_skills2 = [];
+				let indice_i, indice_j;
 
 
-				var menor_hard;
-				var menor_soft;
+				let menor_hard;
+				let menor_soft;
 
-				var maior_hard;
-				var maior_soft;
+				let maior_hard;
+				let maior_soft;
 
-				var p,f;
-				var pode=0;
-				var pode_niveis=0;
+				let p,f;
+				let pode=0;
+				let pode_niveis=0;
 
 				//alert('porcentagens_hard '+porcentagens_hard );
 					
-				var qtd_master=0;
-				var qtd_senior=0;
-				var qtd_pleno=0;
-				var qtd_junior=0;
+				let qtd_master=0;
+				let qtd_senior=0;
+				let qtd_pleno=0;
+				let qtd_junior=0;
 		//===================================
 
 
-				var ig;
+				let ig;
 
-				var soft;
+				let soft;
 
    
-				var a=1;
-				var	porcentagem_kiran;
-				var porcentagem_fred;
-				var porcentagem_alice ;
-				var porcentagem_dave;
+				let a=1;
+				let	porcentagem_kiran;
+				let porcentagem_fred;
+				let porcentagem_alice ;
+				let porcentagem_dave;
 					
-				var porcentagem_bob;
-				var porcentagem_marcos;
-				var porcentagem_julia;
-				var porcentagem_nick;
+				let porcentagem_bob;
+				let porcentagem_marcos;
+				let porcentagem_julia;
+				let porcentagem_nick;
 				
-				var porcentagem_paul;
-				var porcentagem_doug;
+				let porcentagem_paul;
+				let porcentagem_doug;
 				
-				var porcentagem_ana;
-				var porcentagem_rita;
+				let porcentagem_ana;
+				let porcentagem_rita;
 				
-				var porcentagem_peter;
-				var porcentagem_claudio;
+				let porcentagem_peter;
+				let porcentagem_claudio;
 				
-				var porcentagem_livia;
-				var porcentagem_glaucia;
+				let porcentagem_livia;
+				let porcentagem_glaucia;
 				
-				var porcentagem_sugestao2;
-				var porcentagem_sugestao1;
+				let porcentagem_sugestao2;
+				let porcentagem_sugestao1;
 				
-				var kiran_sugest1=1;
-				var fred_sugest1=1;
-				var alice_sugest1=1;
-				var dave_sugest1=1;
+				let kiran_sugest1=1;
+				let fred_sugest1=1;
+				let alice_sugest1=1;
+				let dave_sugest1=1;
 				
-				var bob_sugest1=1;
-				var marcos_sugest1=1;
-				var julia_sugest1=1;
-				var nick_sugest1=1;
+				let bob_sugest1=1;
+				let marcos_sugest1=1;
+				let julia_sugest1=1;
+				let nick_sugest1=1;
 				
-				var paul_sugest1=1;
-				var doug_sugest1=1;
+				let paul_sugest1=1;
+				let doug_sugest1=1;
 				
-				var ana_sugest1=1;
-				var rita_sugest1=1;
+				let ana_sugest1=1;
+				let rita_sugest1=1;
 				
-				var peter_sugest1=1;
-				var claudio_sugest1=1;
+				let peter_sugest1=1;
+				let claudio_sugest1=1;
 				
-				var livia_sugest1=1;
-				var glaucia_sugest1=1;
+				let livia_sugest1=1;
+				let glaucia_sugest1=1;
 				
-				var kiran2_sugest1=1;
-				var fred2_sugest1=1;
-				var alice2_sugest1=1;
-				var dave2_sugest1=1;
+				let kiran2_sugest1=1;
+				let fred2_sugest1=1;
+				let alice2_sugest1=1;
+				let dave2_sugest1=1;
 				
-				var bob2_sugest1=1;
-				var marcos2_sugest1=1;
-				var julia2_sugest1=1;
-				var nick2_sugest1=1;
+				let bob2_sugest1=1;
+				let marcos2_sugest1=1;
+				let julia2_sugest1=1;
+				let nick2_sugest1=1;
 				
-				var paul2_sugest1=1;
-				var doug2_sugest1=1;
+				let paul2_sugest1=1;
+				let doug2_sugest1=1;
 
-				var ana2_sugest1=1;
-				var rita2_sugest1=1;
+				let ana2_sugest1=1;
+				let rita2_sugest1=1;
 				
-				var peter2_sugest1=1;
-				var claudio2_sugest1=1;
+				let peter2_sugest1=1;
+				let claudio2_sugest1=1;
 				
-				var livia2_sugest1=1;
-				var glaucia2_sugest1=1;
+				let livia2_sugest1=1;
+				let glaucia2_sugest1=1;
 				
-				var equipe1 = [];
-				var equipe2 = [];
-				var equipe = [];
-				var nova_equipe1  = [];
-				var nova_equipe2  = [];
+				let equipe1 = [];
+				let equipe2 = [];
+				let equipe = [];
+				let nova_equipe1  = [];
+				let nova_equipe2  = [];
 				
 				
-				var porc_equipe1 = [];
+				let porc_equipe1 = [];
 					
 					
 					
-					var texts = [];
+					let texts = [];
 					
-				var porc_equipe =[];
-				var porc_equipe2 =[];
+				let porc_equipe =[];
+				let porc_equipe2 =[];
 				
 				$( "#botao" ).click(function() {
 					inicia();
@@ -196,7 +196,7 @@ $('.tipe').next().hide();
 					document.getElementById("sugestao1").style.display = "block";
 					document.getElementById("sugestao2").style.display = "block";
 					
-				//restart var
+				//restart let
 
 				//===================================
 				 kiran_perc_hard=0;
@@ -772,68 +772,68 @@ $('.tipe').next().hide();
 					porcentagem_glaucia = 0;
 					
 					//MASTER
-					var tags_kiran = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
-					var tags_bob = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
-					var tags_paul = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
-					var tags_doug = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
+					let tags_kiran = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
+					let tags_bob = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
+					let tags_paul = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					let tags_doug = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
 					
 					//SENIOR
-					var tags_alice = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
-					var tags_julia = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
-					var tags_peter = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc" ];	
-					var tags_claudio = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular" ];	
+					let tags_alice = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
+					let tags_julia = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
+					let tags_peter = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc" ];	
+					let tags_claudio = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular" ];	
 					
 					//PLENO
-					var tags_fred = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
-					var tags_marcos = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
-					var tags_livia = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
-					var tags_glaucia = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
+					let tags_fred = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];
+					let tags_marcos = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];
+					let tags_livia = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					let tags_glaucia = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
 					
 					//JUNIOR
-					var tags_dave = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
-					var tags_nick = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
-					var tags_ana = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
-					var tags_rita = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
+					let tags_dave = ["web","WEB", "Web", "mvc", "MVC","Java","JAVA", "java"];	
+					let tags_nick = ["spring","Spring", "SPRING","ANGULAR", "Angular","angular" ,"Javascript","JAVASCRIPT", "javascript"];	
+					let tags_ana = ["Mobile","MOBILE", "mobile" , "javascript", "Javascript","JAVASCRIPT","mvc", "MVC", "Mvc"];	
+					let tags_rita = ["Java","JAVA", "java","mvc", "MVC", "Mvc", "ANGULAR", "Angular","angular"];	
 					
 					
 					
 					//MASTER
-					var softskills_kiran = ["Creativity","Communication","Initiative"];	
-					var softskills_bob = ["Interaction","Leadership", "Proactivity" ];
-					var softskills_paul = ["Creativity","Communication","Initiative"];
-					var softskills_doug = ["Interaction","Proactivity","Initiative"];
+					let softskills_kiran = ["Creativity","Communication","Initiative"];	
+					let softskills_bob = ["Interaction","Leadership", "Proactivity" ];
+					let softskills_paul = ["Creativity","Communication","Initiative"];
+					let softskills_doug = ["Interaction","Proactivity","Initiative"];
 					
 					
 					//SENIOR
-					var softskills_alice = ["Creativity","Communication","Initiative"];
-					var softskills_julia = ["Interaction","Leadership", "Proactivity" ];
-					var softskills_peter = ["Creativity","Communication","Initiative"];
-					var softskills_claudio = ["Interaction","Proactivity","Initiative"];
+					let softskills_alice = ["Creativity","Communication","Initiative"];
+					let softskills_julia = ["Interaction","Leadership", "Proactivity" ];
+					let softskills_peter = ["Creativity","Communication","Initiative"];
+					let softskills_claudio = ["Interaction","Proactivity","Initiative"];
 					
 				
 					//PLENO
-					var softskills_fred = ["Creativity","Communication","Initiative"];
-					var softskills_marcos = ["Interaction","Leadership", "Proactivity" ];
-					var softskills_livia = ["Creativity","Communication","Initiative"];
-					var softskills_glaucia = ["Interaction","Proactivity","Initiative"];
+					let softskills_fred = ["Creativity","Communication","Initiative"];
+					let softskills_marcos = ["Interaction","Leadership", "Proactivity" ];
+					let softskills_livia = ["Creativity","Communication","Initiative"];
+					let softskills_glaucia = ["Interaction","Proactivity","Initiative"];
 					
 					
 					//JUNIOR
-					var softskills_dave = ["Creativity","Communication","Initiative"];
-					var softskills_nick = ["Interaction","Leadership", "Proactivity" ];
-					var softskills_ana = ["Creativity","Communication","Initiative"];
-					var softskills_rita = ["Interaction","Proactivity","Initiative"];
+					let softskills_dave = ["Creativity","Communication","Initiative"];
+					let softskills_nick = ["Interaction","Leadership", "Proactivity" ];
+					let softskills_ana = ["Creativity","Communication","Initiative"];
+					let softskills_rita = ["Interaction","Proactivity","Initiative"];
 					
 					
 					
 					
 					
-					var lines = $('#txtdigitado').val().split(/,/);
+					let lines = $('#txtdigitado').val().split(/,/);
 					
 					
 					
-					var softs = $('#txtdigitado2').val().split(/,/);
-					var arraysoft = [];
+					let softs = $('#txtdigitado2').val().split(/,/);
+					let arraysoft = [];
 					
 					
 					$("#kiran").css("display", "none");
@@ -878,7 +878,7 @@ $('.tipe').next().hide();
 					$("#livia2").css("display", "none");
 					$("#glaucia2").css("display", "none");
 					
-					for (var i=0; i < lines.length; i++) {
+					for (let i=0; i < lines.length; i++) {
 					// coloca as tags no array TEXTS PARA TODOS.
 						if (/\S/.test(lines[i])) {
 							texts.push($.trim(lines[i]));
@@ -886,7 +886,7 @@ $('.tipe').next().hide();
 					}
 
 					
-					for (var i=0; i < softs.length; i++) {
+					for (let i=0; i < softs.length; i++) {
 					// coloca as tags no array das SOFT SKILLS PARA TODOS.
 						if (/\S/.test(softs[i])) {
 							arraysoft.push($.trim(softs[i]));
@@ -898,11 +898,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM KIRAN e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_kiran.length; i++) {
-							var hab=tags_kiran[i];
+						for (let i=0; i < tags_kiran.length; i++) {
+							let hab=tags_kiran[i];
 							
 							if( tag == hab ){
 								 
@@ -925,11 +925,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM FRED e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_fred.length; i++) {
-							var hab=tags_fred[i];
+						for (let i=0; i < tags_fred.length; i++) {
+							let hab=tags_fred[i];
 							
 							if( tag == hab ){
 								 
@@ -949,11 +949,11 @@ $('.tipe').next().hide();
 						
 					
 					// verifica se existem as tags COMPATIVEIS COM ALICE e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_alice.length; i++) {
-							var hab=tags_alice[i];
+						for (let i=0; i < tags_alice.length; i++) {
+							let hab=tags_alice[i];
 							
 							if( tag == hab ){
 								 
@@ -972,11 +972,11 @@ $('.tipe').next().hide();
 					$("#percentual_alice2").html(porcentagem_alice+'%');
 					
 					// verifica se existem as tags COMPATIVEIS COM DAVE e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_dave.length; i++) {
-							var hab=tags_dave[i];
+						for (let i=0; i < tags_dave.length; i++) {
+							let hab=tags_dave[i];
 							
 							if( tag == hab ){
 								 
@@ -995,11 +995,11 @@ $('.tipe').next().hide();
 					$("#percentual_dave2").html(porcentagem_dave+'%');
 					
 					// verifica se existem as tags COMPATIVEIS COM BOB e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_bob.length; i++) {
-							var hab=tags_bob[i];
+						for (let i=0; i < tags_bob.length; i++) {
+							let hab=tags_bob[i];
 							
 							if( tag == hab ){
 								 
@@ -1018,11 +1018,11 @@ $('.tipe').next().hide();
 					$("#percentual_bob2").html(porcentagem_bob+'%');
 					
 					// verifica se existem as tags COMPATIVEIS COM MARCOS e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_marcos.length; i++) {
-							var hab=tags_marcos[i];
+						for (let i=0; i < tags_marcos.length; i++) {
+							let hab=tags_marcos[i];
 							
 							if( tag == hab ){
 								 
@@ -1041,11 +1041,11 @@ $('.tipe').next().hide();
 						$("#percentual_marcos2").html(porcentagem_marcos+'%');	
 					
 					// verifica se existem as tags COMPATIVEIS COM JULIA e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_julia.length; i++) {
-							var hab=tags_julia[i];
+						for (let i=0; i < tags_julia.length; i++) {
+							let hab=tags_julia[i];
 							
 							if( tag == hab ){
 								 
@@ -1065,11 +1065,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM NICK e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_nick.length; i++) {
-							var hab=tags_nick[i];
+						for (let i=0; i < tags_nick.length; i++) {
+							let hab=tags_nick[i];
 							
 							if( tag == hab ){
 								 
@@ -1088,11 +1088,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM PAUL e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_paul.length; i++) {
-							var hab=tags_paul[i];
+						for (let i=0; i < tags_paul.length; i++) {
+							let hab=tags_paul[i];
 							
 							if( tag == hab ){
 								 
@@ -1112,11 +1112,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM DOUG e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_doug.length; i++) {
-							var hab=tags_doug[i];
+						for (let i=0; i < tags_doug.length; i++) {
+							let hab=tags_doug[i];
 							
 							if( tag == hab ){
 								 
@@ -1137,11 +1137,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM ANA e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_ana.length; i++) {
-							var hab=tags_ana[i];
+						for (let i=0; i < tags_ana.length; i++) {
+							let hab=tags_ana[i];
 							
 							if( tag == hab ){
 								 
@@ -1162,11 +1162,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM RITA e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_rita.length; i++) {
-							var hab=tags_rita[i];
+						for (let i=0; i < tags_rita.length; i++) {
+							let hab=tags_rita[i];
 							
 							if( tag == hab ){
 								 
@@ -1186,11 +1186,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM PETER e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_peter.length; i++) {
-							var hab=tags_peter[i];
+						for (let i=0; i < tags_peter.length; i++) {
+							let hab=tags_peter[i];
 							
 							if( tag == hab ){
 								 
@@ -1214,11 +1214,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM CLAUDIO e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_claudio.length; i++) {
-							var hab=tags_claudio[i];
+						for (let i=0; i < tags_claudio.length; i++) {
+							let hab=tags_claudio[i];
 							
 							if( tag == hab ){
 								 
@@ -1237,11 +1237,11 @@ $('.tipe').next().hide();
 					$("#percentual_claudio2").html(porcentagem_claudio+'%');	
 					
 					// verifica se existem as tags COMPATIVEIS COM LIVIA e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_livia.length; i++) {
-							var hab=tags_livia[i];
+						for (let i=0; i < tags_livia.length; i++) {
+							let hab=tags_livia[i];
 							
 							if( tag == hab ){
 								 
@@ -1261,11 +1261,11 @@ $('.tipe').next().hide();
 					
 					
 					// verifica se existem as tags COMPATIVEIS COM GLAUCIA e ativa cada uma.
-					for (var j=0; j < texts.length; j++) {
-							var tag = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tag = texts[j];
 							
-						for (var i=0; i < tags_glaucia.length; i++) {
-							var hab=tags_glaucia[i];
+						for (let i=0; i < tags_glaucia.length; i++) {
+							let hab=tags_glaucia[i];
 							
 							if( tag == hab ){
 								 
@@ -1292,43 +1292,43 @@ $('.tipe').next().hide();
 					
 					
 					
-					var qtd_devmaster = $( "#DevMast" ).val();
-					var qtd_devmiddle = $( "#DevPleno" ).val();
-					var qtd_devsenior = $( "#DevSeni" ).val();
-					var qtd_devjunior = $( "#DevJuni" ).val();
+					let qtd_devmaster = $( "#DevMast" ).val();
+					let qtd_devmiddle = $( "#DevPleno" ).val();
+					let qtd_devsenior = $( "#DevSeni" ).val();
+					let qtd_devjunior = $( "#DevJuni" ).val();
 					
 					
 					
 					
-					var kiranpode=0;
-					var fredpode=0;
-					var alicepode=0;
-					var davepode=0;
+					let kiranpode=0;
+					let fredpode=0;
+					let alicepode=0;
+					let davepode=0;
 					
 					
-					//var qtd_engmaster = $( "#EngMast" ).val();
-					//var qtd_engmiddle = $( "#DevPleno" ).val();
-					//var qtd_engsenior = $( "#EngSeni" ).val();
-					//var qtd_engjunior = $( "#EngJuni" ).val();
+					//let qtd_engmaster = $( "#EngMast" ).val();
+					//let qtd_engmiddle = $( "#DevPleno" ).val();
+					//let qtd_engsenior = $( "#EngSeni" ).val();
+					//let qtd_engjunior = $( "#EngJuni" ).val();
 					
-					var bobpode=0;
-					var marcospode=0;
-					var juliapode=0;
-					var nickpode=0;
+					let bobpode=0;
+					let marcospode=0;
+					let juliapode=0;
+					let nickpode=0;
 					
 					
-					var paulpode=0;
-					var dougpode=0;
-					var anapode=0;
-					var ritapode=0;
+					let paulpode=0;
+					let dougpode=0;
+					let anapode=0;
+					let ritapode=0;
 					
-					var peterpode=0;
-					var claudiopode=0;
+					let peterpode=0;
+					let claudiopode=0;
 					
-					var liviapode=0;
-					var glauciapode=0;
+					let liviapode=0;
+					let glauciapode=0;
 					
-					var tamanho=0;
+					let tamanho=0;
 					
 					
 					if(qtd_devmaster>=1){
@@ -1353,8 +1353,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_kiran.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_kiran.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_kiran").style.display = "block";	
@@ -1391,8 +1391,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_fred.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_fred.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_fred").style.display = "block";
@@ -1429,8 +1429,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_alice.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_alice.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_alice").style.display = "block";
@@ -1467,8 +1467,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_dave.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_dave.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_dave").style.display = "block";
@@ -1506,8 +1506,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_bob.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_bob.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_bob").style.display = "block";
@@ -1545,8 +1545,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_marcos.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_marcos.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_marcos").style.display = "block";	
@@ -1583,8 +1583,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_julia.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_julia.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_julia").style.display = "block";
@@ -1621,8 +1621,8 @@ $('.tipe').next().hide();
 					
 					
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_nick.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_nick.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_nick").style.display = "block";
@@ -1656,8 +1656,8 @@ $('.tipe').next().hide();
 					}
 					//=================SOFT PAUL ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_paul.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_paul.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_paul").style.display = "block";
@@ -1693,8 +1693,8 @@ $('.tipe').next().hide();
 					//alert('softskills_doug:  '+softskills_doug);
 					//=================SOFT DOUG ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_doug.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_doug.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_doug").style.display = "block";
@@ -1730,8 +1730,8 @@ $('.tipe').next().hide();
 					
 					//=================SOFT ANA ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_ana.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_ana.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_ana").style.display = "block";
@@ -1765,8 +1765,8 @@ $('.tipe').next().hide();
 					}
 					//=================SOFT RITA JR ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_rita.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_rita.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_rita").style.display = "block";
@@ -1801,8 +1801,8 @@ $('.tipe').next().hide();
 					
 					//=================SOFT PETER SENIOR ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_peter.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_peter.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_peter").style.display = "block";
@@ -1839,8 +1839,8 @@ $('.tipe').next().hide();
 					
 					//=================SOFT CLAUDIO SENIOR ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_claudio.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_claudio.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_claudio").style.display = "block";
@@ -1877,8 +1877,8 @@ $('.tipe').next().hide();
 					
 					//=================SOFT LIVIA PLENO ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_livia.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_livia.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_livia").style.display = "block";
@@ -1914,8 +1914,8 @@ $('.tipe').next().hide();
 					
 					//=================SOFT GLAUCIA PLENO ===================
 					
-					for (var j=0; j < arraysoft.length; j++) {
-						for (var i=0; i < softskills_glaucia.length; i++) {
+					for (let j=0; j < arraysoft.length; j++) {
+						for (let i=0; i < softskills_glaucia.length; i++) {
 					
 								if ((arraysoft[j]) == 'Creativity'){
 									document.getElementById("criatividade_glaucia").style.display = "block";
@@ -2111,36 +2111,36 @@ $('.tipe').next().hide();
 // =================================================					
 					
 					
-				var qtd_sof_kiran=0;
-				var qtd_sof_fred=0;
-				var qtd_sof_alice=0;
-				var qtd_sof_dave=0;
+				let qtd_sof_kiran=0;
+				let qtd_sof_fred=0;
+				let qtd_sof_alice=0;
+				let qtd_sof_dave=0;
 				
-				var qtd_sof_bob=0;
-				var qtd_sof_marcos=0;
-				var qtd_sof_julia=0;
-				var qtd_sof_nick=0;
+				let qtd_sof_bob=0;
+				let qtd_sof_marcos=0;
+				let qtd_sof_julia=0;
+				let qtd_sof_nick=0;
 				
-				var qtd_sof_paul=0;
-				var qtd_sof_doug=0;
-				var qtd_sof_ana=0;
-				var qtd_sof_rita=0;
+				let qtd_sof_paul=0;
+				let qtd_sof_doug=0;
+				let qtd_sof_ana=0;
+				let qtd_sof_rita=0;
 				
-				var qtd_sof_peter=0;
-				var qtd_sof_claudio=0;
+				let qtd_sof_peter=0;
+				let qtd_sof_claudio=0;
 				
-				var qtd_sof_livia=0;
-				var qtd_sof_glaucia=0;
+				let qtd_sof_livia=0;
+				let qtd_sof_glaucia=0;
 				
-				var array_qtd_soft = []; 
+				let array_qtd_soft = []; 
 			
 				
 					
 					
 					
 							
-							for (var i=0; i < softskills_kiran.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_kiran.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_kiran[i] == arraysoft[x]){
 										qtd_sof_kiran = qtd_sof_kiran +1;
@@ -2154,8 +2154,8 @@ $('.tipe').next().hide();
 							
 						
 							
-							for (var i=0; i < softskills_fred.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_fred.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_fred[i] == arraysoft[x]){
 										qtd_sof_fred =qtd_sof_fred  +1;
@@ -2169,8 +2169,8 @@ $('.tipe').next().hide();
 							
 						
 							
-							for (var i=0; i < softskills_alice.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_alice.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_alice[i] == arraysoft[x]){
 										qtd_sof_alice = qtd_sof_alice +1;
@@ -2184,8 +2184,8 @@ $('.tipe').next().hide();
 							
 						
 							
-							for (var i=0; i < softskills_dave.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_dave.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_dave[i] == arraysoft[x]){
 										qtd_sof_dave = qtd_sof_dave +1;
@@ -2199,8 +2199,8 @@ $('.tipe').next().hide();
 							
 						
 							
-							for (var i=0; i < softskills_bob.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_bob.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_bob[i] == arraysoft[x]){
 										qtd_sof_bob = qtd_sof_bob +1;
@@ -2214,8 +2214,8 @@ $('.tipe').next().hide();
 							
 						
 							
-							for (var i=0; i < softskills_marcos.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_marcos.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_marcos[i] == arraysoft[x]){
 										qtd_sof_marcos = qtd_sof_marcos +1;
@@ -2231,8 +2231,8 @@ $('.tipe').next().hide();
 						
 						
 							
-							for (var i=0; i < softskills_julia.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_julia.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_julia[i] == arraysoft[x]){
 										qtd_sof_julia = qtd_sof_julia +1;
@@ -2248,8 +2248,8 @@ $('.tipe').next().hide();
 						
 						
 							
-							for (var i=0; i < softskills_nick.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_nick.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_nick[i] == arraysoft[x]){
 										qtd_sof_nick = qtd_sof_nick +1;
@@ -2265,8 +2265,8 @@ $('.tipe').next().hide();
 							
 							
 							
-							for (var i=0; i < softskills_paul.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_paul.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_paul[i] == arraysoft[x]){
 										qtd_sof_paul = qtd_sof_paul +1;
@@ -2279,8 +2279,8 @@ $('.tipe').next().hide();
 							array_qtd_soft.push(qtd_sof_paul);
 							
 							
-							for (var i=0; i < softskills_doug.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_doug.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_doug[i] == arraysoft[x]){
 										qtd_sof_doug = qtd_sof_doug +1;
@@ -2293,8 +2293,8 @@ $('.tipe').next().hide();
 							array_qtd_soft.push(qtd_sof_doug);
 							
 							
-							for (var i=0; i < softskills_ana.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_ana.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_ana[i] == arraysoft[x]){
 										qtd_sof_ana = qtd_sof_ana +1;
@@ -2308,8 +2308,8 @@ $('.tipe').next().hide();
 							
 							
 							
-							for (var i=0; i < softskills_rita.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_rita.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_rita[i] == arraysoft[x]){
 										qtd_sof_rita = qtd_sof_rita +1;
@@ -2323,8 +2323,8 @@ $('.tipe').next().hide();
 							
 							
 							
-							for (var i=0; i < softskills_peter.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_peter.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_peter[i] == arraysoft[x]){
 										qtd_sof_peter = qtd_sof_peter +1;
@@ -2338,8 +2338,8 @@ $('.tipe').next().hide();
 							
 							
 							
-							for (var i=0; i < softskills_claudio.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_claudio.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_claudio[i] == arraysoft[x]){
 										qtd_sof_claudio = qtd_sof_claudio +1;
@@ -2353,8 +2353,8 @@ $('.tipe').next().hide();
 							
 							
 							
-							for (var i=0; i < softskills_livia.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_livia.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_livia[i] == arraysoft[x]){
 										qtd_sof_livia = qtd_sof_livia +1;
@@ -2367,8 +2367,8 @@ $('.tipe').next().hide();
 							array_qtd_soft.push(qtd_sof_livia);
 							
 							
-							for (var i=0; i < softskills_glaucia.length; i++) {
-								for (var x=0; x < arraysoft.length; x++){
+							for (let i=0; i < softskills_glaucia.length; i++) {
+								for (let x=0; x < arraysoft.length; x++){
 									
 									if (softskills_glaucia[i] == arraysoft[x]){
 										qtd_sof_glaucia = qtd_sof_glaucia +1;
@@ -2450,7 +2450,7 @@ if (glauciapode==1){
 
 
 
-for (var ppors = 0; ppors<tamanho; ppors++){
+for (let ppors = 0; ppors<tamanho; ppors++){
 	
 	if (kiran_perc_hard==1){ 
 		porcentagens_hard.push(porcentagem_kiran);
@@ -2580,11 +2580,11 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 					
 		
-//variaveis
-//var porcentagens_hard = [13,25,50,45,9,80,17,30];
-//var pessoas =        ['kiran','fred','dave','alex','helena', 'bob', 'marcos','nick'];
-//var niveis =      ['master','master','senior','pleno','senior','pleno','junior','junior'];
-//var qtd_soft_skills = [3,2,4,3,2,7,3,2];
+//letiaveis
+//let porcentagens_hard = [13,25,50,45,9,80,17,30];
+//let pessoas =        ['kiran','fred','dave','alex','helena', 'bob', 'marcos','nick'];
+//let niveis =      ['master','master','senior','pleno','senior','pleno','junior','junior'];
+//let qtd_soft_skills = [3,2,4,3,2,7,3,2];
   
 
 
@@ -2592,26 +2592,26 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 					
 					
 				//TIPO DE AGRUPAMENTO HARD skill		
-				var type_grouping1;
+				let type_grouping1;
 				checar();
 				function checar()
 				{
-				 var botoes1 = document.getElementsByName("gridRadios1");
+				 let botoes1 = document.getElementsByName("gridRadios1");
 
-				 for (var i = 0 in botoes1) 
+				 for (let i in botoes1) 
 						if (botoes1[i].checked){
 							
 							 type_grouping1 = botoes1[i].value;
 						}
 				}						
 				//TIPO DE AGRUPAMENTO soft skill		
-				var type_grouping2;
+				let type_grouping2;
 				checar2();
 				function checar2()
 				{
-				 var botoes2 = document.getElementsByName("gridRadios2");
+				 let botoes2 = document.getElementsByName("gridRadios2");
 
-				 for (var i = 0 in botoes2) 
+				 for (let i in botoes2) 
 						if (botoes2[i].checked){
 							
 							 type_grouping2 = botoes2[i].value;
@@ -2643,9 +2643,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe.length);
 										if (equipe.length == 0 ) {
@@ -2657,8 +2657,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis.includes(niveis[i]);
-													var ver2 = novos_niveis.includes(niveis[j]);
+													let ver = novos_niveis.includes(niveis[i]);
+													let ver2 = novos_niveis.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -2680,8 +2680,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis.includes(niveis[i]);
-													var ver2 = novos_niveis.includes(niveis[j]);
+													let ver = novos_niveis.includes(niveis[i]);
+													let ver2 = novos_niveis.includes(niveis[j]);
 													
 													
 													
@@ -2702,7 +2702,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe já tiver alguem
 														if (equipe.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe
 															for (p=0;p<=equipe.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe[p]) && (pessoas[indice_j]  != equipe[p])) {
@@ -2870,9 +2870,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe2.length);
 										if (equipe2.length == 0 ) {
@@ -2884,8 +2884,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -2907,8 +2907,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													
@@ -2929,7 +2929,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe2 já tiver alguem
 														if (equipe2.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe2
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe2
 															for (p=0;p<=equipe2.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe2[p]) && (pessoas[indice_j]  != equipe2[p])) {
@@ -3105,9 +3105,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe.length);
 										if (equipe.length == 0 ) {
@@ -3119,8 +3119,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis.includes(niveis[i]);
-													var ver2 = novos_niveis.includes(niveis[j]);
+													let ver = novos_niveis.includes(niveis[i]);
+													let ver2 = novos_niveis.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -3142,8 +3142,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis.includes(niveis[i]);
-													var ver2 = novos_niveis.includes(niveis[j]);
+													let ver = novos_niveis.includes(niveis[i]);
+													let ver2 = novos_niveis.includes(niveis[j]);
 													
 													
 													
@@ -3164,7 +3164,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe já tiver alguem
 														if (equipe.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe
 															for (p=0;p<=equipe.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe[p]) && (pessoas[indice_j]  != equipe[p])) {
@@ -3343,9 +3343,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe2.length);
 										if (equipe2.length == 0 ) {
@@ -3357,8 +3357,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -3380,8 +3380,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													
@@ -3402,7 +3402,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe2 já tiver alguem
 														if (equipe2.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe2
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe2
 															for (p=0;p<=equipe2.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe2[p]) && (pessoas[indice_j]  != equipe2[p])) {
@@ -3582,9 +3582,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 						
 						
-						//varre o array para encontrar maior_hard distancia entre pares
-						for (var i =0; i < porcentagens_hard.length; i++){
-							for ( var j=0; j < porcentagens_hard.length; j++) {
+						//letre o array para encontrar maior_hard distancia entre pares
+						for (let i =0; i < porcentagens_hard.length; i++){
+							for ( let j=0; j < porcentagens_hard.length; j++) {
 										
 									//alert ('tamanho '+equipe.length);
 									if (equipe.length == 0 ) {
@@ -3596,8 +3596,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 											maior_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 												
 												//verifica se nao ja tem o nivel no novo array de niveis
-												var ver = novos_niveis.includes(niveis[i]);
-												var ver2 = novos_niveis.includes(niveis[j]);
+												let ver = novos_niveis.includes(niveis[i]);
+												let ver2 = novos_niveis.includes(niveis[j]);
 												
 												
 												//alert ('a maior_hard distancia = '+maior_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -3619,8 +3619,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 											maior_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 											
 											//verifica se nao ja tem o nivel no novo array de niveis
-												var ver = novos_niveis.includes(niveis[i]);
-												var ver2 = novos_niveis.includes(niveis[j]);
+												let ver = novos_niveis.includes(niveis[i]);
+												let ver2 = novos_niveis.includes(niveis[j]);
 												
 												
 												
@@ -3642,7 +3642,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 													//se equipe já tiver alguem
 													if (equipe.length > 0 ) {
 														
-														//varre array para confirmar que  a pessoa não foi inserida ja na equipe
+														//letre array para confirmar que  a pessoa não foi inserida ja na equipe
 														for (p=0;p<=equipe.length;p++){
 														
 															if ((pessoas[indice_i]  != equipe[p]) && (pessoas[indice_j]  != equipe[p])) {
@@ -3809,9 +3809,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe2.length);
 										if (equipe2.length == 0 ) {
@@ -3823,8 +3823,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -3846,8 +3846,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													
@@ -3868,7 +3868,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe2 já tiver alguem
 														if (equipe2.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe2
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe2
 															for (p=0;p<=equipe2.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe2[p]) && (pessoas[indice_j]  != equipe2[p])) {
@@ -4045,9 +4045,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 						
 						
 						
-						//varre o array para encontrar maior_hard distancia entre pares
-						for (var i =0; i < porcentagens_hard.length; i++){
-							for ( var j=0; j < porcentagens_hard.length; j++) {
+						//letre o array para encontrar maior_hard distancia entre pares
+						for (let i =0; i < porcentagens_hard.length; i++){
+							for ( let j=0; j < porcentagens_hard.length; j++) {
 										
 									//alert ('tamanho '+equipe.length);
 									if (equipe.length == 0 ) {
@@ -4059,8 +4059,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 											maior_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 												
 												//verifica se nao ja tem o nivel no novo array de niveis
-												var ver = novos_niveis.includes(niveis[i]);
-												var ver2 = novos_niveis.includes(niveis[j]);
+												let ver = novos_niveis.includes(niveis[i]);
+												let ver2 = novos_niveis.includes(niveis[j]);
 												
 												
 												//alert ('a maior_hard distancia = '+maior_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -4082,8 +4082,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 											maior_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 											
 											//verifica se nao ja tem o nivel no novo array de niveis
-												var ver = novos_niveis.includes(niveis[i]);
-												var ver2 = novos_niveis.includes(niveis[j]);
+												let ver = novos_niveis.includes(niveis[i]);
+												let ver2 = novos_niveis.includes(niveis[j]);
 												
 												
 												
@@ -4105,7 +4105,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 													//se equipe já tiver alguem
 													if (equipe.length > 0 ) {
 														
-														//varre array para confirmar que  a pessoa não foi inserida ja na equipe
+														//letre array para confirmar que  a pessoa não foi inserida ja na equipe
 														for (p=0;p<=equipe.length;p++){
 														
 															if ((pessoas[indice_i]  != equipe[p]) && (pessoas[indice_j]  != equipe[p])) {
@@ -4273,9 +4273,9 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 							
 							
 							
-							//varre o array para encontrar menor_hard distancia entre pares
-							for (var i =0; i < porcentagens_hard.length; i++){
-								for ( var j=0; j < porcentagens_hard.length; j++) {
+							//letre o array para encontrar menor_hard distancia entre pares
+							for (let i =0; i < porcentagens_hard.length; i++){
+								for ( let j=0; j < porcentagens_hard.length; j++) {
 											
 										//alert ('tamanho '+equipe2.length);
 										if (equipe2.length == 0 ) {
@@ -4287,8 +4287,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);
 													
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													//alert ('a menor_hard distancia = '+menor_dist_hard+ ' entre '+porcentagens_hard[i]+ ' e '+porcentagens_hard[j]+ ' eh menor ou igual que  ' +menor+ ' ? ');
@@ -4310,8 +4310,8 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 												menor_dist_soft = Math.abs(qtd_soft_skills[i] - qtd_soft_skills[j]);						
 												
 													//verifica se nao ja tem o nivel no novo array de niveis
-													var ver = novos_niveis2.includes(niveis[i]);
-													var ver2 = novos_niveis2.includes(niveis[j]);
+													let ver = novos_niveis2.includes(niveis[i]);
+													let ver2 = novos_niveis2.includes(niveis[j]);
 													
 													
 													
@@ -4332,7 +4332,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 														//se equipe2 já tiver alguem
 														if (equipe2.length > 0 ) {
 															
-															//varre array para confirmar que  a pessoa não foi inserida ja na equipe2
+															//letre array para confirmar que  a pessoa não foi inserida ja na equipe2
 															for (p=0;p<=equipe2.length;p++){
 															
 																if ((pessoas[indice_i]  != equipe2[p]) && (pessoas[indice_j]  != equipe2[p])) {
@@ -4493,7 +4493,7 @@ for (var ppors = 0; ppors<tamanho; ppors++){
 
 alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+equipe2+ '\nporc_equipe:    '+porc_equipe2);	
 
-	//for (var tame = 0; tame < tamanho; tame++){
+	//for (let tame = 0; tame < tamanho; tame++){
 																			//coloca a pessoa de incice i
 		
 		//equipe2.push(pessoas[tame]);
@@ -4508,7 +4508,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				
 				
 					
-					for ( var i=0 ; i <= equipe.length; i++){
+					for ( let i=0 ; i <= equipe.length; i++){
 							
 							if ((equipe[i]=='kiran') && (kiranpode==1)){
 								$("#kiran").css("display", "block");
@@ -4578,7 +4578,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					porcentagem_sugestao1 = 0;
 					
 					
-					for ( var i=0 ; i <= equipe.length; i++){
+					for ( let i=0 ; i <= equipe.length; i++){
 						
 						if ((equipe[i]=='kiran') && ($('#kiran').css('display') == 'block')){
 							porcentagem_sugestao1 = (porcentagem_sugestao1 + porcentagem_kiran);
@@ -4656,7 +4656,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}	
 					
 					
-					for ( var i=0 ; i <= equipe2.length; i++){
+					for ( let i=0 ; i <= equipe2.length; i++){
 					
 							if ((equipe2[i]=='kiran') && (kiranpode==1)){
 								$("#kiran2").css("display", "block");
@@ -4723,7 +4723,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					porcentagem_sugestao2 = 0;
 					
 					
-					for ( var i=0 ; i <= equipe2.length; i++){
+					for ( let i=0 ; i <= equipe2.length; i++){
 						
 						if ((equipe2[i]=='kiran') && ($('#kiran2').css('display') == 'block')){
 							porcentagem_sugestao2 = (porcentagem_sugestao2 + porcentagem_kiran);
@@ -4824,8 +4824,8 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					//verifica se há projetos similares e exibe o botao ver similar projects
 					
-					for (var j=0; j < texts.length; j++) {
-							var tecnolo = texts[j];
+					for (let j=0; j < texts.length; j++) {
+							let tecnolo = texts[j];
 							if ((tecnolo == 'Java') || (tecnolo == 'Web') || (tecnolo == 'MVC')){
 								 document.getElementById("similarprojects").style.display = "block";
 							}
@@ -4841,12 +4841,12 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				
 	
 	$("#defaultdemo").click(function() {
-				var projetoa=0;
-				var projetob=0;
-				for (var j=0; j < texts.length; j++) {
+				let projetoa=0;
+				let projetob=0;
+				for (let j=0; j < texts.length; j++) {
 					 
 					 
-					 var tecnolo = texts[j];
+					 let tecnolo = texts[j];
 						
 					if (((tecnolo == 'Java') || (tecnolo == 'MVC') || (tecnolo == 'Spring')) && ( $( "#natureza" ).val()==0) ){
 						projetoa=1;
@@ -4932,7 +4932,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					
 		
-			$( "#salvarequipe" ).click(function() {	
+			$( "#salletequipe" ).click(function() {	
 						alert('saving');
 						
 						localStorage.setItem('valueTexto', equipe);
@@ -5014,7 +5014,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#kiran").is('.ui-draggable-dragging')) && (kiran_sugest1==1) ){
 					$("#kiran").css("z-index", a++);
 					kiran_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='kiran'){
 							equipe2.push('kiran');
@@ -5028,7 +5028,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5053,7 +5053,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5083,7 +5083,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#fred").is('.ui-draggable-dragging')) && (fred_sugest1==1) ){
 					$("#fred").css("z-index", a++);
 					fred_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='fred'){
 							equipe2.push('fred');
@@ -5096,7 +5096,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5121,7 +5121,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5148,7 +5148,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#alice").is('.ui-draggable-dragging')) && (alice_sugest1==1) ){
 					$("#alice").css("z-index", a++);
 					alice_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='alice'){
 							equipe2.push('alice');
@@ -5161,7 +5161,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5186,7 +5186,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5212,7 +5212,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#dave").is('.ui-draggable-dragging')) && (dave_sugest1==1) ){
 					$("#dave").css("z-index", a++);
 					dave_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='dave'){
 							equipe2.push('dave');
@@ -5225,7 +5225,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5247,7 +5247,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5274,7 +5274,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#bob").is('.ui-draggable-dragging')) && (bob_sugest1==1) ){
 					$("#bob").css("z-index", a++);
 					bob_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='bob'){
 							equipe2.push('bob');
@@ -5287,7 +5287,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5309,7 +5309,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5334,7 +5334,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#marcos").is('.ui-draggable-dragging')) && (marcos_sugest1==1) ){
 					$("#marcos").css("z-index", a++);
 					marcos_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='marcos'){
 							equipe2.push('marcos');
@@ -5347,7 +5347,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5369,7 +5369,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5394,7 +5394,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#julia").is('.ui-draggable-dragging')) && (julia_sugest1==1) ){
 					$("#julia").css("z-index", a++);
 					julia_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='julia'){
 							equipe2.push('julia');
@@ -5407,7 +5407,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5429,7 +5429,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5454,7 +5454,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#nick").is('.ui-draggable-dragging')) && (nick_sugest1==1) ){
 					$("#nick").css("z-index", a++);
 					nick_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='nick'){
 							equipe2.push('nick');
@@ -5467,7 +5467,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5489,7 +5489,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5516,7 +5516,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#paul").is('.ui-draggable-dragging')) && (paul_sugest1==1) ){
 					$("#paul").css("z-index", a++);
 					paul_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='paul'){
 							equipe2.push('paul');
@@ -5529,7 +5529,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5551,7 +5551,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5576,7 +5576,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#doug").is('.ui-draggable-dragging')) && (doug_sugest1==1) ){
 					$("#doug").css("z-index", a++);
 					doug_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='doug'){
 							equipe2.push('doug');
@@ -5590,7 +5590,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5615,7 +5615,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5648,7 +5648,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#ana").is('.ui-draggable-dragging')) && (ana_sugest1==1) ){
 					$("#ana").css("z-index", a++);
 					ana_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='ana'){
 							equipe2.push('ana');
@@ -5662,7 +5662,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5687,7 +5687,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5720,7 +5720,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#rita").is('.ui-draggable-dragging')) && (rita_sugest1==1) ){
 					$("#rita").css("z-index", a++);
 					rita_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='rita'){
 							equipe2.push('rita');
@@ -5734,7 +5734,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5759,7 +5759,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5791,7 +5791,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#peter").is('.ui-draggable-dragging')) && (peter_sugest1==1) ){
 					$("#peter").css("z-index", a++);
 					peter_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='peter'){
 							equipe2.push('peter');
@@ -5805,7 +5805,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5830,7 +5830,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5864,7 +5864,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#claudio").is('.ui-draggable-dragging')) && (claudio_sugest1==1) ){
 					$("#claudio").css("z-index", a++);
 					claudio_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='claudio'){
 							equipe2.push('claudio');
@@ -5878,7 +5878,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5903,7 +5903,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -5936,7 +5936,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#livia").is('.ui-draggable-dragging')) && (livia_sugest1==1) ){
 					$("#livia").css("z-index", a++);
 					livia_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='livia'){
 							equipe2.push('livia');
@@ -5950,7 +5950,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -5975,7 +5975,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -6008,7 +6008,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#glaucia").is('.ui-draggable-dragging')) && (glaucia_sugest1==1) ){
 					$("#glaucia").css("z-index", a++);
 					glaucia_sugest1=0;
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='glaucia'){
 							equipe2.push('glaucia');
@@ -6022,7 +6022,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6047,7 +6047,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -6086,7 +6086,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#kiran").is('.ui-draggable-dragging')) && (kiran_sugest1==0) ){
 					$("#kiran").css("z-index", a++);
 					kiran_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='kiran'){
 							equipe.push('kiran');
@@ -6101,7 +6101,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6123,7 +6123,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6146,7 +6146,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#fred").is('.ui-draggable-dragging')) && (fred_sugest1==0) ){
 					$("#fred").css("z-index", a++);
 					fred_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='fred'){
 							equipe.push('fred');
@@ -6161,7 +6161,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6183,7 +6183,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6206,7 +6206,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#alice").is('.ui-draggable-dragging')) && (alice_sugest1==0) ){
 					$("#alice").css("z-index", a++);
 					alice_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='alice'){
 							equipe.push('alice');
@@ -6221,7 +6221,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6243,7 +6243,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6267,7 +6267,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#dave").is('.ui-draggable-dragging')) && (dave_sugest1==0) ){
 						$("#dave").css("z-index", a++);
 						dave_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='dave'){
 							equipe.push('dave');
@@ -6282,7 +6282,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6304,7 +6304,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6329,7 +6329,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#bob").is('.ui-draggable-dragging')) && (bob_sugest1==0) ){
 					$("#bob").css("z-index", a++);
 					bob_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='bob'){
 							equipe.push('bob');
@@ -6344,7 +6344,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6366,7 +6366,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6389,7 +6389,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#marcos").is('.ui-draggable-dragging')) && (marcos_sugest1==0) ){
 					$("#marcos").css("z-index", a++);
 					marcos_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='marcos'){
 							equipe.push('marcos');
@@ -6404,7 +6404,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6426,7 +6426,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6449,7 +6449,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#julia").is('.ui-draggable-dragging')) && (julia_sugest1==0) ){
 					$("#julia").css("z-index", a++);
 					julia_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='julia'){
 							equipe.push('julia');
@@ -6464,7 +6464,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6486,7 +6486,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6509,7 +6509,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#nick").is('.ui-draggable-dragging')) && (nick_sugest1==0) ){
 					$("#nick").css("z-index", a++);
 					nick_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='nick'){
 							equipe.push('nick');
@@ -6524,7 +6524,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6546,7 +6546,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6571,7 +6571,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#paul").is('.ui-draggable-dragging')) && (paul_sugest1==0) ){
 					$("#paul").css("z-index", a++);
 					paul_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='paul'){
 							equipe.push('paul');
@@ -6586,7 +6586,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6608,7 +6608,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6632,7 +6632,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#doug").is('.ui-draggable-dragging')) && (doug_sugest1==0) ){
 					$("#doug").css("z-index", a++);
 					doug_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='doug'){
 							equipe.push('doug');
@@ -6647,7 +6647,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6669,7 +6669,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6695,7 +6695,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#ana").is('.ui-draggable-dragging')) && (ana_sugest1==0) ){
 					$("#ana").css("z-index", a++);
 					ana_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='ana'){
 							equipe.push('ana');
@@ -6710,7 +6710,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6732,7 +6732,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6758,7 +6758,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#rita").is('.ui-draggable-dragging')) && (rita_sugest1==0) ){
 					$("#rita").css("z-index", a++);
 					rita_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='rita'){
 							equipe.push('rita');
@@ -6773,7 +6773,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6795,7 +6795,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6821,7 +6821,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#peter").is('.ui-draggable-dragging')) && (peter_sugest1==0) ){
 					$("#peter").css("z-index", a++);
 					peter_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='peter'){
 							equipe.push('peter');
@@ -6836,7 +6836,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6858,7 +6858,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6884,7 +6884,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#claudio").is('.ui-draggable-dragging')) && (claudio_sugest1==0) ){
 					$("#claudio").css("z-index", a++);
 					claudio_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='claudio'){
 							equipe.push('claudio');
@@ -6899,7 +6899,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6921,7 +6921,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -6949,7 +6949,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#livia").is('.ui-draggable-dragging')) && (livia_sugest1==0) ){
 					$("#livia").css("z-index", a++);
 					livia_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='livia'){
 							equipe.push('livia');
@@ -6964,7 +6964,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -6986,7 +6986,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -7014,7 +7014,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#glaucia").is('.ui-draggable-dragging')) && (glaucia_sugest1==0) ){
 					$("#glaucia").css("z-index", a++);
 					glaucia_sugest1=1;	
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='glaucia'){
 							equipe.push('glaucia');
@@ -7029,7 +7029,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7051,7 +7051,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -7090,7 +7090,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#kiran2").is('.ui-draggable-dragging')) && (kiran2_sugest1==1) ){
 					$("#kiran2").css("z-index", a++);
 					kiran2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='kiran'){
 							equipe.push('kiran');
@@ -7103,7 +7103,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7125,7 +7125,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7150,7 +7150,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#fred2").is('.ui-draggable-dragging')) && (fred2_sugest1==1) ){
 					$("#fred2").css("z-index", a++);
 					fred2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='fred'){
 							equipe.push('fred');
@@ -7163,7 +7163,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7186,7 +7186,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7211,7 +7211,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#alice2").is('.ui-draggable-dragging')) && (alice2_sugest1==1) ){
 					$("#alice2").css("z-index", a++);
 					alice2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='alice'){
 							equipe.push('alice');
@@ -7224,7 +7224,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7246,7 +7246,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7272,7 +7272,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#dave2").is('.ui-draggable-dragging')) && (dave2_sugest1==1) ){
 					$("#dave2").css("z-index", a++);
 					dave2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='dave'){
 							equipe.push('dave');
@@ -7285,7 +7285,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7307,7 +7307,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7334,7 +7334,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#bob2").is('.ui-draggable-dragging')) && (bob2_sugest1==1) ){
 					$("#bob2").css("z-index", a++);
 					bob2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='bob'){
 							equipe.push('bob');
@@ -7347,7 +7347,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7369,7 +7369,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7394,7 +7394,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#marcos2").is('.ui-draggable-dragging')) && (marcos2_sugest1==1) ){
 					$("#marcos2").css("z-index", a++);
 					marcos2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='marcos'){
 							equipe.push('marcos');
@@ -7407,7 +7407,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7429,7 +7429,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7454,7 +7454,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#julia2").is('.ui-draggable-dragging')) && (julia2_sugest1==1) ){
 					$("#julia2").css("z-index", a++);
 					julia2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='julia'){
 							equipe.push('julia');
@@ -7467,7 +7467,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7489,7 +7489,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7514,7 +7514,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#nick2").is('.ui-draggable-dragging')) && (nick2_sugest1==1) ){
 					$("#nick2").css("z-index", a++);
 					nick2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='nick'){
 							equipe.push('nick');
@@ -7527,7 +7527,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7549,7 +7549,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7577,7 +7577,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#paul2").is('.ui-draggable-dragging')) && (paul2_sugest1==1) ){
 					$("#paul2").css("z-index", a++);
 					paul2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='paul'){
 							equipe.push('paul');
@@ -7590,7 +7590,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7612,7 +7612,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7637,7 +7637,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#doug2").is('.ui-draggable-dragging')) && (doug2_sugest1==1) ){
 					$("#doug2").css("z-index", a++);
 					doug2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='doug'){
 							equipe.push('doug');
@@ -7650,7 +7650,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7672,7 +7672,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7699,7 +7699,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#ana2").is('.ui-draggable-dragging')) && (ana2_sugest1==1) ){
 					$("#ana2").css("z-index", a++);
 					ana2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='ana'){
 							equipe.push('ana');
@@ -7712,7 +7712,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7734,7 +7734,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7761,7 +7761,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#rita2").is('.ui-draggable-dragging')) && (rita2_sugest1==1) ){
 					$("#rita2").css("z-index", a++);
 					rita2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='rita'){
 							equipe.push('rita');
@@ -7774,7 +7774,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7796,7 +7796,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7822,7 +7822,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#peter2").is('.ui-draggable-dragging')) && (peter2_sugest1==1) ){
 					$("#peter2").css("z-index", a++);
 					peter2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='peter'){
 							equipe.push('peter');
@@ -7835,7 +7835,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7857,7 +7857,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7884,7 +7884,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#claudio2").is('.ui-draggable-dragging')) && (claudio2_sugest1==1) ){
 					$("#claudio2").css("z-index", a++);
 					claudio2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='claudio'){
 							equipe.push('claudio');
@@ -7897,7 +7897,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7919,7 +7919,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -7948,7 +7948,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#livia2").is('.ui-draggable-dragging')) && (livia2_sugest1==1) ){
 					$("#livia2").css("z-index", a++);
 					livia2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='livia'){
 							equipe.push('livia');
@@ -7961,7 +7961,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -7983,7 +7983,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -8013,7 +8013,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#glaucia2").is('.ui-draggable-dragging')) && (glaucia2_sugest1==1) ){
 					$("#glaucia2").css("z-index", a++);
 					glaucia2_sugest1=0;
-					for (var j=0; j<equipe2.length; j++){
+					for (let j=0; j<equipe2.length; j++){
 						
 						if(equipe2[j]=='glaucia'){
 							equipe.push('glaucia');
@@ -8026,7 +8026,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8048,7 +8048,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 						
@@ -8082,7 +8082,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#kiran2").is('.ui-draggable-dragging')) && (kiran2_sugest1==0) ){
 					$("#kiran2").css("z-index", a++);	
 					kiran2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='kiran'){
 							equipe2.push('kiran');
@@ -8097,7 +8097,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8121,7 +8121,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8144,7 +8144,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#fred2").is('.ui-draggable-dragging')) && (fred2_sugest1==0) ){
 					$("#fred2").css("z-index", a++);	
 					fred2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='fred'){
 							equipe2.push('fred');
@@ -8159,7 +8159,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8182,7 +8182,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8205,7 +8205,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#alice2").is('.ui-draggable-dragging')) && (alice2_sugest1==0) ){
 					$("#alice2").css("z-index", a++);	
 					alice2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='alice'){
 							equipe2.push('alice');
@@ -8220,7 +8220,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8243,7 +8243,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8267,7 +8267,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#dave2").is('.ui-draggable-dragging')) && (dave2_sugest1==0) ){
 					$("#dave2").css("z-index", a++);
 					dave2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='dave'){
 							equipe2.push('dave');
@@ -8282,7 +8282,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8304,7 +8304,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8329,7 +8329,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#bob2").is('.ui-draggable-dragging')) && (bob2_sugest1==0) ){
 					$("#bob2").css("z-index", a++);
 					bob2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='bob'){
 							equipe2.push('bob');
@@ -8344,7 +8344,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8366,7 +8366,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8389,7 +8389,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#marcos2").is('.ui-draggable-dragging')) && (marcos2_sugest1==0) ){
 					$("#marcos2").css("z-index", a++);
 					marcos2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='marcos'){
 							equipe2.push('marcos');
@@ -8404,7 +8404,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8425,7 +8425,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					}
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8448,7 +8448,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#julia2").is('.ui-draggable-dragging')) && (julia2_sugest1==0) ){
 					$("#julia2").css("z-index", a++);
 					julia2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='julia'){
 							equipe2.push('julia');
@@ -8463,7 +8463,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8485,7 +8485,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8508,7 +8508,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#nick2").is('.ui-draggable-dragging')) && (nick2_sugest1==0) ){
 					$("#nick2").css("z-index", a++);
 					nick2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='nick'){
 							equipe2.push('nick');
@@ -8523,7 +8523,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8545,7 +8545,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8570,7 +8570,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#paul2").is('.ui-draggable-dragging')) && (paul2_sugest1==0) ){
 					$("#paul2").css("z-index", a++);
 					paul2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='paul'){
 							equipe2.push('paul');
@@ -8585,7 +8585,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8607,7 +8607,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8630,7 +8630,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#doug2").is('.ui-draggable-dragging')) && (doug2_sugest1==0) ){
 					$("#doug2").css("z-index", a++);	
 					doug2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='doug'){
 							equipe2.push('doug');
@@ -8645,7 +8645,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8669,7 +8669,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8694,7 +8694,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#ana2").is('.ui-draggable-dragging')) && (ana2_sugest1==0) ){
 					$("#ana2").css("z-index", a++);	
 					ana2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='ana'){
 							equipe2.push('ana');
@@ -8709,7 +8709,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8733,7 +8733,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8758,7 +8758,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#rita2").is('.ui-draggable-dragging')) && (rita2_sugest1==0) ){
 					$("#rita2").css("z-index", a++);	
 					rita2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='rita'){
 							equipe2.push('rita');
@@ -8773,7 +8773,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8797,7 +8797,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8822,7 +8822,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#peter2").is('.ui-draggable-dragging')) && (peter2_sugest1==0) ){
 					$("#peter2").css("z-index", a++);	
 					peter2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='peter'){
 							equipe2.push('peter');
@@ -8837,7 +8837,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8861,7 +8861,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8886,7 +8886,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#claudio2").is('.ui-draggable-dragging')) && (claudio2_sugest1==0) ){
 					$("#claudio2").css("z-index", a++);	
 					claudio2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='claudio'){
 							equipe2.push('claudio');
@@ -8901,7 +8901,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8925,7 +8925,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -8951,7 +8951,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#livia2").is('.ui-draggable-dragging')) && (livia2_sugest1==0) ){
 					$("#livia2").css("z-index", a++);	
 					livia2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='livia'){
 							equipe2.push('livia');
@@ -8966,7 +8966,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -8990,7 +8990,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}
@@ -9016,7 +9016,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 				if (($("#glaucia2").is('.ui-draggable-dragging')) && (glaucia2_sugest1==0) ){
 					$("#glaucia2").css("z-index", a++);	
 					glaucia2_sugest1=1;	
-					for (var j=0; j<equipe.length; j++){
+					for (let j=0; j<equipe.length; j++){
 						
 						if(equipe[j]=='glaucia'){
 							equipe2.push('glaucia');
@@ -9031,7 +9031,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao1=0;
 					
-					for (var i=0; i<equipe.length;i++){
+					for (let i=0; i<equipe.length;i++){
 						
 						porcentagem_sugestao1 = porcentagem_sugestao1 + porc_equipe[i];
 						
@@ -9055,7 +9055,7 @@ alert('equipe:   '+equipe+ '\nporc_equipe:    '+porc_equipe+ '\nequipe 2:   '+eq
 					
 					porcentagem_sugestao2=0;
 					
-					for (var i=0; i<equipe2.length;i++){
+					for (let i=0; i<equipe2.length;i++){
 						
 						porcentagem_sugestao2 = porcentagem_sugestao2 + porc_equipe2[i];
 					}

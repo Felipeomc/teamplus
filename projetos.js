@@ -1,22 +1,22 @@
 
-			var timeline;
+			let timeline;
 			$(document).ready(timeline_init);
 			
-			var ano;
+			let ano;
 			
-			var ano_inicio;
-			var ano_fim;
-			var data;
-			var options;
-			var nome;
-			var texto_team;
-			var tech;
-			var natureza;
-			var inicio; 
-				var fim ; 
-				var tag1 ; 
-				var tag2 ;
-			var equipe;
+			let ano_inicio;
+			let ano_fim;
+			let data;
+			let options;
+			let nome;
+			let texto_team;
+			let tech;
+			let natureza;
+			let inicio; 
+		    let fim ; 
+			let tag1 ; 
+			let tag2 ;
+			let equipe;
 			function timeline_init() {
 			
 			
@@ -62,9 +62,9 @@
 				
 			}	
 			function timeline_clicked(e) {
-				var clicked_item = $(e.target);
+				let clicked_item = $(e.target);
 				
-				var sel = $('.selected');
+				let sel = $('.selected');
 				sel.removeClass('selected');
 				$('#clicked-item').empty();
 				
@@ -179,10 +179,10 @@
 			
 			function update_project_o() {
 				
-						var sel_item_id = $('.selected').data('id');
-							var data = timeline.getTimelineData();
-							for(var l = 0; l < data.length; l++) {
-								for(var i = 0; i < data[l].length; i++) {
+						let sel_item_id = $('.selected').data('id');
+							let data = timeline.getTimelineData();
+							for(let l = 0; l < data.length; l++) {
+								for(let i = 0; i < data[l].length; i++) {
 									if(data[l][i].id == sel_item_id) {
 										data[l].splice(i,1);
 										if(data[l].length == 0)
@@ -299,10 +299,10 @@
 			
 			
 			function remove_selected_item() {
-				var sel_item_id = $('.selected').data('id');
-				var data = timeline.getTimelineData();
-				for(var l = 0; l < data.length; l++) {
-					for(var i = 0; i < data[l].length; i++) {
+				let sel_item_id = $('.selected').data('id');
+				let data = timeline.getTimelineData();
+				for(let l = 0; l < data.length; l++) {
+					for(let i = 0; i < data[l].length; i++) {
 						if(data[l][i].id == sel_item_id) {
 							data[l].splice(i,1);
 							if(data[l].length == 0)
@@ -315,7 +315,7 @@
 			}
 			
 			function bind_popup() {
-				var sel_item_id = $('.selected').data('id');
+				let sel_item_id = $('.selected').data('id');
 				if(typeof sel_item_id == 'undefined') {
 					alert('Ain\'t nothin\' selected, yo!');
 					return;
