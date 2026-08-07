@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamPlus{% block title %}{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --border:   #2a2d3a;
+      --accent:   #4f8ef7;
+      --accent2:  #34d399;
+      --warn:     #f59e0b;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --sidebar-w: 220px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w); min-height: 100vh; background: var(--surface);
+      border-right: 1px solid var(--border); display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; z-index: 100;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 20px; border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo span {
+      font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sidebar-logo small { display: block; font-size: .7rem; color: var(--muted); margin-top: 2px; }
+    .sidebar nav { padding: 16px 12px; flex: 1; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px; text-decoration: none;
+      color: var(--muted); font-size: .875rem; font-weight: 500;
+      transition: all .15s; margin-bottom: 2px;
+    }
+    .nav-item:hover  { background: rgba(79,142,247,.1); color: var(--text); }
+    .nav-item.active { background: rgba(79,142,247,.15); color: var(--accent); }
+    .nav-icon { width: 18px; text-align: center; opacity: .8; }
+
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); flex: 1; padding: 32px 36px; max-width: 1200px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .card-title {
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    label { font-size: .8rem; font-weight: 500; color: var(--muted); display: block; margin-bottom: 6px; }
+    input[type=text], input[type=number], select, textarea {
+      width: 100%; padding: 10px 14px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: inherit; font-size: .875rem;
+      outline: none; transition: border-color .15s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+
+    /* TAG INPUT */
+    .tag-input-wrap {
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+      padding: 8px 10px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; cursor: text; transition: border-color .15s; min-height: 42px;
+    }
+    .tag-input-wrap:focus-within { border-color: var(--accent); }
+    .tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(79,142,247,.15); color: var(--accent);
+      border-radius: 5px; padding: 3px 8px; font-size: .78rem; font-weight: 500;
+    }
+    .tag.should { background: rgba(52,211,153,.12); color: var(--accent2); }
+    .tag.could  { background: rgba(245,158,11,.12); color: var(--warn); }
+    .tag .rm { cursor: pointer; opacity: .6; }
+    .tag .rm:hover { opacity: 1; }
+    .tag-input-wrap input {
+      border: none; background: transparent; padding: 0; min-width: 80px;
+      flex: 1; font-size: .85rem;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer;
+      font-family: inherit; font-size: .875rem; font-weight: 500;
+      transition: all .15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #3b7de0; }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    /* BADGES */
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .03em;
+    }
+    .badge-VH { background: rgba(52,211,153,.15); color: var(--accent2); }
+    .badge-H  { background: rgba(79,142,247,.15); color: var(--accent); }
+    .badge-M  { background: rgba(245,158,11,.12); color: var(--warn); }
+    .badge-L  { background: rgba(239,68,68,.12);  color: #f87171; }
+    .badge-VL { background: rgba(100,116,139,.12); color: var(--muted); }
+
+    /* MEMBER CARD */
+    .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-top: 16px; }
+    .member-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; text-align: center;
+    }
+    .member-avatar {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 600; color: var(--accent); margin: 0 auto 10px;
+    }
+    .member-name { font-size: .85rem; font-weight: 600; }
+    .member-role { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .member-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 8px; }
+    .member-tag { font-size: .65rem; background: var(--border); color: var(--muted); padding: 2px 6px; border-radius: 4px; }
+
+    /* FITNESS BAR */
+    .fitness-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .fitness-label { font-size: .75rem; color: var(--muted); width: 90px; flex-shrink: 0; }
+    .fitness-bar { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .fitness-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .fitness-val { font-size: .75rem; font-family: 'IBM Plex Mono', monospace; color: var(--text); width: 42px; text-align: right; }
+
+    /* SPINNER */
+    .spinner {
+      width: 22px; height: 22px; border: 3px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* UTILS */
+    .row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .col { flex: 1; min-width: 180px; }
+    .mt-4 { margin-top: 16px; }
+    .mt-6 { margin-top: 24px; }
+    .text-muted { color: var(--muted); font-size: .8rem; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+    .page-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 6px; }
+    .page-sub   { color: var(--muted); font-size: .875rem; margin-bottom: 28px; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span>TeamPlus</span>
+    <small>Sugestão de equipes por GA + BN</small>
+  </div>
+  <nav>
+    <a href="/"          class="nav-item {% if request.path == '/' %}active{% endif %}">
+      <span class="nav-icon">⚡</span> Novo projeto
+    </a>
+    <a href="/historico" class="nav-item {% if request.path == '/historico' %}active{% endif %}">
+      <span class="nav-icon">🕓</span> Histórico
+    </a>
+    <a href="/perfis"    class="nav-item {% if request.path == '/perfis' %}active{% endif %}">
+      <span class="nav-icon">👥</span> Perfis
+    </a>
+    <a href="/tecnologias" class="nav-item {% if request.path == '/tecnologias' %}active{% endif %}">
+      <span class="nav-icon">🔬</span> Tecnologias
+    </a>
+
+    <a href="/grafo" class="nav-item {% if request.path == '/grafo' %}active{% endif %}">
+      <span class="nav-icon">🕸</span> Grafo
+    </a>
+  </nav>
+</aside>
+
+<main class="main">
+  {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

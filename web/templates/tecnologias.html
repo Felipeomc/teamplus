@@ -1,0 +1,476 @@
+{% extends "base.html" %}
+{% block title %} — Tecnologias{% endblock %}
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dom-color:  #4f8ef7;
+    --eco-color:  #34d399;
+    --lang-color: #f472b6;
+    --dom-glow:   rgba(79,142,247,0.35);
+    --eco-glow:   rgba(52,211,153,0.35);
+    --lang-glow:  rgba(244,114,182,0.35);
+  }
+
+  /* ── Layout ── */
+  .tec-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px; }
+  .search-wrap {
+    display:flex; align-items:center; gap:10px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:10px; padding:8px 14px; width:260px; transition:border-color .2s;
+  }
+  .search-wrap:focus-within { border-color:var(--accent); }
+  .search-wrap input { background:none; border:none; outline:none; color:var(--text); font-size:.875rem; width:100%; }
+  .search-wrap svg   { flex-shrink:0; opacity:.4; }
+
+  /* ── Legend ── */
+  .legend { display:flex; gap:20px; flex-wrap:wrap; }
+  .leg-item { display:flex; align-items:center; gap:7px; font-size:.78rem; color:var(--muted); cursor:pointer; user-select:none; transition:color .15s; }
+  .leg-item:hover { color:var(--text); }
+  .leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .leg-item.dim { opacity:.35; }
+
+  /* ── Stats bar ── */
+  .stats-row { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:20px; }
+  .stat-chip {
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:10px 16px; display:flex; flex-direction:column; gap:2px; min-width:110px;
+  }
+  .stat-chip .sc-val { font-size:1.4rem; font-weight:700; font-family:'JetBrains Mono',monospace; line-height:1; }
+  .stat-chip .sc-lbl { font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+
+  /* ── Canvas ── */
+  #viz-container {
+    position:relative; width:100%; border:1px solid var(--border); border-radius:14px;
+    background:var(--surface); overflow:hidden;
+  }
+  #viz-canvas { display:block; }
+
+  /* ── Zone labels ── */
+  .zone-label {
+    position:absolute; top:0; font-size:.65rem; font-weight:700;
+    letter-spacing:.15em; text-transform:uppercase; padding:12px 18px;
+    pointer-events:none;
+  }
+  #lbl-dom  { color:var(--dom-color);  left:0; }
+  #lbl-eco  { color:var(--eco-color);  left:50%; transform:translateX(-50%); }
+  #lbl-lang { color:var(--lang-color); right:0; }
+
+  /* ── Tooltip ── */
+  #bubble-tip {
+    position:fixed; pointer-events:none; z-index:999;
+    background:#1a1d27; border:1px solid var(--border);
+    border-radius:12px; padding:14px 18px; width:220px;
+    box-shadow:0 8px 32px rgba(0,0,0,.5); display:none;
+    transition:opacity .1s;
+  }
+  #bubble-tip .bt-name  { font-size:.95rem; font-weight:700; margin-bottom:3px; }
+  #bubble-tip .bt-cat   { font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; }
+  #bubble-tip .bt-count { font-size:2rem; font-weight:700; font-family:'JetBrains Mono',monospace; line-height:1; }
+  #bubble-tip .bt-sub   { font-size:.72rem; color:var(--muted); margin-bottom:10px; }
+  #bubble-tip .bt-devs  { display:flex; flex-wrap:wrap; gap:4px; max-height:72px; overflow:hidden; }
+  #bubble-tip .bt-dev   { font-size:.65rem; background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:2px 6px; }
+
+  /* ── Side panel ── */
+  #side-panel {
+    position:absolute; top:0; right:0; bottom:0; width:260px;
+    background:var(--surface); border-left:1px solid var(--border);
+    padding:20px 16px; overflow-y:auto; display:none;
+    animation:slideIn .2s ease;
+  }
+  @keyframes slideIn { from{transform:translateX(20px);opacity:0} to{transform:translateX(0);opacity:1} }
+  #side-panel .sp-close { position:absolute; top:12px; right:14px; cursor:pointer; color:var(--muted); font-size:1.1rem; }
+  #side-panel .sp-name  { font-size:1.1rem; font-weight:700; margin-bottom:4px; padding-right:20px; }
+  #side-panel .sp-cat   { font-size:.7rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; margin-bottom:16px; }
+  #side-panel .sp-bignum { font-size:2.8rem; font-weight:700; font-family:'JetBrains Mono',monospace; line-height:1; margin-bottom:4px; }
+  #side-panel .sp-bigsub { font-size:.75rem; color:var(--muted); margin-bottom:18px; }
+  #side-panel .sp-sec   { font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; margin-top:14px; }
+  #side-panel .sp-devlist { display:flex; flex-direction:column; gap:6px; }
+  #side-panel .sp-dev   {
+    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:8px 10px; font-size:.78rem;
+  }
+  #side-panel .sp-dev-id   { font-weight:600; }
+  #side-panel .sp-dev-role { font-size:.68rem; color:var(--muted); }
+
+  /* ── Spinner ── */
+  #viz-spinner {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; background:var(--surface);
+    gap:12px; border-radius:14px; z-index:10;
+  }
+  #viz-spinner p { font-size:.8rem; color:var(--muted); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="tec-header">
+  <div>
+    <div class="page-title">Tecnologias</div>
+    <div class="page-sub" style="margin-bottom:0">Mapa de cobertura tecnológica da base de desenvolvedores</div>
+  </div>
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="search-input" type="text" placeholder="Buscar tecnologia…">
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-chip"><div class="sc-val" id="s-total">—</div><div class="sc-lbl">Tecnologias</div></div>
+  <div class="stat-chip"><div class="sc-val" style="color:var(--dom-color)" id="s-dom">—</div><div class="sc-lbl">Domínios</div></div>
+  <div class="stat-chip"><div class="sc-val" style="color:var(--eco-color)" id="s-eco">—</div><div class="sc-lbl">Ecossistema</div></div>
+  <div class="stat-chip"><div class="sc-val" style="color:var(--lang-color)" id="s-lang">—</div><div class="sc-lbl">Linguagens</div></div>
+  <div class="stat-chip"><div class="sc-val" id="s-devs">—</div><div class="sc-lbl">Desenvolvedores</div></div>
+</div>
+
+<div class="legend" style="margin-bottom:16px">
+  <div class="leg-item" data-cat="dominio"     onclick="toggleFilter('dominio')">
+    <div class="leg-dot" style="background:var(--dom-color);box-shadow:0 0 6px var(--dom-glow)"></div>
+    Domínio de aplicação
+  </div>
+  <div class="leg-item" data-cat="ecossistema" onclick="toggleFilter('ecossistema')">
+    <div class="leg-dot" style="background:var(--eco-color);box-shadow:0 0 6px var(--eco-glow)"></div>
+    Ecossistema
+  </div>
+  <div class="leg-item" data-cat="linguagens"  onclick="toggleFilter('linguagens')">
+    <div class="leg-dot" style="background:var(--lang-color);box-shadow:0 0 6px var(--lang-glow)"></div>
+    Linguagens
+  </div>
+</div>
+
+<div id="viz-container">
+  <div id="viz-spinner">
+    <div class="spinner" style="width:28px;height:28px;border-width:3px"></div>
+    <p>Processando perfis…</p>
+  </div>
+  <canvas id="viz-canvas"></canvas>
+  <span class="zone-label" id="lbl-dom">Domínio</span>
+  <span class="zone-label" id="lbl-eco">Ecossistema</span>
+  <span class="zone-label" id="lbl-lang">Linguagem</span>
+  <div id="side-panel">
+    <span class="sp-close" onclick="closePanel()">×</span>
+    <div class="sp-name" id="sp-name"></div>
+    <div class="sp-cat"  id="sp-cat"></div>
+    <div class="sp-bignum" id="sp-bignum"></div>
+    <div class="sp-bigsub">desenvolvedores com esta tag</div>
+    <div class="sp-sec">Desenvolvedores</div>
+    <div class="sp-devlist" id="sp-devlist"></div>
+  </div>
+</div>
+<div id="bubble-tip">
+  <div class="bt-name" id="bt-name"></div>
+  <div class="bt-cat"  id="bt-cat"></div>
+  <div class="bt-count" id="bt-count"></div>
+  <div class="bt-sub">desenvolvedores</div>
+  <div class="bt-devs" id="bt-devs"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+// ── Paleta ────────────────────────────────────────────────────────────────────
+const CAT_COLOR = {
+  dominio:     '#4f8ef7',
+  ecossistema: '#34d399',
+  linguagens:  '#f472b6',
+};
+const CAT_GLOW = {
+  dominio:     'rgba(79,142,247,0.5)',
+  ecossistema: 'rgba(52,211,153,0.5)',
+  linguagens:  'rgba(244,114,182,0.5)',
+};
+const CAT_LABEL = {
+  dominio:     'Domínio de Aplicação',
+  ecossistema: 'Ecossistema',
+  linguagens:  'Linguagem',
+};
+
+// ── Estado ────────────────────────────────────────────────────────────────────
+let _nodes    = [];
+let _sim      = null;
+let _raf      = null;
+let _canvas, _ctx, _W, _H;
+let _hidden   = new Set();        // categorias ocultadas
+let _search   = '';
+let _selected = null;
+let _hovered  = null;
+const DPR = window.devicePixelRatio || 1;
+
+// ── Carrega dados ─────────────────────────────────────────────────────────────
+async function init() {
+  const res  = await fetch('/api/devs');
+  const devs = await res.json();
+
+  // Agrega tags por cluster
+  const tally = { dominio:{}, ecossistema:{}, linguagens:{} };
+
+  devs.forEach(d => {
+    const devId = `Dev${d.id}`;
+    const role  = d.contractRoleName || '—';
+    ['dominio','ecossistema','linguagens'].forEach(cat => {
+      const tags = d[cat];
+      if (!Array.isArray(tags)) return;
+      tags.forEach(raw => {
+        const tag = String(raw).trim();
+        if (!tag) return;
+        if (!tally[cat][tag]) tally[cat][tag] = { count:0, devs:[] };
+        tally[cat][tag].count++;
+        tally[cat][tag].devs.push({ id:devId, role });
+      });
+    });
+  });
+
+  // Monta nós
+  _nodes = [];
+  ['dominio','ecossistema','linguagens'].forEach(cat => {
+    Object.entries(tally[cat]).forEach(([name, data]) => {
+      _nodes.push({ id: `${cat}::${name}`, name, cat, count: data.count, devs: data.devs });
+    });
+  });
+
+  // Stats
+  const cats = { dominio:0, ecossistema:0, linguagens:0 };
+  _nodes.forEach(n => cats[n.cat]++);
+  document.getElementById('s-total').textContent = _nodes.length;
+  document.getElementById('s-dom').textContent   = cats.dominio;
+  document.getElementById('s-eco').textContent   = cats.ecossistema;
+  document.getElementById('s-lang').textContent  = cats.linguagens;
+  document.getElementById('s-devs').textContent  = devs.length;
+
+  setupCanvas();
+  buildSim();
+  startLoop();
+  document.getElementById('viz-spinner').style.display = 'none';
+}
+
+// ── Canvas ────────────────────────────────────────────────────────────────────
+function setupCanvas() {
+  const container = document.getElementById('viz-container');
+  _canvas = document.getElementById('viz-canvas');
+  _ctx    = _canvas.getContext('2d');
+
+  function resize() {
+    _W = container.clientWidth;
+    _H = Math.max(480, window.innerHeight - 320);
+    container.style.height = _H + 'px';
+    _canvas.width  = _W * DPR;
+    _canvas.height = _H * DPR;
+    _canvas.style.width  = _W + 'px';
+    _canvas.style.height = _H + 'px';
+    _ctx.scale(DPR, DPR);
+    if (_sim) updateForces();
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+
+  _canvas.addEventListener('mousemove', onMove);
+  _canvas.addEventListener('mouseleave', () => { _hovered = null; hideTip(); });
+  _canvas.addEventListener('click', onClick);
+}
+
+// ── Simulação D3 force ────────────────────────────────────────────────────────
+const CATS = ['dominio','ecossistema','linguagens'];
+
+function zoneX(cat) {
+  const i = CATS.indexOf(cat);
+  return _W * (i + 0.5) / 3;
+}
+
+function radius(n) {
+  const maxCount = Math.max(..._nodes.map(x => x.count), 1);
+  return 6 + Math.sqrt(n.count / maxCount) * 38;
+}
+
+function buildSim() {
+  _sim = d3.forceSimulation(_nodes)
+    .force('charge', d3.forceManyBody().strength(-18))
+    .force('collide', d3.forceCollide().radius(n => radius(n) + 3).iterations(3))
+    .force('zoneX',   d3.forceX().x(n => zoneX(n.cat)).strength(0.12))
+    .force('centerY', d3.forceY().y(_H / 2).strength(0.06))
+    .alphaDecay(0.025)
+    .on('tick', () => {});  // render via RAF
+}
+
+function updateForces() {
+  if (!_sim) return;
+  _sim.force('zoneX').x(n => zoneX(n.cat));
+  _sim.force('centerY').y(_H / 2);
+  _sim.alpha(0.3).restart();
+}
+
+// ── Render loop ───────────────────────────────────────────────────────────────
+function startLoop() {
+  function frame() {
+    draw();
+    _raf = requestAnimationFrame(frame);
+  }
+  _raf = requestAnimationFrame(frame);
+}
+
+function draw() {
+  _ctx.clearRect(0, 0, _W, _H);
+
+  // Zone dividers
+  _ctx.save();
+  [1,2].forEach(i => {
+    const x = _W * i / 3;
+    _ctx.beginPath();
+    _ctx.moveTo(x, 40); _ctx.lineTo(x, _H - 10);
+    _ctx.strokeStyle = 'rgba(42,45,58,0.8)';
+    _ctx.lineWidth   = 1;
+    _ctx.setLineDash([4,6]);
+    _ctx.stroke();
+    _ctx.setLineDash([]);
+  });
+  _ctx.restore();
+
+  const sq = _search.toLowerCase();
+
+  _nodes.forEach(n => {
+    if (_hidden.has(n.cat)) return;
+
+    const r     = radius(n);
+    const color = CAT_COLOR[n.cat];
+    const isHov = _hovered === n;
+    const isSel = _selected === n;
+    const matchSearch = sq && n.name.toLowerCase().includes(sq);
+    const dimmed = (sq && !matchSearch) || (_selected && !isSel);
+
+    _ctx.save();
+    _ctx.globalAlpha = dimmed ? 0.15 : 1;
+
+    // Glow
+    if (isHov || isSel || matchSearch) {
+      _ctx.shadowColor = CAT_GLOW[n.cat];
+      _ctx.shadowBlur  = isSel ? 22 : 14;
+    }
+
+    // Circle fill
+    _ctx.beginPath();
+    _ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+
+    if (isSel) {
+      // Solid fill for selected
+      _ctx.fillStyle = color;
+    } else {
+      // Gradient fill
+      const grad = _ctx.createRadialGradient(n.x - r*0.3, n.y - r*0.3, 0, n.x, n.y, r);
+      grad.addColorStop(0, color + (dimmed ? '66' : 'cc'));
+      grad.addColorStop(1, color + (dimmed ? '22' : '33'));
+      _ctx.fillStyle = grad;
+    }
+    _ctx.fill();
+
+    // Border
+    _ctx.strokeStyle = color + (isSel ? 'ff' : isHov ? 'cc' : '66');
+    _ctx.lineWidth   = isSel ? 2 : 1;
+    _ctx.stroke();
+
+    // Label (always inside if big enough)
+    const fontSize = Math.max(8, Math.min(13, r * 0.42));
+    _ctx.font        = `600 ${fontSize}px 'IBM Plex Sans', sans-serif`;
+    _ctx.textAlign   = 'center';
+    _ctx.textBaseline = 'middle';
+    _ctx.fillStyle   = isSel ? '#fff' : (dimmed ? color + '80' : '#e2e8f0');
+    _ctx.shadowBlur  = 0;
+
+    if (r > 14) {
+      // Truncate if needed
+      const label = n.name.length > 14 ? n.name.slice(0,13) + '…' : n.name;
+      _ctx.fillText(label, n.x, n.y);
+    }
+
+    // Count badge for larger bubbles
+    if (r > 24 && !isSel) {
+      _ctx.font      = `400 ${fontSize * 0.75}px 'JetBrains Mono', monospace`;
+      _ctx.fillStyle = color + 'aa';
+      _ctx.fillText(n.count, n.x, n.y + fontSize * 0.95);
+    }
+
+    _ctx.restore();
+  });
+}
+
+// ── Interação ─────────────────────────────────────────────────────────────────
+function nodeAt(mx, my) {
+  let hit = null;
+  _nodes.forEach(n => {
+    if (_hidden.has(n.cat)) return;
+    if (Math.hypot(n.x - mx, n.y - my) <= radius(n) + 2) hit = n;
+  });
+  return hit;
+}
+
+function onMove(e) {
+  const rect = _canvas.getBoundingClientRect();
+  const n    = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  _hovered = n;
+  _canvas.style.cursor = n ? 'pointer' : 'default';
+  if (n) showTip(e, n); else hideTip();
+}
+
+function onClick(e) {
+  const rect = _canvas.getBoundingClientRect();
+  const n    = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (n && n === _selected) { _selected = null; closePanel(); }
+  else if (n)               { _selected = n; openPanel(n); }
+  else                      { _selected = null; closePanel(); }
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tip = document.getElementById('bubble-tip');
+function showTip(e, n) {
+  document.getElementById('bt-name').textContent  = n.name;
+  document.getElementById('bt-cat').textContent   = CAT_LABEL[n.cat];
+  document.getElementById('bt-cat').style.color   = CAT_COLOR[n.cat];
+  document.getElementById('bt-count').textContent = n.count;
+  document.getElementById('bt-count').style.color = CAT_COLOR[n.cat];
+  document.getElementById('bt-devs').innerHTML    =
+    n.devs.slice(0,8).map(d => `<span class="bt-dev">${d.id}</span>`).join('') +
+    (n.devs.length > 8 ? `<span class="bt-dev">+${n.devs.length - 8}</span>` : '');
+  tip.style.display = 'block';
+  tip.style.left    = (e.clientX + 16) + 'px';
+  tip.style.top     = (e.clientY - 20) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+
+// ── Side Panel ────────────────────────────────────────────────────────────────
+function openPanel(n) {
+  const panel = document.getElementById('side-panel');
+  document.getElementById('sp-name').textContent   = n.name;
+  document.getElementById('sp-cat').textContent    = CAT_LABEL[n.cat];
+  document.getElementById('sp-cat').style.color    = CAT_COLOR[n.cat];
+  document.getElementById('sp-bignum').textContent = n.count;
+  document.getElementById('sp-bignum').style.color = CAT_COLOR[n.cat];
+  document.getElementById('sp-devlist').innerHTML  =
+    n.devs.map(d => `
+      <div class="sp-dev">
+        <div class="sp-dev-id">${d.id}</div>
+        <div class="sp-dev-role">${d.role}</div>
+      </div>`).join('');
+  panel.style.display = 'block';
+}
+function closePanel() {
+  document.getElementById('side-panel').style.display = 'none';
+}
+
+// ── Filtros ───────────────────────────────────────────────────────────────────
+function toggleFilter(cat) {
+  const el = document.querySelector(`.leg-item[data-cat="${cat}"]`);
+  if (_hidden.has(cat)) {
+    _hidden.delete(cat);
+    el.classList.remove('dim');
+  } else {
+    _hidden.add(cat);
+    el.classList.add('dim');
+  }
+}
+
+document.getElementById('search-input').addEventListener('input', e => {
+  _search = e.target.value.trim();
+});
+
+// ── Kick-off ──────────────────────────────────────────────────────────────────
+init();
+</script>
+{% endblock %}

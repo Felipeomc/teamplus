@@ -1,0 +1,1287 @@
+{% extends "base.html" %}
+{% block title %} — Novo Projeto{% endblock %}
+
+{% block head %}
+
+
+<style>
+ 
+
+  .two-col { display: grid; grid-template-columns: 380px 1fr; gap: 20px; align-items: start; min-width: 0; overflow: hidden; }
+  .sugestoes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 0; }
+  .sug-card { min-width: 0; overflow: hidden; }
+  .mem-item { min-width: 0; overflow: hidden; }
+  .mem-techs { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+  /* ── Suggestion card ── */
+  .sug-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; position: relative;
+  }
+  .sug-card.melhor { border-color: var(--accent2); }
+  .sug-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .sug-title  { font-weight: 600; font-size: .9rem; }
+  .sug-badge  { font-size: .7rem; padding: 3px 9px; border-radius: 999px;
+                background: rgba(52,211,153,.12); color: var(--accent2); font-weight: 600; }
+
+  /* ── Member card inside suggestion ── */
+  .mem-row { display: flex; flex-direction: column; gap: 8px; }
+  .mem-item {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    cursor: grab; transition: border-color .15s;
+  }
+  .mem-item:hover    { border-color: var(--accent); }
+  .mem-item.dragging { opacity: .4; border-style: dashed; }
+  .mem-item.drag-over { border-color: var(--accent2); background: rgba(52,211,153,.05); }
+  .mem-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: .7rem;
+    font-weight: 700; color: var(--accent); flex-shrink: 0; }
+  .mem-info   { flex: 1; min-width: 0; }
+  .mem-name   { font-size: .82rem; font-weight: 600; }
+  .mem-role   { font-size: .68rem; color: var(--muted); }
+  .mem-techs  { font-size: .65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .drag-handle { color: var(--muted); font-size: .9rem; cursor: grab; }
+
+  /* ── Fitness bar ── */
+  .fit-row { display: flex; align-items: center; gap: 8px; margin: 12px 0 8px; }
+  .fit-bar { flex:1; height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+  .fit-fill { height:100%; border-radius:3px; background: linear-gradient(90deg,var(--accent),var(--accent2)); transition: width .4s; }
+  .fit-val  { font-size:.75rem; font-family:'IBM Plex Mono',monospace; color:var(--text); width:48px; text-align:right; }
+
+  /* ── Scores por dimensão ── */
+  .dim-scores { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .dim-score  { font-size: .68rem; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 3px 8px; color: var(--muted); }
+  .dim-score span { font-weight: 600; }
+
+  /* ── Save button ── */
+  .btn-save { width: 100%; justify-content: center; margin-top: 12px;
+              background: rgba(52,211,153,.12); color: var(--accent2); border: 1px solid var(--accent2); }
+  .btn-save:hover { background: rgba(52,211,153,.22); }
+  .btn-save.saved { background: rgba(52,211,153,.3); color: #fff; pointer-events: none; }
+
+  /* ── Drag hint ── */
+  .drag-hint { font-size: .7rem; color: var(--muted); text-align: center; margin-top: 10px; }
+  .tag[draggable="true"] { cursor: grab; user-select: none; }
+  .tag[draggable="true"]:active { cursor: grabbing; opacity: .6; }
+  .tag-input-wrap.tag-drag-over { border-color: var(--accent2); background: rgba(52,211,153,.05); }
+  
+
+  /* ── Radares toggle ── */
+  .radares-wrap { display:none; margin-top:10px; }
+  .radares-wrap.open { display:flex; gap:0px; }
+  .radar-svg-box { flex:1; min-width:0; }
+  .radar-svg-box svg { width:100%; height:auto; display:block; }
+
+  .mem-item { position: relative; }
+  .mem-item.pinned { border-color: var(--warn); }
+
+</style>
+{% endblock %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+
+<div class="page-title">Novo projeto</div>
+<div class="page-sub">Informe os requisitos do projeto para gerar sugestões de equipe ranqueadas por aptidão. Ajuste a composição e salve.</div>
+<div class="two-col">
+
+  <!-- ── FORM ── -->
+  <div>
+    <div class="card">
+      <div class="card-title">Dados do projeto</div>
+      <label>Nome</label>
+      <input type="text" id="nome_projeto" placeholder="Ex: App mobile de vendas" style="margin-bottom:14px">
+      <label>Tamanho da equipe</label>
+      <input type="number" id="team_size" value="4" min="2" max="12" style="margin-bottom:14px">
+      <input type="hidden" id="pop_size" value="150">
+      <input type="hidden" id="geracoes" value="200">
+    </div>
+
+    <div class="card mt-4" id="card-descricao">
+      <div class="card-title">Descreva o projeto</div>
+      <p class="text-muted" style="margin-bottom:10px">
+        Escreva em linguagem natural. A IA extrairá as tecnologias automaticamente.
+      </p>
+      <textarea id="descricao-livre" rows="4"
+      placeholder=""
+        onfocus="this.style.borderColor='var(--accent)'"
+        onblur="this.style.borderColor='var(--border)'"></textarea>
+      <button class="btn btn-ghost" id="btn-extrair" onclick="extrairProjeto()"
+        style="width:100%;justify-content:center;margin-top:10px">
+        ✨ Extrair tecnologias com IA
+      </button>
+      <div id="extrair-feedback" style="margin-top:8px;font-size:.75rem;color:var(--muted)"></div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-title">Tecnologias requeridas</div>
+      <p class="text-muted" style="margin-bottom:12px">Digite e pressione <kbd style="background:var(--border);padding:1px 5px;border-radius:3px;font-size:.7rem">Enter</kbd></p>
+
+      {% for dim_key, dim_label in [('dom','Domínio'),('eco','Ecossistema'),('ling','Linguagens')] %}
+      <div style="margin-bottom:16px">
+        <div style="font-size:.8rem;font-weight:600;margin-bottom:6px">{{ dim_label }}</div>
+        {% for prio, prio_label in [('must','MUST ●'),('should','SHOULD ●'),('could','COULD ●')] %}
+        <label style="margin-bottom:3px">{{ prio_label }}</label>
+        <div class="tag-input-wrap" id="wrap-{{dim_key}}-{{prio}}" style="margin-bottom:6px">
+          <input type="text" placeholder="" onkeydown="addTag(event,'{{dim_key}}','{{prio}}')">
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+      
+
+      <div id="fixados-badge" style="font-size:.78rem;color:var(--warn);margin-bottom:6px;min-height:18px"></div>
+      <button class="btn btn-primary" id="btn-run" onclick="rodarGA()" style="width:100%;justify-content:center">
+        ⚡ Montar equipe
+      </button>
+    </div>
+  </div>
+
+  <!-- ── RESULTADO ── -->
+  <div>
+    <div id="resultado-area">
+      <div class="card" style="min-height:180px;display:flex;align-items:center;justify-content:center;border-style:dashed">
+        <div style="text-align:center;color:var(--muted)">
+          <div style="font-size:2rem;margin-bottom:8px">👥</div>
+          <div>As sugestões aparecerão aqui</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end two-col -->
+
+<script>
+
+
+
+
+// ── Tags state ───────────────────────────────────────────────────────────────
+const tags = {
+  dom:  { must:[], should:[], could:[] },
+  eco:  { must:[], should:[], could:[] },
+  ling: { must:[], should:[], could:[] },
+};
+document.addEventListener('DOMContentLoaded', initTagDropZones);
+
+function addTag(e, dim, prio) {
+  if (e.key !== 'Enter' && e.key !== ',' && e.key !== ' ') return;
+  e.preventDefault();
+  const val = e.target.value.trim().toLowerCase();
+  if (!val || tags[dim][prio].includes(val)) { e.target.value=''; return; }
+  tags[dim][prio].push(val);
+  renderTags(dim, prio);
+  e.target.value = '';
+}
+function removeTag(dim, prio, val) {
+  tags[dim][prio] = tags[dim][prio].filter(t => t !== val);
+  renderTags(dim, prio);
+}
+function renderTags(dim, prio) {
+  const wrap  = document.getElementById(`wrap-${dim}-${prio}`);
+  const input = wrap.querySelector('input');
+  wrap.querySelectorAll('.tag').forEach(t => t.remove());
+  tags[dim][prio].forEach(val => {
+    const tag = document.createElement('span');
+    tag.className = `tag ${prio==='should'?'should':prio==='could'?'could':''}`;
+    tag.draggable = true;
+    tag.innerHTML = `${val} <span class="rm" onclick="removeTag('${dim}','${prio}','${val}')">×</span>`;
+
+    tag.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('application/json', JSON.stringify({ dim, prio, val }));
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => tag.style.opacity = '0.4', 0);
+    });
+    tag.addEventListener('dragend', () => { tag.style.opacity = ''; });
+
+    wrap.insertBefore(tag, input);
+  });
+
+  if (!wrap._tagDropReady) {
+    wrap._tagDropReady = true;
+    const wrapDim  = dim;
+    const wrapPrio = prio;
+
+    wrap.addEventListener('dragenter', e => { e.preventDefault(); });
+    wrap.addEventListener('dragover',  e => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'move';
+      wrap.classList.add('tag-drag-over');
+    });
+    wrap.addEventListener('dragleave', e => {
+      if (!wrap.contains(e.relatedTarget)) {
+        wrap.classList.remove('tag-drag-over');
+      }
+    });
+    wrap.addEventListener('drop', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      wrap.classList.remove('tag-drag-over');
+      let data;
+      try { data = JSON.parse(e.dataTransfer.getData('application/json')); } catch { return; }
+      const { dim: srcDim, prio: srcPrio, val } = data;
+
+      if (srcDim === wrapDim && srcPrio === wrapPrio) return;
+
+      tags[srcDim][srcPrio] = tags[srcDim][srcPrio].filter(t => t !== val);
+      if (!tags[wrapDim][wrapPrio].includes(val)) tags[wrapDim][wrapPrio].push(val);
+
+      renderTags(srcDim, srcPrio);
+      renderTags(wrapDim, wrapPrio);
+    });
+  }
+}
+
+//incializa os compos para receber tags arrastaveis
+function initTagDropZones() {
+  ['dom','eco','ling'].forEach(dim => {
+    ['must','should','could'].forEach(prio => {
+      const wrap = document.getElementById(`wrap-${dim}-${prio}`);
+      if (!wrap || wrap._tagDropReady) return;
+      wrap._tagDropReady = true;
+      const wrapDim = dim, wrapPrio = prio;
+
+      wrap.addEventListener('dragenter', e => { e.preventDefault(); });
+      wrap.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.dataTransfer.dropEffect = 'move';
+        wrap.classList.add('tag-drag-over');
+      });
+      wrap.addEventListener('dragleave', e => {
+        if (!wrap.contains(e.relatedTarget)) wrap.classList.remove('tag-drag-over');
+      });
+      wrap.addEventListener('drop', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        wrap.classList.remove('tag-drag-over');
+        let data;
+        try { data = JSON.parse(e.dataTransfer.getData('application/json')); } catch { return; }
+        const { dim: srcDim, prio: srcPrio, val } = data;
+        if (srcDim === wrapDim && srcPrio === wrapPrio) return;
+        tags[srcDim][srcPrio] = tags[srcDim][srcPrio].filter(t => t !== val);
+        if (!tags[wrapDim][wrapPrio].includes(val)) tags[wrapDim][wrapPrio].push(val);
+        renderTags(srcDim, srcPrio);
+        renderTags(wrapDim, wrapPrio);
+      });
+    });
+  });
+}
+
+// ── State global das sugestões (para drag-and-drop e salvar) ─────────────────
+let _sugestoes   = [];    // array com 2 objetos sugestão
+let _fixados     = new Set();  // user_ids fixados para próxima rodada
+let _projetoAlvo = {};
+let _nomeProjeto = '';
+
+async function extrairProjeto() {
+  const descricao = document.getElementById('descricao-livre').value.trim();
+  if (!descricao) return;
+
+  const btn = document.getElementById('btn-extrair');
+  const fb  = document.getElementById('extrair-feedback');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Analisando…';
+  fb.textContent = '';
+
+  try {
+    const res  = await fetch('/api/extrair_projeto', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ descricao }),
+    });
+    const data = await res.json();
+    if (data.erro) throw new Error(data.erro);
+
+    // Mapeia dimensões extraídas para o estado de tags
+    const mapa = { dominio: 'dom', ecossistema: 'eco', linguagens: 'ling' };
+    let total = 0;
+    for (const [dim, key] of Object.entries(mapa)) {
+      for (const prio of ['must', 'should', 'could']) {
+        const itens = data[dim]?.[prio] || [];
+        itens.forEach(val => {
+          val = val.toLowerCase().trim();
+          if (val && !tags[key][prio].includes(val)) {
+            tags[key][prio].push(val);
+            total++;
+          }
+        });
+        renderTags(key, prio);
+      }
+    }
+    fb.style.color = 'var(--accent2)';
+    fb.textContent = `✅ ${total} tecnologia(s) extraída(s). Revise e ajuste antes de sugerir.`;
+  } catch(err) {
+    fb.style.color = '#f87171';
+    fb.textContent = `Erro: ${err.message}`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '✨ Extrair tecnologias com IA';
+  }
+}
+
+// ── Chamar GA ────────────────────────────────────────────────────────────────
+async function rodarGA() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const btn = document.getElementById('btn-run');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Buscando…';
+
+  const mensagens = [
+    'Lendo perfis dos desenvolvedores…',
+    'Analisando compatibilidade técnica…',
+    'Conectando histórico de colaboração…',
+    'Avaliando combinações de equipe…',
+    'Refinando as melhores opções…',
+    'Quase lá, montando as sugestões…',
+  ];
+  let _mi = 0;
+  const _msgEl = document.createElement('div');
+  _msgEl.style = 'color:var(--muted);font-size:.875rem;transition:opacity .3s';
+  _msgEl.textContent = mensagens[0];
+
+  document.getElementById('resultado-area').innerHTML = '';
+  const _loadCard = document.createElement('div');
+  _loadCard.className = 'card';
+  _loadCard.style = 'display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:16px';
+  _loadCard.innerHTML = '<div class="spinner" style="width:36px;height:36px;border-width:4px"></div>';
+  _loadCard.appendChild(_msgEl);
+  document.getElementById('resultado-area').appendChild(_loadCard);
+
+  const _interval = setInterval(() => {
+    _mi = (_mi + 1) % mensagens.length;
+    _msgEl.style.opacity = '0';
+    setTimeout(() => { _msgEl.textContent = mensagens[_mi]; _msgEl.style.opacity = '1'; }, 300);
+  }, 2200);
+
+  const payload = {
+    nome_projeto: document.getElementById('nome_projeto').value || 'Projeto sem título',
+    team_size:    parseInt(document.getElementById('team_size').value) || 4,
+    pop_size:     parseInt(document.getElementById('pop_size').value)  || 50,
+    geracoes:     parseInt(document.getElementById('geracoes').value)  || 50,
+    dominio:     { must: tags.dom.must,  should: tags.dom.should,  could: tags.dom.could  },
+    ecossistema: { must: tags.eco.must,  should: tags.eco.should,  could: tags.eco.could  },
+    linguagens:  { must: tags.ling.must, should: tags.ling.should, could: tags.ling.could },
+    fixed_devs:  Array.from(_fixados),
+  };
+
+  try {
+    const res  = await fetch('/sugerir', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const data = await res.json();
+    if (data.erro) throw new Error(data.erro);
+
+    _sugestoes   = data.sugestoes;
+    _projetoAlvo = data.projeto_alvo;
+    _nomeProjeto = data.nome_projeto;
+
+    // inicializa osf/slf direto da resposta do GA
+    _sugestoes.forEach(s => {
+      s._osf_score = s.osf_score || 0;
+      s._slf_score = s.slf_score || 0;
+    });
+
+    renderSugestoes();
+  } catch(err) {
+    document.getElementById('resultado-area').innerHTML = `
+      <div class="card" style="border-color:#f87171">
+        <div class="card-title" style="color:#f87171">Erro</div>
+        <pre style="color:#f87171;font-size:.8rem;white-space:pre-wrap">${err.message}</pre>
+      </div>`;
+  } finally {
+    clearInterval(_interval);
+    btn.disabled = false;
+    btn.innerHTML = '⚡ Montar equipe';
+  }
+  
+}
+
+// ── Renderizar as 2 sugestões ─────────────────────────────────────────────────
+// ── Renderizar sugestões com paginação (+4) ────────────────────────────────────
+let _exibidas = 0;
+
+function cardSugestao(s, si) {
+  const pct    = Math.round(s.best_fitness * 100);
+  const label  = fitLabel(s.best_fitness);
+  const isBest = si === 0;
+  const membros = s.membros.map((m, mi) => memHtml(m, si, mi)).join('');
+  return `
+    <div class="sug-card ${isBest ? 'melhor' : ''}" id="sug-${si}">
+      <div class="sug-header">
+        <span class="sug-title">Sugestão ${si+1}${isBest ? ' ★' : ''}</span>
+        <span class="sug-badge badge-${label}">${label} — ${pct}%</span>
+      </div>
+      <div class="fit-row">
+        <div class="fit-bar"><div class="fit-fill" id="fitbar-${si}" style="width:${pct}%"></div></div>
+        <span class="fit-val mono" id="fitval-${si}">${s.best_fitness.toFixed(4)}</span>
+      </div>
+      <div class="dim-scores" id="dims-${si}">
+        <span class="dim-score">Dom: <span>—</span></span>
+        <span class="dim-score">Eco: <span>—</span></span>
+        <span class="dim-score">Ling: <span>—</span></span>
+      </div>
+      <div class="mem-row" id="mem-row-${si}"
+           ondragover="onDragOver(event,${si})"
+           ondrop="onDrop(event,${si})"
+           ondragleave="onDragLeave(event)">
+        ${membros}
+      </div>
+      <button class="btn btn-ghost" id="btn-radar-${si}"
+        onclick="toggleRadares(${si})"
+        style="width:100%;justify-content:center;margin-top:8px;font-size:.76rem">
+        🕸 Ver grafo da equipe
+      </button>
+      <div class="radares-wrap" id="radares-wrap-${si}">
+        <div style="width:100%">
+          <svg id="mini-grafo-${si}" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg"
+            style="width:100%;height:auto;display:block"></svg>
+          <svg id="radar-R-${si}" viewBox="-30 0 260 250" xmlns="http://www.w3.org/2000/svg"
+            style="width:100%;height:auto;display:block;margin-top:4px"></svg>
+        </div>
+      </div>
+      <p class="drag-hint">↕ Arraste membros entre as duas sugestões para trocar</p>
+      <button class="btn btn-save" id="btn-save-${si}" onclick="salvar(${si})">
+        💾 Salvar esta sugestão
+      </button>
+      <button class="btn btn-ghost" id="btn-exp-${si}" onclick="explicar(${si})"
+        style="width:100%;justify-content:center;margin-top:6px;font-size:.78rem">
+        🤖 Explicar esta sugestão
+      </button>
+      <div id="exp-box-${si}"
+        style="display:none;margin-top:10px;padding:10px 12px;
+        background:#ffffff;border:1px solid #e4e4e7;
+        border-radius:8px;font-size:.78rem;line-height:1.55;color:#18181b">
+      </div>
+      <div style="margin-top:8px;color:var(--muted);font-size:.7rem">
+        ⏱ ${s.duration_sec}s · ${s.gens_executed} ger. · ${s.stop_reason}
+      </div>
+    </div>`;
+}
+
+function renderSugestoes() {
+  _exibidas = 0;
+  document.getElementById('resultado-area').innerHTML =
+    '<div class="sugestoes-grid" id="sugestoes-grid"></div>' +
+    '<div id="btn-mais-wrap" style="text-align:center;margin-top:16px;grid-column:1/-1"></div>';
+  mostrarMais();
+}
+
+function mostrarMais() {
+  const grid  = document.getElementById('sugestoes-grid');
+  const total = _sugestoes.length;
+  const ate   = Math.min(_exibidas + 4, total);
+  for (let si = _exibidas; si < ate; si++) {
+    grid.insertAdjacentHTML('beforeend', cardSugestao(_sugestoes[si], si));
+    reavaliar(si);
+  }
+  _exibidas = ate;
+  const wrap   = document.getElementById('btn-mais-wrap');
+  const restam = Math.min(4, total - _exibidas);
+  if (_exibidas < total) {
+    wrap.innerHTML = `<button class="btn btn-ghost" onclick="mostrarMais()"
+      style="padding:10px 32px;font-size:.85rem;margin-top:8px">
+      ＋ Ver mais ${restam} sugestão${restam > 1 ? 'ões' : ''}
+      <span style="color:var(--muted);font-size:.75rem;margin-left:6px">(${_exibidas}/${total})</span>
+    </button>`;
+  } else {
+    wrap.innerHTML = '';
+  }
+}
+
+function toggleFixar(userId, e) {
+  e.stopPropagation();
+  if (_fixados.has(userId)) {
+    _fixados.delete(userId);
+  } else {
+    _fixados.add(userId);
+  }
+  // re-renderiza só os cards de membro para atualizar o ícone
+  _sugestoes.forEach((s, si) => {
+    const row = document.getElementById(`mem-row-${si}`);
+    if (row) row.innerHTML = s.membros.map((m, mi) => memHtml(m, si, mi)).join('');
+  });
+  // mostra badge de quantos fixados
+  const n = _fixados.size;
+  const badge = document.getElementById('fixados-badge');
+  if (badge) badge.textContent = n > 0 ? `📌 ${n} fixado${n > 1 ? 's' : ''}` : '';
+}
+
+function memHtml(m, si, mi) {
+  const techs = [...(m.dominio||[]), ...(m.ecossistema||[]), ...(m.linguagens||[])].slice(0,5).join(', ');
+  const isPinned = _fixados.has(m.user_id);
+  return `
+    <div class="mem-item ${isPinned ? 'pinned' : ''}" draggable="true" id="mem-${si}-${mi}"
+         data-sug="${si}" data-idx="${mi}"
+         ondragstart="onDragStart(event,${si},${mi})"
+         ondragend="onDragEnd(event)">
+      <span class="drag-handle">⠿</span>
+      <div class="mem-avatar">${m.id.replace('Dev','D')}</div>
+      <div class="mem-info">
+        <div class="mem-name">${m.id}</div>
+        <div class="mem-role">${m.role}</div>
+        <div class="mem-techs">${techs}</div>
+        <button onclick="toggleFixar(${m.user_id},event)"
+        style="position:absolute;top:6px;right:6px;background:none;border:none;
+        cursor:pointer;font-size:.85rem;opacity:${isPinned ? 1 : 0.3};
+        transition:opacity .15s" title="${isPinned ? 'Desfixar' : 'Fixar para próxima rodada'}">
+        📌
+      </button>
+      </div>
+    </div>`;
+}
+
+function fitLabel(f) {
+  return f>=.8?'VH':f>=.6?'H':f>=.4?'M':f>=.2?'L':'VL';
+}
+
+// ── Drag and drop ─────────────────────────────────────────────────────────────
+let _drag = null;  // { si, mi }
+
+function onDragStart(e, si, mi) {
+  _drag = { si, mi };
+  e.target.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onDragEnd(e) {
+  e.target.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+}
+function onDragOver(e, targetSi) {
+  e.preventDefault();
+  if (_drag === null || _drag.si === targetSi) return;
+  e.currentTarget.classList.add('drag-over');
+}
+function onDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+async function onDrop(e, targetSi) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (_drag === null || _drag.si === targetSi) return;
+
+  const srcSi = _drag.si;
+  const srcMi = _drag.mi;
+
+  // Encontra o índice alvo mais próximo (onde soltou)
+  const targetMi = 0;  // troca pelo primeiro disponível que não está lá
+
+  // Troca os membros entre as duas sugestões
+  const tmp = _sugestoes[srcSi].membros[srcMi];
+  // Encontra um membro do targetSi que não está no srcSi para trocar
+  // Estratégia simples: troca com o membro na mesma posição
+  const tgtMi = Math.min(srcMi, _sugestoes[targetSi].membros.length - 1);
+
+  const tmpMem = _sugestoes[srcSi].membros[srcMi];
+  _sugestoes[srcSi].membros[srcMi]   = _sugestoes[targetSi].membros[tgtMi];
+  _sugestoes[targetSi].membros[tgtMi] = tmpMem;
+
+  // Atualiza best_team também
+  _sugestoes[srcSi].best_team[srcMi]   = _sugestoes[srcSi].membros[srcMi].user_id;
+  _sugestoes[targetSi].best_team[tgtMi] = _sugestoes[targetSi].membros[tgtMi].user_id;
+
+  renderSugestoes();
+
+  // Reavalia as duas equipes modificadas
+  await Promise.all([
+    reavaliar(srcSi),
+    reavaliar(targetSi),
+  ]);
+}
+
+// ── Reavaliar via BN ──────────────────────────────────────────────────────────
+async function reavaliar(si) {
+  const s = _sugestoes[si];
+  try {
+    const res  = await fetch('/api/avaliar', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ team_ids: s.best_team, projeto_alvo: _projetoAlvo }),
+    });
+    const data = await res.json();
+    if (data.erro) { console.error('Avaliar erro:', data.erro); return; }
+
+    // Atualiza fitness na memória
+    _sugestoes[si].best_fitness = data.fitness;
+    _sugestoes[si]._scores      = data.scores   || {};
+    _sugestoes[si]._ac_label    = data.ac_label || '—';
+    _sugestoes[si]._ac_score    = data.ac_score || 0;
+    _sugestoes[si]._at_score    = data.at_score || 0;
+    _sugestoes[si]._osf_score   = data.osf_score  || 0;
+    _sugestoes[si]._slf_score   = data.slf_score || 0;
+    _sugestoes[si]._pcs         = data.pcs      || [];
+    _sugestoes[si]._coverage   = data.coverage   || {};
+    _sugestoes[si]._pares_info = data.pares_info  || {};
+    // Atualiza radares se estiverem abertos
+    const rw = document.getElementById(`radares-wrap-${si}`);
+    if (rw?.classList.contains('open')) desenharRadares(si);
+
+    // Atualiza UI
+    const pct = Math.round(data.fitness * 100);
+    const label = fitLabel(data.fitness);
+    document.getElementById(`fitbar-${si}`).style.width = pct + '%';
+    document.getElementById(`fitval-${si}`).textContent = data.fitness.toFixed(4);
+
+    const badgeEl = document.querySelector(`#sug-${si} .sug-badge`);
+    if (badgeEl) { badgeEl.className = `sug-badge badge-${label}`; badgeEl.textContent = `${label} — ${pct}%`; }
+
+    // Atualiza scores por dimensão
+    if (data.scores) {
+      const dimsEl = document.getElementById(`dims-${si}`);
+      if (dimsEl) {
+        const dimBadges = ['dominio','ecossistema','linguagens'].map(d => {
+          const sc = data.scores[d];
+          const txt = sc ? `${sc.rotulo} (${sc.score})` : '—';
+          const short = {dominio:'Dom',ecossistema:'Eco',linguagens:'Ling'}[d];
+          return `<span class="dim-score">${short}: <span>${txt}</span></span>`;
+        }).join('');
+
+        const acTxt = data.ac_label ? `${data.ac_label} (${data.ac_score})` : '—';
+        const acBadge = `<span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
+
+        dimsEl.innerHTML = dimBadges + acBadge;
+      }
+    }
+  } catch(err) {
+    console.error('Reavaliar erro:', err);
+  }
+}
+
+// ── Salvar sugestão ───────────────────────────────────────────────────────────
+async function salvar(si) {
+  const btn = document.getElementById(`btn-save-${si}`);
+  btn.textContent = 'Salvando…';
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch('/api/salvar', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        sugestao:     _sugestoes[si],
+        nome_projeto: _nomeProjeto,
+        projeto_alvo: _projetoAlvo,
+      }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      btn.classList.add('saved');
+      btn.innerHTML = '✅ Salvo no histórico';
+    }
+  } catch(err) {
+    btn.textContent = 'Erro ao salvar';
+    btn.disabled = false;
+  }
+}
+
+
+// ── Explicar sugestão via IA ──────────────────────────────────────────────────
+async function explicar(si) {
+  const btn = document.getElementById(`btn-exp-${si}`);
+  const box = document.getElementById(`exp-box-${si}`);
+  const s   = _sugestoes[si];
+
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Analisando…';
+  box.style.display = 'none';
+
+  try {
+    const res  = await fetch('/api/explicar', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        team_ids:     s.best_team,
+        projeto_alvo: _projetoAlvo,
+        fitness:      s.best_fitness,
+        nome_projeto: _nomeProjeto,
+        scores:       s._scores || {},
+        ac_label:     s._ac_label || '—',
+        ac_score:     s._ac_score || 0,
+      }),
+    });
+    const data = await res.json();
+    if (data.erro) throw new Error(data.erro);
+    box.textContent = data.explicacao;
+    box.style.display = 'block';
+    btn.innerHTML = '🤖 Regerar explicação';
+  } catch(err) {
+    box.textContent = `Erro: ${err.message}`;
+    box.style.display = 'block';
+    btn.innerHTML = '🤖 Explicar esta sugestão';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+
+// ── Modo edição (vindo do histórico) ─────────────────────────────────────────
+(function() {
+  const raw = sessionStorage.getItem('editar_registro');
+  if (!raw) return;
+  sessionStorage.removeItem('editar_registro');
+  const r = JSON.parse(raw);
+
+  document.getElementById('nome_projeto').value = r.nome_projeto || '';
+
+  const mapa = { dominio: 'dom', ecossistema: 'eco', linguagens: 'ling' };
+  const pa = r.projeto_alvo || {};
+  for (const [dim, key] of Object.entries(mapa)) {
+    for (const prio of ['must','should','could']) {
+      (pa[dim]?.[prio] || []).forEach(val => {
+        val = val.toLowerCase().trim();
+        if (val && !tags[key][prio].includes(val)) tags[key][prio].push(val);
+      });
+      renderTags(key, prio);
+    }
+  }
+
+  if (r.membros?.length) {
+    _sugestoes   = [{ best_team: r.best_team, membros: r.membros, best_fitness: r.best_fitness,
+                      duration_sec: r.duration_sec, gens_executed: r.gens_executed, stop_reason: '(editando)' }];
+    _sugestoes.push({..._sugestoes[0]});
+    _projetoAlvo = r.projeto_alvo || {};
+    _nomeProjeto = r.nome_projeto || '';
+    renderSugestoes();
+
+    const banner = document.createElement('div');
+    banner.style = 'background:rgba(99,102,241,.1);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;font-size:.8rem;color:var(--accent);margin-bottom:12px';
+    banner.innerHTML = '✏️ <strong>Modo edição</strong> — equipe restaurada do histórico. Ajuste as tags e clique em <strong>Sugerir equipes</strong> para rodar novamente.';
+    document.getElementById('resultado-area').insertAdjacentElement('beforebegin', banner);
+  }
+})();
+
+// ── Modo backlog simples (1 projeto) ─────────────────────────────────────────
+(function() {
+  const raw = sessionStorage.getItem('backlog_exec');
+  if (!raw) return;
+  sessionStorage.removeItem('backlog_exec');
+  const p = JSON.parse(raw);
+
+  document.getElementById('nome_projeto').value = p.nome_projeto || '';
+  if (p.team_size) document.getElementById('team_size').value = p.team_size;
+
+  const mapa = { dominio: 'dom', ecossistema: 'eco', linguagens: 'ling' };
+  const pa   = p.projeto_alvo || {};
+  for (const [dim, key] of Object.entries(mapa)) {
+    for (const prio of ['must','should','could']) {
+      (pa[dim]?.[prio] || []).forEach(val => {
+        val = val.toLowerCase().trim();
+        if (val && !tags[key][prio].includes(val)) tags[key][prio].push(val);
+      });
+      renderTags(key, prio);
+    }
+  }
+
+  const banner = document.createElement('div');
+  banner.style = 'background:rgba(245,158,11,.1);border:1px solid var(--warn);border-radius:8px;padding:10px 14px;font-size:.8rem;color:var(--warn);margin-bottom:12px';
+  banner.innerHTML = '📋 <strong>Backlog</strong> — requisitos carregados. Ajuste se necessário e clique em <strong>Montar equipe</strong>.';
+  document.getElementById('resultado-area').insertAdjacentElement('beforebegin', banner);
+})();
+
+// ── Modo fila (múltiplos projetos do backlog) ─────────────────────────────────
+(function() {
+  const raw = sessionStorage.getItem('fila_backlog');
+  if (!raw) return;
+  sessionStorage.removeItem('fila_backlog');
+
+  const fila = JSON.parse(raw);
+  if (!fila.length) return;
+
+  // Esconde o form e o resultado padrão
+  document.querySelector('.two-col').style.display = 'none';
+
+  // Cria área de fila
+  const area = document.createElement('div');
+  area.id = 'fila-area';
+  area.innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-size:1.2rem;font-weight:600;margin-bottom:4px">Montando equipes</div>
+      <div style="font-size:.8rem;color:var(--muted)">
+        ${fila.length} projeto${fila.length>1?'s':''} · estimativa: ~${Math.ceil(fila.length*25)}s
+      </div>
+    </div>
+    <div id="fila-status" style="display:flex;flex-direction:column;gap:6px;margin-bottom:24px"></div>
+    <div id="fila-colunas" style="display:grid;grid-template-columns:repeat(${Math.min(fila.length,3)},1fr);gap:16px;align-items:start"></div>`;
+  document.querySelector('.main').appendChild(area);
+
+  // Estado da fila
+  const _excluidos = [];  // devs confirmados em projetos anteriores
+  let   _filaIdx   = 0;
+
+  // Renderiza status inicial
+  function renderStatus() {
+    document.getElementById('fila-status').innerHTML = fila.map((p, i) => {
+      const estado = i < _filaIdx ? '✅' : i === _filaIdx ? '⏳' : '🕐';
+      const cor    = i < _filaIdx ? 'var(--accent2)' : i === _filaIdx ? 'var(--warn)' : 'var(--muted)';
+      return `<div style="font-size:.78rem;color:${cor}">${estado} ${p.nome_projeto}</div>`;
+    }).join('');
+  }
+
+  // Coluna de cada projeto
+  function criarColuna(p, idx) {
+    const col = document.createElement('div');
+    col.id = `fila-col-${idx}`;
+    col.className = 'card';
+    col.style.cssText = 'padding:16px;min-height:200px';
+    col.innerHTML = `
+      <div style="font-size:.8rem;font-weight:600;margin-bottom:12px;color:var(--text)">${p.nome_projeto}</div>
+      <div style="font-size:.7rem;color:var(--muted);margin-bottom:12px">
+        Dom: ${(p.projeto_alvo?.dominio?.must||[]).join(', ')||'—'}
+      </div>
+      <div id="fila-spinner-${idx}" style="display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.78rem">
+        <div class="spinner"></div> Aguardando…
+      </div>
+      <div id="fila-resultado-${idx}" style="display:none"></div>`;
+    document.getElementById('fila-colunas').appendChild(col);
+  }
+
+  fila.forEach((p, i) => criarColuna(p, i));
+  renderStatus();
+
+  // Rodar GA em sequência
+  async function rodarProximo() {
+    if (_filaIdx >= fila.length) return;
+    const p   = fila[_filaIdx];
+    const idx = _filaIdx;
+
+    // Atualiza spinner do projeto atual
+    const spinner = document.getElementById(`fila-spinner-${idx}`);
+    if (spinner) spinner.innerHTML = `<div class="spinner"></div> Montando equipe…`;
+    renderStatus();
+
+    try {
+      const res = await fetch('/api/sugerir_fila', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          nome_projeto:  p.nome_projeto,
+          team_size:     p.team_size || 4,
+          dominio:       p.projeto_alvo?.dominio     || {},
+          ecossistema:   p.projeto_alvo?.ecossistema || {},
+          linguagens:    p.projeto_alvo?.linguagens  || {},
+          excluded_devs: _excluidos,
+          fixed_devs:    [],
+        }),
+      });
+      const data = await res.json();
+      if (data.erro) throw new Error(data.erro);
+
+      // Guarda sugestões para uso no confirm
+      const sugestoes = data.sugestoes || [];
+
+      // Renderiza resultado na coluna
+      const resEl = document.getElementById(`fila-resultado-${idx}`);
+      if (spinner) spinner.style.display = 'none';
+      if (resEl) {
+        resEl.style.display = 'block';
+        const melhor = sugestoes[0];
+        if (!melhor) { resEl.innerHTML = '<div style="color:var(--muted);font-size:.78rem">Sem sugestões.</div>'; }
+        else {
+          resEl.innerHTML = `
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px">
+                Melhor sugestão · fitness ${melhor.best_fitness.toFixed(4)}
+              </div>
+              ${melhor.membros.map(m => `
+                <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;
+                  background:var(--bg);border:1px solid var(--border);border-radius:6px;margin-bottom:4px">
+                  <div style="width:28px;height:28px;border-radius:50%;background:var(--border);
+                    display:flex;align-items:center;justify-content:center;font-size:.65rem;
+                    font-weight:700;color:var(--accent);flex-shrink:0">${m.id.replace('Dev','D')}</div>
+                  <div>
+                    <div style="font-size:.75rem;font-weight:600">${m.id}</div>
+                    <div style="font-size:.62rem;color:var(--muted)">${m.role}</div>
+                  </div>
+                </div>`).join('')}
+            </div>
+            <div style="display:flex;gap:6px;margin-top:10px">
+              <button onclick="confirmarFila(${idx})"
+                id="btn-confirmar-${idx}"
+                style="flex:1;background:rgba(52,211,153,.12);border:1px solid var(--accent2);
+                color:var(--accent2);border-radius:6px;padding:6px 10px;font-size:.72rem;
+                cursor:pointer;font-family:inherit">
+                ✅ Confirmar e reservar
+              </button>
+              <button onclick="rodarNovamenteFila(${idx})"
+                style="background:var(--bg);border:1px solid var(--border);color:var(--muted);
+                border-radius:6px;padding:6px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+                🔄
+              </button>
+            </div>`;
+          // guarda sugestões no dataset do elemento para usar no confirmar
+          resEl.dataset.sugestoes = JSON.stringify(sugestoes);
+          resEl.dataset.backlogId = p.id;
+          resEl.dataset.nomeProjeto = p.nome_projeto;
+          resEl.dataset.projetoAlvo = JSON.stringify(p.projeto_alvo);
+        }
+      }
+    } catch(err) {
+      const spinner2 = document.getElementById(`fila-spinner-${idx}`);
+      if (spinner2) spinner2.innerHTML = `<div style="color:#f87171;font-size:.75rem">Erro: ${err.message}</div>`;
+    }
+
+    _filaIdx++;
+    renderStatus();
+    rodarProximo();  // próximo da fila
+  }
+
+  // Confirmar equipe: salva, remove do backlog, exclui devs
+  window.confirmarFila = async function(idx) {
+    const resEl = document.getElementById(`fila-resultado-${idx}`);
+    if (!resEl) return;
+    const sugestoes   = JSON.parse(resEl.dataset.sugestoes || '[]');
+    const backlogId   = resEl.dataset.backlogId;
+    const nomeProjeto = resEl.dataset.nomeProjeto;
+    const projetoAlvo = JSON.parse(resEl.dataset.projetoAlvo || '{}');
+    const melhor      = sugestoes[0];
+    if (!melhor) return;
+
+    const btn = document.getElementById(`btn-confirmar-${idx}`);
+    if (btn) { btn.disabled = true; btn.textContent = 'Salvando…'; }
+
+    // Salvar no histórico
+    await fetch('/api/salvar', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        sugestao:     melhor,
+        nome_projeto: nomeProjeto,
+        projeto_alvo: projetoAlvo,
+      }),
+    });
+
+    // Remover do backlog
+    if (backlogId) {
+      await fetch(`/api/backlog/${backlogId}`, { method: 'DELETE' });
+    }
+
+    // Adicionar devs à lista de excluídos
+    (melhor.best_team || []).forEach(uid => {
+      if (!_excluidos.includes(uid)) _excluidos.push(uid);
+    });
+
+    // Atualizar visual da coluna
+    const col = document.getElementById(`fila-col-${idx}`);
+    if (col) {
+      col.style.borderColor = 'rgba(52,211,153,.4)';
+      const btns = resEl.querySelectorAll('button');
+      btns.forEach(b => b.style.display = 'none');
+      resEl.insertAdjacentHTML('beforeend', `
+        <div style="font-size:.72rem;color:var(--accent2);margin-top:8px;text-align:center">
+          ✅ Equipe reservada · ${(melhor.best_team||[]).length} devs excluídos dos próximos projetos
+        </div>`);
+    }
+  };
+
+  // Rodar novamente: adiciona ao final da fila virtual
+  window.rodarNovamenteFila = function(idx) {
+    const p = fila[idx];
+    fila.push({...p});  // cópia no final
+    const novoIdx = fila.length - 1;
+    criarColuna(p, novoIdx);
+    // atualiza grid para acomodar nova coluna
+    document.getElementById('fila-colunas').style.gridTemplateColumns =
+      `repeat(${Math.min(fila.length, 3)}, 1fr)`;
+    renderStatus();
+    // se o GA já terminou tudo, roda o novo imediatamente
+    if (_filaIdx >= fila.length - 1) {
+      _filaIdx = novoIdx;
+      rodarProximo();
+    }
+  };
+
+  rodarProximo();
+})();
+
+
+// ── Radar / mini-grafo toggle ─────────────────────────────────────────────────
+function toggleRadares(si) {
+  const wrap = document.getElementById(`radares-wrap-${si}`);
+  const btn  = document.getElementById(`btn-radar-${si}`);
+  const open = wrap.classList.toggle('open');
+  btn.textContent = open ? '🕸 Ocultar grafo' : '🕸 Ver grafo da equipe';
+  if (open) desenharRadares(si);
+}
+
+async function desenharRadares(si) {
+  const s = _sugestoes[si];
+  if (!s._scores) return;
+
+  // buscar pares do endpoint
+  const ids = s.best_team || [];
+  let pares = [];
+  try {
+    const r = await fetch('/api/grafo/equipe', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({team_ids: ids})
+    });
+    const d = await r.json();
+    pares = d.pares || [];
+  } catch(e) { console.warn('mini-grafo: erro ao buscar pares', e); }
+
+  _desenharMiniGrafo(`mini-grafo-${si}`, ids, pares, s);
+
+  // Radar técnico (direito mantido)
+  const cv = s._coverage || {};
+  const fmtCov = (dim) => {
+    const d = cv[dim] || {};
+    const fmt = (x) => x ? `${x.covered}/${x.total}` : null;
+    const M = fmt(d.M), S = fmt(d.S), C = fmt(d.C);
+    const parts = [];
+    if (M != null) parts.push(`M ${M}`);
+    if (S != null) parts.push(`S ${S}`);
+    if (C != null) parts.push(`C ${C}`);
+    return parts.join('\n');
+  };
+
+  _desenharRadar(`radar-R-${si}`, [
+    { label:'DOM',  val: s._scores.dominio?.score     ?? 0,
+      sub: s._scores.dominio?.rotulo     ?? '—', detail: fmtCov('dominio'), hideVal: true },
+    { label:'ECO',  val: s._scores.ecossistema?.score ?? 0,
+      sub: s._scores.ecossistema?.rotulo ?? '—', detail: fmtCov('ecossistema'), hideVal: true, offsetX: -30, offsetY: 14 },
+    { label:'LING', val: s._scores.linguagens?.score  ?? 0,
+      sub: s._scores.linguagens?.rotulo  ?? '—', detail: fmtCov('linguagens'), hideVal: true },
+  ]);
+}
+
+// ── Mini-grafo da equipe ───────────────────────────────────────────────────────
+function _desenharMiniGrafo(svgId, teamIds, pares, s) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+
+  const n    = teamIds.length;
+  const cx   = 150, cy = 100, R = 72;
+  const ang  = i => (2 * Math.PI * i / n) - Math.PI / 2;
+  const pos  = teamIds.map((_, i) => ({
+    x: cx + R * Math.cos(ang(i)),
+    y: cy + R * Math.sin(ang(i)),
+  }));
+
+  // mapa de peso/N por par
+  const edgeMap = {};
+  pares.forEach(p => {
+    const key = [p.source, p.target].sort().join('-');
+    edgeMap[key] = p;
+  });
+
+  function getEdge(a, b) {
+    return edgeMap[[a,b].sort().join('-')] || null;
+  }
+
+  // cor pela faixa de peso
+  function edgeColor(w) {
+    if (w >= 0.7) return '#34d399';   // verde
+    if (w >= 0.4) return '#f59e0b';   // amarelo
+    if (w >  0.0) return '#f87171';   // vermelho
+    return '#2a2d3a';                  // sem aresta
+  }
+
+  let h = '';
+
+  // Arestas
+  pares.forEach(p => {
+    const ia = teamIds.indexOf(p.source);
+    const ib = teamIds.indexOf(p.target);
+    if (ia < 0 || ib < 0) return;
+    const pa = pos[ia], pb = pos[ib];
+    const mx = (pa.x + pb.x) / 2, my = (pa.y + pb.y) / 2;
+    const w  = p.weight;
+    const sw = p.has_edge ? Math.max(1.2, w * 4) : 1;
+    const col = edgeColor(w);
+    const dash = p.has_edge ? '' : '4,3';
+    h += `<line x1="${pa.x.toFixed(1)}" y1="${pa.y.toFixed(1)}"
+               x2="${pb.x.toFixed(1)}" y2="${pb.y.toFixed(1)}"
+               stroke="${col}" stroke-width="${sw.toFixed(1)}"
+               stroke-dasharray="${dash}" opacity="${p.has_edge ? 0.85 : 0.3}"/>`;
+    // label da aresta: N proj e peso
+    if (p.has_edge) {
+      h += `<text x="${mx.toFixed(1)}" y="${(my - 4).toFixed(1)}"
+        text-anchor="middle" font-size="11" fill="#ffffff" font-family="inherit"
+        font-weight="700">N=${p.N}</text>`;
+      h += `<text x="${mx.toFixed(1)}" y="${(my + 9).toFixed(1)}"
+        text-anchor="middle" font-size="10" fill="#ffffff" font-family="inherit"
+        font-weight="600">w=${w.toFixed(2)}</text>`;
+    }
+  });
+
+  // Nós
+  pos.forEach((p, i) => {
+    const id  = teamIds[i];
+    const lbl = `Dev${id}`;
+    h += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}"
+      r="18" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>`;
+    h += `<text x="${p.x.toFixed(1)}" y="${(p.y - 2).toFixed(1)}"
+      text-anchor="middle" font-size="8" font-weight="700"
+      fill="var(--accent)" font-family="inherit">D${id}</text>`;
+  });
+
+  // Rodapé: AC + pares + projetos
+  const pi  = s._pares_info || {};
+  const nc  = pi.n_colab ?? 0, nt = pi.n_total ?? 0, np = pi.n_proj ?? 0;
+  const acL = s._ac_label ?? '—';
+  const acV = (s._ac_score ?? 0).toFixed(2);
+  const acColor = acL === 'VH' || acL === 'H' ? '#34d399' : acL === 'M' ? '#f59e0b' : '#f87171';
+
+  h += `<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)" stroke-width="0.6"/>`;
+  h += `<text x="12" y="192" font-size="9" fill="var(--muted)" font-family="inherit">Pares: ${nc}/${nt}</text>`;
+  h += `<text x="12" y="204" font-size="9" fill="var(--muted)" font-family="inherit">Proj. compartilhados: ${np}</text>`;
+  h += `<text x="288" y="192" text-anchor="end" font-size="9" fill="${acColor}"
+    font-family="inherit" font-weight="600">AC: ${acL}</text>`;
+  h += `<text x="288" y="204" text-anchor="end" font-size="9" fill="${acColor}"
+    font-family="inherit">${acV}</text>`;
+
+  // Legenda cores
+  [['≥0.7','#34d399'],['0.4–0.7','#f59e0b'],['<0.4','#f87171'],['sem hist.','#2a2d3a']].forEach(([lb,cor],i) => {
+    const lx = 12 + i * 72;
+    h += `<line x1="${lx}" y1="213" x2="${lx+10}" y2="213" stroke="${cor}" stroke-width="2"/>`;
+    h += `<text x="${lx+13}" y="217" font-size="8" fill="var(--muted)" font-family="inherit">${lb}</text>`;
+  });
+
+  svg.innerHTML = h;
+}
+
+function _desenharRadar(svgId, axes) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+
+  const cx = 108, cy = 108, r = 64, n = axes.length;
+  const ang = i => (2 * Math.PI * i / n) - Math.PI / 2;
+  const pt  = (i, sc) => [
+    cx + sc * r * Math.cos(ang(i)),
+    cy + sc * r * Math.sin(ang(i)),
+  ];
+
+  let h = '';
+
+  // Grade (4 anéis)
+  [0.25, 0.5, 0.75, 1].forEach(sc => {
+    const pts = axes.map((_, i) => pt(i, sc).join(',')).join(' ');
+    h += `<polygon points="${pts}" fill="none" stroke="var(--border)"
+      stroke-width="${sc === 1 ? 1.2 : .6}" stroke-dasharray="${sc < 1 ? '3,3' : ''}"/>`;
+  });
+
+  // Eixos
+  axes.forEach((_, i) => {
+    const [x, y] = pt(i, 1);
+    h += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"
+      stroke="var(--border)" stroke-width=".8"/>`;
+  });
+
+  // Polígono de dados
+  const dpts = axes.map((a, i) => pt(i, Math.min(1, Math.max(0, a.val))));
+  h += `<polygon points="${dpts.map(p => p.join(',')).join(' ')}"
+    fill="var(--accent)" fill-opacity=".18"
+    stroke="var(--accent)" stroke-width="1.8"/>`;
+
+  // Pontos nos vértices
+  dpts.forEach(([x, y]) => {
+    h += `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--accent)"/>`;
+  });
+
+  // Valor em cada vértice de dado (próximo ao ponto) — omite se hideVal=true
+  axes.forEach((a, i) => {
+    if (a.hideVal) return;
+    const [vx, vy] = dpts[i];
+    const cos = Math.cos(ang(i));
+    const sin = Math.sin(ang(i));
+    const ox = cos * 11, oy = sin * 11;
+    const anchor = cos > 0.25 ? 'start' : cos < -0.25 ? 'end' : 'middle';
+    h += `<text x="${vx + ox}" y="${vy + oy + 4}" text-anchor="${anchor}"
+      font-size="18" font-weight="700" fill="var(--accent)" font-family="inherit">
+      ${a.val.toFixed(2)}</text>`;
+  });
+
+  // Rótulos externos (label + sub + detail por linha)
+  axes.forEach((a, i) => {
+    const cos = Math.cos(ang(i));
+    const sin = Math.sin(ang(i));
+    const anchor = cos > 0.25 ? 'start' : cos < -0.25 ? 'end' : 'middle';
+    const [lx, ly] = pt(i, 1.42);
+    const lxAdj = (anchor === 'end' ? lx + 10 : lx) + (a.offsetX || 0);
+    const lyAdj = ly + (a.offsetY || 0);
+
+    // label principal
+    h += `<text x="${lxAdj}" y="${lyAdj - 2}" text-anchor="${anchor}"
+
+    
+      font-size="18" font-weight="700" fill="var(--text)" font-family="inherit">
+      ${a.label}</text>`;
+
+    h += `<text x="${lxAdj}" y="${lyAdj + 16}" text-anchor="${anchor}"
+      font-size="18" fill="var(--text)" font-family="inherit">
+      ${a.sub}</text>`;
+
+    if (a.detail) {
+      const lines = a.detail.split('\n');
+      lines.forEach((ln, li) => {
+        h += `<text x="${lxAdj}" y="${lyAdj + 32 + li * 14}" text-anchor="${anchor}"
+          font-size="18" fill="var(--text)" font-family="inherit">
+          ${ln}</text>`;
+      });
+    }
+  });
+
+  // Rodapé: legenda M / S / C
+  h += `<line x1="10" y1="218" x2="206" y2="218" stroke="var(--border)" stroke-width=".6"/>`;
+  [['M','var(--accent)'],['S','var(--muted)'],['C','var(--border)']].forEach(([lb,cor], i) => {
+    const lx = 16 + i * 36;
+    h += `<line x1="${lx}" y1="225" x2="${lx+14}" y2="225"
+      stroke="${cor}" stroke-width="1.8"/>`;
+    h += `<text x="${lx+17}" y="229" font-size="18" fill="var(--text)"
+      font-family="inherit">${lb}</text>`;
+  });
+
+  svg.innerHTML = h;
+}
+</script>
+
+
+<script>
+  (function() {
+    const exemplos = [
+      "Aplicativo de reconhecimento facial para iOS...",
+      "Plataforma web de e-commerce em nuvem...",
+      "Sistema de análise de dados com IoT e IA...",
+      "Jogo de realidade aumentada para Android e iOS...",
+      "PWA para gerenciamento de tarefas offline...",
+      "Sistema de monitoramento de saúde em tempo real...",
+      "Aplicação mobile de finanças pessoais...",
+      "Sistema de CRM na nuvem com automação...",
+      "Plataforma de ensino à distância com vídeos ao vivo...",
+      "Sistema embarcado de reconhecimento de voz...",
+      "Aplicação desktop local para controle de estoque...",
+      "Aplicação desktop cliente para plataforma SaaS...",
+    ];
+    const el = document.getElementById('descricao-livre');
+    let ei = 0, ci = 0, apagando = false;
+    let ph = '';
+  
+    function tick() {
+      const alvo = exemplos[ei];
+      if (!apagando) {
+        ph = alvo.slice(0, ++ci);
+        el.placeholder = ph + '|';
+        if (ci >= alvo.length) { apagando = true; setTimeout(tick, 1800); return; }
+        setTimeout(tick, 48);
+      } else {
+        ph = alvo.slice(0, --ci);
+        el.placeholder = ph + (ci > 0 ? '|' : '');
+        if (ci === 0) { apagando = false; ei = (ei + 1) % exemplos.length; setTimeout(tick, 400); return; }
+        setTimeout(tick, 28);
+      }
+    }
+    setTimeout(tick, 800);
+  })();
+  </script>
+
+{% endblock %}

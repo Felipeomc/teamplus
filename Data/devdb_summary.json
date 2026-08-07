@@ -1,0 +1,75 @@
+{
+  "developers": 192,
+  "unique_projects": 267,
+  "dev_project_assignments": 1566,
+  "projects_per_developer": {
+    "mean": 8.15625,
+    "median": 7.0,
+    "min": 4,
+    "max": 26
+  },
+  "technical_diversity": {
+    "unique_domains": 7,
+    "unique_ecosystems": 16,
+    "unique_languages": 12,
+    "unique_combinations_all": 111,
+    "unique_combinations_primary": 13,
+    "tags_per_dev_distribution": {
+      "domains": {
+        "0": 9,
+        "1": 172,
+        "2": 8,
+        "3": 3
+      },
+      "ecosystems": {
+        "0": 8,
+        "1": 170,
+        "2": 10,
+        "3": 4
+      },
+      "languages": {
+        "0": 9,
+        "1": 172,
+        "2": 7,
+        "3": 3,
+        "4": 1
+      }
+    }
+  },
+  "collaboration": {
+    "total_possible_pairs": 18336,
+    "observed_pairs": 4826,
+    "observed_pairs_pct": 26.319808027923212,
+    "shared_projects_per_observed_pair": {
+      "mean": 2.0830915872358062,
+      "median": 2.0,
+      "max": 18,
+      "pct_1_project": 49.8135101533361,
+      "pct_2_projects": 31.351015333609617,
+      "pct_ge_3_projects": 18.83547451305429,
+      "counts": {
+        "1": 2404,
+        "2": 1513,
+        ">=3": 909
+      }
+    }
+  },
+  "project_quality": {
+    "OSF": {
+      "mean": 0.5881647940074907,
+      "min": 0.302,
+      "max": 0.898,
+      "n_projects_with_osf": 267
+    },
+    "SLF": {
+      "mean": 0.5894494382022472,
+      "min": 0.301,
+      "max": 0.898,
+      "n_projects_with_slf": 267
+    }
+  },
+  "search_space": {
+    "team_size": 4,
+    "possible_teams_nCk": 54870480
+  }
+}

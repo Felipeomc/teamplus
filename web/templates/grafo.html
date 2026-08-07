@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+{% block title %} — Grafo de Colaboração{% endblock %}
+
+{% block head %}
+<style>
+  #grafo-container {
+    width:100%; height:calc(100vh - 180px); position:relative;
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:12px; overflow:hidden;
+  }
+  #grafo-canvas { display:block; width:100%; height:100%; cursor:grab; }
+  #grafo-canvas:active { cursor:grabbing; }
+
+  #perfil-card {
+    position:absolute; top:16px; right:16px; width:240px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:12px; padding:16px; display:none; z-index:10;
+  }
+  #perfil-card .pc-name  { font-weight:700; font-size:.9rem; margin-bottom:4px; }
+  #perfil-card .pc-role  { font-size:.75rem; color:var(--muted); margin-bottom:10px; }
+  #perfil-card .pc-skills { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px; }
+  #perfil-card .pc-skill { font-size:.65rem; background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:2px 6px; }
+  #perfil-card .pc-conns { font-size:.75rem; color:var(--muted); line-height:1.7; }
+  #perfil-card .pc-close { position:absolute; top:8px; right:10px; cursor:pointer; color:var(--muted); font-size:1rem; }
+
+  #perfil-card .pc-vizinhos { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+  #perfil-card .pc-viz      { font-size:.63rem; background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:2px 6px; color:var(--muted); cursor:pointer; }
+  #perfil-card .pc-viz:hover { border-color:var(--accent); color:var(--accent); }
+
+  .controls { display:flex; gap:12px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
+  .controls label { font-size:.8rem; color:var(--muted); }
+
+  #spinner-grafo {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; background:var(--bg);
+    gap:12px; border-radius:12px; z-index:5;
+  }
+  #spinner-msg { font-size:.8rem; color:var(--muted); }
+
+  #sim-badge {
+    position:absolute; bottom:14px; left:16px; display:none;
+    font-size:.7rem; color:var(--muted); font-family:monospace;
+    background:rgba(15,17,23,.8); padding:3px 10px; border-radius:6px;
+  }
+  #tooltip {
+    position:fixed; pointer-events:none; z-index:999;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:6px; padding:5px 10px; font-size:.75rem; display:none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">Grafo de colaboração</div>
+<div class="page-sub">Rede de colaboração entre desenvolvedores. Scroll para zoom, arraste para navegar, clique em um nó para ver o perfil.</div>
+
+<div class="controls">
+  <label>Peso mínimo:</label>
+  <input type="range" id="slider-minw" min="0" max="1" step="0.05" value="0.5"
+         style="width:130px;accent-color:var(--accent)">
+  <span id="lbl-minw" style="font-size:.75rem;font-family:monospace;color:var(--accent);width:36px">0.50</span>
+
+  <label style="margin-left:8px">Máx. arestas:</label>
+  <select id="sel-maxe" style="width:80px;padding:4px 8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.8rem">
+    <option value="150" selected>150</option>
+    <option value="300">300</option>
+    <option value="500">500</option>
+    <option value="800">800</option>
+  </select>
+
+  <button class="btn btn-ghost" onclick="recarregar()" style="padding:5px 14px;font-size:.8rem">↺ Aplicar</button>
+  <span id="stat-nodes" style="font-size:.75rem;color:var(--muted)"></span>
+</div>
+
+<div id="grafo-container">
+  <div id="spinner-grafo">
+    <div class="spinner" style="width:32px;height:32px;border-width:3px"></div>
+    <div id="spinner-msg">Carregando…</div>
+  </div>
+  <canvas id="grafo-canvas"></canvas>
+  <span id="sim-badge"></span>
+  <div id="perfil-card">
+    <span class="pc-close" onclick="fecharPerfil()">×</span>
+    <div class="pc-name"   id="pc-name"></div>
+    <div class="pc-role"   id="pc-role"></div>
+    <div class="pc-skills" id="pc-skills"></div>
+    <div class="pc-conns"  id="pc-conns">—</div>
+    <div class="pc-vizinhos" id="pc-vizinhos"></div>
+  </div>
+</div>
+<div id="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+// ── Estado ────────────────────────────────────────────────────────────────────
+let _nodes=[], _edges=[], _nodeMap={}, _sim=null, _rafId=null;
+let _canvas, _ctx, _W, _H;
+const DPR = window.devicePixelRatio || 1;
+let _tx=0, _ty=0, _scale=1;
+const MIN_S=0.05, MAX_S=10;
+let _drag=false, _ds={x:0,y:0}, _t0x=0, _t0y=0;
+let _hovered=null, _selected=null;
+let _currentMinW=0.5;
+
+// ── Controles ─────────────────────────────────────────────────────────────────
+document.getElementById('slider-minw').oninput = e =>
+  document.getElementById('lbl-minw').textContent = parseFloat(e.target.value).toFixed(2);
+
+function recarregar() {
+  _currentMinW = parseFloat(document.getElementById('slider-minw').value);
+  carregarGrafo(_currentMinW, parseInt(document.getElementById('sel-maxe').value));
+}
+
+// ── Carga — UMA única requisição leve ─────────────────────────────────────────
+async function carregarGrafo(minW=0.5, maxE=300) {
+  document.getElementById('spinner-grafo').style.display = 'flex';
+  document.getElementById('spinner-msg').textContent = 'Buscando dados…';
+  if (_sim)   { _sim.stop(); _sim = null; }
+  if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
+
+  try {
+    const res = await fetch(`/api/grafo?min_w=${minW}&max_e=${maxE}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    _nodes = data.nodes;
+    _edges = data.edges;
+  } catch(err) {
+    document.getElementById('spinner-msg').textContent = `Erro: ${err.message}`;
+    return;
+  }
+
+  _nodeMap = {};
+  _nodes.forEach(n => { _nodeMap[n.id] = n; n._deg = 0; });
+  _edges.forEach(e => {
+    if (_nodeMap[e.source]) _nodeMap[e.source]._deg++;
+    if (_nodeMap[e.target]) _nodeMap[e.target]._deg++;
+  });
+
+  document.getElementById('stat-nodes').textContent =
+    `${_nodes.length} nós · ${_edges.length} arestas`;
+
+  initCanvas();
+  runSim();
+  document.getElementById('spinner-grafo').style.display = 'none';
+}
+
+// ── Canvas ────────────────────────────────────────────────────────────────────
+function initCanvas() {
+  const cont = document.getElementById('grafo-container');
+  _canvas = document.getElementById('grafo-canvas');
+  _ctx    = _canvas.getContext('2d');
+  _W = cont.clientWidth; _H = cont.clientHeight;
+  _canvas.width=_W*DPR; _canvas.height=_H*DPR;
+  _canvas.style.width=_W+'px'; _canvas.style.height=_H+'px';
+  _ctx.scale(DPR, DPR);
+  _scale=1; _tx=0; _ty=0;
+  _canvas.onwheel      = onWheel;
+  _canvas.onmousedown  = onMouseDown;
+  _canvas.onmousemove  = onMouseMove;
+  _canvas.onmouseup    = () => _drag = false;
+  _canvas.onclick      = onClick;
+  _canvas.onmouseleave = () => { _hovered=null; hideTip(); };
+}
+
+// ── D3 Force (roda no browser, zero carga no servidor) ────────────────────────
+function runSim() {
+  const badge  = document.getElementById('sim-badge');
+  badge.style.display = 'block';
+  const maxDeg = Math.max(..._nodes.map(n=>n._deg||1), 1);
+
+  const links = _edges.map(e => ({
+    source: _nodeMap[nid(e.source)] || nid(e.source),
+    target: _nodeMap[nid(e.target)] || nid(e.target),
+    weight: e.weight,
+  }));
+
+  _sim = d3.forceSimulation(_nodes)
+    .force('link',    d3.forceLink(links).id(n=>n.id)
+                        .distance(d => 55 + (1-d.weight)*80)
+                        .strength(d => d.weight * 0.55))
+    .force('charge',  d3.forceManyBody()
+                        .strength(n => -35 - (n._deg/maxDeg)*55)
+                        .theta(0.85))
+    .force('collide', d3.forceCollide().radius(n => r(n,maxDeg)+3))
+    .force('center',  d3.forceCenter(_W/2, _H/2).strength(0.04))
+    .alphaDecay(0.028).velocityDecay(0.38);
+
+  _sim.on('tick', () => {
+    const a = Math.round(_sim.alpha()*100);
+    badge.textContent = a > 1 ? `simulando α=${a}%` : '';
+  });
+  _sim.on('end', () => { badge.style.display='none'; });
+
+  loop();
+}
+
+function r(n, maxDeg) {
+  const md = maxDeg || Math.max(..._nodes.map(x=>x._deg||1), 1);
+  return 4 + ((n._deg||0)/md)*12;
+}
+function nid(x) { return typeof x==='object' ? x.id : x; }
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function loop() { draw(); _rafId = requestAnimationFrame(loop); }
+
+function draw() {
+  if (!_ctx || !_nodes.length) return;
+  _ctx.clearRect(0, 0, _W, _H);
+  const md = Math.max(..._nodes.map(n=>n._deg||1), 1);
+
+  // Arestas
+  _edges.forEach(e => {
+    const s = typeof e.source==='object' ? e.source : _nodeMap[e.source];
+    const t = typeof e.target==='object' ? e.target : _nodeMap[e.target];
+    if (!s || !t || s.x==null) return;
+    const sx=s.x*_scale+_tx, sy=s.y*_scale+_ty;
+    const tx=t.x*_scale+_tx, ty=t.y*_scale+_ty;
+    const hl = _selected && (nid(e.source)===_selected.id || nid(e.target)===_selected.id);
+    _ctx.beginPath(); _ctx.moveTo(sx,sy); _ctx.lineTo(tx,ty);
+    _ctx.strokeStyle = hl ? 'rgba(79,142,247,0.55)' : 'rgba(42,45,58,0.85)';
+    _ctx.lineWidth   = hl ? Math.max(0.6,e.weight*2.5) : Math.max(0.3,e.weight*0.8);
+    _ctx.stroke();
+  });
+
+  // Nós
+  _nodes.forEach(n => {
+    if (n.x==null) return;
+    const cx=n.x*_scale+_tx, cy=n.y*_scale+_ty, rv=r(n,md);
+    const isSel=_selected?.id===n.id, isHov=_hovered?.id===n.id;
+    if (isSel||isHov) {
+      _ctx.beginPath(); _ctx.arc(cx,cy,rv+5,0,Math.PI*2);
+      _ctx.fillStyle=isSel?'rgba(79,142,247,0.22)':'rgba(52,211,153,0.18)'; _ctx.fill();
+    }
+    _ctx.beginPath(); _ctx.arc(cx,cy,rv,0,Math.PI*2);
+    _ctx.fillStyle=isSel?'#4f8ef7':isHov?'#34d399':nodeColor(n);
+    _ctx.fill();
+    _ctx.strokeStyle='rgba(15,17,23,0.5)'; _ctx.lineWidth=1; _ctx.stroke();
+    if (_scale>0.55) {
+      _ctx.font=`${Math.min(11,6+_scale*2.5)}px IBM Plex Sans,sans-serif`;
+      _ctx.textAlign='center'; _ctx.textBaseline='middle';
+      _ctx.fillStyle='rgba(226,232,240,.8)';
+      _ctx.fillText(n.id, cx, cy+rv+7);
+    }
+  });
+}
+
+function nodeColor(n) {
+  const v=(n.contractRoleName||'').toLowerCase();
+  if (v.includes('senior'))                        return '#4f8ef7';
+  if (v.includes('junior'))                        return '#34d399';
+  if (v.includes('lead')||v.includes('manager'))   return '#f59e0b';
+  if (v.includes('full'))                          return '#a78bfa';
+  return '#64748b';
+}
+
+// ── Hit-test ──────────────────────────────────────────────────────────────────
+function nodeAt(mx,my) {
+  const wx=(mx-_tx)/_scale, wy=(my-_ty)/_scale;
+  const md=Math.max(..._nodes.map(n=>n._deg||1),1);
+  for (let i=_nodes.length-1; i>=0; i--) {
+    const n=_nodes[i];
+    if (n.x==null) continue;
+    if (Math.hypot(n.x-wx, n.y-wy) <= r(n,md)/_scale+2) return n;
+  }
+  return null;
+}
+
+// ── Mouse events ──────────────────────────────────────────────────────────────
+function onWheel(e) {
+  e.preventDefault();
+  const rect=_canvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  const f=e.deltaY<0?1.15:0.87;
+  const ns=Math.min(MAX_S,Math.max(MIN_S,_scale*f));
+  _tx=mx-(mx-_tx)*(ns/_scale); _ty=my-(my-_ty)*(ns/_scale); _scale=ns;
+}
+function onMouseDown(e) { _drag=true; _ds={x:e.clientX,y:e.clientY}; _t0x=_tx; _t0y=_ty; }
+function onMouseMove(e) {
+  if (_drag) { _tx=_t0x+(e.clientX-_ds.x); _ty=_t0y+(e.clientY-_ds.y); return; }
+  if (!_nodes.length) return;
+  const rect=_canvas.getBoundingClientRect();
+  const n=nodeAt(e.clientX-rect.left, e.clientY-rect.top);
+  if (n!==_hovered) {
+    _hovered=n; _canvas.style.cursor=n?'pointer':'grab';
+    n ? showTip(e,n) : hideTip();
+  }
+}
+function onClick(e) {
+  if (!_nodes.length) return;
+  const rect=_canvas.getBoundingClientRect();
+  const n=nodeAt(e.clientX-rect.left, e.clientY-rect.top);
+  _selected=n||null;
+  n ? mostrarPerfil(n) : fecharPerfil();
+}
+
+// ── Tooltip (usa grau visível — sem fetch) ────────────────────────────────────
+const tip=document.getElementById('tooltip');
+function showTip(e,n) {
+  tip.style.display='block';
+  tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-10)+'px';
+  tip.textContent=`${n.id} · ${n._deg} conexões no grafo`;
+}
+function hideTip() { tip.style.display='none'; }
+
+// ── Perfil card ───────────────────────────────────────────────────────────────
+async function mostrarPerfil(n) {
+  document.getElementById('pc-name').textContent   = n.id;
+  document.getElementById('pc-role').textContent   = n.contractRoleName || 'Developer';
+  document.getElementById('pc-skills').innerHTML   =
+    (n.hardskill||[]).slice(0,12).map(s=>`<span class="pc-skill">${s}</span>`).join('');
+  document.getElementById('pc-vizinhos').innerHTML = '';
+  document.getElementById('perfil-card').style.display = 'block';
+
+  // Dados locais (sempre disponíveis — arestas já carregadas)
+  const edgesLocais = _edges.filter(e => nid(e.source)===n.id || nid(e.target)===n.id);
+  const vizLocal    = edgesLocais
+    .sort((a,b) => b.weight - a.weight)
+    .map(e => nid(e.source)===n.id ? nid(e.target) : nid(e.source));
+  const mediaLocal  = edgesLocais.length
+    ? (edgesLocais.reduce((s,e)=>s+e.weight,0)/edgesLocais.length).toFixed(3) : '—';
+  const maxLocal    = edgesLocais.length
+    ? Math.max(...edgesLocais.map(e=>e.weight)).toFixed(3) : '—';
+
+  // Exibe imediatamente com dados locais
+  function renderConns(visCount, total, media, maximo, label='') {
+    document.getElementById('pc-conns').innerHTML =
+      `<strong>${visCount}</strong> no grafo` +
+      (total !== visCount ? ` · <strong>${total}</strong> total${label}` : '') +
+      `<br>peso médio: <strong>${media}</strong> · máx: <strong>${maximo}</strong>`;
+  }
+  renderConns(edgesLocais.length, edgesLocais.length, mediaLocal, maxLocal);
+  document.getElementById('pc-vizinhos').innerHTML =
+    vizLocal.slice(0,15).map(v =>
+      `<span class="pc-viz" onclick="focarNo('${v}')">${v}</span>`
+    ).join('');
+
+  // Tenta enriquecer com dados reais do servidor (total real além das 300 arestas)
+  try {
+    const res = await fetch(`/api/grafo/conexoes/${n.id}?min_w=${_currentMinW}`);
+    if (!res.ok) return;   // endpoint não existe ainda → fica com dados locais
+    const data = await res.json();
+    renderConns(edgesLocais.length, data.total, data.media, data.maximo, ' (≥ peso mín.)');
+    if (data.vizinhos && data.vizinhos.length) {
+      document.getElementById('pc-vizinhos').innerHTML =
+        data.vizinhos.slice(0,15).map(v =>
+          `<span class="pc-viz" onclick="focarNo('${v}')">${v}</span>`
+        ).join('');
+    }
+  } catch(_) {
+    // silencioso — dados locais já estão exibidos
+  }
+}
+
+function fecharPerfil() {
+  document.getElementById('perfil-card').style.display='none';
+  _selected=null;
+}
+
+// Clique em vizinho no card → seleciona esse nó no grafo
+function focarNo(nodeId) {
+  const n = _nodeMap[nodeId];
+  if (!n) return;
+  _selected = n;
+  mostrarPerfil(n);
+}
+
+window.addEventListener('resize', () => { if (_nodes.length) initCanvas(); });
+carregarGrafo(0.5, 300);
+</script>
+{% endblock %}

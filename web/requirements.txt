@@ -1,0 +1,11 @@
+flask
+anthropic
+python-dotenv
+numpy
+scipy
+networkx
+pandas
+scikit-learn
+statsmodels
+opt-einsum
+tqdm

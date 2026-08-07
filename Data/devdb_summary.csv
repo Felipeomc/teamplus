@@ -1,0 +1,26 @@
+statistic,value
+Developers,192
+Unique projects (history),267
+Dev--project assignments,1566
+Projects per developer (mean),8.16
+Projects per developer (median),7
+Projects per developer (min),4
+Projects per developer (max),26
+Unique domains,7
+Unique ecosystems,16
+Unique languages,12
+"Unique (domain, ecosystem, language) combinations (all)",111
+"Unique (domain, ecosystem, language) combinations (primary)",13
+"Total possible pairs C(n,2)",18336
+Pairs with observed collaboration,4826 (26.3%)
+Shared projects per observed pair (mean),2.08
+Shared projects per observed pair (median),2
+Shared projects per observed pair (max),18
+Observed pairs with 1 shared project,2404 (49.8%)
+Observed pairs with 2 shared projects,1513 (31.4%)
+Observed pairs with >=3 shared projects,909 (18.8%)
+OSF mean (per project),0.588
+OSF min--max (per project),0.302--0.898
+SLF mean (per project),0.589
+SLF min--max (per project),0.301--0.898
+"Possible teams of size 4 C(n,k)",54870480

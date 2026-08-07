@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+{% block title %} — Histórico{% endblock %}
+
+{% block head %}
+<style>
+  .status-alocado { background: rgba(52,211,153,.12); color: var(--accent2); }
+  .status-temp    { background: rgba(100,116,139,.12); color: var(--muted); }
+  .filter-bar { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; align-items:center; }
+  .filter-btn { padding:6px 14px; border-radius:999px; border:1px solid var(--border);
+    background:transparent; color:var(--muted); cursor:pointer; font-size:.8rem; font-family:inherit; }
+  .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">Histórico de projetos</div>
+<div class="page-sub">{{ historico|length }} registro(s) — projetos salvos e sugestões geradas.</div>
+
+
+<!-- ── BACKLOG ── -->
+<div style="margin-bottom:32px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <div style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)">
+      📋 Backlog de projetos
+    </div>
+    <div style="display:flex;gap:8px">
+      <button id="btn-executar-selecionados" onclick="executarSelecionados()" style="display:none;
+        background:rgba(79,142,247,.15);border:1px solid var(--accent);color:var(--accent);
+        border-radius:6px;padding:4px 12px;font-size:.72rem;cursor:pointer;font-family:inherit">
+        ⚡ Executar selecionados (<span id="n-selecionados">0</span>)
+      </button>
+      <button onclick="abrirFormBacklog()"
+        style="background:rgba(245,158,11,.1);border:1px solid var(--warn);color:var(--warn);
+        border-radius:6px;padding:4px 12px;font-size:.72rem;cursor:pointer;font-family:inherit">
+        + Novo projeto
+      </button>
+    </div>
+  </div>
+
+  <div id="backlog-vazio" style="display:none;color:var(--muted);font-size:.8rem;padding:12px 0">
+    Nenhum projeto no backlog ainda.
+  </div>
+
+  <div id="backlog-lista" style="display:flex;flex-direction:column;gap:8px"></div>
+
+  <!-- Form inline para criar item no backlog -->
+  <div id="backlog-form" style="display:none;margin-top:12px" class="card">
+    <div style="font-size:.8rem;font-weight:600;margin-bottom:10px;color:var(--text)">Novo projeto no backlog</div>
+    <div style="display:grid;grid-template-columns:1fr 80px;gap:10px;margin-bottom:10px">
+      <div>
+        <label>Nome do projeto</label>
+        <input type="text" id="bl-nome" placeholder="Ex: App mobile de vendas">
+      </div>
+      <div>
+        <label>Equipe</label>
+        <input type="number" id="bl-team-size" value="4" min="2" max="12">
+      </div>
+    </div>
+    {% for dim_id, dim_label in [('dom','Domínio'),('eco','Ecossistema'),('ling','Linguagens')] %}
+    <div style="margin-bottom:10px">
+      <div style="font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:4px">{{ dim_label }}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+        <div>
+          <label style="font-size:.65rem">MUST ●</label>
+          <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-must" style="min-height:36px">
+            <input type="text" id="bl-{{dim_id}}-must" placeholder="ex: web"
+              onkeydown="blAddTag(event,'{{dim_id}}','must')">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.65rem">SHOULD ●</label>
+          <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-should" style="min-height:36px">
+            <input type="text" id="bl-{{dim_id}}-should" placeholder="opcional"
+              onkeydown="blAddTag(event,'{{dim_id}}','should')">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.65rem">COULD ●</label>
+          <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-could" style="min-height:36px">
+            <input type="text" id="bl-{{dim_id}}-could" placeholder="opcional"
+              onkeydown="blAddTag(event,'{{dim_id}}','could')">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button onclick="salvarBacklog()"
+        style="background:var(--accent);color:#fff;border:none;border-radius:6px;
+        padding:8px 16px;font-size:.8rem;cursor:pointer;font-family:inherit">
+        Salvar no backlog
+      </button>
+      <button onclick="fecharFormBacklog()"
+        style="background:transparent;border:1px solid var(--border);color:var(--muted);
+        border-radius:6px;padding:8px 16px;font-size:.8rem;cursor:pointer;font-family:inherit">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+{% set alocados = historico | selectattr('status','equalto','alocado') | list %}
+{% set outros   = historico | rejectattr('status','equalto','alocado') | list %}
+
+{% if alocados %}
+<div style="margin-bottom:28px">
+  <div style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px">
+    ✅ Projetos alocados ({{ alocados|length }})
+  </div>
+  <div style="display:grid;gap:12px">
+    {% for r in alocados %}
+    {% set fit = r.best_fitness %}
+    {% set pct = (fit * 100)|round|int %}
+    {% set label = 'VH' if fit >= 0.8 else ('H' if fit >= 0.6 else ('M' if fit >= 0.4 else ('L' if fit >= 0.2 else 'VL'))) %}
+    <div class="card" onclick="toggle('det-a-{{loop.index}}')" style="cursor:pointer;border-color:rgba(52,211,153,.3)">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <span class="badge badge-{{label}}">{{label}}</span>
+        <span class="badge status-alocado">ALOCADO</span>
+        <div style="flex:1;min-width:150px">
+          <div style="font-weight:600;font-size:.9rem">{{ r.nome_projeto }}</div>
+          <div class="text-muted">{{ r.timestamp }}</div>
+        </div>
+        <div class="fitness-bar" style="width:100px">
+          <div class="fitness-fill" style="width:{{pct}}%"></div>
+        </div>
+        <span class="fitness-val mono">{{fit}}</span>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          {% for m in r.membros %}
+          <span style="background:var(--border);border-radius:5px;padding:2px 7px;font-size:.7rem">{{ m.id }}</span>
+          {% endfor %}
+        </div>
+        <span style="color:var(--muted);font-size:.8rem">▾</span>
+        
+        <div style="display:flex;gap:6px" onclick="event.stopPropagation()">
+          <button onclick="editarRegistro('{{r.id}}')"
+            style="background:rgba(99,102,241,.12);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+            ✏️ Editar
+          </button>
+          <button onclick="deletarRegistro('{{r.id}}')"
+            style="background:rgba(248,113,113,.1);border:1px solid #f87171;color:#f87171;border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+            🗑 Excluir
+          </button>
+        </div>
+      </div>
+
+      <div id="det-a-{{loop.index}}" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+        <div class="member-grid">
+          {% for m in r.membros %}
+          <div class="member-card">
+            <div class="member-avatar">{{ m.id.replace('Dev','D') }}</div>
+            <div class="member-name">{{ m.id }}</div>
+            <div class="member-role">{{ m.role }}</div>
+            <div class="member-tags">
+              {% for t in (m.dominio + m.ecossistema + m.linguagens)[:6] %}
+              <span class="member-tag">{{ t }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap">
+          <span class="text-muted">Dom MUST: {{ r.projeto_alvo.get('dominio',{}).get('must',[])|join(', ') or '—' }}</span>
+          <span class="text-muted">Eco MUST: {{ r.projeto_alvo.get('ecossistema',{}).get('must',[])|join(', ') or '—' }}</span>
+          <span class="text-muted">Lang MUST: {{ r.projeto_alvo.get('linguagens',{}).get('must',[])|join(', ') or '—' }}</span>
+          <span class="text-muted">⏱ {{ r.duration_sec }}s · {{ r.gens_executed }} ger.</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if not historico %}
+  <div class="card" style="text-align:center;padding:48px;color:var(--muted)">
+    <div style="font-size:2rem;margin-bottom:8px">🕓</div>
+    Nenhum projeto ainda. <a href="/" style="color:var(--accent)">Criar o primeiro</a>.
+  </div>
+{% endif %}
+
+<script>
+// ── Backlog ───────────────────────────────────────────────────────────────────
+let _backlog = [];
+let _blDrag  = null;
+
+async function carregarBacklog() {
+  try {
+    const res = await fetch('/api/backlog');
+    _backlog  = await res.json();
+  } catch(e) {
+    _backlog = [];
+  }
+  renderBacklog();
+}
+
+function renderBacklog() {
+  const lista  = document.getElementById('backlog-lista');
+  const vazio  = document.getElementById('backlog-vazio');
+
+  if (!_backlog.length) {
+    lista.innerHTML = '';
+    vazio.style.display = 'block';
+    return;
+  }
+  vazio.style.display = 'none';
+
+  lista.innerHTML = _backlog.map((p, idx) => `
+    <div class="card" id="bl-item-${p.id}"
+      draggable="true"
+      ondragstart="blDragStart(event,'${p.id}')"
+      ondragover="blDragOver(event)"
+      ondrop="blDrop(event,'${p.id}')"
+      ondragleave="blDragLeave(event)"
+      style="cursor:grab;display:flex;align-items:center;gap:12px;
+             padding:12px 16px;border-color:${_selecionados.has(p.id)?'var(--accent)':'rgba(245,158,11,.25)'}">
+      <input type="checkbox" ${_selecionados.has(p.id)?'checked':''} 
+        onclick="event.stopPropagation();toggleSelecionado('${p.id}')"
+        style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent);flex-shrink:0">
+      <span style="color:var(--muted);font-size:1rem;cursor:grab">⠿</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:.88rem">${p.nome_projeto}</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:2px">
+          Equipe: ${p.team_size} · 
+          Dom: ${(p.projeto_alvo?.dominio?.must||[]).join(', ')||'—'} · 
+          Eco: ${(p.projeto_alvo?.ecossistema?.must||[]).join(', ')||'—'} · 
+          Lang: ${(p.projeto_alvo?.linguagens?.must||[]).join(', ')||'—'}
+        </div>
+        <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${p.criado_em}</div>
+      </div>
+      <button onclick="event.stopPropagation();executarBacklog('${p.id}')"
+        style="background:rgba(79,142,247,.12);border:1px solid var(--accent);color:var(--accent);
+        border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;white-space:nowrap">
+        ⚡ Montar equipe
+      </button>
+      <button onclick="event.stopPropagation();deletarBacklog('${p.id}')"
+        style="background:rgba(248,113,113,.1);border:1px solid #f87171;color:#f87171;
+        border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+        🗑
+      </button>
+    </div>`).join('');
+}
+
+// ── Tags do backlog ───────────────────────────────────────────────────────────
+const blTags = {
+  dom:  { must:[], should:[], could:[] },
+  eco:  { must:[], should:[], could:[] },
+  ling: { must:[], should:[], could:[] },
+};
+
+function blAddTag(e, dim, prio) {
+  if (e.key !== 'Enter' && e.key !== ',' && e.key !== ' ') return;
+  e.preventDefault();
+  const val = e.target.value.trim().toLowerCase();
+  if (!val || blTags[dim][prio].includes(val)) { e.target.value = ''; return; }
+  blTags[dim][prio].push(val);
+  blRenderTags(dim, prio);
+  e.target.value = '';
+}
+
+function blRemoveTag(dim, prio, val) {
+  blTags[dim][prio] = blTags[dim][prio].filter(t => t !== val);
+  blRenderTags(dim, prio);
+}
+
+function blRenderTags(dim, prio) {
+  const wrap  = document.getElementById(`bl-wrap-${dim}-${prio}`);
+  const input = document.getElementById(`bl-${dim}-${prio}`);
+  if (!wrap || !input) return;
+  wrap.querySelectorAll('.tag').forEach(t => t.remove());
+  blTags[dim][prio].forEach(val => {
+    const tag = document.createElement('span');
+    tag.className = `tag ${prio==='should'?'should':prio==='could'?'could':''}`;
+    tag.draggable = true;
+    tag.innerHTML = `${val} <span class="rm" onclick="blRemoveTag('${dim}','${prio}','${val}')">×</span>`;
+    tag.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData('application/json', JSON.stringify({dim, prio, val, src:'bl'}));
+      ev.dataTransfer.setData('text/plain', JSON.stringify({dim, prio, val, src:'bl'}));
+      ev.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => tag.style.opacity = '0.4', 0);
+    });
+    tag.addEventListener('dragend', () => { tag.style.opacity = ''; });
+    wrap.insertBefore(tag, input);
+  });
+  if (!wrap._blDropReady) {
+    wrap._blDropReady = true;
+    wrap.addEventListener('dragenter', ev => ev.preventDefault());
+    wrap.addEventListener('dragover', ev => {
+      ev.preventDefault(); ev.stopPropagation();
+      wrap.classList.add('tag-drag-over');
+    });
+    wrap.addEventListener('dragleave', ev => {
+      if (!wrap.contains(ev.relatedTarget)) wrap.classList.remove('tag-drag-over');
+    });
+    wrap.addEventListener('drop', ev => {
+      ev.preventDefault(); ev.stopPropagation();
+      wrap.classList.remove('tag-drag-over');
+      let data;
+      try {
+        const raw = ev.dataTransfer.getData('application/json') || ev.dataTransfer.getData('text/plain');
+        data = JSON.parse(raw);
+      } catch { return; }
+      if (!data || data.src !== 'bl') return;
+      const { dim: sd, prio: sp, val } = data;
+      if (sd === dim && sp === prio) return;
+      blTags[sd][sp] = blTags[sd][sp].filter(t => t !== val);
+      if (!blTags[dim][prio].includes(val)) blTags[dim][prio].push(val);
+      blRenderTags(sd, sp);
+      blRenderTags(dim, prio);
+    });
+  }
+}
+
+
+
+function abrirFormBacklog() {
+  document.getElementById('backlog-form').style.display = 'block';
+  document.getElementById('bl-nome').focus();
+  // garante drop zones em todos os campos, mesmo os vazios
+  ['dom','eco','ling'].forEach(dim => {
+    ['must','should','could'].forEach(prio => blRenderTags(dim, prio));
+  });
+}
+function fecharFormBacklog() {
+  document.getElementById('backlog-form').style.display = 'none';
+  document.getElementById('bl-nome').value = '';
+  document.getElementById('bl-team-size').value = '4';
+  ['dom','eco','ling'].forEach(dim => {
+    ['must','should','could'].forEach(prio => {
+      blTags[dim][prio] = [];
+      blRenderTags(dim, prio);
+    });
+  });
+}
+
+function _parseTags(str) {
+  return str.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+}
+
+async function salvarBacklog() {
+  const nome = document.getElementById('bl-nome').value.trim();
+  if (!nome) { alert('Informe o nome do projeto.'); return; }
+
+  const payload = {
+    nome_projeto: nome,
+    team_size:    parseInt(document.getElementById('bl-team-size').value) || 4,
+    projeto_alvo: {
+      dominio:     { must: [...blTags.dom.must],  should: [...blTags.dom.should],  could: [...blTags.dom.could]  },
+      ecossistema: { must: [...blTags.eco.must],  should: [...blTags.eco.should],  could: [...blTags.eco.could]  },
+      linguagens:  { must: [...blTags.ling.must], should: [...blTags.ling.should], could: [...blTags.ling.could] },
+    },
+  };
+
+  const res = await fetch('/api/backlog', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!data.ok) { alert('Erro ao salvar.'); return; }
+  fecharFormBacklog();
+  await carregarBacklog();
+}
+
+let _selecionados = new Set();
+
+function toggleSelecionado(id) {
+  if (_selecionados.has(id)) _selecionados.delete(id);
+  else _selecionados.add(id);
+  const n = _selecionados.size;
+  const btn = document.getElementById('btn-executar-selecionados');
+  document.getElementById('n-selecionados').textContent = n;
+  btn.style.display = n > 0 ? 'inline-block' : 'none';
+  // atualiza visual do card
+  const card = document.getElementById(`bl-item-${id}`);
+  if (card) card.style.borderColor = _selecionados.has(id)
+    ? 'var(--accent)' : 'rgba(245,158,11,.25)';
+}
+
+function executarSelecionados() {
+  if (_selecionados.size === 0) return;
+  const projetos = _backlog.filter(p => _selecionados.has(p.id));
+  sessionStorage.setItem('fila_backlog', JSON.stringify(projetos));
+  window.location.href = '/';
+}
+
+async function deletarBacklog(id) {
+  if (!confirm('Remover do backlog?')) return;
+  await fetch(`/api/backlog/${id}`, { method: 'DELETE' });
+  carregarBacklog();
+}
+
+function executarBacklog(id) {
+  const p = _backlog.find(x => x.id === id);
+  if (!p) return;
+  sessionStorage.setItem('backlog_exec', JSON.stringify(p));
+  window.location.href = '/';
+}
+
+// drag-and-drop para reordenar
+function blDragStart(e, id) {
+  _blDrag = id;
+  e.dataTransfer.effectAllowed = 'move';
+  document.getElementById(`bl-item-${id}`).style.opacity = '0.4';
+}
+function blDragOver(e) {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = 'var(--warn)';
+}
+function blDragLeave(e) {
+  e.currentTarget.style.borderColor = 'rgba(245,158,11,.25)';
+}
+async function blDrop(e, targetId) {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = 'rgba(245,158,11,.25)';
+  if (!_blDrag || _blDrag === targetId) {
+    if (_blDrag) document.getElementById(`bl-item-${_blDrag}`).style.opacity = '1';
+    _blDrag = null; return;
+  }
+  // reordena localmente
+  const fromIdx = _backlog.findIndex(x => x.id === _blDrag);
+  const toIdx   = _backlog.findIndex(x => x.id === targetId);
+  const item    = _backlog.splice(fromIdx, 1)[0];
+  _backlog.splice(toIdx, 0, item);
+  _blDrag = null;
+  renderBacklog();
+  // persiste ordem no servidor
+  await fetch('/api/backlog/reorder', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(_backlog.map(x => x.id)),
+  });
+}
+
+carregarBacklog();
+
+// ── Histórico ─────────────────────────────────────────────────────────────────
+function toggle(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+async function deletarRegistro(id) {
+  if (!confirm('Excluir este registro?')) return;
+  const res = await fetch(`/api/historico/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (data.ok) location.reload();
+}
+async function editarRegistro(id) {
+  const res  = await fetch(`/api/historico/${id}`);
+  const data = await res.json();
+  if (data.erro) { alert('Não encontrado.'); return; }
+  sessionStorage.setItem('editar_registro', JSON.stringify(data));
+  window.location.href = '/';
+}
+</script>
+{% endblock %}

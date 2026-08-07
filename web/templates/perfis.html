@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %} — Perfis{% endblock %}
+
+{% block head %}
+<style>
+  .search-bar { position:relative; margin-bottom:20px; }
+  .search-bar input { padding-left:36px; }
+  .search-bar::before { content:'🔍'; position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:.8rem; pointer-events:none; }
+  .dev-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:12px; }
+  .dev-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:16px; cursor:pointer; transition:border-color .15s;
+  }
+  .dev-card:hover { border-color:var(--accent); }
+  .dev-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .dev-avatar { width:38px; height:38px; border-radius:50%; background:var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;color:var(--accent);flex-shrink:0; }
+  .dev-id { font-weight:600; font-size:.85rem; }
+  .dev-role { font-size:.7rem; color:var(--muted); }
+  .dev-section { font-size:.65rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:6px 0 3px; }
+  .dev-pills { display:flex;flex-wrap:wrap;gap:3px; }
+  .dev-pill { font-size:.62rem; background:var(--bg); border:1px solid var(--border); padding:2px 5px; border-radius:4px; color:var(--muted); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">Perfis de desenvolvedores</div>
+<div class="page-sub">{{ devs|length }} desenvolvedores na base.</div>
+
+<div class="search-bar">
+  <input type="text" id="busca" placeholder="Buscar por ID, papel ou tecnologia…" oninput="filtrar()">
+</div>
+
+<div id="stats" class="text-muted" style="margin-bottom:14px"></div>
+
+<div class="dev-grid" id="grid"></div>
+
+<script>
+const devs = {{ devs|tojson }};
+let visiveis = devs.length;
+
+function renderCard(d) {
+  const initials = d.id.replace('Dev','D');
+  const domPills = (d.dominio||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
+  const ecoPills = (d.ecossistema||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
+  const lingPills = (d.linguagens||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
+  const metPills = (d.metodologia||[]).slice(0,3).map(t=>`<span class="dev-pill">${t}</span>`).join('');
+
+  return `<div class="dev-card">
+    <div class="dev-header">
+      <div class="dev-avatar">${initials}</div>
+      <div>
+        <div class="dev-id">${d.id}</div>
+        <div class="dev-role">${d.role}</div>
+      </div>
+    </div>
+    ${domPills  ? `<div class="dev-section">Domínio</div><div class="dev-pills">${domPills}</div>` : ''}
+    ${ecoPills  ? `<div class="dev-section">Ecossistema</div><div class="dev-pills">${ecoPills}</div>` : ''}
+    ${lingPills ? `<div class="dev-section">Linguagens</div><div class="dev-pills">${lingPills}</div>` : ''}
+    ${metPills  ? `<div class="dev-section">Metodologia</div><div class="dev-pills">${metPills}</div>` : ''}
+  </div>`;
+}
+
+function filtrar() {
+  const q = document.getElementById('busca').value.toLowerCase().trim();
+  const filtered = q
+    ? devs.filter(d => {
+        const haystack = [d.id, d.role,
+          ...(d.dominio||[]), ...(d.ecossistema||[]),
+          ...(d.linguagens||[]), ...(d.metodologia||[])
+        ].join(' ').toLowerCase();
+        return haystack.includes(q);
+      })
+    : devs;
+
+  document.getElementById('grid').innerHTML = filtered.map(renderCard).join('');
+  document.getElementById('stats').textContent =
+    q ? `${filtered.length} resultado${filtered.length !== 1 ? 's' : ''} para "${q}"` : '';
+}
+
+// render inicial
+document.getElementById('grid').innerHTML = devs.slice(0, 200).map(renderCard).join('');
+if (devs.length > 200) {
+  document.getElementById('stats').textContent = `Exibindo 200 de ${devs.length}. Use a busca para filtrar.`;
+}
+</script>
+{% endblock %}
