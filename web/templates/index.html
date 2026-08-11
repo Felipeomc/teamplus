@@ -41,6 +41,49 @@
   .mem-role   { font-size: .68rem; color: var(--muted); }
   .mem-techs  { font-size: .65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .drag-handle { color: var(--muted); font-size: .9rem; cursor: grab; }
+  .mem-details-btn { margin-top:4px; padding:0; border:0; background:none; color:var(--accent);
+    font:inherit; font-size:.65rem; cursor:pointer; }
+  .mem-details-btn:hover { color:var(--accent2); text-decoration:underline; }
+
+  /* ── Member contribution drawer ── */
+  .member-drawer-backdrop { position:fixed; inset:0; z-index:1000; display:none;
+    background:rgba(5,7,12,.68); backdrop-filter:blur(2px); }
+  .member-drawer-backdrop.open { display:block; }
+  .member-drawer { position:absolute; top:0; right:0; width:min(460px,100%); height:100%;
+    overflow-y:auto; padding:24px; background:var(--surface); border-left:1px solid var(--border);
+    box-shadow:-18px 0 50px rgba(0,0,0,.35); }
+  .member-drawer-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+    padding-bottom:18px; border-bottom:1px solid var(--border); }
+  .member-drawer-title { font-size:1.05rem; font-weight:700; }
+  .member-drawer-sub { margin-top:4px; font-size:.74rem; color:var(--muted); }
+  .member-drawer-close { width:34px; height:34px; flex:0 0 auto; border:1px solid var(--border);
+    border-radius:8px; background:var(--bg); color:var(--text); font-size:1.15rem; cursor:pointer; }
+  .member-drawer-section { padding:18px 0; border-bottom:1px solid var(--border); }
+  .member-drawer-section:last-child { border-bottom:0; }
+  .member-drawer-label { margin-bottom:10px; color:var(--muted); font-size:.66rem;
+    font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .member-summary { padding:12px 14px; border:1px solid rgba(79,142,247,.32);
+    border-radius:9px; background:rgba(79,142,247,.08); font-size:.78rem; line-height:1.55; }
+  .member-impact { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .member-impact-card { padding:12px; border:1px solid var(--border); border-radius:9px; background:var(--bg); }
+  .member-impact-value { color:var(--accent2); font-size:1.15rem; font-weight:700; }
+  .member-impact-text { margin-top:3px; color:var(--muted); font-size:.68rem; line-height:1.35; }
+  .member-chip-row { display:flex; flex-wrap:wrap; gap:6px; }
+  .member-chip { padding:4px 8px; border:1px solid var(--border); border-radius:999px;
+    background:var(--bg); color:var(--text); font-size:.68rem; }
+  .member-chip.must { border-color:rgba(248,113,113,.45); }
+  .member-chip.should { border-color:rgba(245,158,11,.45); }
+  .member-chip.could { border-color:rgba(52,211,153,.4); }
+  .member-empty { color:var(--muted); font-size:.72rem; line-height:1.5; }
+  .member-skill-group + .member-skill-group { margin-top:12px; }
+  .member-skill-title { margin-bottom:6px; color:var(--muted); font-size:.68rem; }
+  .member-collab { display:flex; justify-content:space-between; gap:14px; padding:8px 0;
+    border-bottom:1px solid var(--border); font-size:.72rem; }
+  .member-collab:last-child { border-bottom:0; }
+  @media (max-width:640px) {
+    .member-drawer { padding:18px; }
+    .member-impact { grid-template-columns:1fr; }
+  }
 
   /* ── Fitness bar ── */
   .fit-row { display: flex; align-items: center; gap: 8px; margin: 12px 0 8px; }
@@ -167,6 +210,14 @@
   </div>
 
 </div><!-- end two-col -->
+
+<div class="member-drawer-backdrop" id="member-drawer-backdrop"
+     onclick="if(event.target===this) fecharDetalhesMembro()">
+  <aside class="member-drawer" role="dialog" aria-modal="true"
+         aria-labelledby="member-drawer-title" tabindex="-1">
+    <div id="member-drawer-content"></div>
+  </aside>
+</div>
 
 <script>
 
@@ -616,7 +667,9 @@ function toggleFixar(userId, e) {
 }
 
 function memHtml(m, si, mi) {
-  const techs = [...(m.dominio||[]), ...(m.ecossistema||[]), ...(m.linguagens||[])].slice(0,5).join(', ');
+  const todasTechs = [...(m.dominio||[]), ...(m.ecossistema||[]), ...(m.linguagens||[])];
+  const techs = todasTechs.slice(0,5).join(', ');
+  const restantes = Math.max(0, todasTechs.length - 5);
   const isPinned = _fixados.has(m.user_id);
   return `
     <div class="mem-item ${isPinned ? 'pinned' : ''}" draggable="true" id="mem-${si}-${mi}"
@@ -628,7 +681,12 @@ function memHtml(m, si, mi) {
       <div class="mem-info">
         <div class="mem-name">${m.id}</div>
         <div class="mem-role">${m.role}</div>
-        <div class="mem-techs">${techs}</div>
+        <div class="mem-techs">${techs}${restantes ? ` · +${restantes}` : ''}</div>
+        <button class="mem-details-btn" type="button" draggable="false"
+          onpointerdown="event.stopPropagation()"
+          onclick="event.stopPropagation();abrirDetalhesMembro(${si},${mi})">
+          Ver contribuição
+        </button>
         <button onclick="toggleFixar(${m.user_id},event)"
         style="position:absolute;top:6px;right:6px;background:none;border:none;
         cursor:pointer;font-size:.85rem;opacity:${isPinned ? 1 : 0.3};
@@ -638,6 +696,157 @@ function memHtml(m, si, mi) {
       </div>
     </div>`;
 }
+
+function _normalizarTech(valor) {
+  return String(valor || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
+}
+
+function _escapeHtml(valor) {
+  return String(valor ?? '').replace(/[&<>'"]/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;'
+  })[c]);
+}
+
+function _competenciasMembro(membro) {
+  return {
+    dominio: membro.dominio || [],
+    ecossistema: membro.ecossistema || [],
+    linguagens: membro.linguagens || [],
+  };
+}
+
+function _analiseContribuicao(si, mi) {
+  const sugestao = _sugestoes[si];
+  const membro = sugestao.membros[mi];
+  const dims = ['dominio', 'ecossistema', 'linguagens'];
+  const prioridades = ['must', 'should', 'could'];
+  const nomesDim = { dominio:'Domínio', ecossistema:'Ecossistema', linguagens:'Linguagens' };
+  const competencias = _competenciasMembro(membro);
+  const correspondencias = [];
+  const exclusivas = [];
+  let perdas = 0;
+  let redundanciaPerdida = 0;
+
+  dims.forEach(dim => {
+    const skillsMembro = new Set(competencias[dim].map(_normalizarTech));
+    prioridades.forEach(prio => {
+      const requisitos = _projetoAlvo?.[dim]?.[prio] || [];
+      requisitos.forEach(req => {
+        const chave = _normalizarTech(req);
+        if (!skillsMembro.has(chave)) return;
+        const cobridores = sugestao.membros.filter(outro =>
+          (_competenciasMembro(outro)[dim] || []).some(t => _normalizarTech(t) === chave)
+        );
+        const item = { tecnologia:req, dim, dimensao:nomesDim[dim], prioridade:prio, cobridores:cobridores.length };
+        correspondencias.push(item);
+        if (cobridores.length === 1) {
+          exclusivas.push(item);
+          perdas++;
+        } else if (cobridores.length === 2) {
+          redundanciaPerdida++;
+        }
+      });
+    });
+  });
+
+  return { sugestao, membro, competencias, correspondencias, exclusivas, perdas, redundanciaPerdida };
+}
+
+function _chipsRequisitos(itens) {
+  if (!itens.length) return '<div class="member-empty">Nenhuma correspondência direta com os requisitos tecnológicos informados.</div>';
+  return `<div class="member-chip-row">${itens.map(i =>
+    `<span class="member-chip ${i.prioridade}" title="${_escapeHtml(i.dimensao)}">${_escapeHtml(i.tecnologia)} · ${i.prioridade.toUpperCase()}</span>`
+  ).join('')}</div>`;
+}
+
+function _grupoCompetencias(titulo, itens) {
+  return `<div class="member-skill-group">
+    <div class="member-skill-title">${titulo}</div>
+    ${itens.length ? `<div class="member-chip-row">${itens.map(t => `<span class="member-chip">${_escapeHtml(t)}</span>`).join('')}</div>`
+      : '<div class="member-empty">Não informado</div>'}
+  </div>`;
+}
+
+async function abrirDetalhesMembro(si, mi) {
+  const a = _analiseContribuicao(si, mi);
+  const drawer = document.getElementById('member-drawer-backdrop');
+  const content = document.getElementById('member-drawer-content');
+  const resumo = a.correspondencias.length
+    ? `${_escapeHtml(a.membro.id)} contribui diretamente para ${a.correspondencias.length} requisito${a.correspondencias.length === 1 ? '' : 's'} tecnológico${a.correspondencias.length === 1 ? '' : 's'} deste projeto.`
+    : `A participação de ${_escapeHtml(a.membro.id)} decorre da avaliação conjunta da equipe; não há correspondência direta com os requisitos tecnológicos cadastrados.`;
+
+  content.innerHTML = `
+    <div class="member-drawer-head">
+      <div>
+        <div class="member-drawer-title" id="member-drawer-title">Contribuição de ${_escapeHtml(a.membro.id)}</div>
+        <div class="member-drawer-sub">${_escapeHtml(a.membro.role)} · Sugestão ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
+      </div>
+      <button class="member-drawer-close" type="button" onclick="fecharDetalhesMembro()" aria-label="Fechar">×</button>
+    </div>
+    <section class="member-drawer-section">
+      <div class="member-drawer-label">Por que ele contribui</div>
+      <div class="member-summary">${resumo}</div>
+      <div style="margin-top:12px">${_chipsRequisitos(a.correspondencias)}</div>
+    </section>
+    <section class="member-drawer-section">
+      <div class="member-drawer-label">O que muda sem ele</div>
+      <div class="member-impact">
+        <div class="member-impact-card">
+          <div class="member-impact-value">${a.perdas}</div>
+          <div class="member-impact-text">requisito${a.perdas === 1 ? '' : 's'} deixaria${a.perdas === 1 ? '' : 'm'} de ser coberto${a.perdas === 1 ? '' : 's'}</div>
+        </div>
+        <div class="member-impact-card">
+          <div class="member-impact-value">${a.redundanciaPerdida}</div>
+          <div class="member-impact-text">requisito${a.redundanciaPerdida === 1 ? '' : 's'} perderia${a.redundanciaPerdida === 1 ? '' : 'm'} redundância na equipe</div>
+        </div>
+      </div>
+      ${a.exclusivas.length ? `<div style="margin-top:12px">${_chipsRequisitos(a.exclusivas)}</div>` : ''}
+    </section>
+    <section class="member-drawer-section">
+      <div class="member-drawer-label">Colaboração nesta equipe</div>
+      <div id="member-collab-list" class="member-empty">Consultando histórico de colaboração…</div>
+    </section>
+    <section class="member-drawer-section">
+      <div class="member-drawer-label">Perfil completo</div>
+      ${_grupoCompetencias('Domínio', a.competencias.dominio)}
+      ${_grupoCompetencias('Ecossistema', a.competencias.ecossistema)}
+      ${_grupoCompetencias('Linguagens', a.competencias.linguagens)}
+    </section>`;
+
+  drawer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  drawer.querySelector('.member-drawer').focus();
+
+  const collab = document.getElementById('member-collab-list');
+  try {
+    const ids = a.sugestao.membros.map(m => m.id);
+    const res = await fetch('/api/grafo/equipe', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({team_ids:ids})
+    });
+    const data = await res.json();
+    const relacoes = (data.pares || []).filter(p => p.source === a.membro.id || p.target === a.membro.id);
+    collab.className = '';
+    collab.innerHTML = relacoes.length ? relacoes.map(p => {
+      const colega = p.source === a.membro.id ? p.target : p.source;
+      const nivel = !p.has_edge ? 'Sem histórico' : p.weight >= .7 ? 'Alta' : p.weight >= .4 ? 'Média' : 'Baixa';
+      return `<div class="member-collab"><span>${_escapeHtml(colega)}</span><span>${nivel}${p.has_edge ? ` · ${p.N} proj.` : ''}</span></div>`;
+    }).join('') : '<div class="member-empty">Não há relações de colaboração disponíveis para este membro.</div>';
+  } catch (_) {
+    collab.className = 'member-empty';
+    collab.textContent = 'Não foi possível consultar o histórico de colaboração agora.';
+  }
+}
+
+function fecharDetalhesMembro() {
+  document.getElementById('member-drawer-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('member-drawer-backdrop')?.classList.contains('open')) {
+    fecharDetalhesMembro();
+  }
+});
 
 function fitLabel(f) {
   return f>=.8?'VH':f>=.6?'H':f>=.4?'M':f>=.2?'L':'VL';
@@ -1324,18 +1533,18 @@ function _desenharRadar(svgId, axes) {
     h += `<text x="${lxAdj}" y="${lyAdj - 2}" text-anchor="${anchor}"
 
     
-      font-size="18" font-weight="700" fill="var(--text)" font-family="inherit">
+      font-size="12" font-weight="600" fill="var(--text)" font-family="inherit">
       ${a.label}</text>`;
 
-    h += `<text x="${lxAdj}" y="${lyAdj + 16}" text-anchor="${anchor}"
-      font-size="18" fill="var(--text)" font-family="inherit">
+    h += `<text x="${lxAdj}" y="${lyAdj + 12}" text-anchor="${anchor}"
+      font-size="11" fill="var(--text)" font-family="inherit">
       ${a.sub}</text>`;
 
     if (a.detail) {
       const lines = a.detail.split('\n');
       lines.forEach((ln, li) => {
-        h += `<text x="${lxAdj}" y="${lyAdj + 32 + li * 14}" text-anchor="${anchor}"
-          font-size="18" fill="var(--text)" font-family="inherit">
+        h += `<text x="${lxAdj}" y="${lyAdj + 25 + li * 12}" text-anchor="${anchor}"
+          font-size="10" fill="var(--text)" font-family="inherit">
           ${ln}</text>`;
       });
     }
@@ -1347,7 +1556,7 @@ function _desenharRadar(svgId, axes) {
     const lx = 16 + i * 36;
     h += `<line x1="${lx}" y1="225" x2="${lx+14}" y2="225"
       stroke="${cor}" stroke-width="1.8"/>`;
-    h += `<text x="${lx+17}" y="229" font-size="18" fill="var(--text)"
+    h += `<text x="${lx+17}" y="229" font-size="9" fill="var(--text)"
       font-family="inherit">${lb}</text>`;
   });
 
