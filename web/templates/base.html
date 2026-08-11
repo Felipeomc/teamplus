@@ -181,6 +181,11 @@
     <a href="/grafo" class="nav-item {% if request.path == '/grafo' %}active{% endif %}">
       <span class="nav-icon">🕸</span> Grafo
     </a>
+    <form method="post" action="/logout" style="margin-top:20px">
+      <button type="submit" class="nav-item" style="width:100%;border:0;background:transparent;text-align:left;cursor:pointer">
+        <span class="nav-icon">↪</span> Sair
+      </button>
+    </form>
   </nav>
 </aside>
 

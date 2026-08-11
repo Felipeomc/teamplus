@@ -1,8 +1,8 @@
 # web/app.py  — TeamPlus Flask App v2
-import sys, os, json, uuid
+import sys, os, json, uuid, secrets, hmac
 from pathlib import Path
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
 
 from dotenv import load_dotenv
@@ -35,6 +35,131 @@ from Algorithms.GA.engine import run_ga_com_config
 from Pipeline.evaluate_teams_sur import avaliar_equipe_surrogate as avaliar_equipe
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("TEAMPLUS_SESSION_SECRET") or secrets.token_hex(32)
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=os.environ.get("FLASK_ENV") == "production"
+    or os.environ.get("RENDER") == "true",
+    PERMANENT_SESSION_LIFETIME=8 * 60 * 60,
+)
+
+ADMIN_USERNAME = os.environ.get("TEAMPLUS_ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.environ.get("TEAMPLUS_ADMIN_PASSWORD", "admin")
+
+
+@app.before_request
+def exigir_login():
+    if request.endpoint in {"login", "static"}:
+        return None
+    if session.get("autenticado"):
+        return None
+    if request.path.startswith("/api/") or request.path == "/sugerir":
+        return jsonify({"erro": "Sessão expirada. Entre novamente."}), 401
+    return redirect(url_for("login", next=request.path))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    erro = None
+    if request.method == "POST":
+        usuario = request.form.get("usuario", "")
+        senha = request.form.get("senha", "")
+        usuario_ok = hmac.compare_digest(usuario, ADMIN_USERNAME)
+        senha_ok = hmac.compare_digest(senha, ADMIN_PASSWORD)
+        if usuario_ok and senha_ok:
+            session.clear()
+            session["autenticado"] = True
+            session["usuario"] = ADMIN_USERNAME
+            session.permanent = True
+            destino = request.args.get("next", "")
+            if not destino.startswith("/") or destino.startswith("//"):
+                destino = url_for("index")
+            return redirect(destino)
+        erro = "Usuário ou senha inválidos."
+    return render_template("login.html", erro=erro)
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+MIN_TEAM_SIZE = 2
+MAX_TEAM_SIZE = 12
+
+
+def _validar_team_size(valor):
+    """Converte e valida o tamanho antes de acionar qualquer processamento."""
+    try:
+        tamanho = int(valor)
+    except (TypeError, ValueError):
+        return None, "Informe um tamanho de equipe válido."
+
+    if not MIN_TEAM_SIZE <= tamanho <= MAX_TEAM_SIZE:
+        return None, (
+            f"O tamanho da equipe deve estar entre {MIN_TEAM_SIZE} e "
+            f"{MAX_TEAM_SIZE} integrantes."
+        )
+    return tamanho, None
+
+
+LINGUAGENS_CONHECIDAS = {
+    "bash", "c", "c#", "c++", "css", "dart", "go", "html", "java",
+    "javascript", "kotlin", "lua", "php", "powershell", "python", "r",
+    "ruby", "rust", "scala", "shell", "sql", "swift", "typescript",
+}
+
+DOMINIOS_CONHECIDOS = {
+    "artificial intelligence", "bci", "blockchain", "cloud", "desktop client",
+    "desktop standalone", "digital tv", "e-commerce", "embedded systems",
+    "extended reality", "game", "hardware", "iot", "mobile", "scada", "web",
+    "xr", "ia",
+}
+
+
+def _normalizar_taxonomia(projeto):
+    """Realoca linguagens e domínios retornados pela IA na dimensão correta."""
+    normalizado = {}
+    for dimensao in ("dominio", "ecossistema", "linguagens"):
+        origem = projeto.get(dimensao, {}) if isinstance(projeto, dict) else {}
+        normalizado[dimensao] = {}
+        for prioridade in ("must", "should", "could"):
+            vistos = set()
+            itens = []
+            for valor in origem.get(prioridade, []) or []:
+                texto = str(valor).strip()
+                chave = texto.casefold()
+                if texto and chave not in vistos:
+                    vistos.add(chave)
+                    itens.append(texto)
+            normalizado[dimensao][prioridade] = itens
+
+    for prioridade in ("must", "should", "could"):
+        for origem in ("dominio", "ecossistema"):
+            manter = []
+            for item in normalizado[origem][prioridade]:
+                if item.casefold() in LINGUAGENS_CONHECIDAS:
+                    if item.casefold() not in {
+                        x.casefold() for x in normalizado["linguagens"][prioridade]
+                    }:
+                        normalizado["linguagens"][prioridade].append(item)
+                else:
+                    manter.append(item)
+            normalizado[origem][prioridade] = manter
+
+        for origem in ("ecossistema", "linguagens"):
+            manter = []
+            for item in normalizado[origem][prioridade]:
+                if item.casefold() in DOMINIOS_CONHECIDOS:
+                    if item.casefold() not in {
+                        x.casefold() for x in normalizado["dominio"][prioridade]
+                    }:
+                        normalizado["dominio"][prioridade].append(item)
+                else:
+                    manter.append(item)
+            normalizado[origem][prioridade] = manter
+    return normalizado
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def _load_db():
@@ -120,7 +245,9 @@ def sugerir():
     if not tem_must:
         return jsonify({"erro": "Adicione ao menos uma tecnologia MUST e pressione Enter."}), 400
 
-    team_size = int(data.get("team_size", 4))
+    team_size, erro_team_size = _validar_team_size(data.get("team_size", 4))
+    if erro_team_size:
+        return jsonify({"erro": erro_team_size}), 400
     pop_size  = 150
     geracoes  = 200
     nome_proj = data.get("nome_projeto", "Projeto sem título")
@@ -153,10 +280,12 @@ def sugerir():
             log_eval             = False,
             fixed_devs           = fixed_devs if fixed_devs else None,
         )
-    except Exception as e:
+    except Exception:
         import traceback
         print("[ERRO GA]", traceback.format_exc())
-        return jsonify({"erro": f"Erro no GA: {str(e)}"}), 500
+        return jsonify({
+            "erro": "Não foi possível montar as equipes. Tente novamente em instantes."
+        }), 500
 
     devs = _load_db()
     sugestoes = []
@@ -274,7 +403,9 @@ def sugerir_fila():
         "linguagens":  data.get("linguagens",  {"must": [], "should": [], "could": []}),
     }
 
-    team_size     = int(data.get("team_size", 4))
+    team_size, erro_team_size = _validar_team_size(data.get("team_size", 4))
+    if erro_team_size:
+        return jsonify({"erro": erro_team_size}), 400
     nome_proj     = data.get("nome_projeto", "Projeto sem título")
     excluded_devs = [int(x) for x in data.get("excluded_devs", [])]
     fixed_devs    = [int(x) for x in data.get("fixed_devs", [])]
@@ -299,10 +430,12 @@ def sugerir_fila():
             fixed_devs           = fixed_devs if fixed_devs else None,
             excluded_devs        = excluded_devs if excluded_devs else None,
         )
-    except Exception as e:
+    except Exception:
         import traceback
         print("[ERRO GA FILA]", traceback.format_exc())
-        return jsonify({"erro": f"Erro no GA: {str(e)}"}), 500
+        return jsonify({
+            "erro": "Não foi possível montar as equipes deste projeto. Tente novamente."
+        }), 500
 
     devs      = _load_db()
     sugestoes = []
@@ -332,12 +465,15 @@ def api_backlog_get():
 @app.route("/api/backlog", methods=["POST"])
 def api_backlog_add():
     data = request.get_json(silent=True) or {}
+    team_size, erro_team_size = _validar_team_size(data.get("team_size", 4))
+    if erro_team_size:
+        return jsonify({"erro": erro_team_size}), 400
     bl   = _read_backlog()
     novo = {
         "id":           str(uuid.uuid4())[:8],
         "nome_projeto": data.get("nome_projeto", "Projeto sem título"),
         "projeto_alvo": data.get("projeto_alvo", {}),
-        "team_size":    int(data.get("team_size", 4)),
+        "team_size":    team_size,
         "criado_em":    datetime.now().strftime("%d/%m/%Y %H:%M"),
     }
     bl.append(novo)
@@ -452,14 +588,20 @@ def api_extrair_projeto():
         raw  = msg.content[0].text.strip()
         # Remove possíveis backticks se o modelo os incluir
         raw  = raw.replace("```json", "").replace("```", "").strip()
-        proj = json.loads(raw)
+        proj = _normalizar_taxonomia(json.loads(raw))
         return jsonify(proj)
-    except json.JSONDecodeError as e:
-        return jsonify({"erro": f"IA retornou formato inválido: {e}"}), 500
-    except Exception as e:
+    except json.JSONDecodeError:
+        import traceback
+        print("[ERRO EXTRAIR JSON]", traceback.format_exc())
+        return jsonify({
+            "erro": "Não foi possível interpretar as tecnologias extraídas. Tente novamente."
+        }), 500
+    except Exception:
         import traceback
         print("[ERRO EXTRAIR]", traceback.format_exc())
-        return jsonify({"erro": str(e)}), 500
+        return jsonify({
+            "erro": "Não foi possível extrair as tecnologias agora. Tente novamente."
+        }), 500
 
 @app.route("/api/historico/<reg_id>", methods=["DELETE"])
 def api_deletar(reg_id):
@@ -678,12 +820,13 @@ def api_explicar():
             messages   = [{"role": "user", "content": prompt}]
         )
         return jsonify({"explicacao": msg.content[0].text.strip()})
-    except Exception as e:
+    except Exception:
         import traceback
         print("[ERRO EXPLICAR]", traceback.format_exc())
-        return jsonify({"erro": str(e)}), 500
+        return jsonify({
+            "erro": "Não foi possível gerar a explicação agora. Tente novamente."
+        }), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
-

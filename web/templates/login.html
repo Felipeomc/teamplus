@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamPlus — Acesso</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: #0d0f15; color: #eef2ff;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+    }
+    .login-card {
+      width: min(420px, calc(100% - 32px)); padding: 36px;
+      background: #181b25; border: 1px solid #2a3040; border-radius: 16px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+    }
+    h1 { margin: 0 0 6px; font-size: 1.65rem; }
+    .brand { color: #42e8bd; }
+    p { margin: 0 0 26px; color: #94a3b8; line-height: 1.5; }
+    label { display: block; margin: 14px 0 7px; color: #cbd5e1; font-size: .85rem; }
+    input {
+      width: 100%; padding: 12px 14px; border-radius: 9px;
+      border: 1px solid #343b4e; background: #0f1118; color: #fff; font-size: 1rem;
+    }
+    input:focus { outline: 2px solid #3b82f6; outline-offset: 1px; }
+    button {
+      width: 100%; margin-top: 22px; padding: 12px; border: 0; border-radius: 9px;
+      background: #42e8bd; color: #07130f; font-weight: 700; cursor: pointer;
+    }
+    .erro {
+      padding: 10px 12px; margin-bottom: 14px; border: 1px solid #ef4444;
+      border-radius: 8px; color: #fca5a5; background: rgba(239,68,68,.08);
+    }
+    .demo { margin-top: 18px; font-size: .75rem; text-align: center; color: #64748b; }
+  </style>
+</head>
+<body>
+  <main class="login-card">
+    <h1><span class="brand">Team</span>Plus</h1>
+    <p>Entre para acessar a formação inteligente de equipes.</p>
+    {% if erro %}<div class="erro" role="alert">{{ erro }}</div>{% endif %}
+    <form method="post" autocomplete="on">
+      <label for="usuario">Usuário</label>
+      <input id="usuario" name="usuario" type="text" autocomplete="username" required autofocus>
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="demo">Acesso restrito — ambiente de demonstração corporativa</div>
+  </main>
+</body>
+</html>

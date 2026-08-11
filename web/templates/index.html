@@ -98,10 +98,14 @@
   <div>
     <div class="card">
       <div class="card-title">Dados do projeto</div>
-      <label>Nome</label>
+      <label for="nome_projeto">Nome</label>
       <input type="text" id="nome_projeto" placeholder="Ex: App mobile de vendas" style="margin-bottom:14px">
-      <label>Tamanho da equipe</label>
-      <input type="number" id="team_size" value="4" min="2" max="12" style="margin-bottom:14px">
+      <label for="team_size">Tamanho da equipe</label>
+      <input type="number" id="team_size" value="4" min="2" max="12"
+             aria-describedby="team-size-help" style="margin-bottom:4px">
+      <div id="team-size-help" class="text-muted" style="font-size:.72rem;margin-bottom:14px">
+        Informe entre 2 e 12 integrantes.
+      </div>
       <input type="hidden" id="pop_size" value="150">
       <input type="hidden" id="geracoes" value="200">
     </div>
@@ -111,7 +115,7 @@
       <p class="text-muted" style="margin-bottom:10px">
         Escreva em linguagem natural. A IA extrairá as tecnologias automaticamente.
       </p>
-      <textarea id="descricao-livre" rows="4"
+      <textarea id="descricao-livre" rows="4" aria-label="Descrição do projeto"
       placeholder=""
         onfocus="this.style.borderColor='var(--accent)'"
         onblur="this.style.borderColor='var(--border)'"></textarea>
@@ -125,14 +129,17 @@
     <div class="card mt-4">
       <div class="card-title">Tecnologias requeridas</div>
       <p class="text-muted" style="margin-bottom:12px">Digite e pressione <kbd style="background:var(--border);padding:1px 5px;border-radius:3px;font-size:.7rem">Enter</kbd></p>
+      <div id="taxonomia-feedback" role="status" style="display:none;margin-bottom:12px;padding:9px 11px;border:1px solid var(--warn);border-radius:7px;color:var(--warn);font-size:.75rem"></div>
 
       {% for dim_key, dim_label in [('dom','Domínio'),('eco','Ecossistema'),('ling','Linguagens')] %}
       <div style="margin-bottom:16px">
         <div style="font-size:.8rem;font-weight:600;margin-bottom:6px">{{ dim_label }}</div>
         {% for prio, prio_label in [('must','MUST ●'),('should','SHOULD ●'),('could','COULD ●')] %}
-        <label style="margin-bottom:3px">{{ prio_label }}</label>
+        <label for="tech-{{dim_key}}-{{prio}}" style="margin-bottom:3px">{{ prio_label }}</label>
         <div class="tag-input-wrap" id="wrap-{{dim_key}}-{{prio}}" style="margin-bottom:6px">
-          <input type="text" placeholder="" onkeydown="addTag(event,'{{dim_key}}','{{prio}}')">
+          <input type="text" id="tech-{{dim_key}}-{{prio}}"
+                 aria-label="{{ dim_label }} — {{ prio_label }}"
+                 autocomplete="off" onkeydown="addTag(event,'{{dim_key}}','{{prio}}')">
         </div>
         {% endfor %}
       </div>
@@ -172,6 +179,41 @@ const tags = {
   eco:  { must:[], should:[], could:[] },
   ling: { must:[], should:[], could:[] },
 };
+const tecnologiasNaoContabilizadas = new Set();
+const linguagensConhecidas = new Set([
+  'bash','c','c#','c++','css','dart','go','html','java','javascript','kotlin',
+  'lua','php','powershell','python','r','ruby','rust','scala','shell','sql',
+  'swift','typescript'
+]);
+const dominiosConhecidos = new Set([
+  'artificial intelligence','ia','bci','blockchain','cloud','desktop client',
+  'desktop standalone','digital tv','e-commerce','embedded systems',
+  'extended reality','game','hardware','iot','mobile','scada','web','xr'
+]);
+const nomesDimensao = {dom:'Domínio', eco:'Ecossistema', ling:'Linguagens'};
+
+function chaveTecnologia(dim, prio, val) {
+  return `${dim}|${prio}|${val}`;
+}
+
+function dimensaoEsperada(val) {
+  if (linguagensConhecidas.has(val)) return 'ling';
+  if (dominiosConhecidos.has(val)) return 'dom';
+  return null;
+}
+
+function atualizarAvisoTaxonomia() {
+  const aviso = document.getElementById('taxonomia-feedback');
+  if (!aviso) return;
+  const itens = Array.from(tecnologiasNaoContabilizadas).map(chave => chave.split('|')[2]);
+  if (!itens.length) {
+    aviso.style.display = 'none';
+    aviso.textContent = '';
+    return;
+  }
+  aviso.style.display = 'block';
+  aviso.textContent = `${itens.join(', ')} permanece(m) na dimensão escolhida, mas não será(ão) contabilizada(s) no cálculo.`;
+}
 document.addEventListener('DOMContentLoaded', initTagDropZones);
 
 function addTag(e, dim, prio) {
@@ -179,13 +221,35 @@ function addTag(e, dim, prio) {
   e.preventDefault();
   const val = e.target.value.trim().toLowerCase();
   if (!val || tags[dim][prio].includes(val)) { e.target.value=''; return; }
-  tags[dim][prio].push(val);
-  renderTags(dim, prio);
+  const esperada = dimensaoEsperada(val);
+  if (esperada && esperada !== dim) {
+    const mover = window.confirm(
+      `“${val}” é normalmente classificada em ${nomesDimensao[esperada]}, ` +
+      `não em ${nomesDimensao[dim]}.\n\nDeseja movê-la para o campo correto?\n\n` +
+      `OK: mover e contabilizar.\nCancelar: manter aqui sem contabilizar.`
+    );
+    if (mover) {
+      if (!tags[esperada][prio].includes(val)) tags[esperada][prio].push(val);
+      tecnologiasNaoContabilizadas.delete(chaveTecnologia(dim, prio, val));
+      renderTags(esperada, prio);
+    } else {
+      tags[dim][prio].push(val);
+      tecnologiasNaoContabilizadas.add(chaveTecnologia(dim, prio, val));
+      renderTags(dim, prio);
+    }
+  } else {
+    tags[dim][prio].push(val);
+    tecnologiasNaoContabilizadas.delete(chaveTecnologia(dim, prio, val));
+    renderTags(dim, prio);
+  }
+  atualizarAvisoTaxonomia();
   e.target.value = '';
 }
 function removeTag(dim, prio, val) {
   tags[dim][prio] = tags[dim][prio].filter(t => t !== val);
+  tecnologiasNaoContabilizadas.delete(chaveTecnologia(dim, prio, val));
   renderTags(dim, prio);
+  atualizarAvisoTaxonomia();
 }
 function renderTags(dim, prio) {
   const wrap  = document.getElementById(`wrap-${dim}-${prio}`);
@@ -194,8 +258,19 @@ function renderTags(dim, prio) {
   tags[dim][prio].forEach(val => {
     const tag = document.createElement('span');
     tag.className = `tag ${prio==='should'?'should':prio==='could'?'could':''}`;
+    const ignorada = tecnologiasNaoContabilizadas.has(chaveTecnologia(dim, prio, val));
+    if (ignorada) {
+      tag.style.borderColor = 'var(--warn)';
+      tag.style.opacity = '.75';
+      tag.title = 'Mantida por escolha do usuário; não será contabilizada no cálculo.';
+    }
     tag.draggable = true;
-    tag.innerHTML = `${val} <span class="rm" onclick="removeTag('${dim}','${prio}','${val}')">×</span>`;
+    tag.appendChild(document.createTextNode(`${val} `));
+    const remover = document.createElement('span');
+    remover.className = 'rm';
+    remover.textContent = '×';
+    remover.addEventListener('click', () => removeTag(dim, prio, val));
+    tag.appendChild(remover);
 
     tag.addEventListener('dragstart', e => {
       e.dataTransfer.setData('application/json', JSON.stringify({ dim, prio, val }));
@@ -243,6 +318,12 @@ function renderTags(dim, prio) {
   }
 }
 
+function tagsContabilizadas(dim, prio) {
+  return tags[dim][prio].filter(
+    val => !tecnologiasNaoContabilizadas.has(chaveTecnologia(dim, prio, val))
+  );
+}
+
 //incializa os compos para receber tags arrastaveis
 function initTagDropZones() {
   ['dom','eco','ling'].forEach(dim => {
@@ -287,7 +368,13 @@ let _nomeProjeto = '';
 
 async function extrairProjeto() {
   const descricao = document.getElementById('descricao-livre').value.trim();
-  if (!descricao) return;
+  if (!descricao) {
+    const fb = document.getElementById('extrair-feedback');
+    fb.style.color = '#f87171';
+    fb.textContent = 'Descreva o projeto antes de extrair as tecnologias.';
+    document.getElementById('descricao-livre').focus();
+    return;
+  }
 
   const btn = document.getElementById('btn-extrair');
   const fb  = document.getElementById('extrair-feedback');
@@ -333,6 +420,18 @@ async function extrairProjeto() {
 
 // ── Chamar GA ────────────────────────────────────────────────────────────────
 async function rodarGA() {
+  const teamSizeEl = document.getElementById('team_size');
+  const teamSize = Number(teamSizeEl.value);
+  if (!Number.isInteger(teamSize) || teamSize < 2 || teamSize > 12) {
+    teamSizeEl.focus();
+    document.getElementById('resultado-area').innerHTML = `
+      <div class="card" role="alert" style="border-color:#f87171">
+        <div class="card-title" style="color:#f87171">Verifique os dados</div>
+        <p style="color:#f87171;font-size:.85rem">O tamanho da equipe deve estar entre 2 e 12 integrantes.</p>
+      </div>`;
+    return;
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
   const btn = document.getElementById('btn-run');
   btn.disabled = true;
@@ -367,12 +466,12 @@ async function rodarGA() {
 
   const payload = {
     nome_projeto: document.getElementById('nome_projeto').value || 'Projeto sem título',
-    team_size:    parseInt(document.getElementById('team_size').value) || 4,
+    team_size:    teamSize,
     pop_size:     parseInt(document.getElementById('pop_size').value)  || 50,
     geracoes:     parseInt(document.getElementById('geracoes').value)  || 50,
-    dominio:     { must: tags.dom.must,  should: tags.dom.should,  could: tags.dom.could  },
-    ecossistema: { must: tags.eco.must,  should: tags.eco.should,  could: tags.eco.could  },
-    linguagens:  { must: tags.ling.must, should: tags.ling.should, could: tags.ling.could },
+    dominio:     { must: tagsContabilizadas('dom','must'),  should: tagsContabilizadas('dom','should'),  could: tagsContabilizadas('dom','could')  },
+    ecossistema: { must: tagsContabilizadas('eco','must'),  should: tagsContabilizadas('eco','should'),  could: tagsContabilizadas('eco','could')  },
+    linguagens:  { must: tagsContabilizadas('ling','must'), should: tagsContabilizadas('ling','should'), could: tagsContabilizadas('ling','could') },
     fixed_devs:  Array.from(_fixados),
   };
 
@@ -394,7 +493,7 @@ async function rodarGA() {
     renderSugestoes();
   } catch(err) {
     document.getElementById('resultado-area').innerHTML = `
-      <div class="card" style="border-color:#f87171">
+      <div class="card" role="alert" style="border-color:#f87171">
         <div class="card-title" style="color:#f87171">Erro</div>
         <pre style="color:#f87171;font-size:.8rem;white-space:pre-wrap">${err.message}</pre>
       </div>`;
@@ -490,7 +589,7 @@ function mostrarMais() {
   if (_exibidas < total) {
     wrap.innerHTML = `<button class="btn btn-ghost" onclick="mostrarMais()"
       style="padding:10px 32px;font-size:.85rem;margin-top:8px">
-      ＋ Ver mais ${restam} sugestão${restam > 1 ? 'ões' : ''}
+      ＋ Ver mais ${restam} ${restam === 1 ? 'sugestão' : 'sugestões'}
       <span style="color:var(--muted);font-size:.75rem;margin-left:6px">(${_exibidas}/${total})</span>
     </button>`;
   } else {
@@ -542,6 +641,15 @@ function memHtml(m, si, mi) {
 
 function fitLabel(f) {
   return f>=.8?'VH':f>=.6?'H':f>=.4?'M':f>=.2?'L':'VL';
+}
+
+function valorScore(score) {
+  const rotulo = score?.rotulo;
+  const valor = score?.score;
+  if (rotulo == null || rotulo === '' || String(rotulo).toLowerCase() === 'null') {
+    return 'Não informado';
+  }
+  return valor == null ? String(rotulo) : `${rotulo} (${valor})`;
 }
 
 // ── Drag and drop ─────────────────────────────────────────────────────────────
@@ -640,13 +748,15 @@ async function reavaliar(si) {
       if (dimsEl) {
         const dimBadges = ['dominio','ecossistema','linguagens'].map(d => {
           const sc = data.scores[d];
-          const txt = sc ? `${sc.rotulo} (${sc.score})` : '—';
+          const txt = valorScore(sc);
           const short = {dominio:'Dom',ecossistema:'Eco',linguagens:'Ling'}[d];
-          return `<span class="dim-score">${short}: <span>${txt}</span></span>`;
+          const nomes = {dominio:'Domínio',ecossistema:'Ecossistema',linguagens:'Linguagens'};
+          return `<span class="dim-score" title="${nomes[d]}: classificação e pontuação desta dimensão">${short}: <span>${txt}</span></span>`;
         }).join('');
 
-        const acTxt = data.ac_label ? `${data.ac_label} (${data.ac_score})` : '—';
-        const acBadge = `<span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
+        const acValido = data.ac_label && String(data.ac_label).toLowerCase() !== 'null';
+        const acTxt = acValido ? `${data.ac_label} (${data.ac_score})` : 'Não informado';
+        const acBadge = `<span class="dim-score" title="Aptidão Colaborativa: estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
 
         dimsEl.innerHTML = dimBadges + acBadge;
       }
