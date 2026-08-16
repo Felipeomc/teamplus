@@ -581,6 +581,7 @@ function cardSugestao(s, si) {
         <span class="dim-score">Dom: <span>—</span></span>
         <span class="dim-score">Eco: <span>—</span></span>
         <span class="dim-score">Ling: <span>—</span></span>
+        <span class="dim-score" style="border-color:rgba(79,142,247,.35)">AT: <span>calculando…</span></span>
         <span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">calculando…</span></span>
       </div>
       <div class="mem-row" id="mem-row-${si}"
@@ -631,7 +632,8 @@ function renderSugestoes() {
          A nota entre parênteses vai de 0 a 1 e representa a adequação naquela dimensão.<br>
          <strong>VH</strong> Muito alta (0,80–1,00) · <strong>H</strong> Alta (0,60–0,79) ·
          <strong>M</strong> Média (0,40–0,59) · <strong>L</strong> Baixa (0,20–0,39) ·
-         <strong>VL</strong> Muito baixa (0,00–0,19). <strong>AC</strong> é a aptidão colaborativa.
+         <strong>VL</strong> Muito baixa (0,00–0,19). <strong>AT</strong> é a aptidão técnica agregada e
+         <strong>AC</strong> é a aptidão colaborativa.
        </div>
      </details>` +
     `<button class="btn btn-ghost" id="btn-csv" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
@@ -661,6 +663,8 @@ async function _completarMetricasCsv() {
       const data = await res.json();
       if (!res.ok || data.erro) throw new Error(data.erro || 'Falha ao calcular as métricas do CSV.');
       s._scores = data.scores || {};
+      s._at_label = data.at_label || '—';
+      s._at_score = data.at_score ?? null;
       s._ac_label = data.ac_label || '—';
       s._ac_score = data.ac_score ?? null;
     }));
@@ -683,7 +687,8 @@ async function baixarSugestoesCsv() {
     'EcoMust', 'EcoShould', 'EcoCould',
     'LingMust', 'LingShould', 'LingCould',
     'DomScore', 'DomClassificacao', 'EcoScore', 'EcoClassificacao',
-    'LingScore', 'LingClassificacao', 'ACScore', 'ACClassificacao',
+    'LingScore', 'LingClassificacao', 'ATScore', 'ATClassificacao',
+    'ACScore', 'ACClassificacao',
     'DuracaoSegundos', 'GeracoesExecutadas', 'MotivoParada'
   ];
 
@@ -715,6 +720,8 @@ async function baixarSugestoesCsv() {
       s._scores?.ecossistema?.rotulo,
       s._scores?.linguagens?.score,
       s._scores?.linguagens?.rotulo,
+      s._at_score,
+      s._at_label,
       s._ac_score,
       s._ac_label,
       s.duration_sec,
@@ -1051,7 +1058,8 @@ async function reavaliar(si) {
     _sugestoes[si]._scores      = data.scores   || {};
     _sugestoes[si]._ac_label    = data.ac_label || '—';
     _sugestoes[si]._ac_score    = data.ac_score || 0;
-    _sugestoes[si]._at_score    = data.at_score || 0;
+    _sugestoes[si]._at_label    = data.at_label || '—';
+    _sugestoes[si]._at_score    = data.at_score ?? 0;
     _sugestoes[si]._osf_score   = data.osf_score  || 0;
     _sugestoes[si]._slf_score   = data.slf_score || 0;
     _sugestoes[si]._pcs         = data.pcs      || [];
@@ -1082,11 +1090,14 @@ async function reavaliar(si) {
           return `<span class="dim-score" title="${nomes[d]}: classificação e pontuação desta dimensão">${short}: <span>${txt}</span></span>`;
         }).join('');
 
+        const atValido = data.at_label && String(data.at_label).toLowerCase() !== 'null';
+        const atTxt = atValido ? `${data.at_label} (${data.at_score})` : 'Não informado';
+        const atBadge = `<span class="dim-score" title="Aptidão Técnica: síntese agregada de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.35)">AT: <span>${atTxt}</span></span>`;
         const acValido = data.ac_label && String(data.ac_label).toLowerCase() !== 'null';
         const acTxt = acValido ? `${data.ac_label} (${data.ac_score})` : 'Não informado';
         const acBadge = `<span class="dim-score" title="Aptidão Colaborativa: estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
 
-        dimsEl.innerHTML = dimBadges + acBadge;
+        dimsEl.innerHTML = dimBadges + atBadge + acBadge;
       }
     }
   } catch(err) {

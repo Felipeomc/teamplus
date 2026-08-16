@@ -335,6 +335,23 @@ def api_avaliar():
     devs    = _load_db()
     membros = [_dev_info(i, devs) for i in team_ids]
     fitness = round(float(resultado.get("media_AE", 0)), 4)
+    at_score = round(float(resultado.get("AT_cont") or 0), 4)
+    at_label = (
+        "VH" if at_score >= 0.8 else
+        "H" if at_score >= 0.6 else
+        "M" if at_score >= 0.4 else
+        "L" if at_score >= 0.2 else "VL"
+    )
+    # AC_cont é o componente colaborativo efetivamente combinado com AT_cont
+    # pelo surrogate para formar o AE. pc_score permanece apenas como métrica
+    # auxiliar/legada da distribuição dos pares.
+    ac_score = round(float(resultado.get("AC_cont") or 0), 4)
+    ac_label = (
+        "VH" if ac_score >= 0.8 else
+        "H" if ac_score >= 0.6 else
+        "M" if ac_score >= 0.4 else
+        "L" if ac_score >= 0.2 else "VL"
+    )
 
     # Extrai scores por dimensão se disponíveis
     scores = {}
@@ -351,8 +368,12 @@ def api_avaliar():
         "fitness":  fitness,
         "membros":  membros,
         "scores":   scores,
-        "ac_score": round(float(resultado.get("pc_score") or 0), 4),
-        "ac_label": resultado.get("pc_label", "—"),
+        "at_score": at_score,
+        "at_label": at_label,
+        "ac_score": ac_score,
+        "ac_label": ac_label,
+        "pc_score": round(float(resultado.get("pc_score") or 0), 4),
+        "pc_label": resultado.get("pc_label", "—"),
         "coverage":   resultado.get("coverage",   {}),
         "pares_info": resultado.get("pares_info", {}),
     })

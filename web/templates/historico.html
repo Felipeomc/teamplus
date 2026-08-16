@@ -530,6 +530,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
         <span class="dim-score">DOM: ${_histEscape(scores.dominio?.rotulo || '—')}</span>
         <span class="dim-score">ECO: ${_histEscape(scores.ecossistema?.rotulo || '—')}</span>
         <span class="dim-score">LING: ${_histEscape(scores.linguagens?.rotulo || '—')}</span>
+        <span class="dim-score">AT: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
         <span class="dim-score">AC: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
       </div>
       <div class="member-grid" style="margin-bottom:18px">
