@@ -413,6 +413,7 @@ function initTagDropZones() {
 
 // ── State global das sugestões (para drag-and-drop e salvar) ─────────────────
 let _sugestoes   = [];    // array com 2 objetos sugestão
+let _sugestoesOriginais = []; // cópia imutável do resultado do AG
 let _fixados     = new Set();  // user_ids fixados para próxima rodada
 let _projetoAlvo = {};
 let _nomeProjeto = '';
@@ -532,6 +533,7 @@ async function rodarGA() {
     if (data.erro) throw new Error(data.erro);
 
     _sugestoes   = data.sugestoes;
+    _sugestoesOriginais = JSON.parse(JSON.stringify(data.sugestoes));
     _projetoAlvo = data.projeto_alvo;
     _nomeProjeto = data.nome_projeto;
 
@@ -579,6 +581,7 @@ function cardSugestao(s, si) {
         <span class="dim-score">Dom: <span>—</span></span>
         <span class="dim-score">Eco: <span>—</span></span>
         <span class="dim-score">Ling: <span>—</span></span>
+        <span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">calculando…</span></span>
       </div>
       <div class="mem-row" id="mem-row-${si}"
            ondragover="onDragOver(event,${si})"
@@ -621,8 +624,17 @@ function cardSugestao(s, si) {
 function renderSugestoes() {
   _exibidas = 0;
   document.getElementById('resultado-area').innerHTML =
-    '<div style="display:flex;justify-content:flex-end;margin-bottom:12px">' +
-    `<button class="btn btn-ghost" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap">' +
+    `<details style="font-size:.72rem;color:var(--muted);max-width:620px">
+       <summary style="cursor:pointer;color:var(--accent)">ⓘ Como ler as pontuações?</summary>
+       <div style="margin-top:7px;line-height:1.55;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface)">
+         A nota entre parênteses vai de 0 a 1 e representa a adequação naquela dimensão.<br>
+         <strong>VH</strong> Muito alta (0,80–1,00) · <strong>H</strong> Alta (0,60–0,79) ·
+         <strong>M</strong> Média (0,40–0,59) · <strong>L</strong> Baixa (0,20–0,39) ·
+         <strong>VL</strong> Muito baixa (0,00–0,19). <strong>AC</strong> é a aptidão colaborativa.
+       </div>
+     </details>` +
+    `<button class="btn btn-ghost" id="btn-csv" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
     '</div>' +
     '<div class="sugestoes-grid" id="sugestoes-grid"></div>' +
     '<div id="btn-mais-wrap" style="text-align:center;margin-top:16px;grid-column:1/-1"></div>';
@@ -638,16 +650,41 @@ function _listaProjeto(dim, prioridade) {
   return (_projetoAlvo?.[dim]?.[prioridade] || []).join(' | ');
 }
 
-function baixarSugestoesCsv() {
+async function _completarMetricasCsv() {
+  const pendentes = _sugestoes.map((s, i) => ({s, i})).filter(x => !x.s._scores);
+  for (let inicio = 0; inicio < pendentes.length; inicio += 4) {
+    await Promise.all(pendentes.slice(inicio, inicio + 4).map(async ({s}) => {
+      const res = await fetch('/api/avaliar', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({team_ids:s.best_team, projeto_alvo:_projetoAlvo}),
+      });
+      const data = await res.json();
+      if (!res.ok || data.erro) throw new Error(data.erro || 'Falha ao calcular as métricas do CSV.');
+      s._scores = data.scores || {};
+      s._ac_label = data.ac_label || '—';
+      s._ac_score = data.ac_score ?? null;
+    }));
+  }
+}
+
+async function baixarSugestoesCsv() {
   if (!_sugestoes.length) return;
 
+  const btn = document.getElementById('btn-csv');
+  const textoOriginal = btn?.textContent;
+  if (btn) { btn.disabled = true; btn.textContent = 'Preparando métricas…'; }
+  try {
+    await _completarMetricasCsv();
+
   const cabecalho = [
-    'ranking', 'projeto', 'fitness', 'fitness_percentual', 'classificacao',
-    'equipe_ids', 'membros', 'papeis',
-    'dominio_must', 'dominio_should', 'dominio_could',
-    'ecossistema_must', 'ecossistema_should', 'ecossistema_could',
-    'linguagens_must', 'linguagens_should', 'linguagens_could',
-    'duracao_s', 'geracoes_executadas', 'motivo_parada'
+    'Ranking', 'Projeto', 'Fitness', 'FitnessPercentual', 'Classificacao',
+    'EquipeIds', 'Membros', 'Papeis',
+    'DomMust', 'DomShould', 'DomCould',
+    'EcoMust', 'EcoShould', 'EcoCould',
+    'LingMust', 'LingShould', 'LingCould',
+    'DomScore', 'DomClassificacao', 'EcoScore', 'EcoClassificacao',
+    'LingScore', 'LingClassificacao', 'ACScore', 'ACClassificacao',
+    'DuracaoSegundos', 'GeracoesExecutadas', 'MotivoParada'
   ];
 
   const linhas = _sugestoes.map((s, indice) => {
@@ -672,6 +709,14 @@ function baixarSugestoesCsv() {
       _listaProjeto('linguagens', 'must'),
       _listaProjeto('linguagens', 'should'),
       _listaProjeto('linguagens', 'could'),
+      s._scores?.dominio?.score,
+      s._scores?.dominio?.rotulo,
+      s._scores?.ecossistema?.score,
+      s._scores?.ecossistema?.rotulo,
+      s._scores?.linguagens?.score,
+      s._scores?.linguagens?.rotulo,
+      s._ac_score,
+      s._ac_label,
       s.duration_sec,
       s.gens_executed,
       s.stop_reason
@@ -692,6 +737,11 @@ function baixarSugestoesCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  } catch (erro) {
+    alert(`Não foi possível preparar o CSV: ${erro.message}`);
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = textoOriginal; }
+  }
 }
 
 function mostrarMais() {
@@ -1056,6 +1106,7 @@ async function salvar(si) {
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         sugestao:     _sugestoes[si],
+        sugestao_ga_original: _sugestoesOriginais[si] || _sugestoes[si],
         nome_projeto: _nomeProjeto,
         projeto_alvo: _projetoAlvo,
       }),
@@ -1136,6 +1187,8 @@ async function explicar(si) {
     _sugestoes   = [{ best_team: r.best_team, membros: r.membros, best_fitness: r.best_fitness,
                       duration_sec: r.duration_sec, gens_executed: r.gens_executed, stop_reason: '(editando)' }];
     _sugestoes.push({..._sugestoes[0]});
+    const original = r.equipe_ga_original || _sugestoes[0];
+    _sugestoesOriginais = [JSON.parse(JSON.stringify(original)), JSON.parse(JSON.stringify(original))];
     _projetoAlvo = r.projeto_alvo || {};
     _nomeProjeto = r.nome_projeto || '';
     renderSugestoes();

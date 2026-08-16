@@ -366,6 +366,7 @@ def api_salvar():
     """
     data      = request.get_json(silent=True) or {}
     sugestao  = data.get("sugestao", {})
+    sugestao_ga = data.get("sugestao_ga_original")
     nome_proj = data.get("nome_projeto", "Projeto sem título")
 
     registro = {
@@ -380,6 +381,18 @@ def api_salvar():
         "gens_executed":sugestao.get("gens_executed", 0),
         "duration_sec": sugestao.get("duration_sec", 0),
     }
+
+    # Mantém a equipe originalmente sugerida pelo AG separada da composição
+    # que o gestor eventualmente ajustou antes de salvar. Registros antigos
+    # continuam válidos porque este campo é opcional.
+    if isinstance(sugestao_ga, dict) and sugestao_ga.get("best_team"):
+        registro["equipe_ga_original"] = {
+            "best_team": sugestao_ga.get("best_team", []),
+            "membros": sugestao_ga.get("membros", []),
+            "best_fitness": sugestao_ga.get("best_fitness", 0),
+            "gens_executed": sugestao_ga.get("gens_executed", 0),
+            "duration_sec": sugestao_ga.get("duration_sec", 0),
+        }
 
     hist = _read_hist()
     hist.insert(0, registro)

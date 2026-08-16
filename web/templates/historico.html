@@ -9,6 +9,33 @@
   .filter-btn { padding:6px 14px; border-radius:999px; border:1px solid var(--border);
     background:transparent; color:var(--muted); cursor:pointer; font-size:.8rem; font-family:inherit; }
   .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .team-compare { flex:2; min-width:430px; display:grid; gap:7px; }
+  .team-history-row { width:100%; display:grid; grid-template-columns:145px 100px 54px 1fr;
+    gap:10px; align-items:center; padding:8px 10px; border:1px solid var(--border);
+    border-radius:7px; background:rgba(15,17,23,.55); color:var(--text); cursor:pointer;
+    font-family:inherit; text-align:left; }
+  .team-history-row:hover { border-color:var(--accent); background:rgba(79,142,247,.07); }
+  .team-history-label { color:var(--muted); font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+  .team-history-members { display:flex; gap:5px; flex-wrap:wrap; }
+  .team-history-member { background:var(--border); border-radius:5px; padding:2px 7px; font-size:.7rem; }
+  .history-modal-backdrop { position:fixed; inset:0; z-index:1000; display:none; align-items:center;
+    justify-content:center; padding:22px; background:rgba(3,5,10,.78); backdrop-filter:blur(4px); }
+  .history-modal-backdrop.open { display:flex; }
+  .history-modal { width:min(940px,100%); max-height:92vh; overflow:auto; background:var(--surface);
+    border:1px solid var(--border); border-radius:14px; padding:22px; box-shadow:0 24px 70px rgba(0,0,0,.5); }
+  .history-modal-head { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; margin-bottom:16px; }
+  .history-modal-close { border:1px solid var(--border); background:transparent; color:var(--text);
+    border-radius:7px; width:34px; height:34px; cursor:pointer; font-size:1.1rem; }
+  .history-summary { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 16px; }
+  .history-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .history-chart { border:1px solid var(--border); border-radius:10px; padding:12px; min-height:285px; }
+  .history-chart-title { color:var(--muted); font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+  @media (max-width:800px) {
+    .team-compare { min-width:100%; }
+    .team-history-row { grid-template-columns:1fr 70px; }
+    .team-history-members { grid-column:1/-1; }
+    .history-detail-grid { grid-template-columns:1fr; }
+  }
 </style>
 {% endblock %}
 
@@ -113,7 +140,7 @@
     {% set fit = r.best_fitness %}
     {% set pct = (fit * 100)|round|int %}
     {% set label = 'VH' if fit >= 0.8 else ('H' if fit >= 0.6 else ('M' if fit >= 0.4 else ('L' if fit >= 0.2 else 'VL'))) %}
-    <div class="card" onclick="toggle('det-a-{{loop.index}}')" style="cursor:pointer;border-color:rgba(52,211,153,.3)">
+    <div class="card" style="border-color:rgba(52,211,153,.3)">
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
         <span class="badge badge-{{label}}">{{label}}</span>
         <span class="badge status-alocado">ALOCADO</span>
@@ -121,16 +148,23 @@
           <div style="font-weight:600;font-size:.9rem">{{ r.nome_projeto }}</div>
           <div class="text-muted">{{ r.timestamp }}</div>
         </div>
-        <div class="fitness-bar" style="width:100px">
-          <div class="fitness-fill" style="width:{{pct}}%"></div>
+        <div class="team-compare">
+          <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','gestor')">
+            <span class="team-history-label">Alocada pelo gestor</span>
+            <span class="fitness-val mono">{{fit}}</span>
+            <span class="badge badge-{{label}}">{{label}}</span>
+            <span class="team-history-members">{% for m in r.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+          </button>
+          {% if r.equipe_ga_original %}
+          {% set ga = r.equipe_ga_original %}
+          <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
+            <span class="team-history-label">Sugestão original do AG</span>
+            <span class="fitness-val mono">{{ ga.best_fitness }}</span>
+            <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
+            <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+          </button>
+          {% endif %}
         </div>
-        <span class="fitness-val mono">{{fit}}</span>
-        <div style="display:flex;gap:5px;flex-wrap:wrap">
-          {% for m in r.membros %}
-          <span style="background:var(--border);border-radius:5px;padding:2px 7px;font-size:.7rem">{{ m.id }}</span>
-          {% endfor %}
-        </div>
-        <span style="color:var(--muted);font-size:.8rem">▾</span>
         
         <div style="display:flex;gap:6px" onclick="event.stopPropagation()">
           <button onclick="editarRegistro('{{r.id}}')"
@@ -166,6 +200,7 @@
           <span class="text-muted">⏱ {{ r.duration_sec }}s · {{ r.gens_executed }} ger.</span>
         </div>
       </div>
+      <button type="button" onclick="toggle('det-a-{{loop.index}}')" style="margin-top:10px;background:transparent;border:0;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.72rem">▾ Ver requisitos do projeto</button>
     </div>
     {% endfor %}
   </div>
@@ -178,6 +213,19 @@
     Nenhum projeto ainda. <a href="/" style="color:var(--accent)">Criar o primeiro</a>.
   </div>
 {% endif %}
+
+<div id="history-team-modal" class="history-modal-backdrop" onclick="if(event.target===this)fecharEquipeHistorico()">
+  <div class="history-modal" role="dialog" aria-modal="true" aria-labelledby="history-modal-title" tabindex="-1">
+    <div class="history-modal-head">
+      <div>
+        <div id="history-modal-title" style="font-size:1.15rem;font-weight:700">Detalhes da equipe</div>
+        <div id="history-modal-subtitle" class="text-muted" style="margin-top:4px"></div>
+      </div>
+      <button class="history-modal-close" type="button" onclick="fecharEquipeHistorico()" aria-label="Fechar">×</button>
+    </div>
+    <div id="history-modal-body"><div class="text-muted">Carregando avaliação da equipe…</div></div>
+  </div>
+</div>
 
 <script>
 // ── Backlog ───────────────────────────────────────────────────────────────────
@@ -435,6 +483,110 @@ async function blDrop(e, targetId) {
 carregarBacklog();
 
 // ── Histórico ─────────────────────────────────────────────────────────────────
+function _histEscape(v) {
+  return String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+
+function _histIds(equipe) {
+  return (equipe.best_team || equipe.membros?.map(m => m.user_id ?? String(m.id || '').replace(/\D/g,'')) || [])
+    .map(Number).filter(Number.isFinite);
+}
+
+async function abrirEquipeHistorico(registroId, tipo) {
+  const modal = document.getElementById('history-team-modal');
+  const body = document.getElementById('history-modal-body');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modal.querySelector('.history-modal').focus();
+  body.innerHTML = '<div class="text-muted">Carregando avaliação da equipe…</div>';
+
+  try {
+    const rr = await fetch(`/api/historico/${encodeURIComponent(registroId)}`);
+    const registro = await rr.json();
+    if (!rr.ok || registro.erro) throw new Error(registro.erro || 'Registro não encontrado.');
+    const equipe = tipo === 'ga' ? registro.equipe_ga_original : registro;
+    if (!equipe) throw new Error('A sugestão original do AG não foi armazenada neste registro antigo.');
+    const ids = _histIds(equipe);
+    if (!ids.length) throw new Error('Esta equipe não possui integrantes válidos.');
+
+    const [avRes, grRes] = await Promise.all([
+      fetch('/api/avaliar', {method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({team_ids:ids, projeto_alvo:registro.projeto_alvo || {}})}),
+      fetch('/api/grafo/equipe', {method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({team_ids:ids})}),
+    ]);
+    const avaliacao = await avRes.json();
+    const grafo = await grRes.json();
+    if (!avRes.ok || avaliacao.erro) throw new Error(avaliacao.erro || 'Não foi possível avaliar a equipe.');
+
+    const tituloTipo = tipo === 'ga' ? 'Equipe sugerida pelo AG' : 'Equipe alocada pelo gestor';
+    document.getElementById('history-modal-title').textContent = tituloTipo;
+    document.getElementById('history-modal-subtitle').textContent = registro.nome_projeto || 'Projeto sem título';
+    const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
+    const scores = avaliacao.scores || {};
+    body.innerHTML = `
+      <div class="history-summary">
+        <span class="badge badge-${label(avaliacao.fitness)}">Força técnica: ${label(avaliacao.fitness)} · ${Number(avaliacao.fitness).toFixed(4)}</span>
+        <span class="dim-score">DOM: ${_histEscape(scores.dominio?.rotulo || '—')}</span>
+        <span class="dim-score">ECO: ${_histEscape(scores.ecossistema?.rotulo || '—')}</span>
+        <span class="dim-score">LING: ${_histEscape(scores.linguagens?.rotulo || '—')}</span>
+        <span class="dim-score">AC: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
+      </div>
+      <div class="member-grid" style="margin-bottom:18px">
+        ${(avaliacao.membros || []).map(m => `<div class="member-card">
+          <div class="member-avatar">${_histEscape(m.id).replace('Dev','D')}</div>
+          <div class="member-name">${_histEscape(m.id)}</div>
+          <div class="member-role">${_histEscape(m.role)}</div>
+          <div class="member-tags">${[...(m.dominio||[]),...(m.ecossistema||[]),...(m.linguagens||[])].slice(0,6).map(t=>`<span class="member-tag">${_histEscape(t)}</span>`).join('')}</div>
+        </div>`).join('')}
+      </div>
+      <div class="history-detail-grid">
+        <div class="history-chart"><div class="history-chart-title">Histórico de colaboração</div><svg id="history-collab-chart" viewBox="0 0 300 220" style="width:100%;height:250px"></svg></div>
+        <div class="history-chart"><div class="history-chart-title">Força técnica por dimensão</div><svg id="history-tech-chart" viewBox="0 0 216 240" style="width:100%;height:250px"></svg></div>
+      </div>`;
+    _histDesenharGrafo(ids, grafo.pares || [], avaliacao);
+    _histDesenharRadar(scores, avaliacao.coverage || {});
+  } catch (e) {
+    body.innerHTML = `<div style="color:#f87171">${_histEscape(e.message)}</div>`;
+  }
+}
+
+function fecharEquipeHistorico() {
+  document.getElementById('history-team-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function _histDesenharGrafo(ids, pares, av) {
+  const svg = document.getElementById('history-collab-chart');
+  if (!svg) return;
+  const n=ids.length, cx=150, cy=96, R=70;
+  const pos=ids.map((_,i)=>({x:cx+R*Math.cos(2*Math.PI*i/n-Math.PI/2),y:cy+R*Math.sin(2*Math.PI*i/n-Math.PI/2)}));
+  const cor=w=>w>=.7?'#34d399':w>=.4?'#f59e0b':w>0?'#f87171':'#2a2d3a';
+  let h='';
+  pares.forEach(p=>{const a=ids.indexOf(p.source),b=ids.indexOf(p.target);if(a<0||b<0)return;const pa=pos[a],pb=pos[b],mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+    h+=`<line x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" stroke="${cor(p.weight)}" stroke-width="${p.has_edge?Math.max(1.2,p.weight*4):1}" ${p.has_edge?'':'stroke-dasharray="4,3"'} opacity="${p.has_edge ? .85 : .3}"/>`;
+    if(p.has_edge)h+=`<text x="${mx}" y="${my-3}" text-anchor="middle" font-size="10" fill="#fff">N=${p.N}</text><text x="${mx}" y="${my+9}" text-anchor="middle" font-size="9" fill="#fff">w=${Number(p.weight).toFixed(2)}</text>`;
+  });
+  pos.forEach((p,i)=>{h+=`<circle cx="${p.x}" cy="${p.y}" r="18" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--accent)">D${ids[i]}</text>`});
+  const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares: ${pi.n_colab??0}/${pi.n_total??0} · Projetos compartilhados: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="10" fill="var(--accent2)">AC: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
+  svg.innerHTML=h;
+}
+
+function _histDesenharRadar(scores, coverage) {
+  const svg=document.getElementById('history-tech-chart'); if(!svg)return;
+  const axes=[['DOM','dominio'],['ECO','ecossistema'],['LING','linguagens']],cx=108,cy=105,r=62;
+  const pt=(i,v)=>[cx+v*r*Math.cos(2*Math.PI*i/3-Math.PI/2),cy+v*r*Math.sin(2*Math.PI*i/3-Math.PI/2)];let h='';
+  [.25,.5,.75,1].forEach(v=>h+=`<polygon points="${axes.map((_,i)=>pt(i,v).join(',')).join(' ')}" fill="none" stroke="var(--border)" stroke-dasharray="${v<1?'3,3':''}"/>`);
+  axes.forEach((_,i)=>{const p=pt(i,1);h+=`<line x1="${cx}" y1="${cy}" x2="${p[0]}" y2="${p[1]}" stroke="var(--border)"/>`});
+  const vals=axes.map(([,k])=>Number(scores[k]?.score||0)),data=vals.map((v,i)=>pt(i,Math.max(0,Math.min(1,v))));
+  h+=`<polygon points="${data.map(p=>p.join(',')).join(' ')}" fill="var(--accent)" fill-opacity=".18" stroke="var(--accent)" stroke-width="2"/>`;
+  data.forEach(p=>h+=`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--accent)"/>`);
+  axes.forEach(([lb,k],i)=>{const p=pt(i,1.38),c=coverage[k]||{},fmt=x=>x?`${x.covered}/${x.total}`:'—';h+=`<text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--text)">${lb}</text><text x="${p[0]}" y="${p[1]+14}" text-anchor="middle" font-size="10" fill="var(--text)">${_histEscape(scores[k]?.rotulo||'—')}</text><text x="${p[0]}" y="${p[1]+27}" text-anchor="middle" font-size="9" fill="var(--muted)">M ${fmt(c.M)}</text>`});
+  svg.innerHTML=h;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharEquipeHistorico(); });
+
 function toggle(id) {
   const el = document.getElementById(id);
   if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
