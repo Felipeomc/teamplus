@@ -621,9 +621,77 @@ function cardSugestao(s, si) {
 function renderSugestoes() {
   _exibidas = 0;
   document.getElementById('resultado-area').innerHTML =
+    '<div style="display:flex;justify-content:flex-end;margin-bottom:12px">' +
+    `<button class="btn btn-ghost" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
+    '</div>' +
     '<div class="sugestoes-grid" id="sugestoes-grid"></div>' +
     '<div id="btn-mais-wrap" style="text-align:center;margin-top:16px;grid-column:1/-1"></div>';
   mostrarMais();
+}
+
+function _csvValor(valor) {
+  const texto = valor == null ? '' : String(valor);
+  return `"${texto.replaceAll('"', '""')}"`;
+}
+
+function _listaProjeto(dim, prioridade) {
+  return (_projetoAlvo?.[dim]?.[prioridade] || []).join(' | ');
+}
+
+function baixarSugestoesCsv() {
+  if (!_sugestoes.length) return;
+
+  const cabecalho = [
+    'ranking', 'projeto', 'fitness', 'fitness_percentual', 'classificacao',
+    'equipe_ids', 'membros', 'papeis',
+    'dominio_must', 'dominio_should', 'dominio_could',
+    'ecossistema_must', 'ecossistema_should', 'ecossistema_could',
+    'linguagens_must', 'linguagens_should', 'linguagens_could',
+    'duracao_s', 'geracoes_executadas', 'motivo_parada'
+  ];
+
+  const linhas = _sugestoes.map((s, indice) => {
+    const membros = s.membros || [];
+    const ids = (s.best_team || membros.map(m => m.user_id));
+    const fitness = Number(s.best_fitness || 0);
+    return [
+      indice + 1,
+      _nomeProjeto,
+      fitness.toFixed(8),
+      (fitness * 100).toFixed(2),
+      fitLabel(fitness),
+      `[${ids.join(', ')}]`,
+      membros.map(m => m.id || `Dev${m.user_id}`).join(' | '),
+      membros.map(m => m.role || '').join(' | '),
+      _listaProjeto('dominio', 'must'),
+      _listaProjeto('dominio', 'should'),
+      _listaProjeto('dominio', 'could'),
+      _listaProjeto('ecossistema', 'must'),
+      _listaProjeto('ecossistema', 'should'),
+      _listaProjeto('ecossistema', 'could'),
+      _listaProjeto('linguagens', 'must'),
+      _listaProjeto('linguagens', 'should'),
+      _listaProjeto('linguagens', 'could'),
+      s.duration_sec,
+      s.gens_executed,
+      s.stop_reason
+    ].map(_csvValor).join(',');
+  });
+
+  const csv = '\uFEFF' + [cabecalho.map(_csvValor).join(','), ...linhas].join('\r\n');
+  const arquivo = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(arquivo);
+  const link = document.createElement('a');
+  const nomeSeguro = (_nomeProjeto || 'projeto')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9_-]+/g, '_').replace(/^_+|_+$/g, '')
+    .toLowerCase() || 'projeto';
+  link.href = url;
+  link.download = `teamplus_${nomeSeguro}_equipes_ranqueadas.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 function mostrarMais() {
@@ -819,15 +887,16 @@ async function abrirDetalhesMembro(si, mi) {
 
   const collab = document.getElementById('member-collab-list');
   try {
-    const ids = a.sugestao.membros.map(m => m.id);
+    const ids = a.sugestao.membros.map(m => m.user_id);
     const res = await fetch('/api/grafo/equipe', {
       method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({team_ids:ids})
     });
     const data = await res.json();
-    const relacoes = (data.pares || []).filter(p => p.source === a.membro.id || p.target === a.membro.id);
+    const relacoes = (data.pares || []).filter(p => p.source === a.membro.user_id || p.target === a.membro.user_id);
     collab.className = '';
     collab.innerHTML = relacoes.length ? relacoes.map(p => {
-      const colega = p.source === a.membro.id ? p.target : p.source;
+      const colegaId = p.source === a.membro.user_id ? p.target : p.source;
+      const colega = a.sugestao.membros.find(m => m.user_id === colegaId)?.id || `Dev${colegaId}`;
       const nivel = !p.has_edge ? 'Sem histórico' : p.weight >= .7 ? 'Alta' : p.weight >= .4 ? 'Média' : 'Baixa';
       return `<div class="member-collab"><span>${_escapeHtml(colega)}</span><span>${nivel}${p.has_edge ? ` · ${p.N} proj.` : ''}</span></div>`;
     }).join('') : '<div class="member-empty">Não há relações de colaboração disponíveis para este membro.</div>';
