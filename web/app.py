@@ -229,7 +229,7 @@ def index():
 
 @app.route("/sugerir", methods=["POST"])
 def sugerir():
-    """Roda o GA duas vezes (seeds diferentes) e retorna 2 sugestões."""
+    """Roda o GA uma vez, com uma seed aleatória, e retorna as equipes ranqueadas."""
     data = request.get_json(silent=True) or {}
 
     projeto_alvo = {
@@ -251,6 +251,7 @@ def sugerir():
     pop_size  = 150
     geracoes  = 200
     nome_proj = data.get("nome_projeto", "Projeto sem título")
+    project_id = data.get("project_id", "")
 
     entrada = {
         "nome_projeto": nome_proj,
@@ -294,13 +295,23 @@ def sugerir():
         membros = [_dev_info(i, devs) for i in ids]
         sugestoes.append({
             "timestamp":     datetime.now().strftime("%d/%m/%Y %H:%M"),
+            "project_id":    project_id,
             "entrada":       entrada,
             "best_team":     ids,
             "membros":       membros,
             "best_fitness":  round(t["fitness"], 4),
             "gens_executed": res.get("gens_executed", 0),
+            "best_generation": res.get("best_generation", 0),
             "duration_sec":  round(res.get("duration_sec", 0), 2),
             "stop_reason":   res.get("stop_reason", "—"),
+            "seed":          _seed,
+            "population_size": pop_size,
+            "max_generations": geracoes,
+            "elitism_count": 3,
+            "mutation_rate": 0.005,
+            "crossover_rate": 1.0,
+            "stable_gens": 20,
+            "crossover_operator": "ccc",
         })
     return jsonify({
         "nome_projeto": nome_proj,
@@ -403,6 +414,16 @@ def api_salvar():
         "gens_executed":sugestao.get("gens_executed", 0),
         "duration_sec": sugestao.get("duration_sec", 0),
         "stop_reason":  sugestao.get("stop_reason", "—"),
+        "project_id":   sugestao.get("project_id", data.get("project_id", "")),
+        "seed":         sugestao.get("seed"),
+        "best_generation": sugestao.get("best_generation"),
+        "population_size": sugestao.get("population_size"),
+        "max_generations": sugestao.get("max_generations"),
+        "elitism_count": sugestao.get("elitism_count"),
+        "mutation_rate": sugestao.get("mutation_rate"),
+        "crossover_rate": sugestao.get("crossover_rate"),
+        "stable_gens": sugestao.get("stable_gens"),
+        "crossover_operator": sugestao.get("crossover_operator"),
     }
     if backlog_id:
         registro["backlog_id"] = backlog_id
@@ -451,6 +472,7 @@ def sugerir_fila():
     if erro_team_size:
         return jsonify({"erro": erro_team_size}), 400
     nome_proj     = data.get("nome_projeto", "Projeto sem título")
+    project_id    = data.get("project_id", "")
     excluded_devs = [int(x) for x in data.get("excluded_devs", [])]
     fixed_devs    = [int(x) for x in data.get("fixed_devs", [])]
 
@@ -488,12 +510,22 @@ def sugerir_fila():
         membros = [_dev_info(i, devs) for i in ids]
         sugestoes.append({
             "timestamp":     datetime.now().strftime("%d/%m/%Y %H:%M"),
+            "project_id":    project_id,
             "best_team":     ids,
             "membros":       membros,
             "best_fitness":  round(t["fitness"], 4),
             "gens_executed": res.get("gens_executed", 0),
+            "best_generation": res.get("best_generation", 0),
             "duration_sec":  round(res.get("duration_sec", 0), 2),
             "stop_reason":   res.get("stop_reason", "—"),
+            "seed":          _seed,
+            "population_size": 150,
+            "max_generations": 200,
+            "elitism_count": 3,
+            "mutation_rate": 0.005,
+            "crossover_rate": 1.0,
+            "stable_gens": 20,
+            "crossover_operator": "ccc",
         })
 
     return jsonify({
@@ -515,6 +547,7 @@ def api_backlog_add():
     bl   = _read_backlog()
     novo = {
         "id":           str(uuid.uuid4())[:8],
+        "project_id":   data.get("project_id", ""),
         "nome_projeto": data.get("nome_projeto", "Projeto sem título"),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "team_size":    team_size,

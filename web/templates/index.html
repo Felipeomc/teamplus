@@ -418,6 +418,7 @@ let _fixados     = new Set();  // user_ids fixados para próxima rodada
 let _projetoAlvo = {};
 let _nomeProjeto = '';
 let _backlogIdAtual = null;
+let _projectId = '';
 
 async function extrairProjeto() {
   const descricao = document.getElementById('descricao-livre').value.trim();
@@ -519,6 +520,7 @@ async function rodarGA() {
 
   const payload = {
     nome_projeto: document.getElementById('nome_projeto').value || 'Projeto sem título',
+    project_id:   _projectId,
     team_size:    teamSize,
     pop_size:     parseInt(document.getElementById('pop_size').value)  || 50,
     geracoes:     parseInt(document.getElementById('geracoes').value)  || 50,
@@ -664,6 +666,7 @@ async function _completarMetricasCsv() {
       const data = await res.json();
       if (!res.ok || data.erro) throw new Error(data.erro || 'Falha ao calcular as métricas do CSV.');
       s._scores = data.scores || {};
+      s._coverage = data.coverage || {};
       s._at_label = data.at_label || '—';
       s._at_score = data.at_score ?? null;
       s._ac_label = data.ac_label || '—';
@@ -682,7 +685,7 @@ async function baixarSugestoesCsv() {
     await _completarMetricasCsv();
 
   const cabecalho = [
-    'Ranking', 'Projeto', 'Fitness', 'FitnessPercentual', 'Classificacao',
+    'Ranking', 'ProjectId', 'Projeto', 'Fitness', 'FitnessPercentual', 'Classificacao',
     'EquipeIds', 'Membros',
     'DomMust', 'DomShould', 'DomCould',
     'EcoMust', 'EcoShould', 'EcoCould',
@@ -690,15 +693,28 @@ async function baixarSugestoesCsv() {
     'DomScore', 'DomClassificacao', 'EcoScore', 'EcoClassificacao',
     'LingScore', 'LingClassificacao', 'ATScore', 'ATClassificacao',
     'ACScore', 'ACClassificacao',
-    'DuracaoSegundos', 'GeracoesExecutadas', 'MotivoParada'
+    'MustDomOk', 'MustEcoOk', 'MustLingOk', 'AllMustOk',
+    'Seed', 'BestGeneration', 'DuracaoSegundos', 'GeracoesExecutadas', 'MotivoParada',
+    'PopulationSize', 'MaxGenerations', 'MutationRate', 'CrossoverRate',
+    'ElitismCount', 'StableGens', 'CrossoverOperator', 'Timestamp'
   ];
 
   const linhas = _sugestoes.map((s, indice) => {
     const membros = s.membros || [];
     const ids = (s.best_team || membros.map(m => m.user_id));
     const fitness = Number(s.best_fitness || 0);
+    const mustOk = dim => {
+      const requisitos = _projetoAlvo?.[dim]?.must || [];
+      if (!requisitos.length) return true;
+      const cobertura = s._coverage?.[dim]?.M;
+      return !!cobertura && Number(cobertura.covered) >= Number(cobertura.total);
+    };
+    const mustDomOk = mustOk('dominio');
+    const mustEcoOk = mustOk('ecossistema');
+    const mustLingOk = mustOk('linguagens');
     return [
       indice + 1,
+      s.project_id || _projectId,
       _nomeProjeto,
       fitness.toFixed(8),
       (fitness * 100).toFixed(2),
@@ -724,9 +740,23 @@ async function baixarSugestoesCsv() {
       s._at_label,
       s._ac_score,
       s._ac_label,
+      mustDomOk,
+      mustEcoOk,
+      mustLingOk,
+      mustDomOk && mustEcoOk && mustLingOk,
+      s.seed,
+      s.best_generation,
       s.duration_sec,
       s.gens_executed,
-      s.stop_reason
+      s.stop_reason,
+      s.population_size,
+      s.max_generations,
+      s.mutation_rate,
+      s.crossover_rate,
+      s.elitism_count,
+      s.stable_gens,
+      s.crossover_operator,
+      s.timestamp
     ].map(_csvValor).join(',');
   });
 
@@ -1220,6 +1250,7 @@ async function explicar(si) {
   sessionStorage.removeItem('backlog_exec');
   const p = JSON.parse(raw);
   _backlogIdAtual = p.id || null;
+  _projectId = p.project_id || (/^P\d+$/i.test(p.id || '') ? p.id : '');
 
   document.getElementById('nome_projeto').value = p.nome_projeto || '';
   if (p.team_size) document.getElementById('team_size').value = p.team_size;
@@ -1319,6 +1350,7 @@ async function explicar(si) {
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
           nome_projeto:  p.nome_projeto,
+          project_id:    p.project_id || (/^P\d+$/i.test(p.id || '') ? p.id : ''),
           team_size:     p.team_size || 4,
           dominio:       p.projeto_alvo?.dominio     || {},
           ecossistema:   p.projeto_alvo?.ecossistema || {},

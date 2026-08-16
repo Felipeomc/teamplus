@@ -73,7 +73,11 @@
   <!-- Form inline para criar item no backlog -->
   <div id="backlog-form" style="display:none;margin-top:12px" class="card">
     <div style="font-size:.8rem;font-weight:600;margin-bottom:10px;color:var(--text)">Novo projeto no backlog</div>
-    <div style="display:grid;grid-template-columns:1fr 80px;gap:10px;margin-bottom:10px">
+    <div style="display:grid;grid-template-columns:100px 1fr 80px;gap:10px;margin-bottom:10px">
+      <div>
+        <label>Código</label>
+        <input type="text" id="bl-project-id" placeholder="Ex: P1">
+      </div>
       <div>
         <label>Nome do projeto</label>
         <input type="text" id="bl-nome" placeholder="Ex: App mobile de vendas">
@@ -157,12 +161,18 @@
           </button>
           {% if r.equipe_ga_original %}
           {% set ga = r.equipe_ga_original %}
-          <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
-            <span class="team-history-label">Sugestão original do AG</span>
-            <span class="fitness-val mono">{{ ga.best_fitness }}</span>
-            <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
-            <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+          <button type="button" onclick="toggleSugestaoAg('ga-{{r.id}}',this)" aria-expanded="false"
+            style="justify-self:start;background:transparent;border:0;color:var(--accent);padding:3px 1px;cursor:pointer;font-family:inherit;font-size:.7rem">
+            ▸ Ver sugestão original do AG
           </button>
+          <div id="ga-{{r.id}}" style="display:none">
+            <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
+              <span class="team-history-label">Sugestão original do AG</span>
+              <span class="fitness-val mono">{{ ga.best_fitness }}</span>
+              <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
+              <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+            </button>
+          </div>
           {% endif %}
         </div>
         
@@ -271,7 +281,7 @@ function renderBacklog() {
         style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent);flex-shrink:0">
       <span style="color:var(--muted);font-size:1rem;cursor:grab">⠿</span>
       <div style="flex:1;min-width:0">
-        <div style="font-weight:600;font-size:.88rem">${p.nome_projeto}</div>
+        <div style="font-weight:600;font-size:.88rem">${p.project_id ? `${p.project_id} · ` : ''}${p.nome_projeto}</div>
         <div style="font-size:.7rem;color:var(--muted);margin-top:2px">
           Equipe: ${p.team_size} · 
           Dom: ${(p.projeto_alvo?.dominio?.must||[]).join(', ')||'—'} · 
@@ -376,6 +386,7 @@ function abrirFormBacklog() {
 function fecharFormBacklog() {
   document.getElementById('backlog-form').style.display = 'none';
   document.getElementById('bl-nome').value = '';
+  document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-team-size').value = '4';
   ['dom','eco','ling'].forEach(dim => {
     ['must','should','could'].forEach(prio => {
@@ -394,6 +405,7 @@ async function salvarBacklog() {
   if (!nome) { alert('Informe o nome do projeto.'); return; }
 
   const payload = {
+    project_id:   document.getElementById('bl-project-id').value.trim(),
     nome_projeto: nome,
     team_size:    parseInt(document.getElementById('bl-team-size').value) || 4,
     projeto_alvo: {
@@ -487,6 +499,15 @@ async function blDrop(e, targetId) {
 carregarBacklog();
 
 // ── Histórico ─────────────────────────────────────────────────────────────────
+function toggleSugestaoAg(id, botao) {
+  const equipe = document.getElementById(id);
+  if (!equipe) return;
+  const abrir = equipe.style.display === 'none';
+  equipe.style.display = abrir ? 'block' : 'none';
+  botao.setAttribute('aria-expanded', String(abrir));
+  botao.textContent = abrir ? '▾ Ocultar sugestão original do AG' : '▸ Ver sugestão original do AG';
+}
+
 function _histEscape(v) {
   return String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
@@ -614,21 +635,34 @@ async function baixarEquipeHistoricoCsv(registroId) {
     const scores = av.scores || {}, p = registro.projeto_alvo || {};
     const fitness = Number(av.fitness ?? registro.best_fitness ?? 0);
     const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
+    const mustOk = dim => {
+      const requisitos = p?.[dim]?.must || [];
+      if (!requisitos.length) return true;
+      const cobertura = av.coverage?.[dim]?.M;
+      return !!cobertura && Number(cobertura.covered) >= Number(cobertura.total);
+    };
+    const mustDomOk=mustOk('dominio'), mustEcoOk=mustOk('ecossistema'), mustLingOk=mustOk('linguagens');
     const cabecalho = [
-      'Ranking','Projeto','Fitness','FitnessPercentual','Classificacao','EquipeIds','Membros',
+      'Ranking','ProjectId','Projeto','Fitness','FitnessPercentual','Classificacao','EquipeIds','Membros',
       'DomMust','DomShould','DomCould','EcoMust','EcoShould','EcoCould','LingMust','LingShould','LingCould',
       'DomScore','DomClassificacao','EcoScore','EcoClassificacao','LingScore','LingClassificacao',
-      'ATScore','ATClassificacao','ACScore','ACClassificacao','DuracaoSegundos','GeracoesExecutadas','MotivoParada'
+      'ATScore','ATClassificacao','ACScore','ACClassificacao',
+      'MustDomOk','MustEcoOk','MustLingOk','AllMustOk',
+      'Seed','BestGeneration','DuracaoSegundos','GeracoesExecutadas','MotivoParada',
+      'PopulationSize','MaxGenerations','MutationRate','CrossoverRate','ElitismCount','StableGens','CrossoverOperator','Timestamp'
     ];
     const linha = [
-      1, registro.nome_projeto, fitness.toFixed(8), (fitness*100).toFixed(2), label(fitness),
+      1, registro.project_id || '', registro.nome_projeto, fitness.toFixed(8), (fitness*100).toFixed(2), label(fitness),
       `[${ids.join(', ')}]`, (av.membros||[]).map(m=>m.id).join(' | '),
       _histListaProjeto(p,'dominio','must'), _histListaProjeto(p,'dominio','should'), _histListaProjeto(p,'dominio','could'),
       _histListaProjeto(p,'ecossistema','must'), _histListaProjeto(p,'ecossistema','should'), _histListaProjeto(p,'ecossistema','could'),
       _histListaProjeto(p,'linguagens','must'), _histListaProjeto(p,'linguagens','should'), _histListaProjeto(p,'linguagens','could'),
       scores.dominio?.score, scores.dominio?.rotulo, scores.ecossistema?.score, scores.ecossistema?.rotulo,
       scores.linguagens?.score, scores.linguagens?.rotulo, av.at_score, av.at_label, av.ac_score, av.ac_label,
-      registro.duration_sec, registro.gens_executed, registro.stop_reason || ''
+      mustDomOk, mustEcoOk, mustLingOk, mustDomOk && mustEcoOk && mustLingOk,
+      registro.seed, registro.best_generation, registro.duration_sec, registro.gens_executed, registro.stop_reason || '',
+      registro.population_size, registro.max_generations, registro.mutation_rate, registro.crossover_rate,
+      registro.elitism_count, registro.stable_gens, registro.crossover_operator, registro.timestamp
     ];
     const csv = '\uFEFF' + cabecalho.map(_histCsvValor).join(',') + '\r\n' + linha.map(_histCsvValor).join(',');
     const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
