@@ -33,6 +33,13 @@
   .mem-item:hover    { border-color: var(--accent); }
   .mem-item.dragging { opacity: .4; border-style: dashed; }
   .mem-item.drag-over { border-color: var(--accent2); background: rgba(52,211,153,.05); }
+  .mem-item.drop-valid { border-color:var(--accent2); box-shadow:0 0 0 2px rgba(52,211,153,.2); background:rgba(52,211,153,.08); }
+  .mem-item.drop-blocked { border-color:#f87171; box-shadow:0 0 0 2px rgba(248,113,113,.18); background:rgba(248,113,113,.07); cursor:not-allowed; }
+  .mem-item.drop-valid::after, .mem-item.drop-blocked::after { position:absolute; right:8px; bottom:7px;
+    padding:2px 6px; border-radius:4px; font-size:.58rem; font-weight:700; letter-spacing:.03em;
+    background:var(--surface); pointer-events:none; }
+  .mem-item.drop-valid::after { content:'Solte para trocar'; color:var(--accent2); }
+  .mem-item.drop-blocked::after { content:'Troca bloqueada'; color:#f87171; }
   .mem-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--border);
     display: flex; align-items: center; justify-content: center; font-size: .7rem;
     font-weight: 700; color: var(--accent); flex-shrink: 0; }
@@ -147,7 +154,7 @@
       <input type="number" id="team_size" value="4" min="2" max="12"
              aria-describedby="team-size-help" style="margin-bottom:4px">
       <div id="team-size-help" class="text-muted" style="font-size:.72rem;margin-bottom:14px">
-        Informe entre 2 e 12 integrantes.
+        Informe entre 4 e 9 integrantes.
       </div>
       <input type="hidden" id="pop_size" value="150">
       <input type="hidden" id="geracoes" value="200">
@@ -584,13 +591,11 @@ function cardSugestao(s, si) {
         <span class="dim-score">Dom: <span>—</span></span>
         <span class="dim-score">Eco: <span>—</span></span>
         <span class="dim-score">Ling: <span>—</span></span>
-        <span class="dim-score" style="border-color:rgba(79,142,247,.35)">AT: <span>calculando…</span></span>
+        <span class="dim-score" style="border-color:rgba(79,142,247,.45)">AT: <span style="color:var(--accent)">calculando…</span></span>
         <span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">calculando…</span></span>
       </div>
       <div class="mem-row" id="mem-row-${si}"
-           ondragover="onDragOver(event,${si})"
-           ondrop="onDrop(event,${si})"
-           ondragleave="onDragLeave(event)">
+           ondragover="event.preventDefault()">
         ${membros}
       </div>
       <button class="btn btn-ghost" id="btn-radar-${si}"
@@ -830,7 +835,10 @@ function memHtml(m, si, mi) {
     <div class="mem-item ${isPinned ? 'pinned' : ''}" draggable="true" id="mem-${si}-${mi}"
          data-sug="${si}" data-idx="${mi}"
          ondragstart="onDragStart(event,${si},${mi})"
-         ondragend="onDragEnd(event)">
+         ondragend="onDragEnd(event)"
+         ondragover="onMemberDragOver(event,${si},${mi})"
+         ondragleave="onMemberDragLeave(event)"
+         ondrop="onMemberDrop(event,${si},${mi})">
       <span class="drag-handle">⠿</span>
       <div class="mem-avatar">${m.id.replace('Dev','D')}</div>
       <div class="mem-info">
@@ -1014,7 +1022,7 @@ function valorScore(score) {
   if (rotulo == null || rotulo === '' || String(rotulo).toLowerCase() === 'null') {
     return 'Não informado';
   }
-  return valor == null ? String(rotulo) : `${rotulo} (${valor})`;
+  return valor == null ? String(rotulo) : `${rotulo} (${Number(valor).toFixed(2)})`;
 }
 
 // ── Drag and drop ─────────────────────────────────────────────────────────────
@@ -1027,42 +1035,74 @@ function onDragStart(e, si, mi) {
 }
 function onDragEnd(e) {
   e.target.classList.remove('dragging');
-  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  document.querySelectorAll('.drag-over,.drop-valid,.drop-blocked').forEach(el =>
+    el.classList.remove('drag-over','drop-valid','drop-blocked'));
 }
-function onDragOver(e, targetSi) {
+function onMemberDragOver(e, targetSi, targetMi) {
   e.preventDefault();
+  e.stopPropagation();
   if (_drag === null || _drag.si === targetSi) return;
-  e.currentTarget.classList.add('drag-over');
+  const validacao = _validarTroca(_drag.si, _drag.mi, targetSi, targetMi);
+  e.dataTransfer.dropEffect = validacao.ok ? 'move' : 'none';
+  e.currentTarget.classList.toggle('drop-valid', validacao.ok);
+  e.currentTarget.classList.toggle('drop-blocked', !validacao.ok);
 }
-function onDragLeave(e) {
-  e.currentTarget.classList.remove('drag-over');
+function onMemberDragLeave(e) {
+  e.stopPropagation();
+  if (e.currentTarget.contains(e.relatedTarget)) return;
+  e.currentTarget.classList.remove('drag-over','drop-valid','drop-blocked');
 }
-async function onDrop(e, targetSi) {
+
+function _validarTroca(srcSi, srcMi, targetSi, targetMi) {
+  const origem = _sugestoes[srcSi];
+  const destino = _sugestoes[targetSi];
+  const membroOrigem = origem?.membros?.[srcMi];
+  const membroDestino = destino?.membros?.[targetMi];
+  if (!membroOrigem || !membroDestino) {
+    return {ok:false, erro:'Não foi possível identificar os integrantes da troca.'};
+  }
+  if (membroOrigem.user_id === membroDestino.user_id) {
+    return {ok:false, erro:`${membroOrigem.id} já está presente na equipe de destino.`};
+  }
+  if (destino.membros.some((m, i) => i !== targetMi && m.user_id === membroOrigem.user_id)) {
+    return {ok:false, erro:`${membroOrigem.id} já pertence à equipe de destino.`};
+  }
+  if (origem.membros.some((m, i) => i !== srcMi && m.user_id === membroDestino.user_id)) {
+    return {ok:false, erro:`${membroDestino.id} já pertence à equipe de origem.`};
+  }
+  return {ok:true};
+}
+
+function _trocarMembros(srcSi, srcMi, targetSi, targetMi) {
+  const validacao = _validarTroca(srcSi, srcMi, targetSi, targetMi);
+  if (!validacao.ok) return validacao;
+  const origem = _sugestoes[srcSi];
+  const destino = _sugestoes[targetSi];
+  const membroOrigem = origem.membros[srcMi];
+  const membroDestino = destino.membros[targetMi];
+
+  origem.membros[srcMi] = membroDestino;
+  destino.membros[targetMi] = membroOrigem;
+  origem.best_team[srcMi] = membroDestino.user_id;
+  destino.best_team[targetMi] = membroOrigem.user_id;
+  return {ok:true};
+}
+
+async function onMemberDrop(e, targetSi, targetMi) {
   e.preventDefault();
-  e.currentTarget.classList.remove('drag-over');
+  e.stopPropagation();
+  e.currentTarget.classList.remove('drag-over','drop-valid','drop-blocked');
   if (_drag === null || _drag.si === targetSi) return;
 
   const srcSi = _drag.si;
   const srcMi = _drag.mi;
+  _drag = null;
+  const resultado = _trocarMembros(srcSi, srcMi, targetSi, targetMi);
+  if (!resultado.ok) { alert(resultado.erro); return; }
 
-  // Encontra o índice alvo mais próximo (onde soltou)
-  const targetMi = 0;  // troca pelo primeiro disponível que não está lá
-
-  // Troca os membros entre as duas sugestões
-  const tmp = _sugestoes[srcSi].membros[srcMi];
-  // Encontra um membro do targetSi que não está no srcSi para trocar
-  // Estratégia simples: troca com o membro na mesma posição
-  const tgtMi = Math.min(srcMi, _sugestoes[targetSi].membros.length - 1);
-
-  const tmpMem = _sugestoes[srcSi].membros[srcMi];
-  _sugestoes[srcSi].membros[srcMi]   = _sugestoes[targetSi].membros[tgtMi];
-  _sugestoes[targetSi].membros[tgtMi] = tmpMem;
-
-  // Atualiza best_team também
-  _sugestoes[srcSi].best_team[srcMi]   = _sugestoes[srcSi].membros[srcMi].user_id;
-  _sugestoes[targetSi].best_team[tgtMi] = _sugestoes[targetSi].membros[tgtMi].user_id;
-
+  const exibidasAntes = _exibidas;
   renderSugestoes();
+  while (_exibidas < exibidasAntes) mostrarMais();
 
   // Reavalia as duas equipes modificadas
   await Promise.all([
@@ -1117,14 +1157,14 @@ async function reavaliar(si) {
           const txt = valorScore(sc);
           const short = {dominio:'Dom',ecossistema:'Eco',linguagens:'Ling'}[d];
           const nomes = {dominio:'Domínio',ecossistema:'Ecossistema',linguagens:'Linguagens'};
-          return `<span class="dim-score" title="${nomes[d]}: classificação e pontuação desta dimensão">${short}: <span>${txt}</span></span>`;
+          return `<span class="dim-score" title="${nomes[d]}: nota normalizada de 0 a 1; não representa quantidade de tags">${short}: <span>${txt}</span></span>`;
         }).join('');
 
         const atValido = data.at_label && String(data.at_label).toLowerCase() !== 'null';
-        const atTxt = atValido ? `${data.at_label} (${data.at_score})` : 'Não informado';
-        const atBadge = `<span class="dim-score" title="Aptidão Técnica: síntese agregada de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.35)">AT: <span>${atTxt}</span></span>`;
+        const atTxt = atValido ? `${data.at_label} (${Number(data.at_score).toFixed(2)})` : 'Não informado';
+        const atBadge = `<span class="dim-score" title="Aptidão Técnica: síntese agregada de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.45)">AT: <span style="color:var(--accent)">${atTxt}</span></span>`;
         const acValido = data.ac_label && String(data.ac_label).toLowerCase() !== 'null';
-        const acTxt = acValido ? `${data.ac_label} (${data.ac_score})` : 'Não informado';
+        const acTxt = acValido ? `${data.ac_label} (${Number(data.ac_score).toFixed(2)})` : 'Não informado';
         const acBadge = `<span class="dim-score" title="Aptidão Colaborativa: estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
 
         dimsEl.innerHTML = dimBadges + atBadge + acBadge;
