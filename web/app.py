@@ -388,6 +388,7 @@ def api_salvar():
     data      = request.get_json(silent=True) or {}
     sugestao  = data.get("sugestao", {})
     sugestao_ga = data.get("sugestao_ga_original")
+    backlog_id = str(data.get("backlog_id") or "").strip()
     nome_proj = data.get("nome_projeto", "Projeto sem título")
 
     registro = {
@@ -401,7 +402,10 @@ def api_salvar():
         "best_fitness": sugestao.get("best_fitness", 0),
         "gens_executed":sugestao.get("gens_executed", 0),
         "duration_sec": sugestao.get("duration_sec", 0),
+        "stop_reason":  sugestao.get("stop_reason", "—"),
     }
+    if backlog_id:
+        registro["backlog_id"] = backlog_id
 
     # Mantém a equipe originalmente sugerida pelo AG separada da composição
     # que o gestor eventualmente ajustou antes de salvar. Registros antigos
@@ -419,6 +423,12 @@ def api_salvar():
     hist.insert(0, registro)
     hist = hist[:100]
     _write_hist(hist)
+
+    # Um item só sai do backlog depois que seu registro foi efetivamente
+    # gravado no histórico. Funciona tanto no fluxo individual quanto na fila.
+    if backlog_id:
+        backlog = [item for item in _read_backlog() if item.get("id") != backlog_id]
+        _write_backlog(backlog)
 
     return jsonify({"ok": True, "id": registro["id"]})
 

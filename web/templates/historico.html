@@ -171,6 +171,10 @@
             style="background:rgba(99,102,241,.12);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
             ✏️ Editar
           </button>
+          <button onclick="baixarEquipeHistoricoCsv('{{r.id}}')"
+            style="background:rgba(52,211,153,.1);border:1px solid var(--accent2);color:var(--accent2);border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+            ⬇ CSV
+          </button>
           <button onclick="deletarRegistro('{{r.id}}')"
             style="background:rgba(248,113,113,.1);border:1px solid #f87171;color:#f87171;border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
             🗑 Excluir
@@ -584,6 +588,59 @@ function _histDesenharRadar(scores, coverage) {
   data.forEach(p=>h+=`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--accent)"/>`);
   axes.forEach(([lb,k],i)=>{const p=pt(i,1.38),c=coverage[k]||{},fmt=x=>x?`${x.covered}/${x.total}`:'—';h+=`<text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--text)">${lb}</text><text x="${p[0]}" y="${p[1]+14}" text-anchor="middle" font-size="10" fill="var(--text)">${_histEscape(scores[k]?.rotulo||'—')}</text><text x="${p[0]}" y="${p[1]+27}" text-anchor="middle" font-size="9" fill="var(--muted)">M ${fmt(c.M)}</text>`});
   svg.innerHTML=h;
+}
+
+function _histCsvValor(valor) {
+  const texto = valor == null ? '' : String(valor);
+  return `"${texto.replaceAll('"', '""')}"`;
+}
+
+function _histListaProjeto(projeto, dim, prioridade) {
+  return (projeto?.[dim]?.[prioridade] || []).join(' | ');
+}
+
+async function baixarEquipeHistoricoCsv(registroId) {
+  try {
+    const rr = await fetch(`/api/historico/${encodeURIComponent(registroId)}`);
+    const registro = await rr.json();
+    if (!rr.ok || registro.erro) throw new Error(registro.erro || 'Registro não encontrado.');
+    const ids = _histIds(registro);
+    const ar = await fetch('/api/avaliar', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({team_ids:ids, projeto_alvo:registro.projeto_alvo || {}}),
+    });
+    const av = await ar.json();
+    if (!ar.ok || av.erro) throw new Error(av.erro || 'Não foi possível avaliar a equipe.');
+    const scores = av.scores || {}, p = registro.projeto_alvo || {};
+    const fitness = Number(av.fitness ?? registro.best_fitness ?? 0);
+    const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
+    const cabecalho = [
+      'Ranking','Projeto','Fitness','FitnessPercentual','Classificacao','EquipeIds','Membros',
+      'DomMust','DomShould','DomCould','EcoMust','EcoShould','EcoCould','LingMust','LingShould','LingCould',
+      'DomScore','DomClassificacao','EcoScore','EcoClassificacao','LingScore','LingClassificacao',
+      'ATScore','ATClassificacao','ACScore','ACClassificacao','DuracaoSegundos','GeracoesExecutadas','MotivoParada'
+    ];
+    const linha = [
+      1, registro.nome_projeto, fitness.toFixed(8), (fitness*100).toFixed(2), label(fitness),
+      `[${ids.join(', ')}]`, (av.membros||[]).map(m=>m.id).join(' | '),
+      _histListaProjeto(p,'dominio','must'), _histListaProjeto(p,'dominio','should'), _histListaProjeto(p,'dominio','could'),
+      _histListaProjeto(p,'ecossistema','must'), _histListaProjeto(p,'ecossistema','should'), _histListaProjeto(p,'ecossistema','could'),
+      _histListaProjeto(p,'linguagens','must'), _histListaProjeto(p,'linguagens','should'), _histListaProjeto(p,'linguagens','could'),
+      scores.dominio?.score, scores.dominio?.rotulo, scores.ecossistema?.score, scores.ecossistema?.rotulo,
+      scores.linguagens?.score, scores.linguagens?.rotulo, av.at_score, av.at_label, av.ac_score, av.ac_label,
+      registro.duration_sec, registro.gens_executed, registro.stop_reason || ''
+    ];
+    const csv = '\uFEFF' + cabecalho.map(_histCsvValor).join(',') + '\r\n' + linha.map(_histCsvValor).join(',');
+    const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+    const link = document.createElement('a');
+    const nome = (registro.nome_projeto || 'projeto').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-zA-Z0-9_-]+/g,'_').replace(/^_+|_+$/g,'').toLowerCase() || 'projeto';
+    link.href = url;
+    link.download = `teamplus_${nome}_equipe_alocada.csv`;
+    document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url);
+  } catch (erro) {
+    alert(`Não foi possível baixar o CSV: ${erro.message}`);
+  }
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharEquipeHistorico(); });

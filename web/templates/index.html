@@ -417,6 +417,7 @@ let _sugestoesOriginais = []; // cópia imutável do resultado do AG
 let _fixados     = new Set();  // user_ids fixados para próxima rodada
 let _projetoAlvo = {};
 let _nomeProjeto = '';
+let _backlogIdAtual = null;
 
 async function extrairProjeto() {
   const descricao = document.getElementById('descricao-livre').value.trim();
@@ -682,7 +683,7 @@ async function baixarSugestoesCsv() {
 
   const cabecalho = [
     'Ranking', 'Projeto', 'Fitness', 'FitnessPercentual', 'Classificacao',
-    'EquipeIds', 'Membros', 'Papeis',
+    'EquipeIds', 'Membros',
     'DomMust', 'DomShould', 'DomCould',
     'EcoMust', 'EcoShould', 'EcoCould',
     'LingMust', 'LingShould', 'LingCould',
@@ -704,7 +705,6 @@ async function baixarSugestoesCsv() {
       fitLabel(fitness),
       `[${ids.join(', ')}]`,
       membros.map(m => m.id || `Dev${m.user_id}`).join(' | '),
-      membros.map(m => m.role || '').join(' | '),
       _listaProjeto('dominio', 'must'),
       _listaProjeto('dominio', 'should'),
       _listaProjeto('dominio', 'could'),
@@ -1120,12 +1120,14 @@ async function salvar(si) {
         sugestao_ga_original: _sugestoesOriginais[si] || _sugestoes[si],
         nome_projeto: _nomeProjeto,
         projeto_alvo: _projetoAlvo,
+        backlog_id:   _backlogIdAtual,
       }),
     });
     const data = await res.json();
     if (data.ok) {
       btn.classList.add('saved');
       btn.innerHTML = '✅ Salvo no histórico';
+      _backlogIdAtual = null;
     }
   } catch(err) {
     btn.textContent = 'Erro ao salvar';
@@ -1217,6 +1219,7 @@ async function explicar(si) {
   if (!raw) return;
   sessionStorage.removeItem('backlog_exec');
   const p = JSON.parse(raw);
+  _backlogIdAtual = p.id || null;
 
   document.getElementById('nome_projeto').value = p.nome_projeto || '';
   if (p.team_size) document.getElementById('team_size').value = p.team_size;
@@ -1401,19 +1404,22 @@ async function explicar(si) {
     if (btn) { btn.disabled = true; btn.textContent = 'Salvando…'; }
 
     // Salvar no histórico
-    await fetch('/api/salvar', {
+    const salvarRes = await fetch('/api/salvar', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         sugestao:     melhor,
+        sugestao_ga_original: melhor,
         nome_projeto: nomeProjeto,
         projeto_alvo: projetoAlvo,
+        backlog_id:   backlogId,
       }),
     });
-
-    // Remover do backlog
-    if (backlogId) {
-      await fetch(`/api/backlog/${backlogId}`, { method: 'DELETE' });
+    const salvarData = await salvarRes.json();
+    if (!salvarRes.ok || !salvarData.ok) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Tentar salvar novamente'; }
+      alert(salvarData.erro || 'Não foi possível salvar a equipe. O projeto permanece no backlog.');
+      return;
     }
 
     // Adicionar devs à lista de excluídos
