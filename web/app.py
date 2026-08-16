@@ -400,10 +400,11 @@ def api_salvar():
     sugestao  = data.get("sugestao", {})
     sugestao_ga = data.get("sugestao_ga_original")
     backlog_id = str(data.get("backlog_id") or "").strip()
+    registro_id = str(data.get("registro_id") or "").strip()
     nome_proj = data.get("nome_projeto", "Projeto sem título")
 
     registro = {
-        "id":           datetime.now().strftime("%Y%m%d%H%M%S"),
+        "id":           registro_id or datetime.now().strftime("%Y%m%d%H%M%S"),
         "status":       "alocado",
         "timestamp":    datetime.now().strftime("%d/%m/%Y %H:%M"),
         "nome_projeto": nome_proj,
@@ -441,7 +442,14 @@ def api_salvar():
         }
 
     hist = _read_hist()
-    hist.insert(0, registro)
+    if registro_id:
+        indice = next((i for i, item in enumerate(hist) if item.get("id") == registro_id), None)
+        if indice is None:
+            return jsonify({"erro": "Registro do histórico não encontrado para atualização."}), 404
+        registro["atualizado_em"] = datetime.now().strftime("%d/%m/%Y %H:%M")
+        hist[indice] = registro
+    else:
+        hist.insert(0, registro)
     hist = hist[:100]
     _write_hist(hist)
 
@@ -451,7 +459,7 @@ def api_salvar():
         backlog = [item for item in _read_backlog() if item.get("id") != backlog_id]
         _write_backlog(backlog)
 
-    return jsonify({"ok": True, "id": registro["id"]})
+    return jsonify({"ok": True, "id": registro["id"], "atualizado": bool(registro_id)})
 
 @app.route("/api/sugerir_fila", methods=["POST"])
 def sugerir_fila():
@@ -562,6 +570,30 @@ def api_backlog_delete(item_id):
     bl = [x for x in _read_backlog() if x["id"] != item_id]
     _write_backlog(bl)
     return jsonify({"ok": True})
+
+@app.route("/api/backlog/<item_id>", methods=["PUT"])
+def api_backlog_update(item_id):
+    data = request.get_json(silent=True) or {}
+    team_size, erro_team_size = _validar_team_size(data.get("team_size", 4))
+    if erro_team_size:
+        return jsonify({"erro": erro_team_size}), 400
+    nome = str(data.get("nome_projeto") or "").strip()
+    if not nome:
+        return jsonify({"erro": "Informe o nome do projeto."}), 400
+    backlog = _read_backlog()
+    indice = next((i for i, item in enumerate(backlog) if item.get("id") == item_id), None)
+    if indice is None:
+        return jsonify({"erro": "Projeto não encontrado no backlog."}), 404
+    backlog[indice] = {
+        **backlog[indice],
+        "project_id": data.get("project_id", ""),
+        "nome_projeto": nome,
+        "projeto_alvo": data.get("projeto_alvo", {}),
+        "team_size": team_size,
+        "atualizado_em": datetime.now().strftime("%d/%m/%Y %H:%M"),
+    }
+    _write_backlog(backlog)
+    return jsonify({"ok": True, "id": item_id, "atualizado": True})
 
 @app.route("/api/backlog/reorder", methods=["POST"])
 def api_backlog_reorder():

@@ -426,6 +426,7 @@ let _projetoAlvo = {};
 let _nomeProjeto = '';
 let _backlogIdAtual = null;
 let _projectId = '';
+let _registroEditandoId = null;
 
 async function extrairProjeto() {
   const descricao = document.getElementById('descricao-livre').value.trim();
@@ -611,7 +612,7 @@ function cardSugestao(s, si) {
             style="width:100%;height:auto;display:block;margin-top:4px"></svg>
         </div>
       </div>
-      <p class="drag-hint">↕ Arraste membros entre as duas sugestões para trocar</p>
+      ${_sugestoes.length > 1 ? '<p class="drag-hint">↕ Arraste membros entre as sugestões para trocar</p>' : ''}
       <button class="btn btn-save" id="btn-save-${si}" onclick="salvar(${si})">
         💾 Salvar esta sugestão
       </button>
@@ -1178,6 +1179,9 @@ async function reavaliar(si) {
 // ── Salvar sugestão ───────────────────────────────────────────────────────────
 async function salvar(si) {
   const btn = document.getElementById(`btn-save-${si}`);
+  if (_registroEditandoId && !confirm(
+    'Esta ação substituirá a equipe atualmente salva neste projeto. Deseja continuar?'
+  )) return;
   btn.textContent = 'Salvando…';
   btn.disabled = true;
 
@@ -1191,12 +1195,14 @@ async function salvar(si) {
         nome_projeto: _nomeProjeto,
         projeto_alvo: _projetoAlvo,
         backlog_id:   _backlogIdAtual,
+        registro_id:  _registroEditandoId,
       }),
     });
     const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.erro || 'Não foi possível salvar a equipe.');
     if (data.ok) {
       btn.classList.add('saved');
-      btn.innerHTML = '✅ Salvo no histórico';
+      btn.innerHTML = data.atualizado ? '✅ Equipe atualizada no histórico' : '✅ Salvo no histórico';
       _backlogIdAtual = null;
     }
   } catch(err) {
@@ -1251,6 +1257,8 @@ async function explicar(si) {
   if (!raw) return;
   sessionStorage.removeItem('editar_registro');
   const r = JSON.parse(raw);
+  _registroEditandoId = r.id || null;
+  _projectId = r.project_id || '';
 
   document.getElementById('nome_projeto').value = r.nome_projeto || '';
 
@@ -1268,17 +1276,22 @@ async function explicar(si) {
 
   if (r.membros?.length) {
     _sugestoes   = [{ best_team: r.best_team, membros: r.membros, best_fitness: r.best_fitness,
-                      duration_sec: r.duration_sec, gens_executed: r.gens_executed, stop_reason: '(editando)' }];
-    _sugestoes.push({..._sugestoes[0]});
+                      duration_sec: r.duration_sec, gens_executed: r.gens_executed,
+                      best_generation: r.best_generation, seed: r.seed,
+                      population_size: r.population_size, max_generations: r.max_generations,
+                      mutation_rate: r.mutation_rate, crossover_rate: r.crossover_rate,
+                      elitism_count: r.elitism_count, stable_gens: r.stable_gens,
+                      crossover_operator: r.crossover_operator, project_id: r.project_id,
+                      timestamp: r.timestamp, stop_reason: '(editando)' }];
     const original = r.equipe_ga_original || _sugestoes[0];
-    _sugestoesOriginais = [JSON.parse(JSON.stringify(original)), JSON.parse(JSON.stringify(original))];
+    _sugestoesOriginais = [JSON.parse(JSON.stringify(original))];
     _projetoAlvo = r.projeto_alvo || {};
     _nomeProjeto = r.nome_projeto || '';
     renderSugestoes();
 
     const banner = document.createElement('div');
     banner.style = 'background:rgba(99,102,241,.1);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;font-size:.8rem;color:var(--accent);margin-bottom:12px';
-    banner.innerHTML = '✏️ <strong>Modo edição</strong> — equipe restaurada do histórico. Ajuste as tags e clique em <strong>Sugerir equipes</strong> para rodar novamente.';
+    banner.innerHTML = '✏️ <strong>Modo edição</strong> — equipe atual restaurada. Ajuste os requisitos e clique em <strong>Montar equipe</strong> para gerar novas sugestões. Ao salvar uma delas, a equipe anterior será substituída.';
     document.getElementById('resultado-area').insertAdjacentElement('beforebegin', banner);
   }
 })();

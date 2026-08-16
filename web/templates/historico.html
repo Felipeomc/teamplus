@@ -72,7 +72,7 @@
 
   <!-- Form inline para criar item no backlog -->
   <div id="backlog-form" style="display:none;margin-top:12px" class="card">
-    <div style="font-size:.8rem;font-weight:600;margin-bottom:10px;color:var(--text)">Novo projeto no backlog</div>
+    <div id="backlog-form-title" style="font-size:.8rem;font-weight:600;margin-bottom:10px;color:var(--text)">Novo projeto no backlog</div>
     <div style="display:grid;grid-template-columns:100px 1fr 80px;gap:10px;margin-bottom:10px">
       <div>
         <label>Código</label>
@@ -116,7 +116,7 @@
     </div>
     {% endfor %}
     <div style="display:flex;gap:8px;margin-top:8px">
-      <button onclick="salvarBacklog()"
+      <button id="btn-salvar-backlog" onclick="salvarBacklog()"
         style="background:var(--accent);color:#fff;border:none;border-radius:6px;
         padding:8px 16px;font-size:.8rem;cursor:pointer;font-family:inherit">
         Salvar no backlog
@@ -163,11 +163,11 @@
           {% set ga = r.equipe_ga_original %}
           <button type="button" onclick="toggleSugestaoAg('ga-{{r.id}}',this)" aria-expanded="false"
             style="justify-self:start;background:transparent;border:0;color:var(--accent);padding:3px 1px;cursor:pointer;font-family:inherit;font-size:.7rem">
-            ▸ Ver sugestão original do AG
+            ▸ Ver sugestão do otimizador
           </button>
           <div id="ga-{{r.id}}" style="display:none">
             <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
-              <span class="team-history-label">Sugestão original do AG</span>
+              <span class="team-history-label">Sugestão do otimizador</span>
               <span class="fitness-val mono">{{ ga.best_fitness }}</span>
               <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
               <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
@@ -245,6 +245,7 @@
 // ── Backlog ───────────────────────────────────────────────────────────────────
 let _backlog = [];
 let _blDrag  = null;
+let _blEditandoId = null;
 
 async function carregarBacklog() {
   try {
@@ -294,6 +295,11 @@ function renderBacklog() {
         style="background:rgba(79,142,247,.12);border:1px solid var(--accent);color:var(--accent);
         border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;white-space:nowrap">
         ⚡ Montar equipe
+      </button>
+      <button onclick="event.stopPropagation();editarBacklog('${p.id}')"
+        style="background:rgba(99,102,241,.12);border:1px solid var(--accent);color:var(--accent);
+        border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
+        ✏️ Editar
       </button>
       <button onclick="event.stopPropagation();deletarBacklog('${p.id}')"
         style="background:rgba(248,113,113,.1);border:1px solid #f87171;color:#f87171;
@@ -376,6 +382,16 @@ function blRenderTags(dim, prio) {
 
 
 function abrirFormBacklog() {
+  _blEditandoId = null;
+  document.getElementById('backlog-form-title').textContent = 'Novo projeto no backlog';
+  document.getElementById('btn-salvar-backlog').textContent = 'Salvar no backlog';
+  document.getElementById('bl-project-id').value = '';
+  document.getElementById('bl-nome').value = '';
+  document.getElementById('bl-team-size').value = '4';
+  ['dom','eco','ling'].forEach(dim => ['must','should','could'].forEach(prio => {
+    blTags[dim][prio] = [];
+    blRenderTags(dim, prio);
+  }));
   document.getElementById('backlog-form').style.display = 'block';
   document.getElementById('bl-nome').focus();
   // garante drop zones em todos os campos, mesmo os vazios
@@ -384,16 +400,40 @@ function abrirFormBacklog() {
   });
 }
 function fecharFormBacklog() {
+  _blEditandoId = null;
   document.getElementById('backlog-form').style.display = 'none';
   document.getElementById('bl-nome').value = '';
   document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-team-size').value = '4';
+  document.getElementById('backlog-form-title').textContent = 'Novo projeto no backlog';
+  document.getElementById('btn-salvar-backlog').textContent = 'Salvar no backlog';
   ['dom','eco','ling'].forEach(dim => {
     ['must','should','could'].forEach(prio => {
       blTags[dim][prio] = [];
       blRenderTags(dim, prio);
     });
   });
+}
+
+function editarBacklog(id) {
+  const projeto = _backlog.find(item => item.id === id);
+  if (!projeto) { alert('Projeto não encontrado no backlog.'); return; }
+  _blEditandoId = id;
+  document.getElementById('bl-project-id').value = projeto.project_id || '';
+  document.getElementById('bl-nome').value = projeto.nome_projeto || '';
+  document.getElementById('bl-team-size').value = projeto.team_size || 4;
+  const mapa = {dom:'dominio', eco:'ecossistema', ling:'linguagens'};
+  for (const [curta, completa] of Object.entries(mapa)) {
+    for (const prioridade of ['must','should','could']) {
+      blTags[curta][prioridade] = [...(projeto.projeto_alvo?.[completa]?.[prioridade] || [])];
+      blRenderTags(curta, prioridade);
+      document.getElementById(`bl-${curta}-${prioridade}`).value = '';
+    }
+  }
+  document.getElementById('backlog-form-title').textContent = 'Editar projeto do backlog';
+  document.getElementById('btn-salvar-backlog').textContent = 'Salvar alterações';
+  document.getElementById('backlog-form').style.display = 'block';
+  document.getElementById('backlog-form').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function _parseTags(str) {
@@ -415,13 +455,14 @@ async function salvarBacklog() {
     },
   };
 
-  const res = await fetch('/api/backlog', {
-    method: 'POST',
+  const url = _blEditandoId ? `/api/backlog/${encodeURIComponent(_blEditandoId)}` : '/api/backlog';
+  const res = await fetch(url, {
+    method: _blEditandoId ? 'PUT' : 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify(payload),
   });
   const data = await res.json();
-  if (!data.ok) { alert('Erro ao salvar.'); return; }
+  if (!res.ok || !data.ok) { alert(data.erro || 'Erro ao salvar.'); return; }
   fecharFormBacklog();
   await carregarBacklog();
 }
