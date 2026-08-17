@@ -52,7 +52,7 @@ function renderCard(d) {
       <div class="dev-avatar">${initials}</div>
       <div>
         <div class="dev-id">${nome}</div>
-        <div class="dev-role">${d.id} · ${d.role}</div>
+        <div class="dev-role">${d.id}</div>
       </div>
     </div>
     ${domPills  ? `<div class="dev-section">Domínio</div><div class="dev-pills">${domPills}</div>` : ''}
@@ -66,7 +66,7 @@ function filtrar() {
   const q = document.getElementById('busca').value.toLowerCase().trim();
   const filtered = q
     ? devs.filter(d => {
-        const haystack = [d.id, d.pseudonimo, d.role,
+        const haystack = [d.id, d.pseudonimo,
           ...(d.dominio||[]), ...(d.ecossistema||[]),
           ...(d.linguagens||[]), ...(d.metodologia||[])
         ].join(' ').toLowerCase();

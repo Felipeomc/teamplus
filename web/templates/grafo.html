@@ -17,7 +17,6 @@
     border-radius:12px; padding:16px; display:none; z-index:10;
   }
   #perfil-card .pc-name  { font-weight:700; font-size:.9rem; margin-bottom:4px; }
-  #perfil-card .pc-role  { font-size:.75rem; color:var(--muted); margin-bottom:10px; }
   #perfil-card .pc-skills { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px; }
   #perfil-card .pc-skill { font-size:.65rem; background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:2px 6px; }
   #perfil-card .pc-conns { font-size:.75rem; color:var(--muted); line-height:1.7; }
@@ -82,7 +81,6 @@
   <div id="perfil-card">
     <span class="pc-close" onclick="fecharPerfil()">×</span>
     <div class="pc-name"   id="pc-name"></div>
-    <div class="pc-role"   id="pc-role"></div>
     <div class="pc-skills" id="pc-skills"></div>
     <div class="pc-conns"  id="pc-conns">—</div>
     <div class="pc-vizinhos" id="pc-vizinhos"></div>
@@ -245,12 +243,7 @@ function draw() {
 }
 
 function nodeColor(n) {
-  const v=(n.contractRoleName||'').toLowerCase();
-  if (v.includes('senior'))                        return '#4f8ef7';
-  if (v.includes('junior'))                        return '#34d399';
-  if (v.includes('lead')||v.includes('manager'))   return '#f59e0b';
-  if (v.includes('full'))                          return '#a78bfa';
-  return '#64748b';
+  return '#4f8ef7';
 }
 
 // ── Hit-test ──────────────────────────────────────────────────────────────────
@@ -305,7 +298,6 @@ function hideTip() { tip.style.display='none'; }
 // ── Perfil card ───────────────────────────────────────────────────────────────
 async function mostrarPerfil(n) {
   document.getElementById('pc-name').textContent   = `${n.pseudonimo || n.id} · ${n.id}`;
-  document.getElementById('pc-role').textContent   = n.contractRoleName || 'Developer';
   document.getElementById('pc-skills').innerHTML   =
     (n.hardskill||[]).slice(0,12).map(s=>`<span class="pc-skill">${s}</span>`).join('');
   document.getElementById('pc-vizinhos').innerHTML = '';

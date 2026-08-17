@@ -81,6 +81,8 @@
     border-radius:8px; background:#11141c; color:var(--text); box-shadow:0 12px 35px rgba(0,0,0,.55);
     font-size:.67rem; font-weight:400; line-height:1.55; text-align:left; white-space:normal; }
   .affinity-info:hover .affinity-tooltip,.affinity-info:focus .affinity-tooltip { display:block; }
+  .individual-card.out .affinity-tooltip { left:0; right:auto; transform:none; }
+  .individual-card.in .affinity-tooltip { left:auto; right:0; transform:none; }
   .affinity-formula { display:block; margin:6px 0; color:#bfdbfe; font-family:monospace; }
   @media (max-width:800px) {
     .team-compare { min-width:100%; }
@@ -94,7 +96,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-title">Histórico de projetos</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+  <div class="page-title">Histórico de projetos</div>
+  <a class="btn btn-ghost" href="/api/validation-feedback/csv" style="font-size:.72rem;text-decoration:none">⬇ Decisões da validação</a>
+</div>
 <div class="page-sub">{{ historico|length }} registro(s) — projetos salvos e sugestões geradas.</div>
 
 
@@ -151,21 +156,21 @@
       <div style="font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:4px">{{ dim_label }}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
         <div>
-          <label style="font-size:.65rem">MUST ●</label>
+          <label style="font-size:.65rem">MUST — obrigatório ●</label>
           <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-must" style="min-height:36px">
             <input type="text" id="bl-{{dim_id}}-must" placeholder="ex: web"
               onkeydown="blAddTag(event,'{{dim_id}}','must')">
           </div>
         </div>
         <div>
-          <label style="font-size:.65rem">SHOULD ●</label>
+          <label style="font-size:.65rem">SHOULD — desejável ●</label>
           <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-should" style="min-height:36px">
             <input type="text" id="bl-{{dim_id}}-should" placeholder="opcional"
               onkeydown="blAddTag(event,'{{dim_id}}','should')">
           </div>
         </div>
         <div>
-          <label style="font-size:.65rem">COULD ●</label>
+          <label style="font-size:.65rem">COULD — complementar ●</label>
           <div class="tag-input-wrap" id="bl-wrap-{{dim_id}}-could" style="min-height:36px">
             <input type="text" id="bl-{{dim_id}}-could" placeholder="opcional"
               onkeydown="blAddTag(event,'{{dim_id}}','could')">
@@ -174,6 +179,13 @@
       </div>
     </div>
     {% endfor %}
+    <div style="margin-top:12px;padding:11px;border:1px solid var(--border);border-radius:8px">
+      <div style="font-size:.75rem;font-weight:600;color:var(--text)">Integrantes fixos (opcional)</div>
+      <div class="text-muted" style="font-size:.68rem;margin:4px 0 8px">Pesquise pelo pseudônimo ou tecnologia. As equipes recomendadas incluirão os integrantes selecionados.</div>
+      <input id="bl-dev-search" type="search" placeholder="Ex.: Mila, Python, Cloud" oninput="buscarDevsBacklog(this.value)">
+      <div id="bl-fixed-selected" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div>
+      <div id="bl-dev-results" style="display:none;max-height:210px;overflow:auto;margin-top:8px;border-top:1px solid var(--border)"></div>
+    </div>
     <div style="display:flex;gap:8px;margin-top:8px">
       <button id="btn-salvar-backlog" onclick="salvarBacklog()"
         style="background:var(--accent);color:#fff;border:none;border-radius:6px;
@@ -269,7 +281,6 @@
           <div class="member-card">
             <div class="member-avatar">{{ (m.pseudonimo or m.id)[:2] }}</div>
             <div class="member-name">{{ m.pseudonimo or m.id }} <span class="internal-id">{{m.id}}</span></div>
-            <div class="member-role">{{ m.role }}</div>
             <div class="member-tags">
               {% for t in (m.dominio + m.ecossistema + m.linguagens)[:6] %}
               <span class="member-tag">{{ t }}</span>
@@ -350,6 +361,33 @@
 let _backlog = [];
 let _blDrag  = null;
 let _blEditandoId = null;
+let _blDevs = [];
+let _blFixedDevs = new Set();
+
+async function _carregarDevsBacklog() {
+  if(_blDevs.length) return;
+  const res=await fetch('/api/devs/resumo');
+  _blDevs=await res.json();
+}
+function _renderFixedDevs() {
+  const box=document.getElementById('bl-fixed-selected'); if(!box) return;
+  box.innerHTML=[..._blFixedDevs].map(id=>{const d=_blDevs.find(x=>Number(x.user_id)===Number(id));return `<span class="composition-member" style="border-color:var(--warn)">${_histEscape(d?.pseudonimo||d?.id||`Dev${id}`)} <button type="button" onclick="removerDevFixo(${id})" style="border:0;background:none;color:var(--muted);cursor:pointer">×</button></span>`}).join('');
+}
+async function buscarDevsBacklog(value) {
+  await _carregarDevsBacklog();
+  const q=String(value||'').trim().toLowerCase(), box=document.getElementById('bl-dev-results');
+  if(!q){box.style.display='none';box.innerHTML='';return;}
+  const encontrados=_blDevs.filter(d=>[d.pseudonimo,d.id,...(d.dominio||[]),...(d.ecossistema||[]),...(d.linguagens||[])].join(' ').toLowerCase().includes(q)).slice(0,30);
+  box.style.display='block';
+  box.innerHTML=encontrados.map(d=>{const fixed=_blFixedDevs.has(Number(d.user_id));return `<button type="button" ${!d.disponivel&&!fixed?'disabled':''} onclick="adicionarDevFixo(${Number(d.user_id)})" style="width:100%;display:flex;justify-content:space-between;gap:8px;padding:8px;border:0;border-bottom:1px solid var(--border);background:transparent;color:${d.disponivel||fixed?'var(--text)':'var(--muted)'};cursor:${d.disponivel||fixed?'pointer':'not-allowed'};text-align:left"><span><strong>${_histEscape(d.pseudonimo||d.id)}</strong> <span class="internal-id">${_histEscape(d.id)}</span><br><span class="text-muted">${_histEscape([...(d.dominio||[]),...(d.ecossistema||[]),...(d.linguagens||[])].slice(0,6).join(', '))}</span></span><span>${fixed?'Fixado':d.disponivel?'Fixar':'Já alocado'}</span></button>`}).join('')||'<div class="text-muted" style="padding:8px">Nenhum integrante encontrado.</div>';
+}
+function adicionarDevFixo(id){
+  const limite=Math.max(0,(parseInt(document.getElementById('bl-team-size').value)||4)-1);
+  if(_blFixedDevs.has(id)) return;
+  if(_blFixedDevs.size>=limite){alert(`É possível fixar no máximo ${limite} integrante(s), deixando uma posição para o otimizador.`);return;}
+  _blFixedDevs.add(id);_renderFixedDevs();buscarDevsBacklog(document.getElementById('bl-dev-search').value);
+}
+function removerDevFixo(id){_blFixedDevs.delete(id);_renderFixedDevs();buscarDevsBacklog(document.getElementById('bl-dev-search').value);}
 
 async function carregarBacklog() {
   try {
@@ -394,6 +432,7 @@ function renderBacklog() {
           Lang: ${(p.projeto_alvo?.linguagens?.must||[]).join(', ')||'—'}
         </div>
         <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${p.criado_em}</div>
+        ${(p.fixed_devs||[]).length ? `<div style="font-size:.67rem;color:var(--warn);margin-top:4px">📌 ${(p.fixed_devs||[]).length} integrante(s) fixado(s) para este projeto</div>` : ''}
       </div>
       <button onclick="event.stopPropagation();executarBacklog('${p.id}')"
         style="background:rgba(79,142,247,.12);border:1px solid var(--accent);color:var(--accent);
@@ -492,12 +531,16 @@ function blRenderTags(dim, prio) {
 
 function abrirFormBacklog() {
   _blEditandoId = null;
+  _blFixedDevs = new Set();
   document.getElementById('backlog-form-title').textContent = 'Novo projeto no backlog';
   document.getElementById('btn-salvar-backlog').textContent = 'Salvar no backlog';
   document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-nome').value = '';
   document.getElementById('bl-descricao').value = '';
   document.getElementById('bl-team-size').value = '4';
+  document.getElementById('bl-dev-search').value = '';
+  document.getElementById('bl-dev-results').style.display = 'none';
+  _renderFixedDevs();
   ['dom','eco','ling'].forEach(dim => ['must','should','could'].forEach(prio => {
     blTags[dim][prio] = [];
     blRenderTags(dim, prio);
@@ -511,11 +554,15 @@ function abrirFormBacklog() {
 }
 function fecharFormBacklog() {
   _blEditandoId = null;
+  _blFixedDevs = new Set();
   document.getElementById('backlog-form').style.display = 'none';
   document.getElementById('bl-nome').value = '';
   document.getElementById('bl-descricao').value = '';
   document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-team-size').value = '4';
+  document.getElementById('bl-dev-search').value = '';
+  document.getElementById('bl-dev-results').style.display = 'none';
+  _renderFixedDevs();
   document.getElementById('backlog-form-title').textContent = 'Novo projeto no backlog';
   document.getElementById('btn-salvar-backlog').textContent = 'Salvar no backlog';
   ['dom','eco','ling'].forEach(dim => {
@@ -526,14 +573,18 @@ function fecharFormBacklog() {
   });
 }
 
-function editarBacklog(id) {
+async function editarBacklog(id) {
   const projeto = _backlog.find(item => item.id === id);
   if (!projeto) { alert('Projeto não encontrado no backlog.'); return; }
   _blEditandoId = id;
+  await _carregarDevsBacklog();
+  _blFixedDevs = new Set((projeto.fixed_devs||[]).map(Number));
   document.getElementById('bl-project-id').value = projeto.project_id || '';
   document.getElementById('bl-nome').value = projeto.nome_projeto || '';
   document.getElementById('bl-descricao').value = projeto.descricao || '';
   document.getElementById('bl-team-size').value = projeto.team_size || 4;
+  document.getElementById('bl-dev-search').value = '';
+  _renderFixedDevs();
   const mapa = {dom:'dominio', eco:'ecossistema', ling:'linguagens'};
   for (const [curta, completa] of Object.entries(mapa)) {
     for (const prioridade of ['must','should','could']) {
@@ -561,6 +612,7 @@ async function salvarBacklog() {
     nome_projeto: nome,
     descricao:    document.getElementById('bl-descricao').value.trim(),
     team_size:    parseInt(document.getElementById('bl-team-size').value) || 4,
+    fixed_devs:   [..._blFixedDevs],
     projeto_alvo: {
       dominio:     { must: [...blTags.dom.must],  should: [...blTags.dom.should],  could: [...blTags.dom.could]  },
       ecossistema: { must: [...blTags.eco.must],  should: [...blTags.eco.should],  could: [...blTags.eco.could]  },
@@ -718,21 +770,20 @@ async function abrirEquipeHistorico(registroId, tipo) {
     document.getElementById('history-modal-subtitle').textContent = registro.nome_projeto || 'Projeto sem título';
     const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
     const scores = avaliacao.scores || {};
+    const must=['dominio','ecossistema','linguagens'].reduce((acc,d)=>{const x=avaliacao.coverage?.[d]?.M;if(x){acc.covered+=Number(x.covered||0);acc.total+=Number(x.total||0)}return acc},{covered:0,total:0});
     body.innerHTML = `
       <div class="history-summary">
-        <span class="badge badge-${label(avaliacao.fitness)}">Força técnica: ${label(avaliacao.fitness)} · ${Number(avaliacao.fitness).toFixed(4)}</span>
-        <span class="dim-score">DOM: ${_histEscape(scores.dominio?.rotulo || '—')}</span>
-        <span class="dim-score">ECO: ${_histEscape(scores.ecossistema?.rotulo || '—')}</span>
-        <span class="dim-score">LING: ${_histEscape(scores.linguagens?.rotulo || '—')}</span>
-        <span class="dim-score">AT: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
-        <span class="dim-score">AC: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
+        <span class="badge badge-${label(avaliacao.fitness)}">AE — adequação geral: ${label(avaliacao.fitness)} · ${Number(avaliacao.fitness).toFixed(4)}</span>
+        <span class="dim-score">AT — força técnica: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
+        <span class="dim-score">AC — afinidade colaborativa: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
+        <span class="dim-score">MUST — obrigatórios: ${must.covered}/${must.total}</span>
       </div>
+      <details style="font-size:.7rem;color:var(--muted);margin:-6px 0 14px"><summary style="cursor:pointer;color:var(--accent)">Como foi calculado?</summary><div style="margin-top:7px">DOM — domínio: ${_histEscape(scores.dominio?.rotulo || '—')} · ECO — ecossistema: ${_histEscape(scores.ecossistema?.rotulo || '—')} · LING — linguagens: ${_histEscape(scores.linguagens?.rotulo || '—')}</div></details>
       ${registro.descricao ? `<div class="text-muted" style="margin:-6px 0 16px;line-height:1.5"><strong style="color:var(--text)">Descrição:</strong> ${_histEscape(registro.descricao)}</div>` : ''}
       <div class="member-grid" style="margin-bottom:18px">
         ${(avaliacao.membros || []).map(m => { const nome=m.pseudonimo||m.id; return `<div class="member-card">
           <div class="member-avatar">${_histEscape(nome).slice(0,2)}</div>
           <div class="member-name">${_histEscape(nome)} <span class="internal-id">${_histEscape(m.id)}</span></div>
-          <div class="member-role">${_histEscape(m.role)}</div>
           <div class="member-tags">${_histTagsMembro(m, registro.projeto_alvo || {})}</div>
         </div>`}).join('')}
       </div>
@@ -771,14 +822,21 @@ function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[]) {
   const parcelas=detalhes.length ? detalhes.map(item=>numero(item.peso,2)).join(' + ') : '0';
   const linhas=detalhes.map(item=>`${_histEscape(_cmpNome(m))} × ${_histEscape(item.colega)}: ${numero(item.peso,2)} (${item.projetos_compartilhados} projeto${item.projetos_compartilhados===1?'':'s'} compartilhado${item.projetos_compartilhados===1?'':'s'})`).join('<br>');
   const info=`<span class="affinity-info" tabindex="0" aria-label="Como a afinidade foi calculada">i<span class="affinity-tooltip">
-    <strong>Como foi calculada</strong><br>${linhas||'Não há colegas de referência.'}
+    <strong>Como foi calculada</strong><br>Afinidade calculada segundo a regra organizacional validada pelo especialista: o vínculo cresce até quatro projetos compartilhados e diminui progressivamente após esse ponto para evitar concentração recorrente das mesmas duplas.<br><br>${linhas||'Não há colegas de referência.'}
     <span class="affinity-formula">(${parcelas}) ÷ ${detalhes.length||1} = ${numero(colab?.media,4)}</span>
     Relações sem histórico recebem peso 0.<br><strong>Escala do grafo:</strong> 1 projeto=0,25; 2=0,50; 3=0,75; 4=1,00; 5=0,90; 6=0,80; 7=0,70; 8=0,60; 9=0,50; 10=0,40; 11=0,30; 12=0,20; 13=0,10; 14 ou mais=0.</span></span>`;
   return `<div class="individual-card ${classe}"><div style="font-size:.63rem;color:var(--muted);text-transform:uppercase">${rotulo}</div>
     <div style="font-weight:700;margin:4px 0">${_histEscape(_cmpNome(m))}<span class="internal-id">${_histEscape(m.id)}</span></div>
-    <div class="text-muted">${_histEscape(m.role||'')}</div><div class="technology-tags">${skills.map(t=>`<span class="technology-tag">${_histEscape(t)}</span>`).join('')}</div>
+    <div class="technology-tags">${skills.map(t=>`<span class="technology-tag">${_histEscape(t)}</span>`).join('')}</div>
     ${exclusivas.length ? `<div style="margin-top:9px;font-size:.65rem;color:var(--muted)">Competências exclusivas nesta troca</div><div class="technology-tags">${exclusivas.slice(0,8).map(t=>`<span class="technology-tag ${classe==='in'?'gained':'lost'}">${_histEscape(t)}</span>`).join('')}</div>` : ''}
     <div style="margin-top:9px;font-size:.7rem;line-height:1.55">Trabalhou anteriormente com <strong>${colab?.relacoes||0} de ${colab?.total_relacoes||0} colegas desta equipe</strong> em <strong>${colab?.projetos_distintos??colab?.projetos??0} projetos distintos</strong> · afinidade colaborativa média nesta equipe: <strong>${numero(colab?.media,2)}</strong>.${info}</div></div>`;
+}
+
+function _cmpResumoAlteracao(c) {
+  const delta=Number(c.depois.ac||0)-Number(c.antes.ac||0);
+  const verbo=Math.abs(delta)<.00005?'manteve':delta>0?'elevou':'reduziu';
+  const coberturaMantida=['must','should','could'].every(k=>Number(c.depois.coverage[k].covered||0)>=Number(c.antes.coverage[k].covered||0));
+  return `A alteração <strong>${verbo} a afinidade colaborativa${verbo==='manteve'?'':` em ${Math.abs(delta).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}`}</strong> e <strong>${coberturaMantida?'manteve toda a cobertura técnica':'alterou a cobertura dos requisitos'}</strong>.`;
 }
 
 async function abrirComparacaoHistorico(registroId) {
@@ -791,10 +849,11 @@ async function abrirComparacaoHistorico(registroId) {
     document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · equipe recomendada pelo otimizador × equipe ajustada pelo gestor`;
     const rows=[
       ['AE — aptidão final',c.antes.ae,c.depois.ae,4],['AT — força técnica',c.antes.at,c.depois.at,4],['AC — colaboração',c.antes.ac,c.depois.ac,4],
-      ['Pares colaborativos',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Projetos compartilhados',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]
+      ['Pares com histórico',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Colaborações registradas entre os pares',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]
     ];
     const coverage=['must','should','could'].map(k=>{const a=c.antes.coverage[k],d=c.depois.coverage[k];return `<tr><td>${k.toUpperCase()} cobertos</td><td>${a.covered}/${a.total}</td><td>${d.covered}/${d.total}</td><td>${_cmpDelta(a.covered,d.covered,0)}</td></tr>`}).join('');
     body.innerHTML=`
+      <div style="padding:11px 13px;border:1px solid var(--accent);border-radius:8px;background:rgba(79,142,247,.08);font-size:.78rem;line-height:1.55;margin-bottom:14px">${_cmpResumoAlteracao(c)}</div>
       <section><div class="comparison-section-title">Composição</div><div class="composition-grid">
         <div class="composition-box"><div class="text-muted">Mantidos</div><div class="composition-members">${_cmpMembros(c.composicao.mantidos)}</div></div>
         <div class="composition-box removed"><div style="color:#fca5a5">Saíram</div><div class="composition-members">${_cmpMembros(c.composicao.removidos)}</div></div>
@@ -826,7 +885,7 @@ function _histDesenharGrafo(ids, pares, av, membros=[]) {
     if(p.has_edge)h+=`<text x="${mx}" y="${my-3}" text-anchor="middle" font-size="10" fill="#fff">N=${p.N}</text><text x="${mx}" y="${my+9}" text-anchor="middle" font-size="9" fill="#fff">w=${Number(p.weight).toFixed(2)}</text>`;
   });
   pos.forEach((p,i)=>{const m=membros.find(x=>Number(x.user_id)===ids[i]);const nome=(m?.pseudonimo||m?.id||`D${ids[i]}`).slice(0,7);h+=`<circle cx="${p.x}" cy="${p.y}" r="20" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--accent)">${_histEscape(nome)}</text>`});
-  const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares: ${pi.n_colab??0}/${pi.n_total??0} · Projetos compartilhados: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="10" fill="var(--accent2)">AC: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
+  const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares com histórico: ${pi.n_colab??0}/${pi.n_total??0} · Colaborações: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="10" fill="var(--accent2)">AC: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
   svg.innerHTML=h;
 }
 

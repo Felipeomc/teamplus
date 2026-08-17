@@ -189,7 +189,7 @@
       {% for dim_key, dim_label in [('dom','Domínio'),('eco','Ecossistema'),('ling','Linguagens')] %}
       <div style="margin-bottom:16px">
         <div style="font-size:.8rem;font-weight:600;margin-bottom:6px">{{ dim_label }}</div>
-        {% for prio, prio_label in [('must','MUST ●'),('should','SHOULD ●'),('could','COULD ●')] %}
+        {% for prio, prio_label in [('must','MUST — obrigatório ●'),('should','SHOULD — desejável ●'),('could','COULD — complementar ●')] %}
         <label for="tech-{{dim_key}}-{{prio}}" style="margin-bottom:3px">{{ prio_label }}</label>
         <div class="tag-input-wrap" id="wrap-{{dim_key}}-{{prio}}" style="margin-bottom:6px">
           <input type="text" id="tech-{{dim_key}}-{{prio}}"
@@ -592,19 +592,22 @@ function cardSugestao(s, si) {
     <div class="sug-card ${isBest ? 'melhor' : ''}" id="sug-${si}">
       <div class="sug-header">
         <span class="sug-title">Equipe ${si+1}${isBest ? ' ★' : ''}</span>
-        <span class="sug-badge badge-${label}">${label} — ${pct}%</span>
+        <span class="sug-badge badge-${label}">AE — adequação geral · ${pct}%</span>
       </div>
       <div class="fit-row">
         <div class="fit-bar"><div class="fit-fill" id="fitbar-${si}" style="width:${pct}%"></div></div>
         <span class="fit-val mono" id="fitval-${si}">${s.best_fitness.toFixed(4)}</span>
       </div>
       <div class="dim-scores" id="dims-${si}">
-        <span class="dim-score">Dom: <span>—</span></span>
-        <span class="dim-score">Eco: <span>—</span></span>
-        <span class="dim-score">Ling: <span>—</span></span>
-        <span class="dim-score" style="border-color:rgba(79,142,247,.45)">AT: <span style="color:var(--accent)">calculando…</span></span>
-        <span class="dim-score" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">calculando…</span></span>
+        <span class="dim-score">AT — força técnica: calculando…</span>
+        <span class="dim-score">AC — afinidade colaborativa: calculando…</span>
+        <span class="dim-score">MUST — requisitos obrigatórios: calculando…</span>
       </div>
+      <div id="executivo-${si}" style="margin:10px 0;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:.72rem;line-height:1.55;color:var(--muted)">Analisando pontos fortes e riscos…</div>
+      <details style="font-size:.7rem;color:var(--muted);margin-bottom:10px">
+        <summary style="cursor:pointer;color:var(--accent)">Como foi calculado?</summary>
+        <div id="calculo-${si}" style="margin-top:7px;padding:8px 10px;border:1px solid var(--border);border-radius:7px"></div>
+      </details>
       <div class="mem-row" id="mem-row-${si}"
            ondragover="event.preventDefault()">
         ${membros}
@@ -624,11 +627,15 @@ function cardSugestao(s, si) {
       </div>
       ${_sugestoes.length > 1 ? '<p class="drag-hint">↕ Arraste membros entre as sugestões para trocar</p>' : ''}
       <button class="btn btn-save" id="btn-save-${si}" onclick="salvar(${si})">
-        💾 Salvar esta equipe
+        💾 Salvar decisão
       </button>
       <button class="btn btn-ghost" id="btn-exp-${si}" onclick="explicar(${si})"
         style="width:100%;justify-content:center;margin-top:6px;font-size:.78rem">
         🤖 Explicar esta equipe
+      </button>
+      <button class="btn btn-ghost" onclick="rejeitarERegenerar(${si})"
+        style="width:100%;justify-content:center;margin-top:6px;font-size:.76rem;color:var(--warn)">
+        ↻ Não atende — gerar novas equipes
       </button>
       <div id="exp-box-${si}"
         style="display:none;margin-top:10px;padding:10px 12px;
@@ -646,13 +653,12 @@ function renderSugestoes() {
   document.getElementById('resultado-area').innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap">' +
     `<details style="font-size:.72rem;color:var(--muted);max-width:620px">
-       <summary style="cursor:pointer;color:var(--accent)">ⓘ Como ler as pontuações?</summary>
+       <summary style="cursor:pointer;color:var(--accent)">ⓘ Entenda os indicadores e os dados utilizados</summary>
        <div style="margin-top:7px;line-height:1.55;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface)">
-         A nota entre parênteses vai de 0 a 1 e representa a adequação naquela dimensão.<br>
-         <strong>VH</strong> Muito alta (0,80–1,00) · <strong>H</strong> Alta (0,60–0,79) ·
-         <strong>M</strong> Média (0,40–0,59) · <strong>L</strong> Baixa (0,20–0,39) ·
-         <strong>VL</strong> Muito baixa (0,00–0,19). <strong>AT</strong> é a aptidão técnica agregada e
-         <strong>AC</strong> é a aptidão colaborativa.
+         <strong>AE — adequação geral</strong> · <strong>AT — força técnica</strong> · <strong>AC — afinidade colaborativa</strong>.<br>
+         <strong>MUST</strong> é obrigatório, <strong>SHOULD</strong> é desejável e <strong>COULD</strong> é complementar.<br>
+         As faixas são: VH muito alta, H alta, M média, L baixa e VL muito baixa.<br>
+         <span style="display:block;margin-top:6px">A recomendação utiliza os dados atualmente disponíveis. Data de atualização declarada: <strong>{{ data_updated_at }}</strong>. Perfis incompletos ou desatualizados podem afetar o resultado.</span>
        </div>
      </details>` +
     `<button class="btn btn-ghost" id="btn-csv" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
@@ -860,7 +866,6 @@ function memHtml(m, si, mi) {
       <div class="mem-avatar">${_escapeHtml(nome.split('-')[0].slice(0,2).toUpperCase())}</div>
       <div class="mem-info">
         <div class="mem-name">${_escapeHtml(nome)}<span class="mem-id">${_escapeHtml(m.id)}</span></div>
-        <div class="mem-role">${m.role}</div>
         <div class="mem-techs">${techs}${restantes ? `<span class="mem-tech">+${restantes}</span>` : ''}</div>
         <button class="mem-details-btn" type="button" draggable="false"
           onpointerdown="event.stopPropagation()"
@@ -973,7 +978,7 @@ async function abrirDetalhesMembro(si, mi) {
     <div class="member-drawer-head">
       <div>
         <div class="member-drawer-title" id="member-drawer-title">Contribuição de ${_escapeHtml(nomeMembro)}</div>
-        <div class="member-drawer-sub">${_escapeHtml(a.membro.id)} · ${_escapeHtml(a.membro.role)} · Equipe ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
+        <div class="member-drawer-sub">${_escapeHtml(a.membro.id)} · Equipe ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
       </div>
       <button class="member-drawer-close" type="button" onclick="fecharDetalhesMembro()" aria-label="Fechar">×</button>
     </div>
@@ -1005,6 +1010,10 @@ async function abrirDetalhesMembro(si, mi) {
       ${_grupoCompetencias('Domínio', a.competencias.dominio, 'dominio')}
       ${_grupoCompetencias('Ecossistema', a.competencias.ecossistema, 'ecossistema')}
       ${_grupoCompetencias('Linguagens', a.competencias.linguagens, 'linguagens')}
+    </section>
+    <section class="member-drawer-section">
+      <div class="member-drawer-label">Limite de interpretação</div>
+      <div class="member-empty">Os perfis são anonimizados. As competências e relações são apresentadas como evidências da recomendação, mas não permitem ao avaliador confirmar a identidade ou a completude dos dados individuais. Data de atualização declarada: <strong>{{ data_updated_at }}</strong>.</div>
     </section>`;
 
   drawer.classList.add('open');
@@ -1033,6 +1042,21 @@ async function abrirDetalhesMembro(si, mi) {
   }
 }
 
+async function _registrarDecisao(category, si, note='') {
+  const s=_sugestoes[si]||{};
+  await fetch('/api/validation-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    category, project_name:_nomeProjeto||'Projeto atual', team_index:si+1, note,
+    team_ids:s.best_team||[], ae:s.best_fitness, at:s._at_score, ac:s._ac_score
+  })});
+}
+
+async function rejeitarERegenerar(si) {
+  if(!confirm('Registrar que estas recomendações não atenderam e gerar novas equipes?')) return;
+  const motivo=prompt('Qual foi o principal motivo? (opcional)')||'';
+  await _registrarDecisao('rejeitar_regenerar',si,motivo);
+  rodarGA();
+}
+
 function fecharDetalhesMembro() {
   document.getElementById('member-drawer-backdrop').classList.remove('open');
   document.body.style.overflow = '';
@@ -1055,6 +1079,29 @@ function valorScore(score) {
     return 'Não informado';
   }
   return valor == null ? String(rotulo) : `${rotulo} (${Number(valor).toFixed(2)})`;
+}
+
+function _renderResumoExecutivo(si, data, must) {
+  const box=document.getElementById(`executivo-${si}`); if(!box) return;
+  const equipe=_sugestoes[si];
+  let dependencias=0;
+  ['dominio','ecossistema','linguagens'].forEach(dim => {
+    (_projetoAlvo?.[dim]?.must||[]).forEach(req => {
+      const n=(equipe?.membros||[]).filter(m => (m[dim]||[]).some(t => String(t).toLowerCase()===String(req).toLowerCase())).length;
+      if(n===1) dependencias++;
+    });
+  });
+  const pares=data.pares_info||{};
+  const todosPares=Number(pares.n_total||0)>0 && Number(pares.n_colab||0)===Number(pares.n_total||0);
+  const forte=Number(data.at_score||0)>=Number(data.ac_score||0) ? 'força técnica' : 'afinidade colaborativa';
+  let risco='Nenhum risco crítico identificado nos dados disponíveis.';
+  if(must.covered<must.total) risco=`${must.total-must.covered} requisito(s) obrigatório(s) sem cobertura.`;
+  else if(dependencias) risco=`${dependencias} requisito(s) obrigatório(s) dependem de apenas uma pessoa.`;
+  else if(!todosPares) risco=`${Number(pares.n_total||0)-Number(pares.n_colab||0)} par(es) sem histórico de colaboração.`;
+  box.innerHTML=`<div><strong style="color:var(--text)">Leitura rápida</strong></div>
+    <div>Obrigatórios cobertos: <strong>${must.covered}/${must.total}</strong> · Histórico entre os pares: <strong>${pares.n_colab||0}/${pares.n_total||0}</strong>.</div>
+    <div>Ponto forte: <strong>${forte}</strong>. Principal atenção: <strong>${risco}</strong></div>
+    <div style="margin-top:4px">Clique em <strong>Ver contribuição</strong> para identificar quem cobre cada requisito.</div>`;
 }
 
 // ── Drag and drop ─────────────────────────────────────────────────────────────
@@ -1178,7 +1225,7 @@ async function reavaliar(si) {
     document.getElementById(`fitval-${si}`).textContent = data.fitness.toFixed(4);
 
     const badgeEl = document.querySelector(`#sug-${si} .sug-badge`);
-    if (badgeEl) { badgeEl.className = `sug-badge badge-${label}`; badgeEl.textContent = `${label} — ${pct}%`; }
+    if (badgeEl) { badgeEl.className = `sug-badge badge-${label}`; badgeEl.textContent = `AE — adequação geral · ${pct}%`; }
 
     // Atualiza scores por dimensão
     if (data.scores) {
@@ -1194,12 +1241,19 @@ async function reavaliar(si) {
 
         const atValido = data.at_label && String(data.at_label).toLowerCase() !== 'null';
         const atTxt = atValido ? `${data.at_label} (${Number(data.at_score).toFixed(2)})` : 'Não informado';
-        const atBadge = `<span class="dim-score" title="Aptidão Técnica: síntese agregada de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.45)">AT: <span style="color:var(--accent)">${atTxt}</span></span>`;
+        const atBadge = `<span class="dim-score" title="Síntese de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.45)">AT — força técnica: <span style="color:var(--accent)">${atTxt}</span></span>`;
         const acValido = data.ac_label && String(data.ac_label).toLowerCase() !== 'null';
         const acTxt = acValido ? `${data.ac_label} (${Number(data.ac_score).toFixed(2)})` : 'Não informado';
-        const acBadge = `<span class="dim-score" title="Aptidão Colaborativa: estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC: <span style="color:var(--warn)">${acTxt}</span></span>`;
+        const acBadge = `<span class="dim-score" title="Estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC — afinidade colaborativa: <span style="color:var(--warn)">${acTxt}</span></span>`;
 
-        dimsEl.innerHTML = dimBadges + atBadge + acBadge;
+        const must = ['dominio','ecossistema','linguagens'].reduce((acc,d) => {
+          const item=data.coverage?.[d]?.M; if(item){acc.covered+=Number(item.covered||0);acc.total+=Number(item.total||0);} return acc;
+        },{covered:0,total:0});
+        const mustBadge = `<span class="dim-score" style="border-color:rgba(52,211,153,.4)">MUST — requisitos obrigatórios: <span style="color:var(--accent2)">${must.covered}/${must.total}</span></span>`;
+        dimsEl.innerHTML = atBadge + acBadge + mustBadge;
+        const calculo=document.getElementById(`calculo-${si}`);
+        if(calculo) calculo.innerHTML = `<strong>Dimensões técnicas</strong><div class="dim-scores" style="margin-top:6px">${dimBadges}</div><div style="margin-top:7px"><strong>AE</strong> combina força técnica e afinidade colaborativa. DOM, ECO e LING detalham domínio, ecossistema e linguagens. As fórmulas completas permanecem disponíveis nos gráficos e detalhes.</div>`;
+        _renderResumoExecutivo(si, data, must);
       }
     }
   } catch(err) {
@@ -1213,6 +1267,10 @@ async function salvar(si) {
   if (_registroEditandoId && !confirm(
     'Esta ação substituirá a equipe atualmente salva neste projeto. Deseja continuar?'
   )) return;
+  const atual=[...(_sugestoes[si]?.best_team||[])].map(Number).sort((a,b)=>a-b);
+  const original=[...(_sugestoesOriginais[si]?.best_team||[])].map(Number).sort((a,b)=>a-b);
+  const ajustada=JSON.stringify(atual)!==JSON.stringify(original);
+  const motivo=ajustada ? (prompt('Qual foi o principal motivo da alteração? (opcional)')||'') : '';
   btn.textContent = 'Salvando…';
   btn.disabled = true;
 
@@ -1235,8 +1293,9 @@ async function salvar(si) {
     const data = await res.json();
     if (!res.ok || !data.ok) throw new Error(data.erro || 'Não foi possível salvar a equipe.');
     if (data.ok) {
+      await _registrarDecisao(ajustada?'ajustar_composicao':'aceitar_recomendacao',si,motivo);
       btn.classList.add('saved');
-      btn.innerHTML = data.atualizado ? '✅ Equipe atualizada no histórico' : '✅ Salvo no histórico';
+      btn.innerHTML = data.atualizado ? '✅ Decisão atualizada no histórico' : '✅ Decisão salva no histórico';
       _backlogIdAtual = null;
     }
   } catch(err) {
@@ -1344,6 +1403,9 @@ async function explicar(si) {
   document.getElementById('nome_projeto').value = p.nome_projeto || '';
   document.getElementById('descricao-livre').value = p.descricao || '';
   if (p.team_size) document.getElementById('team_size').value = p.team_size;
+  _fixados = new Set((p.fixed_devs||[]).map(Number));
+  const fixBadge=document.getElementById('fixados-badge');
+  if(fixBadge && _fixados.size) fixBadge.textContent=`📌 ${_fixados.size} integrante(s) fixado(s) pelo gestor para este projeto`;
 
   const mapa = { dominio: 'dom', ecossistema: 'eco', linguagens: 'ling' };
   const pa   = p.projeto_alvo || {};
@@ -1448,7 +1510,7 @@ async function explicar(si) {
           ecossistema:   p.projeto_alvo?.ecossistema || {},
           linguagens:    p.projeto_alvo?.linguagens  || {},
           excluded_devs: _excluidos,
-          fixed_devs:    [],
+          fixed_devs:    (p.fixed_devs||[]).map(Number),
         }),
       });
       const data = await res.json();
@@ -1478,7 +1540,7 @@ async function explicar(si) {
                     font-weight:700;color:var(--accent);flex-shrink:0">${_escapeHtml((m.pseudonimo||m.id).split('-')[0].slice(0,2).toUpperCase())}</div>
                   <div>
                     <div style="font-size:.75rem;font-weight:600">${_escapeHtml(m.pseudonimo||m.id)}</div>
-                    <div style="font-size:.62rem;color:var(--muted)">${_escapeHtml(m.id)} · ${_escapeHtml(m.role)}</div>
+                    <div style="font-size:.62rem;color:var(--muted)">${_escapeHtml(m.id)}</div>
                   </div>
                 </div>`).join('')}
             </div>

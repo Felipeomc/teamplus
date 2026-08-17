@@ -206,7 +206,6 @@ async function init() {
 
   devs.forEach(d => {
     const devId = `Dev${d.id}`;
-    const role  = d.contractRoleName || '—';
     ['dominio','ecossistema','linguagens'].forEach(cat => {
       const tags = d[cat];
       if (!Array.isArray(tags)) return;
@@ -215,7 +214,7 @@ async function init() {
         if (!tag) return;
         if (!tally[cat][tag]) tally[cat][tag] = { count:0, devs:[] };
         tally[cat][tag].count++;
-        tally[cat][tag].devs.push({ id:devId, role });
+        tally[cat][tag].devs.push({ id:devId });
       });
     });
   });
@@ -446,7 +445,6 @@ function openPanel(n) {
     n.devs.map(d => `
       <div class="sp-dev">
         <div class="sp-dev-id">${d.id}</div>
-        <div class="sp-dev-role">${d.role}</div>
       </div>`).join('');
   panel.style.display = 'block';
 }

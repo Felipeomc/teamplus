@@ -30,6 +30,7 @@ DB_PATH   = STFP_ROOT / "Data" / "base_final.json"
 HIST_PATH    = THIS_DIR / "historico_sugestoes.json"
 BACKLOG_PATH = THIS_DIR / "backlog_projetos.json"
 RUNS_PATH    = THIS_DIR / "recommendation_runs.json"
+FEEDBACK_PATH = THIS_DIR / "validation_feedback.json"
 
 if not HIST_PATH.exists():
     HIST_PATH.write_text("[]", encoding="utf-8")
@@ -37,6 +38,7 @@ if not HIST_PATH.exists():
 HIST_STORE = ListStore("team_allocations", HIST_PATH)
 BACKLOG_STORE = ListStore("backlog_projects", BACKLOG_PATH)
 RUNS_STORE = ListStore("recommendation_runs", RUNS_PATH)
+FEEDBACK_STORE = ListStore("validation_feedback", FEEDBACK_PATH)
 
 from Algorithms.GA.engine import run_ga_com_config
 #from Pipeline.evaluate_teams import avaliar_equipe
@@ -225,6 +227,15 @@ def _read_runs():
 def _write_runs(runs):
     RUNS_STORE.write(runs)
 
+def _read_feedback():
+    return FEEDBACK_STORE.read()
+
+def _write_feedback(items):
+    FEEDBACK_STORE.write(items)
+
+def _data_updated_at():
+    return os.environ.get("TEAMPLUS_DATA_UPDATED_AT", "não informada na fonte")
+
 def _score_label(score):
     return (
         "VH" if score >= 0.8 else
@@ -389,7 +400,7 @@ def _enriquecer(resultado: dict, projeto_alvo: dict, entrada: dict) -> dict:
 # ── Rotas ─────────────────────────────────────────────────────────────────────
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", data_updated_at=_data_updated_at())
 
 
 @app.route("/sugerir", methods=["POST"])
@@ -432,6 +443,9 @@ def sugerir():
         _seed = int(_time.time() * 1000) % 2**31   # seed aleatória por execução
         fixed_devs = [int(x) for x in data.get("fixed_devs", [])]
         excluded_devs = _allocated_dev_ids(registro_id)
+        conflitos = sorted(set(fixed_devs) & set(excluded_devs))
+        if conflitos:
+            return jsonify({"erro": "Um ou mais integrantes fixados já estão alocados em outro projeto. Atualize a seleção no backlog."}), 400
         res = _run_ga_isolado(
             PROJETO_ALVO_EXTERNO = projeto_alvo,
             team_size            = team_size,
@@ -674,6 +688,9 @@ def sugerir_fila():
         {int(x) for x in data.get("excluded_devs", [])}
     )
     fixed_devs    = [int(x) for x in data.get("fixed_devs", [])]
+    conflitos = sorted(set(fixed_devs) & set(excluded_devs))
+    if conflitos:
+        return jsonify({"erro": "Um ou mais integrantes fixados já estão alocados em outro projeto. Atualize a seleção no backlog."}), 400
 
     try:
         import time as _time
@@ -763,6 +780,7 @@ def api_backlog_add():
         "descricao":    str(data.get("descricao") or "").strip(),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "team_size":    team_size,
+        "fixed_devs":   [int(value) for value in data.get("fixed_devs", [])][:max(0, team_size - 1)],
         "criado_em":    datetime.now().strftime("%d/%m/%Y %H:%M"),
     }
     bl.append(novo)
@@ -795,6 +813,7 @@ def api_backlog_update(item_id):
         "descricao": str(data.get("descricao") or "").strip(),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "team_size": team_size,
+        "fixed_devs": [int(value) for value in data.get("fixed_devs", [])][:max(0, team_size - 1)],
         "atualizado_em": datetime.now().strftime("%d/%m/%Y %H:%M"),
     }
     _write_backlog(backlog)
@@ -912,6 +931,7 @@ def api_devs():
 
 @app.route("/api/devs/resumo")
 def api_devs_resumo():
+    indisponiveis = set(_allocated_dev_ids())
     devs = []
     for item in _load_db():
         raw_id = item.get("id") or item.get("user_id")
@@ -919,8 +939,56 @@ def api_devs_resumo():
             dev_id = int(raw_id)
         except (TypeError, ValueError):
             continue
-        devs.append(_dev_info(dev_id, [item]))
+        info = _dev_info(dev_id, [item])
+        info["disponivel"] = dev_id not in indisponiveis
+        devs.append(info)
     return jsonify(devs)
+
+@app.route("/api/validation-feedback", methods=["POST"])
+def api_validation_feedback():
+    data = request.get_json(silent=True) or {}
+    category = str(data.get("category") or "").strip()
+    if category not in {"aceitar_recomendacao", "ajustar_composicao", "rejeitar_regenerar"}:
+        return jsonify({"erro": "Tipo de observação inválido."}), 400
+    item = {
+        "id": str(uuid.uuid4()),
+        "category": category,
+        "project_name": str(data.get("project_name") or ""),
+        "team_index": data.get("team_index"),
+        "team_ids": [int(value) for value in data.get("team_ids", [])],
+        "ae": data.get("ae"),
+        "at": data.get("at"),
+        "ac": data.get("ac"),
+        "note": str(data.get("note") or "").strip(),
+        "created_at": datetime.now().isoformat(timespec="seconds"),
+    }
+    items = _read_feedback()
+    items.append(item)
+    _write_feedback(items)
+    return jsonify({"ok": True, "id": item["id"]})
+
+@app.route("/api/validation-feedback/csv", methods=["GET"])
+def api_validation_feedback_csv():
+    output = io.StringIO(newline="")
+    writer = csv.writer(output, quoting=csv.QUOTE_ALL)
+    writer.writerow(["Data", "Projeto", "Equipe", "Decisao", "EquipeIds", "AE", "AT", "AC", "Justificativa"])
+    labels = {
+        "aceitar_recomendacao": "Aceitou a recomendação",
+        "ajustar_composicao": "Ajustou a composição",
+        "rejeitar_regenerar": "Rejeitou e solicitou novas equipes",
+    }
+    for item in _read_feedback():
+        writer.writerow([
+            item.get("created_at", ""), item.get("project_name", ""), item.get("team_index", ""),
+            labels.get(item.get("category"), item.get("category", "")),
+            json.dumps(item.get("team_ids") or [], ensure_ascii=False),
+            item.get("ae", ""), item.get("at", ""), item.get("ac", ""), item.get("note", ""),
+        ])
+    return Response(
+        "\ufeff" + output.getvalue(),
+        content_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": "attachment; filename=teamplus_observacoes_validacao.csv"},
+    )
 
 @app.route("/api/extrair_projeto", methods=["POST"])
 def api_extrair_projeto():
