@@ -846,7 +846,7 @@ function _cmpTagTecnologia(tecnologia, prioridade='', classe='') {
   return `<span class="${classes}"${titulo ? ` title="${titulo}"` : ''}>${_histEscape(tecnologia)}</span>`;
 }
 function _cmpGraficoEscalaAfinidade() {
-  const valores=[0,.25,.50,.75,1,.90,.80,.70,.60,.50,.40,.30,.20,.10,0];
+  const valores=[.30,.25,.50,.75,1,.90,.80,.70,.60,.50,.40,.30,.20,.10,0];
   const largura=350, altura=132, esquerda=31, direita=9, topo=12, base=100;
   const x=i=>esquerda+(i/14)*(largura-esquerda-direita);
   const y=v=>base-v*(base-topo);
@@ -871,11 +871,11 @@ function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[], projeto={}) {
   const detalhes=colab?.detalhes||[];
   const numero=(valor,casas=2)=>Number(valor||0).toLocaleString('pt-BR',{minimumFractionDigits:casas,maximumFractionDigits:casas});
   const parcelas=detalhes.length ? detalhes.map(item=>numero(item.peso,2)).join(' + ') : '0';
-  const linhas=detalhes.map(item=>`${_histEscape(_cmpNome(m))} × ${_histEscape(item.colega)}: ${numero(item.peso,2)} (${item.projetos_compartilhados} projeto${item.projetos_compartilhados===1?'':'s'} compartilhado${item.projetos_compartilhados===1?'':'s'})`).join('<br>');
+  const linhas=detalhes.map(item=>`${_histEscape(_cmpNome(m))} × ${_histEscape(item.colega)}: ${numero(item.peso,2)} (${item.tem_historico===false?'sem histórico':`${item.projetos_compartilhados} projeto${item.projetos_compartilhados===1?'':'s'} compartilhado${item.projetos_compartilhados===1?'':'s'}`})`).join('<br>');
   const info=`<span class="affinity-info" tabindex="0" aria-label="Como a afinidade foi calculada">i<span class="affinity-tooltip">
     ${linhas||'Não há colegas de referência.'}
     <span class="affinity-formula">(${parcelas}) ÷ ${detalhes.length||1} = ${numero(colab?.media,4)}</span>
-    Relações sem histórico recebem peso 0.<br><strong>Escala do grafo</strong>${_cmpGraficoEscalaAfinidade()}<span style="display:block;margin-top:4px;color:var(--muted)">De 1 a 4 projetos: +0,25 por projeto. Após o pico, −0,10 por projeto; 14 ou mais = 0.</span></span></span>`;
+    Relações sem histórico recebem peso padrão 0,30.<br><strong>Escala do grafo</strong>${_cmpGraficoEscalaAfinidade()}<span style="display:block;margin-top:4px;color:var(--muted)">Sem histórico = 0,30. De 1 a 4 projetos: +0,25 por projeto. Após o pico, −0,10 por projeto; 14 ou mais = 0.</span></span></span>`;
   return `<div class="individual-card ${classe}"><div style="font-size:.63rem;color:var(--muted);text-transform:uppercase">${rotulo}</div>
     <div style="font-weight:700;margin:4px 0">${_histEscape(_cmpNome(m))}<span class="internal-id">${_histEscape(m.id)}</span></div>
     <div class="technology-tags">${skills.map(x=>_cmpTagTecnologia(x.tecnologia,x.prioridade)).join('')}</div>

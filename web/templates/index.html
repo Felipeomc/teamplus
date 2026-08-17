@@ -426,6 +426,7 @@ function initTagDropZones() {
 // ── State global das sugestões (para drag-and-drop e salvar) ─────────────────
 let _sugestoes   = [];    // equipes ranqueadas retornadas pelo GA
 let _sugestoesOriginais = []; // cópia imutável do resultado do AG
+let _geracaoInfo = null;
 let _fixados     = new Set();  // user_ids fixados para próxima rodada
 let _projetoAlvo = {};
 let _nomeProjeto = '';
@@ -557,6 +558,11 @@ async function rodarGA() {
     _projetoAlvo = data.projeto_alvo;
     _nomeProjeto = data.nome_projeto;
     _runIdAtual  = data.run_id || null;
+    _geracaoInfo = {
+      runs: Number(data.ga_runs || 1),
+      distinct: Number(data.distinct_teams || data.sugestoes.length),
+      requested: Number(data.requested_teams || 20),
+    };
 
     // inicializa osf/slf direto da resposta do GA
     _sugestoes.forEach(s => {
@@ -650,6 +656,9 @@ function cardSugestao(s, si) {
 
 function renderSugestoes() {
   _exibidas = 0;
+  const avisoQuantidade = _geracaoInfo
+    ? `<div style="font-size:.72rem;color:${_geracaoInfo.distinct<_geracaoInfo.requested?'var(--warn)':'var(--muted)'};margin:0 0 12px">${_geracaoInfo.distinct} equipe${_geracaoInfo.distinct===1?'':'s'} distinta${_geracaoInfo.distinct===1?'':'s'} encontrada${_geracaoInfo.distinct===1?'':'s'} em ${_geracaoInfo.runs} ${_geracaoInfo.runs===1?'execução':'execuções'} do otimizador${_geracaoInfo.distinct<_geracaoInfo.requested?' — não foram inseridas duplicatas para completar 20.':'.'}</div>`
+    : '';
   document.getElementById('resultado-area').innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap">' +
     `<details style="font-size:.72rem;color:var(--muted);max-width:620px">
@@ -661,7 +670,7 @@ function renderSugestoes() {
        </div>
      </details>` +
     `<button class="btn btn-ghost" id="btn-csv" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
-    '</div>' +
+    '</div>' + avisoQuantidade +
     '<div class="sugestoes-grid" id="sugestoes-grid"></div>' +
     '<div id="btn-mais-wrap" style="text-align:center;margin-top:16px;grid-column:1/-1"></div>';
   mostrarMais();

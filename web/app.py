@@ -405,7 +405,7 @@ def index():
 
 @app.route("/sugerir", methods=["POST"])
 def sugerir():
-    """Roda o GA uma vez, com uma seed aleatória, e retorna as equipes ranqueadas."""
+    """Roda o GA uma vez, com uma seed aleatória, e retorna equipes distintas."""
     data = request.get_json(silent=True) or {}
 
     projeto_alvo = {
@@ -440,18 +440,18 @@ def sugerir():
 
     try:
         import time as _time
-        _seed = int(_time.time() * 1000) % 2**31   # seed aleatória por execução
+        seed = int(_time.time() * 1000) % 2**31
         fixed_devs = [int(x) for x in data.get("fixed_devs", [])]
         excluded_devs = _allocated_dev_ids(registro_id)
         conflitos = sorted(set(fixed_devs) & set(excluded_devs))
         if conflitos:
             return jsonify({"erro": "Um ou mais integrantes fixados já estão alocados em outro projeto. Atualize a seleção no backlog."}), 400
-        res = _run_ga_isolado(
+        resultado = _run_ga_isolado(
             PROJETO_ALVO_EXTERNO = projeto_alvo,
             team_size            = team_size,
             pop_size             = pop_size,
             geracoes             = geracoes,
-            seed                 = _seed,
+            seed                 = seed,
             elitism_count        = 3,
             mutation_rate        = 0.005,
             crossover_rate       = 1.0,
@@ -472,8 +472,11 @@ def sugerir():
 
     devs = _load_db()
     sugestoes = []
-    for t in res.get("top_teams", [{"team": res["best_team"], "fitness": res["best_fitness"]}]):
-        ids     = [int(x) for x in t["team"]]
+    top_teams = resultado.get("top_teams") or [{
+        "team": resultado["best_team"], "fitness": resultado["best_fitness"]
+    }]
+    for team_data in top_teams[:20]:
+        ids = [int(value) for value in team_data["team"]]
         membros = [_dev_info(i, devs) for i in ids]
         sugestoes.append({
             "timestamp":     datetime.now().strftime("%d/%m/%Y %H:%M"),
@@ -481,12 +484,12 @@ def sugerir():
             "entrada":       entrada,
             "best_team":     ids,
             "membros":       membros,
-            "best_fitness":  round(t["fitness"], 4),
-            "gens_executed": res.get("gens_executed", 0),
-            "best_generation": res.get("best_generation", 0),
-            "duration_sec":  round(res.get("duration_sec", 0), 2),
-            "stop_reason":   res.get("stop_reason", "—"),
-            "seed":          _seed,
+            "best_fitness":  round(float(team_data["fitness"]), 4),
+            "gens_executed": resultado.get("gens_executed", 0),
+            "best_generation": resultado.get("best_generation", 0),
+            "duration_sec":  round(resultado.get("duration_sec", 0), 2),
+            "stop_reason":   resultado.get("stop_reason", "—"),
+            "seed":          seed,
             "population_size": pop_size,
             "max_generations": geracoes,
             "elitism_count": 3,
@@ -498,7 +501,7 @@ def sugerir():
     for sugestao in sugestoes:
         _adicionar_metricas_sugestao(sugestao, projeto_alvo)
     try:
-        run_id = _salvar_recommendation_run(data, projeto_alvo, sugestoes, _seed, res)
+        run_id = _salvar_recommendation_run(data, projeto_alvo, sugestoes, seed, resultado)
     except Exception:
         import traceback
         print("[ERRO PERSISTÊNCIA RUN]", traceback.format_exc())
@@ -510,6 +513,9 @@ def sugerir():
         "projeto_alvo": projeto_alvo,
         "sugestoes":    sugestoes,
         "run_id":       run_id,
+        "ga_runs":      1,
+        "requested_teams": 20,
+        "distinct_teams": len(sugestoes),
 
     })
     
@@ -1230,7 +1236,10 @@ def _colaboracao_membro(dev_id, teammates):
     details = []
     for teammate in teammates:
         edge = _GRAPH_DB.get(tuple(sorted([int(dev_id), int(teammate)])))
-        weight = float(edge.get("weight", 0)) if edge else 0.0
+        has_history = edge is not None
+        # Mantém a explicação individual consistente com o avaliador surrogate,
+        # que imputa PC=0.3 quando não existe uma aresta entre a dupla.
+        weight = float(edge.get("weight", 0)) if has_history else 0.3
         weights.append(weight)
         shared_projects = member_projects & project_ids(profiles.get(int(teammate)))
         distinct_shared_projects.update(shared_projects)
@@ -1240,12 +1249,13 @@ def _colaboracao_membro(dev_id, teammates):
             "colega": teammate_info.get("pseudonimo") or teammate_info.get("id"),
             "peso": round(weight, 4),
             "projetos_compartilhados": len(shared_projects),
+            "tem_historico": has_history,
         })
     return {
         "media": round(sum(weights) / len(weights), 4) if weights else 0,
         "projetos": len(distinct_shared_projects),
         "projetos_distintos": len(distinct_shared_projects),
-        "relacoes": len([value for value in weights if value > 0]),
+        "relacoes": len([item for item in details if item["tem_historico"]]),
         "total_relacoes": len(weights),
         "detalhes": details,
     }

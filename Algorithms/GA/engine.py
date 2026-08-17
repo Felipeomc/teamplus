@@ -1035,10 +1035,6 @@ def run_ga_com_config(
         if len(selecionadas) >= 20:
             break
 
-    # garante sempre 4 (caso população seja muito pequena)
-    if len(selecionadas) < 20:
-        selecionadas.append(selecionadas[0])
-
     selecionadas.sort(key=lambda x: x["fitness"], reverse=True)
     top_teams = [
         {"team": s["equipe"], "fitness": s["fitness"]}
