@@ -592,15 +592,15 @@ function cardSugestao(s, si) {
     <div class="sug-card ${isBest ? 'melhor' : ''}" id="sug-${si}">
       <div class="sug-header">
         <span class="sug-title">Equipe ${si+1}${isBest ? ' ★' : ''}</span>
-        <span class="sug-badge badge-${label}">AE — adequação geral · ${pct}%</span>
+        <span class="sug-badge badge-${label}">AE - Aptidão geral da equipe · ${pct}%</span>
       </div>
       <div class="fit-row">
         <div class="fit-bar"><div class="fit-fill" id="fitbar-${si}" style="width:${pct}%"></div></div>
         <span class="fit-val mono" id="fitval-${si}">${s.best_fitness.toFixed(4)}</span>
       </div>
       <div class="dim-scores" id="dims-${si}">
-        <span class="dim-score">AT — força técnica: calculando…</span>
-        <span class="dim-score">AC — afinidade colaborativa: calculando…</span>
+        <span class="dim-score">AT - Aptidão Técnica: calculando…</span>
+        <span class="dim-score">AC - Aptidão Colaborativa: calculando…</span>
         <span class="dim-score">MUST — requisitos obrigatórios: calculando…</span>
       </div>
       <div id="executivo-${si}" style="margin:10px 0;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:.72rem;line-height:1.55;color:var(--muted)">Analisando pontos fortes e riscos…</div>
@@ -655,10 +655,9 @@ function renderSugestoes() {
     `<details style="font-size:.72rem;color:var(--muted);max-width:620px">
        <summary style="cursor:pointer;color:var(--accent)">ⓘ Entenda os indicadores e os dados utilizados</summary>
        <div style="margin-top:7px;line-height:1.55;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface)">
-         <strong>AE — adequação geral</strong> · <strong>AT — força técnica</strong> · <strong>AC — afinidade colaborativa</strong>.<br>
+         <strong>AE - Aptidão geral da equipe</strong> · <strong>AT - Aptidão Técnica</strong> · <strong>AC - Aptidão Colaborativa</strong>.<br>
          <strong>MUST</strong> é obrigatório, <strong>SHOULD</strong> é desejável e <strong>COULD</strong> é complementar.<br>
          As faixas são: VH muito alta, H alta, M média, L baixa e VL muito baixa.<br>
-         <span style="display:block;margin-top:6px">A recomendação utiliza os dados atualmente disponíveis. Data de atualização declarada: <strong>{{ data_updated_at }}</strong>. Perfis incompletos ou desatualizados podem afetar o resultado.</span>
        </div>
      </details>` +
     `<button class="btn btn-ghost" id="btn-csv" onclick="baixarSugestoesCsv()" style="font-size:.8rem">⬇ Baixar CSV das ${_sugestoes.length} equipes</button>` +
@@ -1225,7 +1224,7 @@ async function reavaliar(si) {
     document.getElementById(`fitval-${si}`).textContent = data.fitness.toFixed(4);
 
     const badgeEl = document.querySelector(`#sug-${si} .sug-badge`);
-    if (badgeEl) { badgeEl.className = `sug-badge badge-${label}`; badgeEl.textContent = `AE — adequação geral · ${pct}%`; }
+    if (badgeEl) { badgeEl.className = `sug-badge badge-${label}`; badgeEl.textContent = `AE - Aptidão geral da equipe · ${pct}%`; }
 
     // Atualiza scores por dimensão
     if (data.scores) {
@@ -1241,10 +1240,10 @@ async function reavaliar(si) {
 
         const atValido = data.at_label && String(data.at_label).toLowerCase() !== 'null';
         const atTxt = atValido ? `${data.at_label} (${Number(data.at_score).toFixed(2)})` : 'Não informado';
-        const atBadge = `<span class="dim-score" title="Síntese de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.45)">AT — força técnica: <span style="color:var(--accent)">${atTxt}</span></span>`;
+        const atBadge = `<span class="dim-score" title="Síntese de Domínio, Ecossistema e Linguagens" style="border-color:rgba(79,142,247,.45)">AT - Aptidão Técnica: <span style="color:var(--accent)">${atTxt}</span></span>`;
         const acValido = data.ac_label && String(data.ac_label).toLowerCase() !== 'null';
         const acTxt = acValido ? `${data.ac_label} (${Number(data.ac_score).toFixed(2)})` : 'Não informado';
-        const acBadge = `<span class="dim-score" title="Estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC — afinidade colaborativa: <span style="color:var(--warn)">${acTxt}</span></span>`;
+        const acBadge = `<span class="dim-score" title="Estimativa da capacidade de trabalho conjunto" style="border-color:rgba(245,158,11,.3)">AC - Aptidão Colaborativa: <span style="color:var(--warn)">${acTxt}</span></span>`;
 
         const must = ['dominio','ecossistema','linguagens'].reduce((acc,d) => {
           const item=data.coverage?.[d]?.M; if(item){acc.covered+=Number(item.covered||0);acc.total+=Number(item.total||0);} return acc;
@@ -1252,7 +1251,7 @@ async function reavaliar(si) {
         const mustBadge = `<span class="dim-score" style="border-color:rgba(52,211,153,.4)">MUST — requisitos obrigatórios: <span style="color:var(--accent2)">${must.covered}/${must.total}</span></span>`;
         dimsEl.innerHTML = atBadge + acBadge + mustBadge;
         const calculo=document.getElementById(`calculo-${si}`);
-        if(calculo) calculo.innerHTML = `<strong>Dimensões técnicas</strong><div class="dim-scores" style="margin-top:6px">${dimBadges}</div><div style="margin-top:7px"><strong>AE</strong> combina força técnica e afinidade colaborativa. DOM, ECO e LING detalham domínio, ecossistema e linguagens. As fórmulas completas permanecem disponíveis nos gráficos e detalhes.</div>`;
+        if(calculo) calculo.innerHTML = `<strong>Dimensões técnicas</strong><div class="dim-scores" style="margin-top:6px">${dimBadges}</div><div style="margin-top:7px"><strong>AE - Aptidão geral da equipe</strong> combina <strong>AT - Aptidão Técnica</strong> e <strong>AC - Aptidão Colaborativa</strong>. DOM, ECO e LING detalham domínio, ecossistema e linguagens. As fórmulas completas permanecem disponíveis nos gráficos e detalhes.</div>`;
         _renderResumoExecutivo(si, data, must);
       }
     }
@@ -1787,7 +1786,7 @@ function _desenharMiniGrafo(svgId, teamIds, pares, s) {
   h += `<text x="12" y="192" font-size="9" fill="var(--muted)" font-family="inherit">Pares: ${nc}/${nt}</text>`;
   h += `<text x="12" y="204" font-size="9" fill="var(--muted)" font-family="inherit">Proj. compartilhados: ${np}</text>`;
   h += `<text x="288" y="192" text-anchor="end" font-size="9" fill="${acColor}"
-    font-family="inherit" font-weight="600">AC: ${acL}</text>`;
+    font-family="inherit" font-weight="600">AC - Aptidão Colaborativa: ${acL}</text>`;
   h += `<text x="288" y="204" text-anchor="end" font-size="9" fill="${acColor}"
     font-family="inherit">${acV}</text>`;
 

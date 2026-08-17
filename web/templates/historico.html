@@ -38,9 +38,9 @@
   .project-requirement-tags { display:flex; flex-wrap:wrap; gap:4px; }
   .project-requirement-tag { padding:2px 6px; border:1px solid var(--border); border-radius:5px; color:var(--text); font-size:.66rem; }
   .project-requirement-empty { color:var(--muted); font-size:.66rem; }
-  .member-tag.match-must,.project-requirement-tag.must { border-color:#60a5fa; color:#93c5fd; background:rgba(59,130,246,.16); }
-  .member-tag.match-should,.project-requirement-tag.should { border-color:#34d399; color:#6ee7b7; background:rgba(16,185,129,.14); }
-  .member-tag.match-could,.project-requirement-tag.could { border-color:#f59e0b; color:#fbbf24; background:rgba(245,158,11,.13); }
+  .member-tag.match-must,.technology-tag.match-must,.project-requirement-tag.must { border-color:#60a5fa; color:#93c5fd; background:rgba(59,130,246,.16); }
+  .member-tag.match-should,.technology-tag.match-should,.project-requirement-tag.should { border-color:#34d399; color:#6ee7b7; background:rgba(16,185,129,.14); }
+  .member-tag.match-could,.technology-tag.match-could,.project-requirement-tag.could { border-color:#f59e0b; color:#fbbf24; background:rgba(245,158,11,.13); }
   .comparison-backdrop { position:fixed; inset:0; z-index:1100; display:none; justify-content:flex-end;
     background:rgba(3,5,10,.76); backdrop-filter:blur(4px); }
   .comparison-backdrop.open { display:flex; }
@@ -773,9 +773,9 @@ async function abrirEquipeHistorico(registroId, tipo) {
     const must=['dominio','ecossistema','linguagens'].reduce((acc,d)=>{const x=avaliacao.coverage?.[d]?.M;if(x){acc.covered+=Number(x.covered||0);acc.total+=Number(x.total||0)}return acc},{covered:0,total:0});
     body.innerHTML = `
       <div class="history-summary">
-        <span class="badge badge-${label(avaliacao.fitness)}">AE — adequação geral: ${label(avaliacao.fitness)} · ${Number(avaliacao.fitness).toFixed(4)}</span>
-        <span class="dim-score">AT — força técnica: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
-        <span class="dim-score">AC — afinidade colaborativa: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
+        <span class="badge badge-${label(avaliacao.fitness)}">AE - Aptidão geral da equipe: ${label(avaliacao.fitness)} · ${Number(avaliacao.fitness).toFixed(4)}</span>
+        <span class="dim-score">AT - Aptidão Técnica: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
+        <span class="dim-score">AC - Aptidão Colaborativa: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
         <span class="dim-score">MUST — obrigatórios: ${must.covered}/${must.total}</span>
       </div>
       <details style="font-size:.7rem;color:var(--muted);margin:-6px 0 14px"><summary style="cursor:pointer;color:var(--accent)">Como foi calculado?</summary><div style="margin-top:7px">DOM — domínio: ${_histEscape(scores.dominio?.rotulo || '—')} · ECO — ecossistema: ${_histEscape(scores.ecossistema?.rotulo || '—')} · LING — linguagens: ${_histEscape(scores.linguagens?.rotulo || '—')}</div></details>
@@ -814,9 +814,24 @@ function _cmpMembros(itens) {
 function _cmpTecnologias(itens, classe) {
   return itens?.length ? itens.map(t=>`<span class="technology-tag ${classe}" title="${_histEscape(t.dimensao)} · ${_histEscape(t.prioridade)}">${_histEscape(t.tecnologia)} · ${_histEscape(t.prioridade)}</span>`).join('') : '<span class="text-muted">Nenhuma</span>';
 }
-function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[]) {
+function _cmpPrioridadeProjeto(projeto, tecnologia) {
+  for (const dimensao of ['dominio','ecossistema','linguagens']) {
+    const prioridade=_histPrioridade(projeto,dimensao,tecnologia);
+    if (prioridade) return prioridade;
+  }
+  return '';
+}
+function _cmpTagTecnologia(tecnologia, prioridade='', classe='') {
+  const classes=['technology-tag', classe, prioridade ? `match-${prioridade}` : ''].filter(Boolean).join(' ');
+  const titulo=prioridade ? `Requisito ${prioridade.toUpperCase()} do projeto` : '';
+  return `<span class="${classes}"${titulo ? ` title="${titulo}"` : ''}>${_histEscape(tecnologia)}</span>`;
+}
+function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[], projeto={}) {
   if (!m) return `<div class="individual-card ${classe}"><div class="text-muted">Sem integrante correspondente</div></div>`;
-  const skills=[...(m.dominio||[]),...(m.ecossistema||[]),...(m.linguagens||[])].slice(0,7);
+  const skills=[['dominio',m.dominio||[]],['ecossistema',m.ecossistema||[]],['linguagens',m.linguagens||[]]]
+    .flatMap(([dimensao,itens])=>itens.map(tecnologia=>({tecnologia,prioridade:_histPrioridade(projeto,dimensao,tecnologia)})))
+    .sort((a,b)=>({must:0,should:1,could:2,'':3}[a.prioridade]-({must:0,should:1,could:2,'':3}[b.prioridade])))
+    .slice(0,10);
   const detalhes=colab?.detalhes||[];
   const numero=(valor,casas=2)=>Number(valor||0).toLocaleString('pt-BR',{minimumFractionDigits:casas,maximumFractionDigits:casas});
   const parcelas=detalhes.length ? detalhes.map(item=>numero(item.peso,2)).join(' + ') : '0';
@@ -827,8 +842,8 @@ function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[]) {
     Relações sem histórico recebem peso 0.<br><strong>Escala do grafo:</strong> 1 projeto=0,25; 2=0,50; 3=0,75; 4=1,00; 5=0,90; 6=0,80; 7=0,70; 8=0,60; 9=0,50; 10=0,40; 11=0,30; 12=0,20; 13=0,10; 14 ou mais=0.</span></span>`;
   return `<div class="individual-card ${classe}"><div style="font-size:.63rem;color:var(--muted);text-transform:uppercase">${rotulo}</div>
     <div style="font-weight:700;margin:4px 0">${_histEscape(_cmpNome(m))}<span class="internal-id">${_histEscape(m.id)}</span></div>
-    <div class="technology-tags">${skills.map(t=>`<span class="technology-tag">${_histEscape(t)}</span>`).join('')}</div>
-    ${exclusivas.length ? `<div style="margin-top:9px;font-size:.65rem;color:var(--muted)">Competências exclusivas nesta troca</div><div class="technology-tags">${exclusivas.slice(0,8).map(t=>`<span class="technology-tag ${classe==='in'?'gained':'lost'}">${_histEscape(t)}</span>`).join('')}</div>` : ''}
+    <div class="technology-tags">${skills.map(x=>_cmpTagTecnologia(x.tecnologia,x.prioridade)).join('')}</div>
+    ${exclusivas.length ? `<div style="margin-top:9px;font-size:.65rem;color:var(--muted)">Diferenças em relação ao outro perfil</div><div style="margin-top:3px;font-size:.61rem;color:var(--muted)">Tecnologias presentes neste perfil e ausentes no perfil comparado.</div><div class="technology-tags">${exclusivas.slice(0,8).map(t=>_cmpTagTecnologia(t,_cmpPrioridadeProjeto(projeto,t),classe==='in'?'gained':'lost')).join('')}</div>` : ''}
     <div style="margin-top:9px;font-size:.7rem;line-height:1.55">Trabalhou anteriormente com <strong>${colab?.relacoes||0} de ${colab?.total_relacoes||0} colegas desta equipe</strong> em <strong>${colab?.projetos_distintos??colab?.projetos??0} projetos distintos</strong> · afinidade colaborativa média nesta equipe: <strong>${numero(colab?.media,2)}</strong>.${info}</div></div>`;
 }
 
@@ -848,7 +863,7 @@ async function abrirComparacaoHistorico(registroId) {
     const registro=await rr.json(), c=await cr.json(); if(!cr.ok||c.erro) throw new Error(c.erro||'Não foi possível comparar.');
     document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · equipe recomendada pelo otimizador × equipe ajustada pelo gestor`;
     const rows=[
-      ['AE — aptidão final',c.antes.ae,c.depois.ae,4],['AT — força técnica',c.antes.at,c.depois.at,4],['AC — colaboração',c.antes.ac,c.depois.ac,4],
+      ['AE - Aptidão geral da equipe',c.antes.ae,c.depois.ae,4],['AT - Aptidão Técnica',c.antes.at,c.depois.at,4],['AC - Aptidão Colaborativa',c.antes.ac,c.depois.ac,4],
       ['Pares com histórico',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Colaborações registradas entre os pares',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]
     ];
     const coverage=['must','should','could'].map(k=>{const a=c.antes.coverage[k],d=c.depois.coverage[k];return `<tr><td>${k.toUpperCase()} cobertos</td><td>${a.covered}/${a.total}</td><td>${d.covered}/${d.total}</td><td>${_cmpDelta(a.covered,d.covered,0)}</td></tr>`}).join('');
@@ -867,7 +882,7 @@ async function abrirComparacaoHistorico(registroId) {
         <div class="technology-box"><div class="text-muted">Mantidos</div><div class="technology-tags">${_cmpTecnologias(c.tecnologias.mantidas,'')}</div></div>
       </div></section>
       <section class="comparison-section"><div class="comparison-section-title">Trocas individuais</div>
-        ${(c.comparacao_individual||[]).length ? c.comparacao_individual.map(p=>`<div class="individual-grid">${_cmpCardPessoa(p.saiu,p.colaboracao_saiu,'out','Saiu',p.competencias_exclusivas_saiu)}<div class="individual-arrow">→</div>${_cmpCardPessoa(p.entrou,p.colaboracao_entrou,'in','Entrou',p.competencias_exclusivas_entrou)}</div>`).join('') : '<div class="text-muted">A composição foi mantida.</div>'}
+        ${(c.comparacao_individual||[]).length ? c.comparacao_individual.map(p=>`<div class="individual-grid">${_cmpCardPessoa(p.saiu,p.colaboracao_saiu,'out','Saiu',p.competencias_exclusivas_saiu,registro.projeto_alvo||{})}<div class="individual-arrow">→</div>${_cmpCardPessoa(p.entrou,p.colaboracao_entrou,'in','Entrou',p.competencias_exclusivas_entrou,registro.projeto_alvo||{})}</div>`).join('') : '<div class="text-muted">A composição foi mantida.</div>'}
       </section>`;
   } catch(e) { body.innerHTML=`<div style="color:#f87171">${_histEscape(e.message)}</div>`; }
 }
@@ -885,7 +900,7 @@ function _histDesenharGrafo(ids, pares, av, membros=[]) {
     if(p.has_edge)h+=`<text x="${mx}" y="${my-3}" text-anchor="middle" font-size="10" fill="#fff">N=${p.N}</text><text x="${mx}" y="${my+9}" text-anchor="middle" font-size="9" fill="#fff">w=${Number(p.weight).toFixed(2)}</text>`;
   });
   pos.forEach((p,i)=>{const m=membros.find(x=>Number(x.user_id)===ids[i]);const nome=(m?.pseudonimo||m?.id||`D${ids[i]}`).slice(0,7);h+=`<circle cx="${p.x}" cy="${p.y}" r="20" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--accent)">${_histEscape(nome)}</text>`});
-  const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares com histórico: ${pi.n_colab??0}/${pi.n_total??0} · Colaborações: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="10" fill="var(--accent2)">AC: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
+  const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares com histórico: ${pi.n_colab??0}/${pi.n_total??0} · Colaborações: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="9" fill="var(--accent2)">AC - Aptidão Colaborativa: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
   svg.innerHTML=h;
 }
 

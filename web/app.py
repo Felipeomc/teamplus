@@ -84,8 +84,8 @@ def login():
             session["usuario"] = ADMIN_USERNAME
             session.permanent = True
             destino = request.args.get("next", "")
-            if not destino.startswith("/") or destino.startswith("//"):
-                destino = url_for("index")
+            if destino in {"", "/"} or not destino.startswith("/") or destino.startswith("//"):
+                destino = url_for("historico")
             return redirect(destino)
         erro = "Usuário ou senha inválidos."
     return render_template("login.html", erro=erro)
