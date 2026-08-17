@@ -30,11 +30,20 @@
   .history-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
   .history-chart { border:1px solid var(--border); border-radius:10px; padding:12px; min-height:285px; }
   .history-chart-title { color:var(--muted); font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+  .project-requirements { margin-top:14px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+  .project-requirement-dimension { border:1px solid var(--border); border-radius:8px; padding:10px; background:rgba(15,17,23,.35); }
+  .project-requirement-title { margin-bottom:8px; color:var(--text); font-size:.72rem; font-weight:600; }
+  .project-requirement-row { display:grid; grid-template-columns:58px 1fr; gap:7px; align-items:start; margin-top:6px; }
+  .project-requirement-priority { color:var(--muted); font-size:.62rem; letter-spacing:.05em; }
+  .project-requirement-tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .project-requirement-tag { padding:2px 6px; border:1px solid var(--border); border-radius:5px; color:var(--text); font-size:.66rem; }
+  .project-requirement-empty { color:var(--muted); font-size:.66rem; }
   @media (max-width:800px) {
     .team-compare { min-width:100%; }
     .team-history-row { grid-template-columns:1fr 70px; }
     .team-history-members { grid-column:1/-1; }
     .history-detail-grid { grid-template-columns:1fr; }
+    .project-requirements { grid-template-columns:1fr; }
   }
 </style>
 {% endblock %}
@@ -86,6 +95,11 @@
         <label>Equipe</label>
         <input type="number" id="bl-team-size" value="4" min="2" max="12">
       </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <label for="bl-descricao">Descrição do projeto</label>
+      <textarea id="bl-descricao" rows="3"
+        placeholder="Descreva resumidamente o objetivo e o contexto do projeto"></textarea>
     </div>
     {% for dim_id, dim_label in [('dom','Domínio'),('eco','Ecossistema'),('ling','Linguagens')] %}
     <div style="margin-bottom:10px">
@@ -183,8 +197,14 @@
           </button>
           <button onclick="baixarEquipeHistoricoCsv('{{r.id}}')"
             style="background:rgba(52,211,153,.1);border:1px solid var(--accent2);color:var(--accent2);border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
-            ⬇ CSV
+            ⬇ CSV equipe
           </button>
+          {% if r.run_id %}
+          <a href="/api/recommendation-runs/{{ r.run_id }}/csv"
+            style="text-decoration:none;background:rgba(245,158,11,.1);border:1px solid var(--warn);color:var(--warn);border-radius:6px;padding:4px 10px;font-size:.72rem;font-family:inherit">
+            ⬇ CSV 20 equipes
+          </a>
+          {% endif %}
           <button onclick="deletarRegistro('{{r.id}}')"
             style="background:rgba(248,113,113,.1);border:1px solid #f87171;color:#f87171;border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
             🗑 Excluir
@@ -207,12 +227,34 @@
           </div>
           {% endfor %}
         </div>
-        <div style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap">
-          <span class="text-muted">Dom MUST: {{ r.projeto_alvo.get('dominio',{}).get('must',[])|join(', ') or '—' }}</span>
-          <span class="text-muted">Eco MUST: {{ r.projeto_alvo.get('ecossistema',{}).get('must',[])|join(', ') or '—' }}</span>
-          <span class="text-muted">Lang MUST: {{ r.projeto_alvo.get('linguagens',{}).get('must',[])|join(', ') or '—' }}</span>
-          <span class="text-muted">⏱ {{ r.duration_sec }}s · {{ r.gens_executed }} ger.</span>
+        <div class="project-requirements">
+          {% for dim_key, dim_label in [('dominio','Domínio'),('ecossistema','Ecossistema'),('linguagens','Linguagens')] %}
+          <div class="project-requirement-dimension">
+            <div class="project-requirement-title">{{ dim_label }}</div>
+            {% for priority, priority_label in [('must','MUST'),('should','SHOULD'),('could','COULD')] %}
+            {% set requirement_tags = r.projeto_alvo.get(dim_key,{}).get(priority,[]) %}
+            <div class="project-requirement-row">
+              <span class="project-requirement-priority">{{ priority_label }}</span>
+              <div class="project-requirement-tags">
+                {% for tag in requirement_tags %}
+                <span class="project-requirement-tag">{{ tag }}</span>
+                {% else %}
+                <span class="project-requirement-empty">Não informado</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
         </div>
+        <div class="text-muted" style="margin-top:10px">
+          ⏱ {{ r.duration_sec }}s · {{ r.gens_executed }} ger.
+        </div>
+        {% if r.descricao %}
+        <div class="text-muted" style="margin-top:10px;line-height:1.5">
+          <strong style="color:var(--text)">Descrição:</strong> {{ r.descricao }}
+        </div>
+        {% endif %}
       </div>
       <button type="button" onclick="toggle('det-a-{{loop.index}}')" style="margin-top:10px;background:transparent;border:0;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.72rem">▾ Ver requisitos do projeto</button>
     </div>
@@ -296,6 +338,11 @@ function renderBacklog() {
         border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;white-space:nowrap">
         ⚡ Montar equipe
       </button>
+      ${p.latest_run_id ? `<a href="/api/recommendation-runs/${encodeURIComponent(p.latest_run_id)}/csv"
+        onclick="event.stopPropagation()"
+        style="text-decoration:none;background:rgba(245,158,11,.1);border:1px solid var(--warn);color:var(--warn);
+        border-radius:6px;padding:4px 10px;font-size:.72rem;font-family:inherit;white-space:nowrap">
+        ⬇ CSV 20</a>` : ''}
       <button onclick="event.stopPropagation();editarBacklog('${p.id}')"
         style="background:rgba(99,102,241,.12);border:1px solid var(--accent);color:var(--accent);
         border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit">
@@ -387,6 +434,7 @@ function abrirFormBacklog() {
   document.getElementById('btn-salvar-backlog').textContent = 'Salvar no backlog';
   document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-nome').value = '';
+  document.getElementById('bl-descricao').value = '';
   document.getElementById('bl-team-size').value = '4';
   ['dom','eco','ling'].forEach(dim => ['must','should','could'].forEach(prio => {
     blTags[dim][prio] = [];
@@ -403,6 +451,7 @@ function fecharFormBacklog() {
   _blEditandoId = null;
   document.getElementById('backlog-form').style.display = 'none';
   document.getElementById('bl-nome').value = '';
+  document.getElementById('bl-descricao').value = '';
   document.getElementById('bl-project-id').value = '';
   document.getElementById('bl-team-size').value = '4';
   document.getElementById('backlog-form-title').textContent = 'Novo projeto no backlog';
@@ -421,6 +470,7 @@ function editarBacklog(id) {
   _blEditandoId = id;
   document.getElementById('bl-project-id').value = projeto.project_id || '';
   document.getElementById('bl-nome').value = projeto.nome_projeto || '';
+  document.getElementById('bl-descricao').value = projeto.descricao || '';
   document.getElementById('bl-team-size').value = projeto.team_size || 4;
   const mapa = {dom:'dominio', eco:'ecossistema', ling:'linguagens'};
   for (const [curta, completa] of Object.entries(mapa)) {
@@ -447,6 +497,7 @@ async function salvarBacklog() {
   const payload = {
     project_id:   document.getElementById('bl-project-id').value.trim(),
     nome_projeto: nome,
+    descricao:    document.getElementById('bl-descricao').value.trim(),
     team_size:    parseInt(document.getElementById('bl-team-size').value) || 4,
     projeto_alvo: {
       dominio:     { must: [...blTags.dom.must],  should: [...blTags.dom.should],  could: [...blTags.dom.could]  },
@@ -599,6 +650,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
         <span class="dim-score">AT: ${_histEscape(avaliacao.at_label || '—')} · ${Number(avaliacao.at_score || 0).toFixed(2)}</span>
         <span class="dim-score">AC: ${_histEscape(avaliacao.ac_label || '—')} · ${Number(avaliacao.ac_score || 0).toFixed(2)}</span>
       </div>
+      ${registro.descricao ? `<div class="text-muted" style="margin:-6px 0 16px;line-height:1.5"><strong style="color:var(--text)">Descrição:</strong> ${_histEscape(registro.descricao)}</div>` : ''}
       <div class="member-grid" style="margin-bottom:18px">
         ${(avaliacao.membros || []).map(m => `<div class="member-card">
           <div class="member-avatar">${_histEscape(m.id).replace('Dev','D')}</div>

@@ -1,8 +1,8 @@
 # web/app.py  — TeamPlus Flask App v2
-import sys, os, json, uuid, secrets, hmac
+import sys, os, json, uuid, secrets, hmac, csv, io, re
 from pathlib import Path
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
 try:
     from .persistence import ListStore
 except ImportError:
@@ -29,12 +29,14 @@ if str(STFP_ROOT) not in sys.path:
 DB_PATH   = STFP_ROOT / "Data" / "base_final.json"
 HIST_PATH    = THIS_DIR / "historico_sugestoes.json"
 BACKLOG_PATH = THIS_DIR / "backlog_projetos.json"
+RUNS_PATH    = THIS_DIR / "recommendation_runs.json"
 
 if not HIST_PATH.exists():
     HIST_PATH.write_text("[]", encoding="utf-8")
 
 HIST_STORE = ListStore("team_allocations", HIST_PATH)
 BACKLOG_STORE = ListStore("backlog_projects", BACKLOG_PATH)
+RUNS_STORE = ListStore("recommendation_runs", RUNS_PATH)
 
 from Algorithms.GA.engine import run_ga_com_config
 #from Pipeline.evaluate_teams import avaliar_equipe
@@ -188,6 +190,84 @@ def _read_backlog():
 def _write_backlog(bl):
     BACKLOG_STORE.write(bl)
 
+def _read_runs():
+    return RUNS_STORE.read()
+
+def _write_runs(runs):
+    RUNS_STORE.write(runs)
+
+def _score_label(score):
+    return (
+        "VH" if score >= 0.8 else
+        "H" if score >= 0.6 else
+        "M" if score >= 0.4 else
+        "L" if score >= 0.2 else "VL"
+    )
+
+def _adicionar_metricas_sugestao(sugestao, projeto_alvo):
+    """Anexa métricas explicativas sem alterar o resultado ou ranking do GA."""
+    try:
+        resultado = avaliar_equipe(sugestao.get("best_team", []), projeto_alvo, log=False)
+        scores = {}
+        for dim, valor in (resultado.get("scores") or {}).items():
+            if isinstance(valor, dict):
+                scores[dim] = {
+                    "score": round(float(valor.get("score") or 0), 4),
+                    "rotulo": valor.get("rotulo", "—"),
+                }
+        at_score = round(float(resultado.get("AT_cont") or 0), 4)
+        ac_score = round(float(resultado.get("AC_cont") or 0), 4)
+        sugestao.update({
+            "_scores": scores,
+            "_coverage": resultado.get("coverage", {}),
+            "_at_score": at_score,
+            "_at_label": _score_label(at_score),
+            "_ac_score": ac_score,
+            "_ac_label": _score_label(ac_score),
+        })
+    except Exception as exc:
+        print(f"[AVISO MÉTRICAS RUN] {exc}")
+
+def _salvar_recommendation_run(data, projeto_alvo, sugestoes, seed, resultado_ga):
+    run_id = str(uuid.uuid4())
+    run = {
+        "id": run_id,
+        "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M"),
+        "project_id": str(data.get("project_id") or ""),
+        "backlog_id": str(data.get("backlog_id") or ""),
+        "nome_projeto": data.get("nome_projeto", "Projeto sem título"),
+        "descricao": str(data.get("descricao") or "").strip(),
+        "projeto_alvo": projeto_alvo,
+        "team_size": int(data.get("team_size") or 4),
+        "seed": seed,
+        "gens_executed": resultado_ga.get("gens_executed", 0),
+        "best_generation": resultado_ga.get("best_generation", 0),
+        "duration_sec": round(resultado_ga.get("duration_sec", 0), 2),
+        "stop_reason": resultado_ga.get("stop_reason", "—"),
+        "population_size": 150,
+        "max_generations": 200,
+        "elitism_count": 3,
+        "mutation_rate": 0.005,
+        "crossover_rate": 1.0,
+        "stable_gens": 20,
+        "crossover_operator": "ccc",
+        "sugestoes": [dict(s, ranking=i + 1) for i, s in enumerate(sugestoes)],
+    }
+    runs = _read_runs()
+    runs.insert(0, run)
+    _write_runs(runs[:200])
+
+    backlog_id = run["backlog_id"]
+    if backlog_id:
+        backlog = _read_backlog()
+        for item in backlog:
+            if item.get("id") == backlog_id:
+                item["latest_run_id"] = run_id
+                item["ultima_execucao_em"] = run["timestamp"]
+                _write_backlog(backlog)
+                break
+    return run_id
+
 def _dev_info(dev_id: int, devs: list) -> dict:
     for d in devs:
         try:
@@ -314,10 +394,21 @@ def sugerir():
             "stable_gens": 20,
             "crossover_operator": "ccc",
         })
+    for sugestao in sugestoes:
+        _adicionar_metricas_sugestao(sugestao, projeto_alvo)
+    try:
+        run_id = _salvar_recommendation_run(data, projeto_alvo, sugestoes, _seed, res)
+    except Exception:
+        import traceback
+        print("[ERRO PERSISTÊNCIA RUN]", traceback.format_exc())
+        return jsonify({
+            "erro": "As equipes foram calculadas, mas não foi possível registrar a execução. Tente novamente."
+        }), 500
     return jsonify({
         "nome_projeto": nome_proj,
         "projeto_alvo": projeto_alvo,
         "sugestoes":    sugestoes,
+        "run_id":       run_id,
 
     })
     
@@ -402,6 +493,7 @@ def api_salvar():
     sugestao_ga = data.get("sugestao_ga_original")
     backlog_id = str(data.get("backlog_id") or "").strip()
     registro_id = str(data.get("registro_id") or "").strip()
+    run_id = str(data.get("run_id") or "").strip()
     nome_proj = data.get("nome_projeto", "Projeto sem título")
 
     registro = {
@@ -409,6 +501,7 @@ def api_salvar():
         "status":       "alocado",
         "timestamp":    datetime.now().strftime("%d/%m/%Y %H:%M"),
         "nome_projeto": nome_proj,
+        "descricao":    str(data.get("descricao") or "").strip(),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "best_team":    sugestao.get("best_team", []),
         "membros":      sugestao.get("membros", []),
@@ -429,6 +522,12 @@ def api_salvar():
     }
     if backlog_id:
         registro["backlog_id"] = backlog_id
+    if run_id:
+        registro["run_id"] = run_id
+        try:
+            registro["ranking_escolhido"] = int(data.get("ranking_escolhido"))
+        except (TypeError, ValueError):
+            registro["ranking_escolhido"] = None
 
     # Mantém a equipe originalmente sugerida pelo AG separada da composição
     # que o gestor eventualmente ajustou antes de salvar. Registros antigos
@@ -537,10 +636,22 @@ def sugerir_fila():
             "crossover_operator": "ccc",
         })
 
+    for sugestao in sugestoes:
+        _adicionar_metricas_sugestao(sugestao, projeto_alvo)
+    try:
+        run_id = _salvar_recommendation_run(data, projeto_alvo, sugestoes, _seed, res)
+    except Exception:
+        import traceback
+        print("[ERRO PERSISTÊNCIA RUN FILA]", traceback.format_exc())
+        return jsonify({
+            "erro": "As equipes foram calculadas, mas não foi possível registrar a execução. Tente novamente."
+        }), 500
+
     return jsonify({
         "nome_projeto": nome_proj,
         "projeto_alvo": projeto_alvo,
         "sugestoes":    sugestoes,
+        "run_id":       run_id,
     })
 
 @app.route("/api/backlog", methods=["GET"])
@@ -558,6 +669,7 @@ def api_backlog_add():
         "id":           str(uuid.uuid4())[:8],
         "project_id":   data.get("project_id", ""),
         "nome_projeto": data.get("nome_projeto", "Projeto sem título"),
+        "descricao":    str(data.get("descricao") or "").strip(),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "team_size":    team_size,
         "criado_em":    datetime.now().strftime("%d/%m/%Y %H:%M"),
@@ -589,6 +701,7 @@ def api_backlog_update(item_id):
         **backlog[indice],
         "project_id": data.get("project_id", ""),
         "nome_projeto": nome,
+        "descricao": str(data.get("descricao") or "").strip(),
         "projeto_alvo": data.get("projeto_alvo", {}),
         "team_size": team_size,
         "atualizado_em": datetime.now().strftime("%d/%m/%Y %H:%M"),
@@ -604,6 +717,81 @@ def api_backlog_reorder():
     bl_new = [bl_map[i] for i in order if i in bl_map]
     _write_backlog(bl_new)
     return jsonify({"ok": True})
+
+@app.route("/api/recommendation-runs/<run_id>/csv", methods=["GET"])
+def baixar_recommendation_run_csv(run_id):
+    run = next((item for item in _read_runs() if item.get("id") == run_id), None)
+    if run is None:
+        return jsonify({"erro": "Execução de recomendações não encontrada."}), 404
+
+    projeto = run.get("projeto_alvo") or {}
+    cabecalho = [
+        "Ranking", "ProjectId", "Projeto", "Fitness", "FitnessPercentual", "Classificacao",
+        "EquipeIds", "Membros", "DomMust", "DomShould", "DomCould",
+        "EcoMust", "EcoShould", "EcoCould", "LingMust", "LingShould", "LingCould",
+        "DomScore", "DomClassificacao", "EcoScore", "EcoClassificacao",
+        "LingScore", "LingClassificacao", "ATScore", "ATClassificacao",
+        "ACScore", "ACClassificacao", "MustDomOk", "MustEcoOk", "MustLingOk", "AllMustOk",
+        "Seed", "BestGeneration", "DuracaoSegundos", "GeracoesExecutadas", "MotivoParada",
+        "PopulationSize", "MaxGenerations", "MutationRate", "CrossoverRate",
+        "ElitismCount", "StableGens", "CrossoverOperator", "Timestamp", "RunId",
+    ]
+
+    def lista(dim, prioridade):
+        return " | ".join(projeto.get(dim, {}).get(prioridade, []) or [])
+
+    def must_ok(sugestao, dim):
+        requisitos = projeto.get(dim, {}).get("must", []) or []
+        if not requisitos:
+            return True
+        cobertura = (sugestao.get("_coverage") or {}).get(dim, {}).get("M") or {}
+        return int(cobertura.get("covered") or 0) >= int(cobertura.get("total") or len(requisitos))
+
+    output = io.StringIO(newline="")
+    writer = csv.writer(output, quoting=csv.QUOTE_ALL)
+    writer.writerow(cabecalho)
+    for indice, sugestao in enumerate(run.get("sugestoes") or []):
+        scores = sugestao.get("_scores") or {}
+        ids = sugestao.get("best_team") or []
+        fitness = float(sugestao.get("best_fitness") or 0)
+        dom_ok = must_ok(sugestao, "dominio")
+        eco_ok = must_ok(sugestao, "ecossistema")
+        ling_ok = must_ok(sugestao, "linguagens")
+        writer.writerow([
+            sugestao.get("ranking", indice + 1), run.get("project_id", ""),
+            run.get("nome_projeto", ""), f"{fitness:.8f}", f"{fitness * 100:.2f}",
+            _score_label(fitness), json.dumps(ids, ensure_ascii=False),
+            " | ".join(m.get("id", "") for m in sugestao.get("membros") or []),
+            lista("dominio", "must"), lista("dominio", "should"), lista("dominio", "could"),
+            lista("ecossistema", "must"), lista("ecossistema", "should"), lista("ecossistema", "could"),
+            lista("linguagens", "must"), lista("linguagens", "should"), lista("linguagens", "could"),
+            scores.get("dominio", {}).get("score"), scores.get("dominio", {}).get("rotulo"),
+            scores.get("ecossistema", {}).get("score"), scores.get("ecossistema", {}).get("rotulo"),
+            scores.get("linguagens", {}).get("score"), scores.get("linguagens", {}).get("rotulo"),
+            sugestao.get("_at_score"), sugestao.get("_at_label"),
+            sugestao.get("_ac_score"), sugestao.get("_ac_label"),
+            dom_ok, eco_ok, ling_ok, dom_ok and eco_ok and ling_ok,
+            sugestao.get("seed", run.get("seed")), sugestao.get("best_generation", run.get("best_generation")),
+            sugestao.get("duration_sec", run.get("duration_sec")),
+            sugestao.get("gens_executed", run.get("gens_executed")),
+            sugestao.get("stop_reason", run.get("stop_reason")),
+            sugestao.get("population_size", run.get("population_size")),
+            sugestao.get("max_generations", run.get("max_generations")),
+            sugestao.get("mutation_rate", run.get("mutation_rate")),
+            sugestao.get("crossover_rate", run.get("crossover_rate")),
+            sugestao.get("elitism_count", run.get("elitism_count")),
+            sugestao.get("stable_gens", run.get("stable_gens")),
+            sugestao.get("crossover_operator", run.get("crossover_operator")),
+            sugestao.get("timestamp", run.get("timestamp")), run_id,
+        ])
+
+    nome = re.sub(r"[^a-zA-Z0-9_-]+", "_", run.get("nome_projeto") or "projeto").strip("_").lower()
+    filename = f"teamplus_{nome or 'projeto'}_20_equipes.csv"
+    return Response(
+        "\ufeff" + output.getvalue(),
+        content_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
 
 @app.route("/historico")
 def historico():
