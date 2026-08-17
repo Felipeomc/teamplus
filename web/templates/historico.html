@@ -73,6 +73,15 @@
   .individual-card.out { border-color:rgba(248,113,113,.4); } .individual-card.in { border-color:rgba(52,211,153,.4); }
   .individual-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; }
   .internal-id { color:var(--muted); font-size:.61rem; margin-left:4px; }
+  .affinity-info { position:relative; display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; margin-left:5px; border:1px solid var(--accent); border-radius:50%;
+    color:var(--accent); font-size:.61rem; font-weight:700; cursor:help; vertical-align:middle; }
+  .affinity-tooltip { position:absolute; z-index:20; display:none; left:50%; bottom:calc(100% + 9px);
+    width:min(390px,78vw); transform:translateX(-50%); padding:11px 12px; border:1px solid var(--border);
+    border-radius:8px; background:#11141c; color:var(--text); box-shadow:0 12px 35px rgba(0,0,0,.55);
+    font-size:.67rem; font-weight:400; line-height:1.55; text-align:left; white-space:normal; }
+  .affinity-info:hover .affinity-tooltip,.affinity-info:focus .affinity-tooltip { display:block; }
+  .affinity-formula { display:block; margin:6px 0; color:#bfdbfe; font-family:monospace; }
   @media (max-width:800px) {
     .team-compare { min-width:100%; }
     .team-history-row { grid-template-columns:1fr 70px; }
@@ -204,7 +213,7 @@
         </div>
         <div class="team-compare">
           <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','gestor')">
-            <span class="team-history-label">Alocada pelo gestor</span>
+            <span class="team-history-label">Equipe ajustada pelo gestor</span>
             <span class="fitness-val mono">{{fit}}</span>
             <span class="badge badge-{{label}}">{{label}}</span>
             <span class="team-history-members">{% for m in r.membros %}<span class="team-history-member" title="{{m.id}}">{{m.pseudonimo or m.id}}</span>{% endfor %}</span>
@@ -213,11 +222,11 @@
           {% set ga = r.equipe_ga_original %}
           <button type="button" onclick="toggleSugestaoAg('ga-{{r.id}}',this)" aria-expanded="false"
             style="justify-self:start;background:transparent;border:0;color:var(--accent);padding:3px 1px;cursor:pointer;font-family:inherit;font-size:.7rem">
-            ▸ Ver sugestão do otimizador
+            ▸ Ver equipe recomendada pelo otimizador
           </button>
           <div id="ga-{{r.id}}" style="display:none">
             <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
-              <span class="team-history-label">Sugestão do otimizador</span>
+              <span class="team-history-label">Equipe recomendada pelo otimizador</span>
               <span class="fitness-val mono">{{ ga.best_fitness }}</span>
               <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
               <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member" title="{{m.id}}">{{m.pseudonimo or m.id}}</span>{% endfor %}</span>
@@ -329,7 +338,7 @@
   <aside class="comparison-drawer" role="dialog" aria-modal="true" aria-labelledby="comparison-title" tabindex="-1">
     <div class="comparison-head">
       <div><div class="comparison-title" id="comparison-title">Comparação da decisão</div>
-        <div class="text-muted" id="comparison-subtitle">Sugestão do otimizador × equipe alocada</div></div>
+        <div class="text-muted" id="comparison-subtitle">Equipe recomendada pelo otimizador × equipe ajustada pelo gestor</div></div>
       <button class="history-modal-close" type="button" onclick="fecharComparacaoHistorico()" aria-label="Fechar">×</button>
     </div>
     <div id="comparison-body"><div class="text-muted">Carregando comparação…</div></div>
@@ -650,7 +659,7 @@ function toggleSugestaoAg(id, botao) {
   const abrir = equipe.style.display === 'none';
   equipe.style.display = abrir ? 'block' : 'none';
   botao.setAttribute('aria-expanded', String(abrir));
-  botao.textContent = abrir ? '▾ Ocultar sugestão original do AG' : '▸ Ver sugestão original do AG';
+  botao.textContent = abrir ? '▾ Ocultar equipe recomendada pelo otimizador' : '▸ Ver equipe recomendada pelo otimizador';
 }
 
 function _histEscape(v) {
@@ -690,7 +699,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
     const registro = await rr.json();
     if (!rr.ok || registro.erro) throw new Error(registro.erro || 'Registro não encontrado.');
     const equipe = tipo === 'ga' ? registro.equipe_ga_original : registro;
-    if (!equipe) throw new Error('A sugestão original do AG não foi armazenada neste registro antigo.');
+    if (!equipe) throw new Error('A equipe original recomendada pelo otimizador não foi armazenada neste registro antigo.');
     const ids = _histIds(equipe);
     if (!ids.length) throw new Error('Esta equipe não possui integrantes válidos.');
 
@@ -704,7 +713,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
     const grafo = await grRes.json();
     if (!avRes.ok || avaliacao.erro) throw new Error(avaliacao.erro || 'Não foi possível avaliar a equipe.');
 
-    const tituloTipo = tipo === 'ga' ? 'Equipe sugerida pelo AG' : 'Equipe alocada pelo gestor';
+    const tituloTipo = tipo === 'ga' ? 'Equipe recomendada pelo otimizador' : 'Equipe ajustada pelo gestor';
     document.getElementById('history-modal-title').textContent = tituloTipo;
     document.getElementById('history-modal-subtitle').textContent = registro.nome_projeto || 'Projeto sem título';
     const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
@@ -757,11 +766,19 @@ function _cmpTecnologias(itens, classe) {
 function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[]) {
   if (!m) return `<div class="individual-card ${classe}"><div class="text-muted">Sem integrante correspondente</div></div>`;
   const skills=[...(m.dominio||[]),...(m.ecossistema||[]),...(m.linguagens||[])].slice(0,7);
+  const detalhes=colab?.detalhes||[];
+  const numero=(valor,casas=2)=>Number(valor||0).toLocaleString('pt-BR',{minimumFractionDigits:casas,maximumFractionDigits:casas});
+  const parcelas=detalhes.length ? detalhes.map(item=>numero(item.peso,2)).join(' + ') : '0';
+  const linhas=detalhes.map(item=>`${_histEscape(_cmpNome(m))} × ${_histEscape(item.colega)}: ${numero(item.peso,2)} (${item.projetos_compartilhados} projeto${item.projetos_compartilhados===1?'':'s'} compartilhado${item.projetos_compartilhados===1?'':'s'})`).join('<br>');
+  const info=`<span class="affinity-info" tabindex="0" aria-label="Como a afinidade foi calculada">i<span class="affinity-tooltip">
+    <strong>Como foi calculada</strong><br>${linhas||'Não há colegas de referência.'}
+    <span class="affinity-formula">(${parcelas}) ÷ ${detalhes.length||1} = ${numero(colab?.media,4)}</span>
+    Relações sem histórico recebem peso 0.<br><strong>Escala do grafo:</strong> 1 projeto=0,25; 2=0,50; 3=0,75; 4=1,00; 5=0,90; 6=0,80; 7=0,70; 8=0,60; 9=0,50; 10=0,40; 11=0,30; 12=0,20; 13=0,10; 14 ou mais=0.</span></span>`;
   return `<div class="individual-card ${classe}"><div style="font-size:.63rem;color:var(--muted);text-transform:uppercase">${rotulo}</div>
     <div style="font-weight:700;margin:4px 0">${_histEscape(_cmpNome(m))}<span class="internal-id">${_histEscape(m.id)}</span></div>
     <div class="text-muted">${_histEscape(m.role||'')}</div><div class="technology-tags">${skills.map(t=>`<span class="technology-tag">${_histEscape(t)}</span>`).join('')}</div>
     ${exclusivas.length ? `<div style="margin-top:9px;font-size:.65rem;color:var(--muted)">Competências exclusivas nesta troca</div><div class="technology-tags">${exclusivas.slice(0,8).map(t=>`<span class="technology-tag ${classe==='in'?'gained':'lost'}">${_histEscape(t)}</span>`).join('')}</div>` : ''}
-    <div style="margin-top:9px;font-size:.7rem">Colaboração média: <strong>${Number(colab?.media||0).toFixed(2)}</strong> · Relações: ${colab?.relacoes||0}/${colab?.total_relacoes||0} · Projetos: ${colab?.projetos||0}</div></div>`;
+    <div style="margin-top:9px;font-size:.7rem;line-height:1.55">Trabalhou anteriormente com <strong>${colab?.relacoes||0} de ${colab?.total_relacoes||0} colegas desta equipe</strong> em <strong>${colab?.projetos_distintos??colab?.projetos??0} projetos distintos</strong> · afinidade colaborativa média nesta equipe: <strong>${numero(colab?.media,2)}</strong>.${info}</div></div>`;
 }
 
 async function abrirComparacaoHistorico(registroId) {
@@ -771,7 +788,7 @@ async function abrirComparacaoHistorico(registroId) {
   try {
     const [rr,cr]=await Promise.all([fetch(`/api/historico/${encodeURIComponent(registroId)}`),fetch(`/api/historico/${encodeURIComponent(registroId)}/comparacao`)]);
     const registro=await rr.json(), c=await cr.json(); if(!cr.ok||c.erro) throw new Error(c.erro||'Não foi possível comparar.');
-    document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · sugestão do otimizador × decisão do gestor`;
+    document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · equipe recomendada pelo otimizador × equipe ajustada pelo gestor`;
     const rows=[
       ['AE — aptidão final',c.antes.ae,c.depois.ae,4],['AT — força técnica',c.antes.at,c.depois.at,4],['AC — colaboração',c.antes.ac,c.depois.ac,4],
       ['Pares colaborativos',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Projetos compartilhados',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]

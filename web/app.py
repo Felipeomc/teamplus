@@ -1,5 +1,5 @@
 # web/app.py  — TeamPlus Flask App v2
-import sys, os, json, uuid, secrets, hmac, csv, io, re
+import sys, os, json, uuid, secrets, hmac, csv, io, re, threading
 from pathlib import Path
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
@@ -178,6 +178,35 @@ def _load_db():
 
 def _read_hist():
     return HIST_STORE.read()
+
+_GA_CANDIDATOS = run_ga_com_config.__globals__.get("CANDIDATOS_IDS", [])
+_GA_CANDIDATOS_BASE = tuple(_GA_CANDIDATOS)
+_GA_EXECUTION_LOCK = threading.Lock()
+
+def _run_ga_isolado(**kwargs):
+    """Executa o GA sem deixar exclusões de uma requisição vazarem para a próxima."""
+    with _GA_EXECUTION_LOCK:
+        _GA_CANDIDATOS[:] = _GA_CANDIDATOS_BASE
+        try:
+            return run_ga_com_config(**kwargs)
+        finally:
+            _GA_CANDIDATOS[:] = _GA_CANDIDATOS_BASE
+
+def _allocated_dev_ids(exclude_record_id=None):
+    """IDs indisponíveis por já pertencerem a uma equipe alocada."""
+    ids = set()
+    record_to_ignore = str(exclude_record_id or "").strip()
+    for item in _read_hist():
+        if item.get("status") != "alocado":
+            continue
+        if record_to_ignore and str(item.get("id") or "") == record_to_ignore:
+            continue
+        for value in item.get("best_team") or []:
+            try:
+                ids.add(int(value))
+            except (TypeError, ValueError):
+                continue
+    return sorted(ids)
 
 def _write_hist(hist):
     HIST_STORE.write(hist)
@@ -388,6 +417,7 @@ def sugerir():
     geracoes  = 200
     nome_proj = data.get("nome_projeto", "Projeto sem título")
     project_id = data.get("project_id", "")
+    registro_id = str(data.get("registro_id") or "").strip()
 
     entrada = {
         "nome_projeto": nome_proj,
@@ -401,7 +431,8 @@ def sugerir():
         import time as _time
         _seed = int(_time.time() * 1000) % 2**31   # seed aleatória por execução
         fixed_devs = [int(x) for x in data.get("fixed_devs", [])]
-        res = run_ga_com_config(
+        excluded_devs = _allocated_dev_ids(registro_id)
+        res = _run_ga_isolado(
             PROJETO_ALVO_EXTERNO = projeto_alvo,
             team_size            = team_size,
             pop_size             = pop_size,
@@ -416,6 +447,7 @@ def sugerir():
             report               = False,
             log_eval             = False,
             fixed_devs           = fixed_devs if fixed_devs else None,
+            excluded_devs        = excluded_devs if excluded_devs else None,
         )
     except Exception:
         import traceback
@@ -637,13 +669,16 @@ def sugerir_fila():
         return jsonify({"erro": erro_team_size}), 400
     nome_proj     = data.get("nome_projeto", "Projeto sem título")
     project_id    = data.get("project_id", "")
-    excluded_devs = [int(x) for x in data.get("excluded_devs", [])]
+    excluded_devs = sorted(
+        set(_allocated_dev_ids()) |
+        {int(x) for x in data.get("excluded_devs", [])}
+    )
     fixed_devs    = [int(x) for x in data.get("fixed_devs", [])]
 
     try:
         import time as _time
         _seed = int(_time.time() * 1000) % 2**31
-        res = run_ga_com_config(
+        res = _run_ga_isolado(
             PROJETO_ALVO_EXTERNO = projeto_alvo,
             team_size            = team_size,
             pop_size             = 150,
@@ -1103,17 +1138,48 @@ def _requisitos_cobertos(team, projeto_alvo):
 
 def _colaboracao_membro(dev_id, teammates):
     _load_graph_db()
+    devs = _load_db()
+    profiles = {}
+    for profile in devs:
+        try:
+            profile_id = int(profile.get("id") or profile.get("user_id") or -1)
+        except (TypeError, ValueError):
+            continue
+        profiles[profile_id] = profile
+
+    def project_ids(profile):
+        explicit = (profile or {}).get("projects_id") or []
+        if explicit:
+            return {str(value) for value in explicit if value is not None}
+        return {
+            str(project.get("id")) for project in ((profile or {}).get("projects") or [])
+            if isinstance(project, dict) and project.get("id") is not None
+        }
+
+    member_projects = project_ids(profiles.get(int(dev_id)))
+    distinct_shared_projects = set()
     weights = []
-    projects = 0
+    details = []
     for teammate in teammates:
         edge = _GRAPH_DB.get(tuple(sorted([int(dev_id), int(teammate)])))
-        weights.append(float(edge.get("weight", 0)) if edge else 0.0)
-        projects += int(edge.get("N", 0)) if edge else 0
+        weight = float(edge.get("weight", 0)) if edge else 0.0
+        weights.append(weight)
+        shared_projects = member_projects & project_ids(profiles.get(int(teammate)))
+        distinct_shared_projects.update(shared_projects)
+        teammate_info = _dev_info(int(teammate), devs)
+        details.append({
+            "colega_id": int(teammate),
+            "colega": teammate_info.get("pseudonimo") or teammate_info.get("id"),
+            "peso": round(weight, 4),
+            "projetos_compartilhados": len(shared_projects),
+        })
     return {
         "media": round(sum(weights) / len(weights), 4) if weights else 0,
-        "projetos": projects,
+        "projetos": len(distinct_shared_projects),
+        "projetos_distintos": len(distinct_shared_projects),
         "relacoes": len([value for value in weights if value > 0]),
         "total_relacoes": len(weights),
+        "detalhes": details,
     }
 
 

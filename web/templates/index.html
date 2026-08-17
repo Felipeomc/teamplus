@@ -146,7 +146,7 @@
 
 
 <div class="page-title">Novo projeto</div>
-<div class="page-sub">Informe os requisitos do projeto para gerar sugestões de equipe ranqueadas por aptidão. Ajuste a composição e salve.</div>
+<div class="page-sub">Informe os requisitos do projeto para gerar equipes ranqueadas por aptidão. Ajuste a composição e salve.</div>
 <div class="two-col">
 
   <!-- ── FORM ── -->
@@ -215,7 +215,7 @@
       <div class="card" style="min-height:180px;display:flex;align-items:center;justify-content:center;border-style:dashed">
         <div style="text-align:center;color:var(--muted)">
           <div style="font-size:2rem;margin-bottom:8px">👥</div>
-          <div>As sugestões aparecerão aqui</div>
+          <div>As equipes aparecerão aqui</div>
         </div>
       </div>
     </div>
@@ -537,6 +537,7 @@ async function rodarGA() {
     descricao:    document.getElementById('descricao-livre').value.trim(),
     project_id:   _projectId,
     backlog_id:   _backlogIdAtual,
+    registro_id:  _registroEditandoId,
     team_size:    teamSize,
     pop_size:     parseInt(document.getElementById('pop_size').value)  || 50,
     geracoes:     parseInt(document.getElementById('geracoes').value)  || 50,
@@ -590,7 +591,7 @@ function cardSugestao(s, si) {
   return `
     <div class="sug-card ${isBest ? 'melhor' : ''}" id="sug-${si}">
       <div class="sug-header">
-        <span class="sug-title">Sugestão ${si+1}${isBest ? ' ★' : ''}</span>
+        <span class="sug-title">Equipe ${si+1}${isBest ? ' ★' : ''}</span>
         <span class="sug-badge badge-${label}">${label} — ${pct}%</span>
       </div>
       <div class="fit-row">
@@ -623,11 +624,11 @@ function cardSugestao(s, si) {
       </div>
       ${_sugestoes.length > 1 ? '<p class="drag-hint">↕ Arraste membros entre as sugestões para trocar</p>' : ''}
       <button class="btn btn-save" id="btn-save-${si}" onclick="salvar(${si})">
-        💾 Salvar esta sugestão
+        💾 Salvar esta equipe
       </button>
       <button class="btn btn-ghost" id="btn-exp-${si}" onclick="explicar(${si})"
         style="width:100%;justify-content:center;margin-top:6px;font-size:.78rem">
-        🤖 Explicar esta sugestão
+        🤖 Explicar esta equipe
       </button>
       <div id="exp-box-${si}"
         style="display:none;margin-top:10px;padding:10px 12px;
@@ -810,7 +811,7 @@ function mostrarMais() {
   if (_exibidas < total) {
     wrap.innerHTML = `<button class="btn btn-ghost" onclick="mostrarMais()"
       style="padding:10px 32px;font-size:.85rem;margin-top:8px">
-      ＋ Ver mais ${restam} ${restam === 1 ? 'sugestão' : 'sugestões'}
+      ＋ Ver mais ${restam} ${restam === 1 ? 'equipe' : 'equipes'}
       <span style="color:var(--muted);font-size:.75rem;margin-left:6px">(${_exibidas}/${total})</span>
     </button>`;
   } else {
@@ -972,7 +973,7 @@ async function abrirDetalhesMembro(si, mi) {
     <div class="member-drawer-head">
       <div>
         <div class="member-drawer-title" id="member-drawer-title">Contribuição de ${_escapeHtml(nomeMembro)}</div>
-        <div class="member-drawer-sub">${_escapeHtml(a.membro.id)} · ${_escapeHtml(a.membro.role)} · Sugestão ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
+        <div class="member-drawer-sub">${_escapeHtml(a.membro.id)} · ${_escapeHtml(a.membro.role)} · Equipe ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
       </div>
       <button class="member-drawer-close" type="button" onclick="fecharDetalhesMembro()" aria-label="Fechar">×</button>
     </div>
@@ -1277,7 +1278,7 @@ async function explicar(si) {
   } catch(err) {
     box.textContent = `Erro: ${err.message}`;
     box.style.display = 'block';
-    btn.innerHTML = '🤖 Explicar esta sugestão';
+    btn.innerHTML = '🤖 Explicar esta equipe';
   } finally {
     btn.disabled = false;
   }
@@ -1467,7 +1468,7 @@ async function explicar(si) {
           resEl.innerHTML = `
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px">
-                Melhor sugestão · fitness ${melhor.best_fitness.toFixed(4)}
+                Equipe 1 · fitness ${melhor.best_fitness.toFixed(4)}
               </div>
               ${melhor.membros.map(m => `
                 <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;
