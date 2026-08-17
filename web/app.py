@@ -3,6 +3,10 @@ import sys, os, json, uuid, secrets, hmac
 from pathlib import Path
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+try:
+    from .persistence import ListStore
+except ImportError:
+    from persistence import ListStore
 
 
 from dotenv import load_dotenv
@@ -28,6 +32,9 @@ BACKLOG_PATH = THIS_DIR / "backlog_projetos.json"
 
 if not HIST_PATH.exists():
     HIST_PATH.write_text("[]", encoding="utf-8")
+
+HIST_STORE = ListStore("team_allocations", HIST_PATH)
+BACKLOG_STORE = ListStore("backlog_projects", BACKLOG_PATH)
 
 from Algorithms.GA.engine import run_ga_com_config
 #from Pipeline.evaluate_teams import avaliar_equipe
@@ -168,24 +175,18 @@ def _load_db():
     return raw if isinstance(raw, list) else raw.get("developers", [])
 
 def _read_hist():
-    try:
-        return json.loads(HIST_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        return []
+    return HIST_STORE.read()
 
 def _write_hist(hist):
-    HIST_PATH.write_text(json.dumps(hist, ensure_ascii=False, indent=2), encoding="utf-8")
+    HIST_STORE.write(hist)
 
 
 
 def _read_backlog():
-    try:
-        return json.loads(BACKLOG_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        return []
+    return BACKLOG_STORE.read()
 
 def _write_backlog(bl):
-    BACKLOG_PATH.write_text(json.dumps(bl, ensure_ascii=False, indent=2), encoding="utf-8")
+    BACKLOG_STORE.write(bl)
 
 def _dev_info(dev_id: int, devs: list) -> dict:
     for d in devs:

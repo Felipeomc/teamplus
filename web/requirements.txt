@@ -1,6 +1,7 @@
 flask
 anthropic
 python-dotenv
+pymongo[srv]
 numpy
 scipy
 networkx
