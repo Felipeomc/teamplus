@@ -239,11 +239,11 @@
           {% set ga = r.equipe_ga_original %}
           <button type="button" onclick="toggleSugestaoAg('ga-{{r.id}}',this)" aria-expanded="false"
             style="justify-self:start;background:transparent;border:0;color:var(--accent);padding:3px 1px;cursor:pointer;font-family:inherit;font-size:.7rem">
-            ▸ Ver equipe recomendada pelo otimizador
+            ▸ Ver equipe Top 1 do otimizador
           </button>
           <div id="ga-{{r.id}}" style="display:none">
             <button type="button" class="team-history-row" onclick="abrirEquipeHistorico('{{r.id}}','ga')">
-              <span class="team-history-label">Equipe recomendada pelo otimizador</span>
+              <span class="team-history-label">Equipe Top 1 do otimizador</span>
               <span class="fitness-val mono">{{ ga.best_fitness }}</span>
               <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
               <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member" title="{{m.id}}">{{m.pseudonimo or m.id}}</span>{% endfor %}</span>
@@ -354,7 +354,7 @@
   <aside class="comparison-drawer" role="dialog" aria-modal="true" aria-labelledby="comparison-title" tabindex="-1">
     <div class="comparison-head">
       <div><div class="comparison-title" id="comparison-title">Comparação da decisão</div>
-        <div class="text-muted" id="comparison-subtitle">Equipe recomendada pelo otimizador × equipe ajustada pelo gestor</div></div>
+        <div class="text-muted" id="comparison-subtitle">Equipe Top 1 do otimizador × equipe ajustada pelo gestor</div></div>
       <button class="history-modal-close" type="button" onclick="fecharComparacaoHistorico()" aria-label="Fechar">×</button>
     </div>
     <div id="comparison-body"><div class="text-muted">Carregando comparação…</div></div>
@@ -716,7 +716,7 @@ function toggleSugestaoAg(id, botao) {
   const abrir = equipe.style.display === 'none';
   equipe.style.display = abrir ? 'block' : 'none';
   botao.setAttribute('aria-expanded', String(abrir));
-  botao.textContent = abrir ? '▾ Ocultar equipe recomendada pelo otimizador' : '▸ Ver equipe recomendada pelo otimizador';
+  botao.textContent = abrir ? '▾ Ocultar equipe Top 1 do otimizador' : '▸ Ver equipe Top 1 do otimizador';
 }
 
 function _histEscape(v) {
@@ -756,7 +756,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
     const registro = await rr.json();
     if (!rr.ok || registro.erro) throw new Error(registro.erro || 'Registro não encontrado.');
     const equipe = tipo === 'ga' ? registro.equipe_ga_original : registro;
-    if (!equipe) throw new Error('A equipe original recomendada pelo otimizador não foi armazenada neste registro antigo.');
+    if (!equipe) throw new Error('A equipe Top 1 original do otimizador não foi armazenada neste registro antigo.');
     const ids = _histIds(equipe);
     if (!ids.length) throw new Error('Esta equipe não possui integrantes válidos.');
 
@@ -770,7 +770,7 @@ async function abrirEquipeHistorico(registroId, tipo) {
     const grafo = await grRes.json();
     if (!avRes.ok || avaliacao.erro) throw new Error(avaliacao.erro || 'Não foi possível avaliar a equipe.');
 
-    const tituloTipo = tipo === 'ga' ? 'Equipe recomendada pelo otimizador' : 'Equipe ajustada pelo gestor';
+    const tituloTipo = tipo === 'ga' ? 'Equipe Top 1 do otimizador' : 'Equipe ajustada pelo gestor';
     document.getElementById('history-modal-title').textContent = tituloTipo;
     document.getElementById('history-modal-subtitle').textContent = registro.nome_projeto || 'Projeto sem título';
     const label = f => f >= .8 ? 'VH' : f >= .6 ? 'H' : f >= .4 ? 'M' : f >= .2 ? 'L' : 'VL';
@@ -897,7 +897,7 @@ async function abrirComparacaoHistorico(registroId) {
   try {
     const [rr,cr]=await Promise.all([fetch(`/api/historico/${encodeURIComponent(registroId)}`),fetch(`/api/historico/${encodeURIComponent(registroId)}/comparacao`)]);
     const registro=await rr.json(), c=await cr.json(); if(!cr.ok||c.erro) throw new Error(c.erro||'Não foi possível comparar.');
-    document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · equipe recomendada pelo otimizador × equipe ajustada pelo gestor`;
+    document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · equipe Top 1 do otimizador × equipe ajustada pelo gestor`;
     const rows=[
       ['AE - Aptidão geral da equipe',c.antes.ae,c.depois.ae,4],['AT - Aptidão Técnica',c.antes.at,c.depois.at,4],['AC - Aptidão Colaborativa',c.antes.ac,c.depois.ac,4],
       ['Pares com histórico',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Colaborações registradas entre os pares',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]
