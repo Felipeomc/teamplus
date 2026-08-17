@@ -38,12 +38,48 @@
   .project-requirement-tags { display:flex; flex-wrap:wrap; gap:4px; }
   .project-requirement-tag { padding:2px 6px; border:1px solid var(--border); border-radius:5px; color:var(--text); font-size:.66rem; }
   .project-requirement-empty { color:var(--muted); font-size:.66rem; }
+  .member-tag.match-must,.project-requirement-tag.must { border-color:#60a5fa; color:#93c5fd; background:rgba(59,130,246,.16); }
+  .member-tag.match-should,.project-requirement-tag.should { border-color:#34d399; color:#6ee7b7; background:rgba(16,185,129,.14); }
+  .member-tag.match-could,.project-requirement-tag.could { border-color:#f59e0b; color:#fbbf24; background:rgba(245,158,11,.13); }
+  .comparison-backdrop { position:fixed; inset:0; z-index:1100; display:none; justify-content:flex-end;
+    background:rgba(3,5,10,.76); backdrop-filter:blur(4px); }
+  .comparison-backdrop.open { display:flex; }
+  .comparison-drawer { width:min(780px,100%); height:100%; overflow:auto; background:var(--surface);
+    border-left:1px solid var(--border); padding:24px; box-shadow:-22px 0 60px rgba(0,0,0,.45); }
+  .comparison-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:20px; }
+  .comparison-title { font-size:1.15rem; font-weight:700; }
+  .comparison-section { border-top:1px solid var(--border); padding-top:17px; margin-top:17px; }
+  .comparison-section-title { color:var(--muted); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.09em; margin-bottom:11px; }
+  .composition-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .composition-box { border:1px solid var(--border); border-radius:9px; padding:11px; background:rgba(15,17,23,.45); }
+  .composition-box.removed { border-color:rgba(248,113,113,.45); }
+  .composition-box.added { border-color:rgba(52,211,153,.45); }
+  .composition-members { display:flex; gap:5px; flex-wrap:wrap; margin-top:8px; }
+  .composition-member { border-radius:5px; padding:3px 7px; font-size:.7rem; background:var(--border); }
+  .removed .composition-member { color:#fca5a5; background:rgba(248,113,113,.12); }
+  .added .composition-member { color:#6ee7b7; background:rgba(52,211,153,.12); }
+  .impact-table { width:100%; border-collapse:collapse; font-size:.76rem; }
+  .impact-table th,.impact-table td { padding:9px 8px; text-align:right; border-bottom:1px solid var(--border); }
+  .impact-table th:first-child,.impact-table td:first-child { text-align:left; }
+  .delta-positive { color:#34d399; } .delta-negative { color:#f87171; } .delta-neutral { color:var(--muted); }
+  .technology-impact { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .technology-box { border:1px solid var(--border); border-radius:9px; padding:11px; min-height:85px; }
+  .technology-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:8px; }
+  .technology-tag { font-size:.67rem; padding:3px 6px; border-radius:5px; border:1px solid var(--border); }
+  .technology-tag.gained { color:#6ee7b7; border-color:rgba(52,211,153,.5); }
+  .technology-tag.lost { color:#fca5a5; border-color:rgba(248,113,113,.5); }
+  .individual-grid { display:grid; grid-template-columns:1fr 44px 1fr; gap:10px; align-items:stretch; margin-top:10px; }
+  .individual-card { border:1px solid var(--border); border-radius:9px; padding:12px; }
+  .individual-card.out { border-color:rgba(248,113,113,.4); } .individual-card.in { border-color:rgba(52,211,153,.4); }
+  .individual-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; }
+  .internal-id { color:var(--muted); font-size:.61rem; margin-left:4px; }
   @media (max-width:800px) {
     .team-compare { min-width:100%; }
     .team-history-row { grid-template-columns:1fr 70px; }
     .team-history-members { grid-column:1/-1; }
     .history-detail-grid { grid-template-columns:1fr; }
     .project-requirements { grid-template-columns:1fr; }
+    .composition-grid,.technology-impact { grid-template-columns:1fr; }
   }
 </style>
 {% endblock %}
@@ -171,7 +207,7 @@
             <span class="team-history-label">Alocada pelo gestor</span>
             <span class="fitness-val mono">{{fit}}</span>
             <span class="badge badge-{{label}}">{{label}}</span>
-            <span class="team-history-members">{% for m in r.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+            <span class="team-history-members">{% for m in r.membros %}<span class="team-history-member" title="{{m.id}}">{{m.pseudonimo or m.id}}</span>{% endfor %}</span>
           </button>
           {% if r.equipe_ga_original %}
           {% set ga = r.equipe_ga_original %}
@@ -184,9 +220,15 @@
               <span class="team-history-label">Sugestão do otimizador</span>
               <span class="fitness-val mono">{{ ga.best_fitness }}</span>
               <span class="badge badge-{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}">{{ 'VH' if ga.best_fitness >= 0.8 else ('H' if ga.best_fitness >= 0.6 else ('M' if ga.best_fitness >= 0.4 else ('L' if ga.best_fitness >= 0.2 else 'VL'))) }}</span>
-              <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member">{{m.id}}</span>{% endfor %}</span>
+              <span class="team-history-members">{% for m in ga.membros %}<span class="team-history-member" title="{{m.id}}">{{m.pseudonimo or m.id}}</span>{% endfor %}</span>
             </button>
           </div>
+          {% endif %}
+          {% if r.equipe_ga_original %}
+          <button type="button" onclick="abrirComparacaoHistorico('{{r.id}}')"
+            style="justify-self:start;background:rgba(79,142,247,.1);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:5px 9px;cursor:pointer;font-family:inherit;font-size:.7rem">
+            ↔ Comparar decisão do gestor
+          </button>
           {% endif %}
         </div>
         
@@ -216,8 +258,8 @@
         <div class="member-grid">
           {% for m in r.membros %}
           <div class="member-card">
-            <div class="member-avatar">{{ m.id.replace('Dev','D') }}</div>
-            <div class="member-name">{{ m.id }}</div>
+            <div class="member-avatar">{{ (m.pseudonimo or m.id)[:2] }}</div>
+            <div class="member-name">{{ m.pseudonimo or m.id }} <span class="internal-id">{{m.id}}</span></div>
             <div class="member-role">{{ m.role }}</div>
             <div class="member-tags">
               {% for t in (m.dominio + m.ecossistema + m.linguagens)[:6] %}
@@ -237,7 +279,7 @@
               <span class="project-requirement-priority">{{ priority_label }}</span>
               <div class="project-requirement-tags">
                 {% for tag in requirement_tags %}
-                <span class="project-requirement-tag">{{ tag }}</span>
+                <span class="project-requirement-tag {{priority}}">{{ tag }}</span>
                 {% else %}
                 <span class="project-requirement-empty">Não informado</span>
                 {% endfor %}
@@ -281,6 +323,17 @@
     </div>
     <div id="history-modal-body"><div class="text-muted">Carregando avaliação da equipe…</div></div>
   </div>
+</div>
+
+<div id="comparison-backdrop" class="comparison-backdrop" onclick="if(event.target===this)fecharComparacaoHistorico()">
+  <aside class="comparison-drawer" role="dialog" aria-modal="true" aria-labelledby="comparison-title" tabindex="-1">
+    <div class="comparison-head">
+      <div><div class="comparison-title" id="comparison-title">Comparação da decisão</div>
+        <div class="text-muted" id="comparison-subtitle">Sugestão do otimizador × equipe alocada</div></div>
+      <button class="history-modal-close" type="button" onclick="fecharComparacaoHistorico()" aria-label="Fechar">×</button>
+    </div>
+    <div id="comparison-body"><div class="text-muted">Carregando comparação…</div></div>
+  </aside>
 </div>
 
 <script>
@@ -609,6 +662,21 @@ function _histIds(equipe) {
     .map(Number).filter(Number.isFinite);
 }
 
+function _histPrioridade(projeto, dimensao, tecnologia) {
+  const alvo = String(tecnologia || '').trim().toLocaleLowerCase('pt-BR');
+  for (const prioridade of ['must','should','could']) {
+    if ((projeto?.[dimensao]?.[prioridade] || []).some(t => String(t).trim().toLocaleLowerCase('pt-BR') === alvo)) return prioridade;
+  }
+  return '';
+}
+
+function _histTagsMembro(m, projeto) {
+  return [['dominio',m.dominio||[]],['ecossistema',m.ecossistema||[]],['linguagens',m.linguagens||[]]]
+    .flatMap(([dim,itens]) => itens.map(t => ({t, prioridade:_histPrioridade(projeto,dim,t)})))
+    .sort((a,b) => ({must:0,should:1,could:2,'':3}[a.prioridade]-({must:0,should:1,could:2,'':3}[b.prioridade])))
+    .slice(0,8).map(x => `<span class="member-tag${x.prioridade ? ` match-${x.prioridade}` : ''}"${x.prioridade ? ` title="Requisito ${x.prioridade.toUpperCase()}"` : ''}>${_histEscape(x.t)}</span>`).join('');
+}
+
 async function abrirEquipeHistorico(registroId, tipo) {
   const modal = document.getElementById('history-team-modal');
   const body = document.getElementById('history-modal-body');
@@ -652,18 +720,18 @@ async function abrirEquipeHistorico(registroId, tipo) {
       </div>
       ${registro.descricao ? `<div class="text-muted" style="margin:-6px 0 16px;line-height:1.5"><strong style="color:var(--text)">Descrição:</strong> ${_histEscape(registro.descricao)}</div>` : ''}
       <div class="member-grid" style="margin-bottom:18px">
-        ${(avaliacao.membros || []).map(m => `<div class="member-card">
-          <div class="member-avatar">${_histEscape(m.id).replace('Dev','D')}</div>
-          <div class="member-name">${_histEscape(m.id)}</div>
+        ${(avaliacao.membros || []).map(m => { const nome=m.pseudonimo||m.id; return `<div class="member-card">
+          <div class="member-avatar">${_histEscape(nome).slice(0,2)}</div>
+          <div class="member-name">${_histEscape(nome)} <span class="internal-id">${_histEscape(m.id)}</span></div>
           <div class="member-role">${_histEscape(m.role)}</div>
-          <div class="member-tags">${[...(m.dominio||[]),...(m.ecossistema||[]),...(m.linguagens||[])].slice(0,6).map(t=>`<span class="member-tag">${_histEscape(t)}</span>`).join('')}</div>
-        </div>`).join('')}
+          <div class="member-tags">${_histTagsMembro(m, registro.projeto_alvo || {})}</div>
+        </div>`}).join('')}
       </div>
       <div class="history-detail-grid">
         <div class="history-chart"><div class="history-chart-title">Histórico de colaboração</div><svg id="history-collab-chart" viewBox="0 0 300 220" style="width:100%;height:250px"></svg></div>
         <div class="history-chart"><div class="history-chart-title">Força técnica por dimensão</div><svg id="history-tech-chart" viewBox="0 0 216 240" style="width:100%;height:250px"></svg></div>
       </div>`;
-    _histDesenharGrafo(ids, grafo.pares || [], avaliacao);
+    _histDesenharGrafo(ids, grafo.pares || [], avaliacao, avaliacao.membros || []);
     _histDesenharRadar(scores, avaliacao.coverage || {});
   } catch (e) {
     body.innerHTML = `<div style="color:#f87171">${_histEscape(e.message)}</div>`;
@@ -675,7 +743,61 @@ function fecharEquipeHistorico() {
   document.body.style.overflow = '';
 }
 
-function _histDesenharGrafo(ids, pares, av) {
+function _cmpNome(m) { return m ? (m.pseudonimo || m.id || '—') : '—'; }
+function _cmpDelta(antes, depois, casas=4) {
+  const delta=Number(depois||0)-Number(antes||0), classe=delta>0?'delta-positive':delta<0?'delta-negative':'delta-neutral';
+  return `<span class="${classe}">${delta>0?'+':''}${delta.toFixed(casas)}</span>`;
+}
+function _cmpMembros(itens) {
+  return itens?.length ? itens.map(m=>`<span class="composition-member" title="${_histEscape(m.id)}">${_histEscape(_cmpNome(m))}</span>`).join('') : '<span class="text-muted">Nenhum</span>';
+}
+function _cmpTecnologias(itens, classe) {
+  return itens?.length ? itens.map(t=>`<span class="technology-tag ${classe}" title="${_histEscape(t.dimensao)} · ${_histEscape(t.prioridade)}">${_histEscape(t.tecnologia)} · ${_histEscape(t.prioridade)}</span>`).join('') : '<span class="text-muted">Nenhuma</span>';
+}
+function _cmpCardPessoa(m, colab, classe, rotulo, exclusivas=[]) {
+  if (!m) return `<div class="individual-card ${classe}"><div class="text-muted">Sem integrante correspondente</div></div>`;
+  const skills=[...(m.dominio||[]),...(m.ecossistema||[]),...(m.linguagens||[])].slice(0,7);
+  return `<div class="individual-card ${classe}"><div style="font-size:.63rem;color:var(--muted);text-transform:uppercase">${rotulo}</div>
+    <div style="font-weight:700;margin:4px 0">${_histEscape(_cmpNome(m))}<span class="internal-id">${_histEscape(m.id)}</span></div>
+    <div class="text-muted">${_histEscape(m.role||'')}</div><div class="technology-tags">${skills.map(t=>`<span class="technology-tag">${_histEscape(t)}</span>`).join('')}</div>
+    ${exclusivas.length ? `<div style="margin-top:9px;font-size:.65rem;color:var(--muted)">Competências exclusivas nesta troca</div><div class="technology-tags">${exclusivas.slice(0,8).map(t=>`<span class="technology-tag ${classe==='in'?'gained':'lost'}">${_histEscape(t)}</span>`).join('')}</div>` : ''}
+    <div style="margin-top:9px;font-size:.7rem">Colaboração média: <strong>${Number(colab?.media||0).toFixed(2)}</strong> · Relações: ${colab?.relacoes||0}/${colab?.total_relacoes||0} · Projetos: ${colab?.projetos||0}</div></div>`;
+}
+
+async function abrirComparacaoHistorico(registroId) {
+  const backdrop=document.getElementById('comparison-backdrop'), body=document.getElementById('comparison-body');
+  backdrop.classList.add('open'); document.body.style.overflow='hidden'; backdrop.querySelector('.comparison-drawer').focus();
+  body.innerHTML='<div class="text-muted">Carregando comparação…</div>';
+  try {
+    const [rr,cr]=await Promise.all([fetch(`/api/historico/${encodeURIComponent(registroId)}`),fetch(`/api/historico/${encodeURIComponent(registroId)}/comparacao`)]);
+    const registro=await rr.json(), c=await cr.json(); if(!cr.ok||c.erro) throw new Error(c.erro||'Não foi possível comparar.');
+    document.getElementById('comparison-subtitle').textContent=`${registro.nome_projeto||'Projeto'} · sugestão do otimizador × decisão do gestor`;
+    const rows=[
+      ['AE — aptidão final',c.antes.ae,c.depois.ae,4],['AT — força técnica',c.antes.at,c.depois.at,4],['AC — colaboração',c.antes.ac,c.depois.ac,4],
+      ['Pares colaborativos',c.antes.pares_colaborativos,c.depois.pares_colaborativos,0],['Projetos compartilhados',c.antes.projetos_compartilhados,c.depois.projetos_compartilhados,0]
+    ];
+    const coverage=['must','should','could'].map(k=>{const a=c.antes.coverage[k],d=c.depois.coverage[k];return `<tr><td>${k.toUpperCase()} cobertos</td><td>${a.covered}/${a.total}</td><td>${d.covered}/${d.total}</td><td>${_cmpDelta(a.covered,d.covered,0)}</td></tr>`}).join('');
+    body.innerHTML=`
+      <section><div class="comparison-section-title">Composição</div><div class="composition-grid">
+        <div class="composition-box"><div class="text-muted">Mantidos</div><div class="composition-members">${_cmpMembros(c.composicao.mantidos)}</div></div>
+        <div class="composition-box removed"><div style="color:#fca5a5">Saíram</div><div class="composition-members">${_cmpMembros(c.composicao.removidos)}</div></div>
+        <div class="composition-box added"><div style="color:#6ee7b7">Entraram</div><div class="composition-members">${_cmpMembros(c.composicao.adicionados)}</div></div>
+      </div></section>
+      <section class="comparison-section"><div class="comparison-section-title">Impacto geral</div><table class="impact-table"><thead><tr><th>Indicador</th><th>Antes</th><th>Depois</th><th>Variação</th></tr></thead><tbody>
+        ${rows.map(r=>`<tr><td>${r[0]}</td><td>${Number(r[1]||0).toFixed(r[3])}</td><td>${Number(r[2]||0).toFixed(r[3])}</td><td>${_cmpDelta(r[1],r[2],r[3])}</td></tr>`).join('')}${coverage}</tbody></table></section>
+      <section class="comparison-section"><div class="comparison-section-title">Impacto nos requisitos tecnológicos</div><div class="technology-impact">
+        <div class="technology-box"><div style="color:#6ee7b7">Ganhos</div><div class="technology-tags">${_cmpTecnologias(c.tecnologias.ganhas,'gained')}</div></div>
+        <div class="technology-box"><div style="color:#fca5a5">Perdas</div><div class="technology-tags">${_cmpTecnologias(c.tecnologias.perdidas,'lost')}</div></div>
+        <div class="technology-box"><div class="text-muted">Mantidos</div><div class="technology-tags">${_cmpTecnologias(c.tecnologias.mantidas,'')}</div></div>
+      </div></section>
+      <section class="comparison-section"><div class="comparison-section-title">Trocas individuais</div>
+        ${(c.comparacao_individual||[]).length ? c.comparacao_individual.map(p=>`<div class="individual-grid">${_cmpCardPessoa(p.saiu,p.colaboracao_saiu,'out','Saiu',p.competencias_exclusivas_saiu)}<div class="individual-arrow">→</div>${_cmpCardPessoa(p.entrou,p.colaboracao_entrou,'in','Entrou',p.competencias_exclusivas_entrou)}</div>`).join('') : '<div class="text-muted">A composição foi mantida.</div>'}
+      </section>`;
+  } catch(e) { body.innerHTML=`<div style="color:#f87171">${_histEscape(e.message)}</div>`; }
+}
+function fecharComparacaoHistorico(){document.getElementById('comparison-backdrop').classList.remove('open');document.body.style.overflow='';}
+
+function _histDesenharGrafo(ids, pares, av, membros=[]) {
   const svg = document.getElementById('history-collab-chart');
   if (!svg) return;
   const n=ids.length, cx=150, cy=96, R=70;
@@ -686,7 +808,7 @@ function _histDesenharGrafo(ids, pares, av) {
     h+=`<line x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" stroke="${cor(p.weight)}" stroke-width="${p.has_edge?Math.max(1.2,p.weight*4):1}" ${p.has_edge?'':'stroke-dasharray="4,3"'} opacity="${p.has_edge ? .85 : .3}"/>`;
     if(p.has_edge)h+=`<text x="${mx}" y="${my-3}" text-anchor="middle" font-size="10" fill="#fff">N=${p.N}</text><text x="${mx}" y="${my+9}" text-anchor="middle" font-size="9" fill="#fff">w=${Number(p.weight).toFixed(2)}</text>`;
   });
-  pos.forEach((p,i)=>{h+=`<circle cx="${p.x}" cy="${p.y}" r="18" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--accent)">D${ids[i]}</text>`});
+  pos.forEach((p,i)=>{const m=membros.find(x=>Number(x.user_id)===ids[i]);const nome=(m?.pseudonimo||m?.id||`D${ids[i]}`).slice(0,7);h+=`<circle cx="${p.x}" cy="${p.y}" r="20" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--accent)">${_histEscape(nome)}</text>`});
   const pi=av.pares_info||{};h+=`<line x1="10" y1="178" x2="290" y2="178" stroke="var(--border)"/><text x="12" y="194" font-size="9" fill="var(--muted)">Pares: ${pi.n_colab??0}/${pi.n_total??0} · Projetos compartilhados: ${pi.n_proj??0}</text><text x="288" y="208" text-anchor="end" font-size="10" fill="var(--accent2)">AC: ${_histEscape(av.ac_label||'—')} · ${Number(av.ac_score||0).toFixed(2)}</text>`;
   svg.innerHTML=h;
 }

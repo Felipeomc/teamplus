@@ -46,7 +46,12 @@
   .mem-info   { flex: 1; min-width: 0; }
   .mem-name   { font-size: .82rem; font-weight: 600; }
   .mem-role   { font-size: .68rem; color: var(--muted); }
-  .mem-techs  { font-size: .65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mem-techs  { display:flex;flex-wrap:wrap;gap:3px;margin-top:3px; }
+  .mem-tech { font-size:.61rem;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:1px 5px; }
+  .mem-tech.match-must { color:#fca5a5;border-color:rgba(248,113,113,.55);background:rgba(248,113,113,.08); }
+  .mem-tech.match-should { color:var(--accent2);border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.07); }
+  .mem-tech.match-could { color:var(--warn);border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.07); }
+  .mem-id { color:var(--muted);font-size:.58rem;margin-left:4px;font-weight:400; }
   .drag-handle { color: var(--muted); font-size: .9rem; cursor: grab; }
   .mem-details-btn { margin-top:4px; padding:0; border:0; background:none; color:var(--accent);
     font:inherit; font-size:.65rem; cursor:pointer; }
@@ -833,9 +838,15 @@ function toggleFixar(userId, e) {
 
 function memHtml(m, si, mi) {
   const todasTechs = [...(m.dominio||[]), ...(m.ecossistema||[]), ...(m.linguagens||[])];
-  const techs = todasTechs.slice(0,5).join(', ');
-  const restantes = Math.max(0, todasTechs.length - 5);
+  const techItems = [
+    ...(m.dominio||[]).map(t=>({dim:'dominio',t})),
+    ...(m.ecossistema||[]).map(t=>({dim:'ecossistema',t})),
+    ...(m.linguagens||[]).map(t=>({dim:'linguagens',t})),
+  ].map(x=>({...x,prio:_prioridadeMatch(x.dim,x.t)})).sort((a,b)=>(a.prio?0:1)-(b.prio?0:1));
+  const techs = techItems.slice(0,7).map(x=>`<span class="mem-tech ${x.prio?'match-'+x.prio:''}" title="${x.prio?`Requisito ${x.prio.toUpperCase()} do projeto`:'Competência adicional'}">${_escapeHtml(x.t)}</span>`).join('');
+  const restantes = Math.max(0, todasTechs.length - 7);
   const isPinned = _fixados.has(m.user_id);
+  const nome = m.pseudonimo || m.id;
   return `
     <div class="mem-item ${isPinned ? 'pinned' : ''}" draggable="true" id="mem-${si}-${mi}"
          data-sug="${si}" data-idx="${mi}"
@@ -845,11 +856,11 @@ function memHtml(m, si, mi) {
          ondragleave="onMemberDragLeave(event)"
          ondrop="onMemberDrop(event,${si},${mi})">
       <span class="drag-handle">⠿</span>
-      <div class="mem-avatar">${m.id.replace('Dev','D')}</div>
+      <div class="mem-avatar">${_escapeHtml(nome.split('-')[0].slice(0,2).toUpperCase())}</div>
       <div class="mem-info">
-        <div class="mem-name">${m.id}</div>
+        <div class="mem-name">${_escapeHtml(nome)}<span class="mem-id">${_escapeHtml(m.id)}</span></div>
         <div class="mem-role">${m.role}</div>
-        <div class="mem-techs">${techs}${restantes ? ` · +${restantes}` : ''}</div>
+        <div class="mem-techs">${techs}${restantes ? `<span class="mem-tech">+${restantes}</span>` : ''}</div>
         <button class="mem-details-btn" type="button" draggable="false"
           onpointerdown="event.stopPropagation()"
           onclick="event.stopPropagation();abrirDetalhesMembro(${si},${mi})">
@@ -867,6 +878,14 @@ function memHtml(m, si, mi) {
 
 function _normalizarTech(valor) {
   return String(valor || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
+}
+
+function _prioridadeMatch(dim, tecnologia) {
+  const alvo = _normalizarTech(tecnologia);
+  for (const prioridade of ['must','should','could']) {
+    if ((_projetoAlvo?.[dim]?.[prioridade] || []).some(item => _normalizarTech(item) === alvo)) return prioridade;
+  }
+  return null;
 }
 
 function _escapeHtml(valor) {
@@ -927,27 +946,33 @@ function _chipsRequisitos(itens) {
   ).join('')}</div>`;
 }
 
-function _grupoCompetencias(titulo, itens) {
+function _grupoCompetencias(titulo, itens, dimensao) {
   return `<div class="member-skill-group">
     <div class="member-skill-title">${titulo}</div>
-    ${itens.length ? `<div class="member-chip-row">${itens.map(t => `<span class="member-chip">${_escapeHtml(t)}</span>`).join('')}</div>`
+    ${itens.length ? `<div class="member-chip-row">${itens.map(t => {
+      const prioridade = _prioridadeMatch(dimensao, t);
+      const classe = prioridade ? ` match-${prioridade}` : '';
+      const dica = prioridade ? ` title="Requisito ${prioridade.toUpperCase()} do projeto"` : '';
+      return `<span class="member-chip${classe}"${dica}>${_escapeHtml(t)}</span>`;
+    }).join('')}</div>`
       : '<div class="member-empty">Não informado</div>'}
   </div>`;
 }
 
 async function abrirDetalhesMembro(si, mi) {
   const a = _analiseContribuicao(si, mi);
+  const nomeMembro = a.membro.pseudonimo || a.membro.id;
   const drawer = document.getElementById('member-drawer-backdrop');
   const content = document.getElementById('member-drawer-content');
   const resumo = a.correspondencias.length
-    ? `${_escapeHtml(a.membro.id)} contribui diretamente para ${a.correspondencias.length} requisito${a.correspondencias.length === 1 ? '' : 's'} tecnológico${a.correspondencias.length === 1 ? '' : 's'} deste projeto.`
-    : `A participação de ${_escapeHtml(a.membro.id)} decorre da avaliação conjunta da equipe; não há correspondência direta com os requisitos tecnológicos cadastrados.`;
+    ? `${_escapeHtml(nomeMembro)} contribui diretamente para ${a.correspondencias.length} requisito${a.correspondencias.length === 1 ? '' : 's'} tecnológico${a.correspondencias.length === 1 ? '' : 's'} deste projeto.`
+    : `A participação de ${_escapeHtml(nomeMembro)} decorre da avaliação conjunta da equipe; não há correspondência direta com os requisitos tecnológicos cadastrados.`;
 
   content.innerHTML = `
     <div class="member-drawer-head">
       <div>
-        <div class="member-drawer-title" id="member-drawer-title">Contribuição de ${_escapeHtml(a.membro.id)}</div>
-        <div class="member-drawer-sub">${_escapeHtml(a.membro.role)} · Sugestão ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
+        <div class="member-drawer-title" id="member-drawer-title">Contribuição de ${_escapeHtml(nomeMembro)}</div>
+        <div class="member-drawer-sub">${_escapeHtml(a.membro.id)} · ${_escapeHtml(a.membro.role)} · Sugestão ${si + 1} · ${_escapeHtml(_nomeProjeto || 'Projeto atual')}</div>
       </div>
       <button class="member-drawer-close" type="button" onclick="fecharDetalhesMembro()" aria-label="Fechar">×</button>
     </div>
@@ -976,9 +1001,9 @@ async function abrirDetalhesMembro(si, mi) {
     </section>
     <section class="member-drawer-section">
       <div class="member-drawer-label">Perfil completo</div>
-      ${_grupoCompetencias('Domínio', a.competencias.dominio)}
-      ${_grupoCompetencias('Ecossistema', a.competencias.ecossistema)}
-      ${_grupoCompetencias('Linguagens', a.competencias.linguagens)}
+      ${_grupoCompetencias('Domínio', a.competencias.dominio, 'dominio')}
+      ${_grupoCompetencias('Ecossistema', a.competencias.ecossistema, 'ecossistema')}
+      ${_grupoCompetencias('Linguagens', a.competencias.linguagens, 'linguagens')}
     </section>`;
 
   drawer.classList.add('open');
@@ -996,7 +1021,8 @@ async function abrirDetalhesMembro(si, mi) {
     collab.className = '';
     collab.innerHTML = relacoes.length ? relacoes.map(p => {
       const colegaId = p.source === a.membro.user_id ? p.target : p.source;
-      const colega = a.sugestao.membros.find(m => m.user_id === colegaId)?.id || `Dev${colegaId}`;
+      const colegaMembro = a.sugestao.membros.find(m => m.user_id === colegaId);
+      const colega = colegaMembro?.pseudonimo || colegaMembro?.id || `Dev${colegaId}`;
       const nivel = !p.has_edge ? 'Sem histórico' : p.weight >= .7 ? 'Alta' : p.weight >= .4 ? 'Média' : 'Baixa';
       return `<div class="member-collab"><span>${_escapeHtml(colega)}</span><span>${nivel}${p.has_edge ? ` · ${p.N} proj.` : ''}</span></div>`;
     }).join('') : '<div class="member-empty">Não há relações de colaboração disponíveis para este membro.</div>';
@@ -1067,10 +1093,10 @@ function _validarTroca(srcSi, srcMi, targetSi, targetMi) {
     return {ok:false, erro:'Não foi possível identificar os integrantes da troca.'};
   }
   if (membroOrigem.user_id === membroDestino.user_id) {
-    return {ok:false, erro:`${membroOrigem.id} já está presente na equipe de destino.`};
+    return {ok:false, erro:`${membroOrigem.pseudonimo || membroOrigem.id} já está presente na equipe de destino.`};
   }
   if (destino.membros.some((m, i) => i !== targetMi && m.user_id === membroOrigem.user_id)) {
-    return {ok:false, erro:`${membroOrigem.id} já pertence à equipe de destino.`};
+    return {ok:false, erro:`${membroOrigem.pseudonimo || membroOrigem.id} já pertence à equipe de destino.`};
   }
   if (origem.membros.some((m, i) => i !== srcMi && m.user_id === membroDestino.user_id)) {
     return {ok:false, erro:`${membroDestino.id} já pertence à equipe de origem.`};
@@ -1448,10 +1474,10 @@ async function explicar(si) {
                   background:var(--bg);border:1px solid var(--border);border-radius:6px;margin-bottom:4px">
                   <div style="width:28px;height:28px;border-radius:50%;background:var(--border);
                     display:flex;align-items:center;justify-content:center;font-size:.65rem;
-                    font-weight:700;color:var(--accent);flex-shrink:0">${m.id.replace('Dev','D')}</div>
+                    font-weight:700;color:var(--accent);flex-shrink:0">${_escapeHtml((m.pseudonimo||m.id).split('-')[0].slice(0,2).toUpperCase())}</div>
                   <div>
-                    <div style="font-size:.75rem;font-weight:600">${m.id}</div>
-                    <div style="font-size:.62rem;color:var(--muted)">${m.role}</div>
+                    <div style="font-size:.75rem;font-weight:600">${_escapeHtml(m.pseudonimo||m.id)}</div>
+                    <div style="font-size:.62rem;color:var(--muted)">${_escapeHtml(m.id)} · ${_escapeHtml(m.role)}</div>
                   </div>
                 </div>`).join('')}
             </div>

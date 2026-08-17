@@ -5,5292 +5,6048 @@
       "user_id": 1,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-1"
     },
     {
       "id": "Dev2",
       "user_id": 2,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-2"
     },
     {
       "id": "Dev3",
       "user_id": 3,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-3"
     },
     {
       "id": "Dev4",
       "user_id": 4,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-4"
     },
     {
       "id": "Dev5",
       "user_id": 5,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-5"
     },
     {
       "id": "Dev6",
       "user_id": 6,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-6"
     },
     {
       "id": "Dev7",
       "user_id": 7,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-7"
     },
     {
       "id": "Dev8",
       "user_id": 8,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-8"
     },
     {
       "id": "Dev9",
       "user_id": 9,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-9"
     },
     {
       "id": "Dev10",
       "user_id": 10,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-10"
     },
     {
       "id": "Dev11",
       "user_id": 11,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-11"
     },
     {
       "id": "Dev12",
       "user_id": 12,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-12"
     },
     {
       "id": "Dev13",
       "user_id": 13,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-13"
     },
     {
       "id": "Dev14",
       "user_id": 14,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-14"
     },
     {
       "id": "Dev15",
       "user_id": 15,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-15"
     },
     {
       "id": "Dev16",
       "user_id": 16,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-16"
     },
     {
       "id": "Dev17",
       "user_id": 17,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-17"
     },
     {
       "id": "Dev18",
       "user_id": 18,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-18"
     },
     {
       "id": "Dev19",
       "user_id": 19,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-19"
     },
     {
       "id": "Dev20",
       "user_id": 20,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-20"
     },
     {
       "id": "Dev21",
       "user_id": 21,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-21"
     },
     {
       "id": "Dev22",
       "user_id": 22,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-22"
     },
     {
       "id": "Dev23",
       "user_id": 23,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-23"
     },
     {
       "id": "Dev24",
       "user_id": 24,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-24"
     },
     {
       "id": "Dev25",
       "user_id": 25,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-25"
     },
     {
       "id": "Dev26",
       "user_id": 26,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-26"
     },
     {
       "id": "Dev27",
       "user_id": 27,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-27"
     },
     {
       "id": "Dev28",
       "user_id": 28,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-28"
     },
     {
       "id": "Dev29",
       "user_id": 29,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-29"
     },
     {
       "id": "Dev30",
       "user_id": 30,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-30"
     },
     {
       "id": "Dev31",
       "user_id": 31,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-31"
     },
     {
       "id": "Dev32",
       "user_id": 32,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-32"
     },
     {
       "id": "Dev33",
       "user_id": 33,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-33"
     },
     {
       "id": "Dev34",
       "user_id": 34,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-34"
     },
     {
       "id": "Dev35",
       "user_id": 35,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-35"
     },
     {
       "id": "Dev36",
       "user_id": 36,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-36"
     },
     {
       "id": "Dev37",
       "user_id": 37,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-37"
     },
     {
       "id": "Dev38",
       "user_id": 38,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-38"
     },
     {
       "id": "Dev39",
       "user_id": 39,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-39"
     },
     {
       "id": "Dev40",
       "user_id": 40,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-40"
     },
     {
       "id": "Dev41",
       "user_id": 41,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-41"
     },
     {
       "id": "Dev42",
       "user_id": 42,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-42"
     },
     {
       "id": "Dev43",
       "user_id": 43,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-43"
     },
     {
       "id": "Dev44",
       "user_id": 44,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-44"
     },
     {
       "id": "Dev45",
       "user_id": 45,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-45"
     },
     {
       "id": "Dev46",
       "user_id": 46,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-46"
     },
     {
       "id": "Dev47",
       "user_id": 47,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-47"
     },
     {
       "id": "Dev48",
       "user_id": 48,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-48"
     },
     {
       "id": "Dev49",
       "user_id": 49,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-49"
     },
     {
       "id": "Dev50",
       "user_id": 50,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-50"
     },
     {
       "id": "Dev51",
       "user_id": 51,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-51"
     },
     {
       "id": "Dev52",
       "user_id": 52,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-52"
     },
     {
       "id": "Dev53",
       "user_id": 53,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-53"
     },
     {
       "id": "Dev54",
       "user_id": 54,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-54"
     },
     {
       "id": "Dev55",
       "user_id": 55,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-55"
     },
     {
       "id": "Dev56",
       "user_id": 56,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-56"
     },
     {
       "id": "Dev57",
       "user_id": 57,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-57"
     },
     {
       "id": "Dev58",
       "user_id": 58,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-58"
     },
     {
       "id": "Dev59",
       "user_id": 59,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-59"
     },
     {
       "id": "Dev60",
       "user_id": 60,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-60"
     },
     {
       "id": "Dev61",
       "user_id": 61,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-61"
     },
     {
       "id": "Dev62",
       "user_id": 62,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-62"
     },
     {
       "id": "Dev63",
       "user_id": 63,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-63"
     },
     {
       "id": "Dev64",
       "user_id": 64,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-64"
     },
     {
       "id": "Dev65",
       "user_id": 65,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-65"
     },
     {
       "id": "Dev66",
       "user_id": 66,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-66"
     },
     {
       "id": "Dev67",
       "user_id": 67,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-67"
     },
     {
       "id": "Dev68",
       "user_id": 68,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-68"
     },
     {
       "id": "Dev69",
       "user_id": 69,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-69"
     },
     {
       "id": "Dev70",
       "user_id": 70,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-70"
     },
     {
       "id": "Dev71",
       "user_id": 71,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-71"
     },
     {
       "id": "Dev72",
       "user_id": 72,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-72"
     },
     {
       "id": "Dev73",
       "user_id": 73,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-73"
     },
     {
       "id": "Dev74",
       "user_id": 74,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-74"
     },
     {
       "id": "Dev75",
       "user_id": 75,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-75"
     },
     {
       "id": "Dev76",
       "user_id": 76,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-76"
     },
     {
       "id": "Dev77",
       "user_id": 77,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-77"
     },
     {
       "id": "Dev78",
       "user_id": 78,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-78"
     },
     {
       "id": "Dev79",
       "user_id": 79,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-79"
     },
     {
       "id": "Dev80",
       "user_id": 80,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-80"
     },
     {
       "id": "Dev81",
       "user_id": 81,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-81"
     },
     {
       "id": "Dev82",
       "user_id": 82,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-82"
     },
     {
       "id": "Dev83",
       "user_id": 83,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-83"
     },
     {
       "id": "Dev84",
       "user_id": 84,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-84"
     },
     {
       "id": "Dev85",
       "user_id": 85,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-85"
     },
     {
       "id": "Dev86",
       "user_id": 86,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-86"
     },
     {
       "id": "Dev87",
       "user_id": 87,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-87"
     },
     {
       "id": "Dev88",
       "user_id": 88,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-88"
     },
     {
       "id": "Dev89",
       "user_id": 89,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-89"
     },
     {
       "id": "Dev90",
       "user_id": 90,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-90"
     },
     {
       "id": "Dev91",
       "user_id": 91,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-91"
     },
     {
       "id": "Dev92",
       "user_id": 92,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-92"
     },
     {
       "id": "Dev93",
       "user_id": 93,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-93"
     },
     {
       "id": "Dev94",
       "user_id": 94,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-94"
     },
     {
       "id": "Dev95",
       "user_id": 95,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-95"
     },
     {
       "id": "Dev96",
       "user_id": 96,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-96"
     },
     {
       "id": "Dev97",
       "user_id": 97,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-97"
     },
     {
       "id": "Dev98",
       "user_id": 98,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-98"
     },
     {
       "id": "Dev99",
       "user_id": 99,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-99"
     },
     {
       "id": "Dev100",
       "user_id": 100,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-100"
     },
     {
       "id": "Dev101",
       "user_id": 101,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-101"
     },
     {
       "id": "Dev102",
       "user_id": 102,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-102"
     },
     {
       "id": "Dev103",
       "user_id": 103,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-103"
     },
     {
       "id": "Dev104",
       "user_id": 104,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-104"
     },
     {
       "id": "Dev105",
       "user_id": 105,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-105"
     },
     {
       "id": "Dev106",
       "user_id": 106,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-106"
     },
     {
       "id": "Dev107",
       "user_id": 107,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-107"
     },
     {
       "id": "Dev108",
       "user_id": 108,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-108"
     },
     {
       "id": "Dev109",
       "user_id": 109,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-109"
     },
     {
       "id": "Dev110",
       "user_id": 110,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-110"
     },
     {
       "id": "Dev111",
       "user_id": 111,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-111"
     },
     {
       "id": "Dev112",
       "user_id": 112,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-112"
     },
     {
       "id": "Dev113",
       "user_id": 113,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-113"
     },
     {
       "id": "Dev114",
       "user_id": 114,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-114"
     },
     {
       "id": "Dev115",
       "user_id": 115,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-115"
     },
     {
       "id": "Dev116",
       "user_id": 116,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-116"
     },
     {
       "id": "Dev117",
       "user_id": 117,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-117"
     },
     {
       "id": "Dev118",
       "user_id": 118,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-118"
     },
     {
       "id": "Dev119",
       "user_id": 119,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-119"
     },
     {
       "id": "Dev120",
       "user_id": 120,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-120"
     },
     {
       "id": "Dev121",
       "user_id": 121,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-121"
     },
     {
       "id": "Dev122",
       "user_id": 122,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-122"
     },
     {
       "id": "Dev123",
       "user_id": 123,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-123"
     },
     {
       "id": "Dev124",
       "user_id": 124,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-124"
     },
     {
       "id": "Dev125",
       "user_id": 125,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-125"
     },
     {
       "id": "Dev126",
       "user_id": 126,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-126"
     },
     {
       "id": "Dev127",
       "user_id": 127,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-127"
     },
     {
       "id": "Dev128",
       "user_id": 128,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-128"
     },
     {
       "id": "Dev129",
       "user_id": 129,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-129"
     },
     {
       "id": "Dev130",
       "user_id": 130,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-130"
     },
     {
       "id": "Dev131",
       "user_id": 131,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-131"
     },
     {
       "id": "Dev132",
       "user_id": 132,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-132"
     },
     {
       "id": "Dev133",
       "user_id": 133,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-133"
     },
     {
       "id": "Dev134",
       "user_id": 134,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-134"
     },
     {
       "id": "Dev135",
       "user_id": 135,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-135"
     },
     {
       "id": "Dev136",
       "user_id": 136,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-136"
     },
     {
       "id": "Dev137",
       "user_id": 137,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-137"
     },
     {
       "id": "Dev138",
       "user_id": 138,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-138"
     },
     {
       "id": "Dev139",
       "user_id": 139,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-139"
     },
     {
       "id": "Dev140",
       "user_id": 140,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-140"
     },
     {
       "id": "Dev141",
       "user_id": 141,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-141"
     },
     {
       "id": "Dev142",
       "user_id": 142,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-142"
     },
     {
       "id": "Dev143",
       "user_id": 143,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-143"
     },
     {
       "id": "Dev144",
       "user_id": 144,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-144"
     },
     {
       "id": "Dev145",
       "user_id": 145,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-145"
     },
     {
       "id": "Dev146",
       "user_id": 146,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-146"
     },
     {
       "id": "Dev147",
       "user_id": 147,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-147"
     },
     {
       "id": "Dev148",
       "user_id": 148,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-148"
     },
     {
       "id": "Dev149",
       "user_id": 149,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-149"
     },
     {
       "id": "Dev150",
       "user_id": 150,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-150"
     },
     {
       "id": "Dev151",
       "user_id": 151,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-151"
     },
     {
       "id": "Dev152",
       "user_id": 152,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-152"
     },
     {
       "id": "Dev153",
       "user_id": 153,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-153"
     },
     {
       "id": "Dev154",
       "user_id": 154,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-154"
     },
     {
       "id": "Dev155",
       "user_id": 155,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-155"
     },
     {
       "id": "Dev156",
       "user_id": 156,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-156"
     },
     {
       "id": "Dev157",
       "user_id": 157,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-157"
     },
     {
       "id": "Dev158",
       "user_id": 158,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-158"
     },
     {
       "id": "Dev159",
       "user_id": 159,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-159"
     },
     {
       "id": "Dev160",
       "user_id": 160,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-160"
     },
     {
       "id": "Dev161",
       "user_id": 161,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-161"
     },
     {
       "id": "Dev162",
       "user_id": 162,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-162"
     },
     {
       "id": "Dev163",
       "user_id": 163,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-163"
     },
     {
       "id": "Dev164",
       "user_id": 164,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-164"
     },
     {
       "id": "Dev165",
       "user_id": 165,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-165"
     },
     {
       "id": "Dev166",
       "user_id": 166,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-166"
     },
     {
       "id": "Dev167",
       "user_id": 167,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-167"
     },
     {
       "id": "Dev168",
       "user_id": 168,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-168"
     },
     {
       "id": "Dev169",
       "user_id": 169,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-169"
     },
     {
       "id": "Dev170",
       "user_id": 170,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-170"
     },
     {
       "id": "Dev171",
       "user_id": 171,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-171"
     },
     {
       "id": "Dev172",
       "user_id": 172,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-172"
     },
     {
       "id": "Dev173",
       "user_id": 173,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-173"
     },
     {
       "id": "Dev174",
       "user_id": 174,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-174"
     },
     {
       "id": "Dev175",
       "user_id": 175,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-175"
     },
     {
       "id": "Dev176",
       "user_id": 176,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-176"
     },
     {
       "id": "Dev177",
       "user_id": 177,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-177"
     },
     {
       "id": "Dev178",
       "user_id": 178,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-178"
     },
     {
       "id": "Dev179",
       "user_id": 179,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-179"
     },
     {
       "id": "Dev180",
       "user_id": 180,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-180"
     },
     {
       "id": "Dev181",
       "user_id": 181,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-181"
     },
     {
       "id": "Dev182",
       "user_id": 182,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-182"
     },
     {
       "id": "Dev183",
       "user_id": 183,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-183"
     },
     {
       "id": "Dev184",
       "user_id": 184,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-184"
     },
     {
       "id": "Dev185",
       "user_id": 185,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-185"
     },
     {
       "id": "Dev186",
       "user_id": 186,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-186"
     },
     {
       "id": "Dev187",
       "user_id": 187,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-187"
     },
     {
       "id": "Dev188",
       "user_id": 188,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-188"
     },
     {
       "id": "Dev189",
       "user_id": 189,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-189"
     },
     {
       "id": "Dev190",
       "user_id": 190,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-190"
     },
     {
       "id": "Dev191",
       "user_id": 191,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-191"
     },
     {
       "id": "Dev192",
       "user_id": 192,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-192"
     },
     {
       "id": "Dev193",
       "user_id": 193,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-193"
     },
     {
       "id": "Dev194",
       "user_id": 194,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-194"
     },
     {
       "id": "Dev195",
       "user_id": 195,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-195"
     },
     {
       "id": "Dev196",
       "user_id": 196,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-196"
     },
     {
       "id": "Dev197",
       "user_id": 197,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-197"
     },
     {
       "id": "Dev198",
       "user_id": 198,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-198"
     },
     {
       "id": "Dev199",
       "user_id": 199,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-199"
     },
     {
       "id": "Dev200",
       "user_id": 200,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-200"
     },
     {
       "id": "Dev201",
       "user_id": 201,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-201"
     },
     {
       "id": "Dev202",
       "user_id": 202,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-202"
     },
     {
       "id": "Dev203",
       "user_id": 203,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-203"
     },
     {
       "id": "Dev204",
       "user_id": 204,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-204"
     },
     {
       "id": "Dev205",
       "user_id": 205,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-205"
     },
     {
       "id": "Dev207",
       "user_id": 207,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-207"
     },
     {
       "id": "Dev208",
       "user_id": 208,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-208"
     },
     {
       "id": "Dev209",
       "user_id": 209,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-209"
     },
     {
       "id": "Dev210",
       "user_id": 210,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-210"
     },
     {
       "id": "Dev211",
       "user_id": 211,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-211"
     },
     {
       "id": "Dev212",
       "user_id": 212,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-212"
     },
     {
       "id": "Dev213",
       "user_id": 213,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-213"
     },
     {
       "id": "Dev214",
       "user_id": 214,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-214"
     },
     {
       "id": "Dev215",
       "user_id": 215,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-215"
     },
     {
       "id": "Dev216",
       "user_id": 216,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-216"
     },
     {
       "id": "Dev217",
       "user_id": 217,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-217"
     },
     {
       "id": "Dev218",
       "user_id": 218,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-218"
     },
     {
       "id": "Dev219",
       "user_id": 219,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-219"
     },
     {
       "id": "Dev220",
       "user_id": 220,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-220"
     },
     {
       "id": "Dev221",
       "user_id": 221,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-221"
     },
     {
       "id": "Dev222",
       "user_id": 222,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-222"
     },
     {
       "id": "Dev223",
       "user_id": 223,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-223"
     },
     {
       "id": "Dev224",
       "user_id": 224,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-224"
     },
     {
       "id": "Dev225",
       "user_id": 225,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-225"
     },
     {
       "id": "Dev226",
       "user_id": 226,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-226"
     },
     {
       "id": "Dev227",
       "user_id": 227,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-227"
     },
     {
       "id": "Dev228",
       "user_id": 228,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-228"
     },
     {
       "id": "Dev229",
       "user_id": 229,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-229"
     },
     {
       "id": "Dev230",
       "user_id": 230,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-230"
     },
     {
       "id": "Dev231",
       "user_id": 231,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-231"
     },
     {
       "id": "Dev232",
       "user_id": 232,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-232"
     },
     {
       "id": "Dev233",
       "user_id": 233,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-233"
     },
     {
       "id": "Dev234",
       "user_id": 234,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-234"
     },
     {
       "id": "Dev235",
       "user_id": 235,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-235"
     },
     {
       "id": "Dev236",
       "user_id": 236,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-236"
     },
     {
       "id": "Dev237",
       "user_id": 237,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-237"
     },
     {
       "id": "Dev238",
       "user_id": 238,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-238"
     },
     {
       "id": "Dev239",
       "user_id": 239,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-239"
     },
     {
       "id": "Dev240",
       "user_id": 240,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-240"
     },
     {
       "id": "Dev241",
       "user_id": 241,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-241"
     },
     {
       "id": "Dev242",
       "user_id": 242,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-242"
     },
     {
       "id": "Dev243",
       "user_id": 243,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-243"
     },
     {
       "id": "Dev244",
       "user_id": 244,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-244"
     },
     {
       "id": "Dev245",
       "user_id": 245,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-245"
     },
     {
       "id": "Dev246",
       "user_id": 246,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-246"
     },
     {
       "id": "Dev247",
       "user_id": 247,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-247"
     },
     {
       "id": "Dev248",
       "user_id": 248,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-248"
     },
     {
       "id": "Dev249",
       "user_id": 249,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-249"
     },
     {
       "id": "Dev250",
       "user_id": 250,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-250"
     },
     {
       "id": "Dev251",
       "user_id": 251,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-251"
     },
     {
       "id": "Dev252",
       "user_id": 252,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-252"
     },
     {
       "id": "Dev253",
       "user_id": 253,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-253"
     },
     {
       "id": "Dev254",
       "user_id": 254,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-254"
     },
     {
       "id": "Dev255",
       "user_id": 255,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-255"
     },
     {
       "id": "Dev256",
       "user_id": 256,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-256"
     },
     {
       "id": "Dev257",
       "user_id": 257,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-257"
     },
     {
       "id": "Dev258",
       "user_id": 258,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-258"
     },
     {
       "id": "Dev259",
       "user_id": 259,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-259"
     },
     {
       "id": "Dev260",
       "user_id": 260,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-260"
     },
     {
       "id": "Dev261",
       "user_id": 261,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-261"
     },
     {
       "id": "Dev262",
       "user_id": 262,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-262"
     },
     {
       "id": "Dev263",
       "user_id": 263,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-263"
     },
     {
       "id": "Dev264",
       "user_id": 264,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-264"
     },
     {
       "id": "Dev265",
       "user_id": 265,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-265"
     },
     {
       "id": "Dev266",
       "user_id": 266,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-266"
     },
     {
       "id": "Dev267",
       "user_id": 267,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-267"
     },
     {
       "id": "Dev268",
       "user_id": 268,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-268"
     },
     {
       "id": "Dev269",
       "user_id": 269,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-269"
     },
     {
       "id": "Dev270",
       "user_id": 270,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-270"
     },
     {
       "id": "Dev271",
       "user_id": 271,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-271"
     },
     {
       "id": "Dev272",
       "user_id": 272,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-272"
     },
     {
       "id": "Dev273",
       "user_id": 273,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-273"
     },
     {
       "id": "Dev274",
       "user_id": 274,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-274"
     },
     {
       "id": "Dev275",
       "user_id": 275,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-275"
     },
     {
       "id": "Dev276",
       "user_id": 276,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-276"
     },
     {
       "id": "Dev277",
       "user_id": 277,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-277"
     },
     {
       "id": "Dev278",
       "user_id": 278,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-278"
     },
     {
       "id": "Dev279",
       "user_id": 279,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-279"
     },
     {
       "id": "Dev280",
       "user_id": 280,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-280"
     },
     {
       "id": "Dev281",
       "user_id": 281,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-281"
     },
     {
       "id": "Dev282",
       "user_id": 282,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-282"
     },
     {
       "id": "Dev283",
       "user_id": 283,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-283"
     },
     {
       "id": "Dev284",
       "user_id": 284,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-284"
     },
     {
       "id": "Dev285",
       "user_id": 285,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-285"
     },
     {
       "id": "Dev286",
       "user_id": 286,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-286"
     },
     {
       "id": "Dev287",
       "user_id": 287,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-287"
     },
     {
       "id": "Dev288",
       "user_id": 288,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-288"
     },
     {
       "id": "Dev289",
       "user_id": 289,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-289"
     },
     {
       "id": "Dev290",
       "user_id": 290,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-290"
     },
     {
       "id": "Dev291",
       "user_id": 291,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-291"
     },
     {
       "id": "Dev292",
       "user_id": 292,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-292"
     },
     {
       "id": "Dev293",
       "user_id": 293,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-293"
     },
     {
       "id": "Dev294",
       "user_id": 294,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-294"
     },
     {
       "id": "Dev295",
       "user_id": 295,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-295"
     },
     {
       "id": "Dev296",
       "user_id": 296,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-296"
     },
     {
       "id": "Dev297",
       "user_id": 297,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-297"
     },
     {
       "id": "Dev298",
       "user_id": 298,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-298"
     },
     {
       "id": "Dev299",
       "user_id": 299,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-299"
     },
     {
       "id": "Dev300",
       "user_id": 300,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-300"
     },
     {
       "id": "Dev301",
       "user_id": 301,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-301"
     },
     {
       "id": "Dev302",
       "user_id": 302,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-302"
     },
     {
       "id": "Dev303",
       "user_id": 303,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-303"
     },
     {
       "id": "Dev304",
       "user_id": 304,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-304"
     },
     {
       "id": "Dev305",
       "user_id": 305,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-305"
     },
     {
       "id": "Dev306",
       "user_id": 306,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-306"
     },
     {
       "id": "Dev307",
       "user_id": 307,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-307"
     },
     {
       "id": "Dev308",
       "user_id": 308,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-308"
     },
     {
       "id": "Dev309",
       "user_id": 309,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-309"
     },
     {
       "id": "Dev310",
       "user_id": 310,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-310"
     },
     {
       "id": "Dev311",
       "user_id": 311,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-311"
     },
     {
       "id": "Dev312",
       "user_id": 312,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-312"
     },
     {
       "id": "Dev313",
       "user_id": 313,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-313"
     },
     {
       "id": "Dev314",
       "user_id": 314,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-314"
     },
     {
       "id": "Dev315",
       "user_id": 315,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-315"
     },
     {
       "id": "Dev316",
       "user_id": 316,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-316"
     },
     {
       "id": "Dev317",
       "user_id": 317,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-317"
     },
     {
       "id": "Dev318",
       "user_id": 318,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-318"
     },
     {
       "id": "Dev319",
       "user_id": 319,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-319"
     },
     {
       "id": "Dev320",
       "user_id": 320,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-320"
     },
     {
       "id": "Dev321",
       "user_id": 321,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-321"
     },
     {
       "id": "Dev322",
       "user_id": 322,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-322"
     },
     {
       "id": "Dev323",
       "user_id": 323,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-323"
     },
     {
       "id": "Dev324",
       "user_id": 324,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-324"
     },
     {
       "id": "Dev325",
       "user_id": 325,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-325"
     },
     {
       "id": "Dev326",
       "user_id": 326,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-326"
     },
     {
       "id": "Dev327",
       "user_id": 327,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-327"
     },
     {
       "id": "Dev328",
       "user_id": 328,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-328"
     },
     {
       "id": "Dev329",
       "user_id": 329,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-329"
     },
     {
       "id": "Dev330",
       "user_id": 330,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-330"
     },
     {
       "id": "Dev331",
       "user_id": 331,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-331"
     },
     {
       "id": "Dev332",
       "user_id": 332,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-332"
     },
     {
       "id": "Dev333",
       "user_id": 333,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-333"
     },
     {
       "id": "Dev334",
       "user_id": 334,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-334"
     },
     {
       "id": "Dev335",
       "user_id": 335,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-335"
     },
     {
       "id": "Dev336",
       "user_id": 336,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-336"
     },
     {
       "id": "Dev337",
       "user_id": 337,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-337"
     },
     {
       "id": "Dev338",
       "user_id": 338,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-338"
     },
     {
       "id": "Dev339",
       "user_id": 339,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-339"
     },
     {
       "id": "Dev340",
       "user_id": 340,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-340"
     },
     {
       "id": "Dev341",
       "user_id": 341,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-341"
     },
     {
       "id": "Dev342",
       "user_id": 342,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-342"
     },
     {
       "id": "Dev343",
       "user_id": 343,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-343"
     },
     {
       "id": "Dev344",
       "user_id": 344,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-344"
     },
     {
       "id": "Dev345",
       "user_id": 345,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-345"
     },
     {
       "id": "Dev346",
       "user_id": 346,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-346"
     },
     {
       "id": "Dev347",
       "user_id": 347,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-347"
     },
     {
       "id": "Dev348",
       "user_id": 348,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-348"
     },
     {
       "id": "Dev349",
       "user_id": 349,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-349"
     },
     {
       "id": "Dev350",
       "user_id": 350,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-350"
     },
     {
       "id": "Dev351",
       "user_id": 351,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-351"
     },
     {
       "id": "Dev352",
       "user_id": 352,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-352"
     },
     {
       "id": "Dev353",
       "user_id": 353,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-353"
     },
     {
       "id": "Dev354",
       "user_id": 354,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-354"
     },
     {
       "id": "Dev355",
       "user_id": 355,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-355"
     },
     {
       "id": "Dev356",
       "user_id": 356,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-356"
     },
     {
       "id": "Dev357",
       "user_id": 357,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-357"
     },
     {
       "id": "Dev358",
       "user_id": 358,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-358"
     },
     {
       "id": "Dev359",
       "user_id": 359,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-359"
     },
     {
       "id": "Dev360",
       "user_id": 360,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-360"
     },
     {
       "id": "Dev361",
       "user_id": 361,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-361"
     },
     {
       "id": "Dev362",
       "user_id": 362,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-362"
     },
     {
       "id": "Dev363",
       "user_id": 363,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-363"
     },
     {
       "id": "Dev364",
       "user_id": 364,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-364"
     },
     {
       "id": "Dev365",
       "user_id": 365,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-365"
     },
     {
       "id": "Dev366",
       "user_id": 366,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-366"
     },
     {
       "id": "Dev367",
       "user_id": 367,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-367"
     },
     {
       "id": "Dev368",
       "user_id": 368,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-368"
     },
     {
       "id": "Dev369",
       "user_id": 369,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-369"
     },
     {
       "id": "Dev370",
       "user_id": 370,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-370"
     },
     {
       "id": "Dev371",
       "user_id": 371,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-371"
     },
     {
       "id": "Dev372",
       "user_id": 372,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-372"
     },
     {
       "id": "Dev373",
       "user_id": 373,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-373"
     },
     {
       "id": "Dev374",
       "user_id": 374,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-374"
     },
     {
       "id": "Dev375",
       "user_id": 375,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-375"
     },
     {
       "id": "Dev376",
       "user_id": 376,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-376"
     },
     {
       "id": "Dev377",
       "user_id": 377,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-377"
     },
     {
       "id": "Dev378",
       "user_id": 378,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-378"
     },
     {
       "id": "Dev379",
       "user_id": 379,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-379"
     },
     {
       "id": "Dev380",
       "user_id": 380,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-380"
     },
     {
       "id": "Dev381",
       "user_id": 381,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-381"
     },
     {
       "id": "Dev382",
       "user_id": 382,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-382"
     },
     {
       "id": "Dev383",
       "user_id": 383,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-383"
     },
     {
       "id": "Dev384",
       "user_id": 384,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-384"
     },
     {
       "id": "Dev385",
       "user_id": 385,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-385"
     },
     {
       "id": "Dev386",
       "user_id": 386,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-386"
     },
     {
       "id": "Dev387",
       "user_id": 387,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-387"
     },
     {
       "id": "Dev388",
       "user_id": 388,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-388"
     },
     {
       "id": "Dev389",
       "user_id": 389,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-389"
     },
     {
       "id": "Dev390",
       "user_id": 390,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-390"
     },
     {
       "id": "Dev391",
       "user_id": 391,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-391"
     },
     {
       "id": "Dev392",
       "user_id": 392,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-392"
     },
     {
       "id": "Dev393",
       "user_id": 393,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-393"
     },
     {
       "id": "Dev394",
       "user_id": 394,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-394"
     },
     {
       "id": "Dev395",
       "user_id": 395,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-395"
     },
     {
       "id": "Dev396",
       "user_id": 396,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-396"
     },
     {
       "id": "Dev397",
       "user_id": 397,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-397"
     },
     {
       "id": "Dev398",
       "user_id": 398,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-398"
     },
     {
       "id": "Dev399",
       "user_id": 399,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-399"
     },
     {
       "id": "Dev400",
       "user_id": 400,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-400"
     },
     {
       "id": "Dev401",
       "user_id": 401,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-401"
     },
     {
       "id": "Dev402",
       "user_id": 402,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-402"
     },
     {
       "id": "Dev403",
       "user_id": 403,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-403"
     },
     {
       "id": "Dev404",
       "user_id": 404,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-404"
     },
     {
       "id": "Dev405",
       "user_id": 405,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-405"
     },
     {
       "id": "Dev406",
       "user_id": 406,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-406"
     },
     {
       "id": "Dev407",
       "user_id": 407,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-407"
     },
     {
       "id": "Dev408",
       "user_id": 408,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-408"
     },
     {
       "id": "Dev409",
       "user_id": 409,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-409"
     },
     {
       "id": "Dev410",
       "user_id": 410,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-410"
     },
     {
       "id": "Dev411",
       "user_id": 411,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-411"
     },
     {
       "id": "Dev412",
       "user_id": 412,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-412"
     },
     {
       "id": "Dev413",
       "user_id": 413,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-413"
     },
     {
       "id": "Dev414",
       "user_id": 414,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-414"
     },
     {
       "id": "Dev415",
       "user_id": 415,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-415"
     },
     {
       "id": "Dev416",
       "user_id": 416,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-416"
     },
     {
       "id": "Dev417",
       "user_id": 417,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-417"
     },
     {
       "id": "Dev418",
       "user_id": 418,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-418"
     },
     {
       "id": "Dev419",
       "user_id": 419,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-419"
     },
     {
       "id": "Dev420",
       "user_id": 420,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-420"
     },
     {
       "id": "Dev421",
       "user_id": 421,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-421"
     },
     {
       "id": "Dev422",
       "user_id": 422,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-422"
     },
     {
       "id": "Dev423",
       "user_id": 423,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-423"
     },
     {
       "id": "Dev424",
       "user_id": 424,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-424"
     },
     {
       "id": "Dev425",
       "user_id": 425,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-425"
     },
     {
       "id": "Dev426",
       "user_id": 426,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-426"
     },
     {
       "id": "Dev427",
       "user_id": 427,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-427"
     },
     {
       "id": "Dev428",
       "user_id": 428,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-428"
     },
     {
       "id": "Dev429",
       "user_id": 429,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-429"
     },
     {
       "id": "Dev430",
       "user_id": 430,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-430"
     },
     {
       "id": "Dev431",
       "user_id": 431,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-431"
     },
     {
       "id": "Dev432",
       "user_id": 432,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-432"
     },
     {
       "id": "Dev433",
       "user_id": 433,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-433"
     },
     {
       "id": "Dev434",
       "user_id": 434,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-434"
     },
     {
       "id": "Dev435",
       "user_id": 435,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-435"
     },
     {
       "id": "Dev436",
       "user_id": 436,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-436"
     },
     {
       "id": "Dev437",
       "user_id": 437,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-437"
     },
     {
       "id": "Dev438",
       "user_id": 438,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-438"
     },
     {
       "id": "Dev439",
       "user_id": 439,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-439"
     },
     {
       "id": "Dev440",
       "user_id": 440,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-440"
     },
     {
       "id": "Dev441",
       "user_id": 441,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-441"
     },
     {
       "id": "Dev442",
       "user_id": 442,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-442"
     },
     {
       "id": "Dev443",
       "user_id": 443,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-443"
     },
     {
       "id": "Dev444",
       "user_id": 444,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-444"
     },
     {
       "id": "Dev445",
       "user_id": 445,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-445"
     },
     {
       "id": "Dev446",
       "user_id": 446,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-446"
     },
     {
       "id": "Dev447",
       "user_id": 447,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-447"
     },
     {
       "id": "Dev448",
       "user_id": 448,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-448"
     },
     {
       "id": "Dev449",
       "user_id": 449,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-449"
     },
     {
       "id": "Dev450",
       "user_id": 450,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-450"
     },
     {
       "id": "Dev451",
       "user_id": 451,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-451"
     },
     {
       "id": "Dev452",
       "user_id": 452,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-452"
     },
     {
       "id": "Dev453",
       "user_id": 453,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-453"
     },
     {
       "id": "Dev454",
       "user_id": 454,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-454"
     },
     {
       "id": "Dev455",
       "user_id": 455,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-455"
     },
     {
       "id": "Dev456",
       "user_id": 456,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-456"
     },
     {
       "id": "Dev457",
       "user_id": 457,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-457"
     },
     {
       "id": "Dev458",
       "user_id": 458,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-458"
     },
     {
       "id": "Dev459",
       "user_id": 459,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-459"
     },
     {
       "id": "Dev460",
       "user_id": 460,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-460"
     },
     {
       "id": "Dev461",
       "user_id": 461,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-461"
     },
     {
       "id": "Dev462",
       "user_id": 462,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-462"
     },
     {
       "id": "Dev463",
       "user_id": 463,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-463"
     },
     {
       "id": "Dev464",
       "user_id": 464,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-464"
     },
     {
       "id": "Dev465",
       "user_id": 465,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-465"
     },
     {
       "id": "Dev466",
       "user_id": 466,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-466"
     },
     {
       "id": "Dev467",
       "user_id": 467,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-467"
     },
     {
       "id": "Dev468",
       "user_id": 468,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-468"
     },
     {
       "id": "Dev469",
       "user_id": 469,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-469"
     },
     {
       "id": "Dev470",
       "user_id": 470,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-470"
     },
     {
       "id": "Dev471",
       "user_id": 471,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-471"
     },
     {
       "id": "Dev472",
       "user_id": 472,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-472"
     },
     {
       "id": "Dev473",
       "user_id": 473,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-473"
     },
     {
       "id": "Dev474",
       "user_id": 474,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-474"
     },
     {
       "id": "Dev475",
       "user_id": 475,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-475"
     },
     {
       "id": "Dev476",
       "user_id": 476,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-476"
     },
     {
       "id": "Dev477",
       "user_id": 477,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-477"
     },
     {
       "id": "Dev478",
       "user_id": 478,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-478"
     },
     {
       "id": "Dev479",
       "user_id": 479,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-479"
     },
     {
       "id": "Dev480",
       "user_id": 480,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-480"
     },
     {
       "id": "Dev481",
       "user_id": 481,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-481"
     },
     {
       "id": "Dev482",
       "user_id": 482,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-482"
     },
     {
       "id": "Dev483",
       "user_id": 483,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-483"
     },
     {
       "id": "Dev484",
       "user_id": 484,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-484"
     },
     {
       "id": "Dev485",
       "user_id": 485,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-485"
     },
     {
       "id": "Dev486",
       "user_id": 486,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-486"
     },
     {
       "id": "Dev487",
       "user_id": 487,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-487"
     },
     {
       "id": "Dev488",
       "user_id": 488,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-488"
     },
     {
       "id": "Dev489",
       "user_id": 489,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-489"
     },
     {
       "id": "Dev490",
       "user_id": 490,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-490"
     },
     {
       "id": "Dev491",
       "user_id": 491,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-491"
     },
     {
       "id": "Dev492",
       "user_id": 492,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-492"
     },
     {
       "id": "Dev493",
       "user_id": 493,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-493"
     },
     {
       "id": "Dev494",
       "user_id": 494,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-494"
     },
     {
       "id": "Dev495",
       "user_id": 495,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-495"
     },
     {
       "id": "Dev496",
       "user_id": 496,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-496"
     },
     {
       "id": "Dev497",
       "user_id": 497,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-497"
     },
     {
       "id": "Dev498",
       "user_id": 498,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-498"
     },
     {
       "id": "Dev499",
       "user_id": 499,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-499"
     },
     {
       "id": "Dev500",
       "user_id": 500,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-500"
     },
     {
       "id": "Dev501",
       "user_id": 501,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-501"
     },
     {
       "id": "Dev502",
       "user_id": 502,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-502"
     },
     {
       "id": "Dev503",
       "user_id": 503,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-503"
     },
     {
       "id": "Dev504",
       "user_id": 504,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-504"
     },
     {
       "id": "Dev505",
       "user_id": 505,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-505"
     },
     {
       "id": "Dev506",
       "user_id": 506,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-506"
     },
     {
       "id": "Dev507",
       "user_id": 507,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-507"
     },
     {
       "id": "Dev508",
       "user_id": 508,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-508"
     },
     {
       "id": "Dev509",
       "user_id": 509,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-509"
     },
     {
       "id": "Dev510",
       "user_id": 510,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-510"
     },
     {
       "id": "Dev511",
       "user_id": 511,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-511"
     },
     {
       "id": "Dev512",
       "user_id": 512,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-512"
     },
     {
       "id": "Dev513",
       "user_id": 513,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-513"
     },
     {
       "id": "Dev514",
       "user_id": 514,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-514"
     },
     {
       "id": "Dev515",
       "user_id": 515,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-515"
     },
     {
       "id": "Dev516",
       "user_id": 516,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-516"
     },
     {
       "id": "Dev517",
       "user_id": 517,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-517"
     },
     {
       "id": "Dev518",
       "user_id": 518,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-518"
     },
     {
       "id": "Dev519",
       "user_id": 519,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-519"
     },
     {
       "id": "Dev520",
       "user_id": 520,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-520"
     },
     {
       "id": "Dev521",
       "user_id": 521,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-521"
     },
     {
       "id": "Dev522",
       "user_id": 522,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-522"
     },
     {
       "id": "Dev523",
       "user_id": 523,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-523"
     },
     {
       "id": "Dev524",
       "user_id": 524,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-524"
     },
     {
       "id": "Dev525",
       "user_id": 525,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-525"
     },
     {
       "id": "Dev526",
       "user_id": 526,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-526"
     },
     {
       "id": "Dev527",
       "user_id": 527,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-527"
     },
     {
       "id": "Dev528",
       "user_id": 528,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-528"
     },
     {
       "id": "Dev529",
       "user_id": 529,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-529"
     },
     {
       "id": "Dev530",
       "user_id": 530,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-530"
     },
     {
       "id": "Dev531",
       "user_id": 531,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-531"
     },
     {
       "id": "Dev532",
       "user_id": 532,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-532"
     },
     {
       "id": "Dev533",
       "user_id": 533,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-533"
     },
     {
       "id": "Dev534",
       "user_id": 534,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-534"
     },
     {
       "id": "Dev535",
       "user_id": 535,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-535"
     },
     {
       "id": "Dev536",
       "user_id": 536,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-536"
     },
     {
       "id": "Dev537",
       "user_id": 537,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-537"
     },
     {
       "id": "Dev538",
       "user_id": 538,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-538"
     },
     {
       "id": "Dev539",
       "user_id": 539,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-539"
     },
     {
       "id": "Dev540",
       "user_id": 540,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-540"
     },
     {
       "id": "Dev541",
       "user_id": 541,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-541"
     },
     {
       "id": "Dev542",
       "user_id": 542,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-542"
     },
     {
       "id": "Dev543",
       "user_id": 543,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-543"
     },
     {
       "id": "Dev544",
       "user_id": 544,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-544"
     },
     {
       "id": "Dev545",
       "user_id": 545,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-545"
     },
     {
       "id": "Dev546",
       "user_id": 546,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-546"
     },
     {
       "id": "Dev547",
       "user_id": 547,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-547"
     },
     {
       "id": "Dev548",
       "user_id": 548,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-548"
     },
     {
       "id": "Dev549",
       "user_id": 549,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-549"
     },
     {
       "id": "Dev550",
       "user_id": 550,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-550"
     },
     {
       "id": "Dev551",
       "user_id": 551,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-551"
     },
     {
       "id": "Dev552",
       "user_id": 552,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-552"
     },
     {
       "id": "Dev553",
       "user_id": 553,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-553"
     },
     {
       "id": "Dev554",
       "user_id": 554,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-554"
     },
     {
       "id": "Dev555",
       "user_id": 555,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-555"
     },
     {
       "id": "Dev556",
       "user_id": 556,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-556"
     },
     {
       "id": "Dev557",
       "user_id": 557,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-557"
     },
     {
       "id": "Dev558",
       "user_id": 558,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-558"
     },
     {
       "id": "Dev559",
       "user_id": 559,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-559"
     },
     {
       "id": "Dev560",
       "user_id": 560,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-560"
     },
     {
       "id": "Dev561",
       "user_id": 561,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-561"
     },
     {
       "id": "Dev562",
       "user_id": 562,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-562"
     },
     {
       "id": "Dev563",
       "user_id": 563,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-563"
     },
     {
       "id": "Dev564",
       "user_id": 564,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-564"
     },
     {
       "id": "Dev565",
       "user_id": 565,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-565"
     },
     {
       "id": "Dev566",
       "user_id": 566,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-566"
     },
     {
       "id": "Dev567",
       "user_id": 567,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-567"
     },
     {
       "id": "Dev568",
       "user_id": 568,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-568"
     },
     {
       "id": "Dev569",
       "user_id": 569,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-569"
     },
     {
       "id": "Dev570",
       "user_id": 570,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-570"
     },
     {
       "id": "Dev571",
       "user_id": 571,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-571"
     },
     {
       "id": "Dev572",
       "user_id": 572,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-572"
     },
     {
       "id": "Dev573",
       "user_id": 573,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-573"
     },
     {
       "id": "Dev574",
       "user_id": 574,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-574"
     },
     {
       "id": "Dev575",
       "user_id": 575,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-575"
     },
     {
       "id": "Dev576",
       "user_id": 576,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-576"
     },
     {
       "id": "Dev577",
       "user_id": 577,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-577"
     },
     {
       "id": "Dev578",
       "user_id": 578,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-578"
     },
     {
       "id": "Dev579",
       "user_id": 579,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-579"
     },
     {
       "id": "Dev580",
       "user_id": 580,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-580"
     },
     {
       "id": "Dev581",
       "user_id": 581,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-581"
     },
     {
       "id": "Dev582",
       "user_id": 582,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-582"
     },
     {
       "id": "Dev583",
       "user_id": 583,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-583"
     },
     {
       "id": "Dev584",
       "user_id": 584,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-584"
     },
     {
       "id": "Dev585",
       "user_id": 585,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-585"
     },
     {
       "id": "Dev586",
       "user_id": 586,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-586"
     },
     {
       "id": "Dev587",
       "user_id": 587,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-587"
     },
     {
       "id": "Dev588",
       "user_id": 588,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-588"
     },
     {
       "id": "Dev589",
       "user_id": 589,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-589"
     },
     {
       "id": "Dev590",
       "user_id": 590,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-590"
     },
     {
       "id": "Dev591",
       "user_id": 591,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-591"
     },
     {
       "id": "Dev592",
       "user_id": 592,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-592"
     },
     {
       "id": "Dev593",
       "user_id": 593,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-593"
     },
     {
       "id": "Dev594",
       "user_id": 594,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-594"
     },
     {
       "id": "Dev595",
       "user_id": 595,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-595"
     },
     {
       "id": "Dev596",
       "user_id": 596,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-596"
     },
     {
       "id": "Dev597",
       "user_id": 597,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-597"
     },
     {
       "id": "Dev598",
       "user_id": 598,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-598"
     },
     {
       "id": "Dev599",
       "user_id": 599,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-599"
     },
     {
       "id": "Dev600",
       "user_id": 600,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-600"
     },
     {
       "id": "Dev601",
       "user_id": 601,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-601"
     },
     {
       "id": "Dev602",
       "user_id": 602,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-602"
     },
     {
       "id": "Dev603",
       "user_id": 603,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-603"
     },
     {
       "id": "Dev604",
       "user_id": 604,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-604"
     },
     {
       "id": "Dev605",
       "user_id": 605,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-605"
     },
     {
       "id": "Dev606",
       "user_id": 606,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-606"
     },
     {
       "id": "Dev607",
       "user_id": 607,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-607"
     },
     {
       "id": "Dev608",
       "user_id": 608,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-608"
     },
     {
       "id": "Dev609",
       "user_id": 609,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-609"
     },
     {
       "id": "Dev610",
       "user_id": 610,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-610"
     },
     {
       "id": "Dev611",
       "user_id": 611,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-611"
     },
     {
       "id": "Dev612",
       "user_id": 612,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-612"
     },
     {
       "id": "Dev613",
       "user_id": 613,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-613"
     },
     {
       "id": "Dev614",
       "user_id": 614,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-614"
     },
     {
       "id": "Dev615",
       "user_id": 615,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-615"
     },
     {
       "id": "Dev616",
       "user_id": 616,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-616"
     },
     {
       "id": "Dev617",
       "user_id": 617,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-617"
     },
     {
       "id": "Dev618",
       "user_id": 618,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-618"
     },
     {
       "id": "Dev619",
       "user_id": 619,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-619"
     },
     {
       "id": "Dev620",
       "user_id": 620,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-620"
     },
     {
       "id": "Dev621",
       "user_id": 621,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-621"
     },
     {
       "id": "Dev622",
       "user_id": 622,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-622"
     },
     {
       "id": "Dev623",
       "user_id": 623,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-623"
     },
     {
       "id": "Dev624",
       "user_id": 624,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-624"
     },
     {
       "id": "Dev625",
       "user_id": 625,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-625"
     },
     {
       "id": "Dev626",
       "user_id": 626,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-626"
     },
     {
       "id": "Dev627",
       "user_id": 627,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-627"
     },
     {
       "id": "Dev628",
       "user_id": 628,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-628"
     },
     {
       "id": "Dev629",
       "user_id": 629,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-629"
     },
     {
       "id": "Dev630",
       "user_id": 630,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-630"
     },
     {
       "id": "Dev631",
       "user_id": 631,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-631"
     },
     {
       "id": "Dev632",
       "user_id": 632,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-632"
     },
     {
       "id": "Dev633",
       "user_id": 633,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-633"
     },
     {
       "id": "Dev634",
       "user_id": 634,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-634"
     },
     {
       "id": "Dev635",
       "user_id": 635,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-635"
     },
     {
       "id": "Dev636",
       "user_id": 636,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-636"
     },
     {
       "id": "Dev637",
       "user_id": 637,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-637"
     },
     {
       "id": "Dev638",
       "user_id": 638,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-638"
     },
     {
       "id": "Dev639",
       "user_id": 639,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-639"
     },
     {
       "id": "Dev640",
       "user_id": 640,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-640"
     },
     {
       "id": "Dev641",
       "user_id": 641,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-641"
     },
     {
       "id": "Dev642",
       "user_id": 642,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-642"
     },
     {
       "id": "Dev643",
       "user_id": 643,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-643"
     },
     {
       "id": "Dev644",
       "user_id": 644,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-644"
     },
     {
       "id": "Dev645",
       "user_id": 645,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-645"
     },
     {
       "id": "Dev646",
       "user_id": 646,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-646"
     },
     {
       "id": "Dev647",
       "user_id": 647,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-647"
     },
     {
       "id": "Dev648",
       "user_id": 648,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-648"
     },
     {
       "id": "Dev649",
       "user_id": 649,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-649"
     },
     {
       "id": "Dev650",
       "user_id": 650,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-650"
     },
     {
       "id": "Dev651",
       "user_id": 651,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-651"
     },
     {
       "id": "Dev652",
       "user_id": 652,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-652"
     },
     {
       "id": "Dev653",
       "user_id": 653,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-653"
     },
     {
       "id": "Dev654",
       "user_id": 654,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-654"
     },
     {
       "id": "Dev655",
       "user_id": 655,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-655"
     },
     {
       "id": "Dev656",
       "user_id": 656,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-656"
     },
     {
       "id": "Dev657",
       "user_id": 657,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-657"
     },
     {
       "id": "Dev658",
       "user_id": 658,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-658"
     },
     {
       "id": "Dev659",
       "user_id": 659,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-659"
     },
     {
       "id": "Dev660",
       "user_id": 660,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-660"
     },
     {
       "id": "Dev661",
       "user_id": 661,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-661"
     },
     {
       "id": "Dev662",
       "user_id": 662,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-662"
     },
     {
       "id": "Dev663",
       "user_id": 663,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-663"
     },
     {
       "id": "Dev664",
       "user_id": 664,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-664"
     },
     {
       "id": "Dev665",
       "user_id": 665,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-665"
     },
     {
       "id": "Dev666",
       "user_id": 666,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-666"
     },
     {
       "id": "Dev667",
       "user_id": 667,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-667"
     },
     {
       "id": "Dev668",
       "user_id": 668,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-668"
     },
     {
       "id": "Dev669",
       "user_id": 669,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-669"
     },
     {
       "id": "Dev670",
       "user_id": 670,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-670"
     },
     {
       "id": "Dev671",
       "user_id": 671,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-671"
     },
     {
       "id": "Dev672",
       "user_id": 672,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-672"
     },
     {
       "id": "Dev673",
       "user_id": 673,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-673"
     },
     {
       "id": "Dev674",
       "user_id": 674,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-674"
     },
     {
       "id": "Dev675",
       "user_id": 675,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-675"
     },
     {
       "id": "Dev676",
       "user_id": 676,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-676"
     },
     {
       "id": "Dev677",
       "user_id": 677,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-677"
     },
     {
       "id": "Dev678",
       "user_id": 678,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-678"
     },
     {
       "id": "Dev679",
       "user_id": 679,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-679"
     },
     {
       "id": "Dev680",
       "user_id": 680,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-680"
     },
     {
       "id": "Dev681",
       "user_id": 681,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-681"
     },
     {
       "id": "Dev682",
       "user_id": 682,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-682"
     },
     {
       "id": "Dev683",
       "user_id": 683,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-683"
     },
     {
       "id": "Dev684",
       "user_id": 684,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-684"
     },
     {
       "id": "Dev685",
       "user_id": 685,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-685"
     },
     {
       "id": "Dev686",
       "user_id": 686,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-686"
     },
     {
       "id": "Dev687",
       "user_id": 687,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-687"
     },
     {
       "id": "Dev688",
       "user_id": 688,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-688"
     },
     {
       "id": "Dev689",
       "user_id": 689,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-689"
     },
     {
       "id": "Dev690",
       "user_id": 690,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-690"
     },
     {
       "id": "Dev691",
       "user_id": 691,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-691"
     },
     {
       "id": "Dev692",
       "user_id": 692,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-692"
     },
     {
       "id": "Dev693",
       "user_id": 693,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Miro-693"
     },
     {
       "id": "Dev694",
       "user_id": 694,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Kira-694"
     },
     {
       "id": "Dev695",
       "user_id": 695,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jade-695"
     },
     {
       "id": "Dev696",
       "user_id": 696,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sol-696"
     },
     {
       "id": "Dev697",
       "user_id": 697,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ari-697"
     },
     {
       "id": "Dev698",
       "user_id": 698,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eli-698"
     },
     {
       "id": "Dev699",
       "user_id": 699,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Emi-699"
     },
     {
       "id": "Dev700",
       "user_id": 700,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ian-700"
     },
     {
       "id": "Dev701",
       "user_id": 701,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zoe-701"
     },
     {
       "id": "Dev702",
       "user_id": 702,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Liz-702"
     },
     {
       "id": "Dev703",
       "user_id": 703,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tom-703"
     },
     {
       "id": "Dev704",
       "user_id": 704,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Max-704"
     },
     {
       "id": "Dev705",
       "user_id": 705,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sam-705"
     },
     {
       "id": "Dev706",
       "user_id": 706,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mel-706"
     },
     {
       "id": "Dev707",
       "user_id": 707,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mia-707"
     },
     {
       "id": "Dev708",
       "user_id": 708,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ana-708"
     },
     {
       "id": "Dev709",
       "user_id": 709,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Eva-709"
     },
     {
       "id": "Dev710",
       "user_id": 710,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rui-710"
     },
     {
       "id": "Dev711",
       "user_id": 711,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gil-711"
     },
     {
       "id": "Dev712",
       "user_id": 712,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Teo-712"
     },
     {
       "id": "Dev713",
       "user_id": 713,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Jo-713"
     },
     {
       "id": "Dev714",
       "user_id": 714,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luiz-714"
     },
     {
       "id": "Dev715",
       "user_id": 715,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rita-715"
     },
     {
       "id": "Dev716",
       "user_id": 716,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ada-716"
     },
     {
       "id": "Dev717",
       "user_id": 717,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lia-717"
     },
     {
       "id": "Dev718",
       "user_id": 718,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bia-718"
     },
     {
       "id": "Dev719",
       "user_id": 719,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Caio-719"
     },
     {
       "id": "Dev720",
       "user_id": 720,
       "type": "developer",
       "contractRoleName": "Scrum Master",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivo-720"
     },
     {
       "id": "Dev721",
       "user_id": 721,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Theo-721"
     },
     {
       "id": "Dev722",
       "user_id": 722,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nina-722"
     },
     {
       "id": "Dev723",
       "user_id": 723,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ravi-723"
     },
     {
       "id": "Dev724",
       "user_id": 724,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luna-724"
     },
     {
       "id": "Dev725",
       "user_id": 725,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maya-725"
     },
     {
       "id": "Dev726",
       "user_id": 726,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Leo-726"
     },
     {
       "id": "Dev727",
       "user_id": 727,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nilo-727"
     },
     {
       "id": "Dev728",
       "user_id": 728,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tito-728"
     },
     {
       "id": "Dev729",
       "user_id": 729,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Dora-729"
     },
     {
       "id": "Dev730",
       "user_id": 730,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Cora-730"
     },
     {
       "id": "Dev731",
       "user_id": 731,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Iris-731"
     },
     {
       "id": "Dev732",
       "user_id": 732,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yara-732"
     },
     {
       "id": "Dev733",
       "user_id": 733,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Zeca-733"
     },
     {
       "id": "Dev734",
       "user_id": 734,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Luma-734"
     },
     {
       "id": "Dev735",
       "user_id": 735,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Noah-735"
     },
     {
       "id": "Dev736",
       "user_id": 736,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Otto-736"
     },
     {
       "id": "Dev737",
       "user_id": 737,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Enzo-737"
     },
     {
       "id": "Dev738",
       "user_id": 738,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Hugo-738"
     },
     {
       "id": "Dev739",
       "user_id": 739,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Sara-739"
     },
     {
       "id": "Dev740",
       "user_id": 740,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lara-740"
     },
     {
       "id": "Dev741",
       "user_id": 741,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Maia-741"
     },
     {
       "id": "Dev742",
       "user_id": 742,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Mila-742"
     },
     {
       "id": "Dev743",
       "user_id": 743,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rute-743"
     },
     {
       "id": "Dev744",
       "user_id": 744,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gabi-744"
     },
     {
       "id": "Dev745",
       "user_id": 745,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Davi-745"
     },
     {
       "id": "Dev746",
       "user_id": 746,
       "type": "developer",
       "contractRoleName": "Product Owner",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Yuri-746"
     },
     {
       "id": "Dev747",
       "user_id": 747,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ivan-747"
     },
     {
       "id": "Dev748",
       "user_id": 748,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Raul-748"
     },
     {
       "id": "Dev749",
       "user_id": 749,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Rosa-749"
     },
     {
       "id": "Dev750",
       "user_id": 750,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Tina-750"
     },
     {
       "id": "Dev751",
       "user_id": 751,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Nara-751"
     },
     {
       "id": "Dev752",
       "user_id": 752,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Bela-752"
     },
     {
       "id": "Dev753",
       "user_id": 753,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Ceci-753"
     },
     {
       "id": "Dev754",
       "user_id": 754,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Levi-754"
     },
     {
       "id": "Dev755",
       "user_id": 755,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Gael-755"
     },
     {
       "id": "Dev756",
       "user_id": 756,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lino-756"
     },
     {
       "id": "Dev757",
       "user_id": 757,
       "type": "developer",
       "contractRoleName": "Dev Team",
-      "hardskill": []
+      "hardskill": [],
+      "pseudonimo": "Lila-757"
     }
   ],
   "edges": [

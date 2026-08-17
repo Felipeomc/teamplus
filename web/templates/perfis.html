@@ -40,7 +40,8 @@ const devs = {{ devs|tojson }};
 let visiveis = devs.length;
 
 function renderCard(d) {
-  const initials = d.id.replace('Dev','D');
+  const nome = d.pseudonimo || d.id;
+  const initials = nome.split('-')[0].slice(0,2).toUpperCase();
   const domPills = (d.dominio||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
   const ecoPills = (d.ecossistema||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
   const lingPills = (d.linguagens||[]).slice(0,4).map(t=>`<span class="dev-pill">${t}</span>`).join('');
@@ -50,8 +51,8 @@ function renderCard(d) {
     <div class="dev-header">
       <div class="dev-avatar">${initials}</div>
       <div>
-        <div class="dev-id">${d.id}</div>
-        <div class="dev-role">${d.role}</div>
+        <div class="dev-id">${nome}</div>
+        <div class="dev-role">${d.id} · ${d.role}</div>
       </div>
     </div>
     ${domPills  ? `<div class="dev-section">Domínio</div><div class="dev-pills">${domPills}</div>` : ''}
@@ -65,7 +66,7 @@ function filtrar() {
   const q = document.getElementById('busca').value.toLowerCase().trim();
   const filtered = q
     ? devs.filter(d => {
-        const haystack = [d.id, d.role,
+        const haystack = [d.id, d.pseudonimo, d.role,
           ...(d.dominio||[]), ...(d.ecossistema||[]),
           ...(d.linguagens||[]), ...(d.metodologia||[])
         ].join(' ').toLowerCase();

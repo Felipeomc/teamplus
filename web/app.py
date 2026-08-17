@@ -278,14 +278,69 @@ def _dev_info(dev_id: int, devs: list) -> dict:
             return {
                 "id":          f"Dev{dev_id}",
                 "user_id":     dev_id,
+                "pseudonimo":  d.get("pseudonimo") or f"Dev{dev_id}",
                 "role":        d.get("contractRoleName", "—"),
                 "dominio":     d.get("dominio", []),
                 "ecossistema": d.get("ecossistema", []),
                 "linguagens":  d.get("linguagens", []),
                 "metodologia": d.get("methodology", []),
             }
-    return {"id": f"Dev{dev_id}", "user_id": dev_id,
+    return {"id": f"Dev{dev_id}", "user_id": dev_id, "pseudonimo": f"Dev{dev_id}",
             "role": "—", "dominio": [], "ecossistema": [], "linguagens": [], "metodologia": []}
+
+
+def _equipe_avaliada(team_ids, projeto_alvo):
+    """Avalia uma composição sem alterar o avaliador surrogate."""
+    ids = [int(value) for value in team_ids]
+    resultado = avaliar_equipe(ids, projeto_alvo, log=False)
+    fitness = round(float(resultado.get("media_AE") or 0), 4)
+    at_score = round(float(resultado.get("AT_cont") or 0), 4)
+    ac_score = round(float(resultado.get("AC_cont") or 0), 4)
+    scores = {}
+    for dim, value in (resultado.get("scores") or {}).items():
+        if isinstance(value, dict):
+            scores[dim] = {
+                "score": round(float(value.get("score") or 0), 4),
+                "rotulo": value.get("rotulo", "—"),
+            }
+    devs = _load_db()
+    return {
+        "best_team": ids,
+        "membros": [_dev_info(dev_id, devs) for dev_id in ids],
+        "best_fitness": fitness,
+        "fitness": fitness,
+        "scores": scores,
+        "at_score": at_score,
+        "at_label": _score_label(at_score),
+        "ac_score": ac_score,
+        "ac_label": _score_label(ac_score),
+        "coverage": resultado.get("coverage", {}),
+        "pares_info": resultado.get("pares_info", {}),
+    }
+
+
+def _hidratar_equipe(equipe, devs=None):
+    """Atualiza metadados visuais de registros antigos a partir da base atual."""
+    if not isinstance(equipe, dict):
+        return equipe
+    devs = devs or _load_db()
+    ids = equipe.get("best_team") or [
+        member.get("user_id") for member in equipe.get("membros", [])
+        if member.get("user_id") is not None
+    ]
+    if ids:
+        equipe = dict(equipe)
+        equipe["membros"] = [_dev_info(int(dev_id), devs) for dev_id in ids]
+    return equipe
+
+
+def _hidratar_registro(registro):
+    devs = _load_db()
+    hydrated = _hidratar_equipe(dict(registro), devs)
+    for field in ("equipe_ga_original",):
+        if hydrated.get(field):
+            hydrated[field] = _hidratar_equipe(hydrated[field], devs)
+    return hydrated
 def _enriquecer(resultado: dict, projeto_alvo: dict, entrada: dict) -> dict:
     """Recebe retorno bruto do GA e adiciona membros + metadados."""
     devs     = _load_db()
@@ -495,6 +550,7 @@ def api_salvar():
     registro_id = str(data.get("registro_id") or "").strip()
     run_id = str(data.get("run_id") or "").strip()
     nome_proj = data.get("nome_projeto", "Projeto sem título")
+    hist = _read_hist()
 
     registro = {
         "id":           registro_id or datetime.now().strftime("%Y%m%d%H%M%S"),
@@ -541,7 +597,6 @@ def api_salvar():
             "duration_sec": sugestao_ga.get("duration_sec", 0),
         }
 
-    hist = _read_hist()
     if registro_id:
         indice = next((i for i, item in enumerate(hist) if item.get("id") == registro_id), None)
         if indice is None:
@@ -560,6 +615,7 @@ def api_salvar():
         _write_backlog(backlog)
 
     return jsonify({"ok": True, "id": registro["id"], "atualizado": bool(registro_id)})
+
 
 @app.route("/api/sugerir_fila", methods=["POST"])
 def sugerir_fila():
@@ -795,7 +851,7 @@ def baixar_recommendation_run_csv(run_id):
 
 @app.route("/historico")
 def historico():
-    hist = _read_hist()
+    hist = [_hidratar_registro(item) for item in _read_hist()]
     return render_template("historico.html", historico=hist)
 
 
@@ -804,6 +860,7 @@ def perfis():
     devs = _load_db()
     resumo = [{
         "id":          f"Dev{d.get('user_id', d.get('id', ''))}",
+        "pseudonimo":  d.get("pseudonimo") or f"Dev{d.get('user_id', d.get('id', ''))}",
         "role":        d.get("contractRoleName", "—"),
         "dominio":     d.get("dominio", []),
         "ecossistema": d.get("ecossistema", []),
@@ -816,6 +873,19 @@ def perfis():
 @app.route("/api/devs")
 def api_devs():
     return jsonify(_load_db())
+
+
+@app.route("/api/devs/resumo")
+def api_devs_resumo():
+    devs = []
+    for item in _load_db():
+        raw_id = item.get("id") or item.get("user_id")
+        try:
+            dev_id = int(raw_id)
+        except (TypeError, ValueError):
+            continue
+        devs.append(_dev_info(dev_id, [item]))
+    return jsonify(devs)
 
 @app.route("/api/extrair_projeto", methods=["POST"])
 def api_extrair_projeto():
@@ -913,7 +983,7 @@ def api_get_registro(reg_id):
     hist = _read_hist()
     for r in hist:
         if r.get("id") == reg_id:
-            return jsonify(r)
+            return jsonify(_hidratar_registro(r))
     return jsonify({"erro": "Não encontrado"}), 404
 
 @app.route("/tecnologias")
@@ -1005,6 +1075,130 @@ def api_grafo_equipe():
     return jsonify({"pares": pares})
 
 
+def _cobertura_resumida(avaliacao):
+    resumo = {}
+    for code, label in (("M", "must"), ("S", "should"), ("C", "could")):
+        covered = total = 0
+        for dim in ("dominio", "ecossistema", "linguagens"):
+            value = (avaliacao.get("coverage") or {}).get(dim, {}).get(code) or {}
+            covered += int(value.get("covered") or 0)
+            total += int(value.get("total") or 0)
+        resumo[label] = {"covered": covered, "total": total}
+    return resumo
+
+
+def _requisitos_cobertos(team, projeto_alvo):
+    result = set()
+    for dim in ("dominio", "ecossistema", "linguagens"):
+        skills = {
+            str(skill).strip().casefold()
+            for member in team.get("membros", []) for skill in member.get(dim, [])
+        }
+        for priority in ("must", "should", "could"):
+            for technology in projeto_alvo.get(dim, {}).get(priority, []) or []:
+                if str(technology).strip().casefold() in skills:
+                    result.add((dim, priority, str(technology)))
+    return result
+
+
+def _colaboracao_membro(dev_id, teammates):
+    _load_graph_db()
+    weights = []
+    projects = 0
+    for teammate in teammates:
+        edge = _GRAPH_DB.get(tuple(sorted([int(dev_id), int(teammate)])))
+        weights.append(float(edge.get("weight", 0)) if edge else 0.0)
+        projects += int(edge.get("N", 0)) if edge else 0
+    return {
+        "media": round(sum(weights) / len(weights), 4) if weights else 0,
+        "projetos": projects,
+        "relacoes": len([value for value in weights if value > 0]),
+        "total_relacoes": len(weights),
+    }
+
+
+@app.route("/api/historico/<reg_id>/comparacao")
+def api_comparacao_historico(reg_id):
+    registro = next((item for item in _read_hist() if item.get("id") == reg_id), None)
+    if not registro:
+        return jsonify({"erro": "Registro não encontrado."}), 404
+    before_raw = registro.get("equipe_ga_original")
+    if not before_raw:
+        return jsonify({"erro": "Este registro não possui uma equipe de referência para comparação."}), 404
+
+    projeto = registro.get("projeto_alvo") or {}
+    try:
+        before = _equipe_avaliada(before_raw.get("best_team") or [], projeto)
+        after = _equipe_avaliada(registro.get("best_team") or [], projeto)
+    except Exception:
+        import traceback
+        print("[ERRO COMPARAÇÃO]", traceback.format_exc())
+        return jsonify({"erro": "Não foi possível comparar as equipes."}), 500
+
+    before_ids, after_ids = set(before["best_team"]), set(after["best_team"])
+    kept = sorted(before_ids & after_ids)
+    removed = sorted(before_ids - after_ids)
+    added = sorted(after_ids - before_ids)
+    devs = _load_db()
+
+    before_covered = _requisitos_cobertos(before, projeto)
+    after_covered = _requisitos_cobertos(after, projeto)
+    dimension_names = {"dominio": "Domínio", "ecossistema": "Ecossistema", "linguagens": "Linguagens"}
+    priority_names = {"must": "MUST", "should": "SHOULD", "could": "COULD"}
+    fmt_req = lambda item: {
+        "dimensao": dimension_names[item[0]], "prioridade": priority_names[item[1]], "tecnologia": item[2]
+    }
+
+    pairs = []
+    for index in range(max(len(removed), len(added))):
+        out_id = removed[index] if index < len(removed) else None
+        in_id = added[index] if index < len(added) else None
+        out_profile = _dev_info(out_id, devs) if out_id is not None else None
+        in_profile = _dev_info(in_id, devs) if in_id is not None else None
+        def skill_map(profile):
+            return {
+                str(skill).strip().casefold(): str(skill)
+                for dimension in ("dominio", "ecossistema", "linguagens")
+                for skill in ((profile or {}).get(dimension) or [])
+            }
+        out_skills, in_skills = skill_map(out_profile), skill_map(in_profile)
+        pairs.append({
+            "saiu": out_profile,
+            "entrou": in_profile,
+            "competencias_exclusivas_saiu": sorted(out_skills[key] for key in out_skills.keys() - in_skills.keys()),
+            "competencias_exclusivas_entrou": sorted(in_skills[key] for key in in_skills.keys() - out_skills.keys()),
+            "colaboracao_saiu": _colaboracao_membro(out_id, kept) if out_id is not None else None,
+            "colaboracao_entrou": _colaboracao_membro(in_id, kept) if in_id is not None else None,
+        })
+
+    def metric_payload(team):
+        pairs_info = team.get("pares_info") or {}
+        return {
+            "ae": team["fitness"], "at": team["at_score"], "ac": team["ac_score"],
+            "coverage": _cobertura_resumida(team),
+            "pares_colaborativos": int(pairs_info.get("n_colab") or 0),
+            "pares_total": int(pairs_info.get("n_total") or 0),
+            "projetos_compartilhados": int(pairs_info.get("n_proj") or 0),
+        }
+
+    return jsonify({
+        "base": "ga",
+        "antes": {**metric_payload(before), "membros": before["membros"]},
+        "depois": {**metric_payload(after), "membros": after["membros"]},
+        "composicao": {
+            "mantidos": [_dev_info(value, devs) for value in kept],
+            "removidos": [_dev_info(value, devs) for value in removed],
+            "adicionados": [_dev_info(value, devs) for value in added],
+        },
+        "tecnologias": {
+            "ganhas": [fmt_req(item) for item in sorted(after_covered - before_covered)],
+            "perdidas": [fmt_req(item) for item in sorted(before_covered - after_covered)],
+            "mantidas": [fmt_req(item) for item in sorted(before_covered & after_covered)],
+        },
+        "comparacao_individual": pairs,
+    })
+
+
 @app.route("/api/grafo")
 def api_grafo():
     min_w     = round(float(request.args.get("min_w", 0.5)), 2)
@@ -1031,10 +1225,23 @@ def api_grafo():
         for i, nid in enumerate(sorted(ids_usados))
     }
 
-    nodes_out = [
-        {**n, "x": pos_map[n["id"]][0], "y": pos_map[n["id"]][1]}
-        for n in _SUMMARY["nodes"] if n["id"] in ids_usados
-    ]
+    devs = _load_db()
+    aliases = {}
+    for profile in devs:
+        try:
+            profile_id = int(profile.get("id") or profile.get("user_id") or -1)
+        except (TypeError, ValueError):
+            continue
+        aliases[profile_id] = profile.get("pseudonimo")
+    nodes_out = []
+    for node in _SUMMARY["nodes"]:
+        if node["id"] not in ids_usados:
+            continue
+        numeric_id = int("".join(character for character in str(node["id"]) if character.isdigit()) or 0)
+        nodes_out.append({
+            **node, "x": pos_map[node["id"]][0], "y": pos_map[node["id"]][1],
+            "pseudonimo": aliases.get(numeric_id) or node["id"],
+        })
 
     result = {
         "nodes":       nodes_out,
@@ -1055,7 +1262,10 @@ def api_grafo_conexoes(node_id):
     if not node:
         return jsonify({"erro": "Nó não encontrado"}), 404
 
-    return jsonify(node)
+    numeric_id = int("".join(character for character in str(node_id) if character.isdigit()) or 0)
+    profile = next((item for item in _load_db()
+                    if int(item.get("id") or item.get("user_id") or -1) == numeric_id), {})
+    return jsonify({**node, "pseudonimo": profile.get("pseudonimo") or node_id})
 @app.route("/api/explicar", methods=["POST"])
 def api_explicar():
     import anthropic

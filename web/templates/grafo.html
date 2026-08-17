@@ -239,7 +239,7 @@ function draw() {
       _ctx.font=`${Math.min(11,6+_scale*2.5)}px IBM Plex Sans,sans-serif`;
       _ctx.textAlign='center'; _ctx.textBaseline='middle';
       _ctx.fillStyle='rgba(226,232,240,.8)';
-      _ctx.fillText(n.id, cx, cy+rv+7);
+      _ctx.fillText(n.pseudonimo || n.id, cx, cy+rv+7);
     }
   });
 }
@@ -298,13 +298,13 @@ const tip=document.getElementById('tooltip');
 function showTip(e,n) {
   tip.style.display='block';
   tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY-10)+'px';
-  tip.textContent=`${n.id} · ${n._deg} conexões no grafo`;
+  tip.textContent=`${n.pseudonimo || n.id} (${n.id}) · ${n._deg} conexões no grafo`;
 }
 function hideTip() { tip.style.display='none'; }
 
 // ── Perfil card ───────────────────────────────────────────────────────────────
 async function mostrarPerfil(n) {
-  document.getElementById('pc-name').textContent   = n.id;
+  document.getElementById('pc-name').textContent   = `${n.pseudonimo || n.id} · ${n.id}`;
   document.getElementById('pc-role').textContent   = n.contractRoleName || 'Developer';
   document.getElementById('pc-skills').innerHTML   =
     (n.hardskill||[]).slice(0,12).map(s=>`<span class="pc-skill">${s}</span>`).join('');
