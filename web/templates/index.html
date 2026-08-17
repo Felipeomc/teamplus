@@ -1276,7 +1276,10 @@ async function salvar(si) {
     'Esta ação substituirá a equipe atualmente salva neste projeto. Deseja continuar?'
   )) return;
   const atual=[...(_sugestoes[si]?.best_team||[])].map(Number).sort((a,b)=>a-b);
-  const original=[...(_sugestoesOriginais[si]?.best_team||[])].map(Number).sort((a,b)=>a-b);
+  // A referência da decisão é sempre a Top 1 originalmente retornada pelo GA,
+  // antes de qualquer troca feita pelo gestor e independentemente do cartão salvo.
+  const recomendadaTop1 = _sugestoesOriginais[0] || _sugestoes[0];
+  const original=[...(recomendadaTop1?.best_team||[])].map(Number).sort((a,b)=>a-b);
   const ajustada=JSON.stringify(atual)!==JSON.stringify(original);
   const motivo=ajustada ? (prompt('Qual foi o principal motivo da alteração? (opcional)')||'') : '';
   btn.textContent = 'Salvando…';
@@ -1288,7 +1291,7 @@ async function salvar(si) {
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         sugestao:     _sugestoes[si],
-        sugestao_ga_original: _sugestoesOriginais[si] || _sugestoes[si],
+        sugestao_ga_original: recomendadaTop1,
         nome_projeto: _nomeProjeto,
         descricao: document.getElementById('descricao-livre').value.trim(),
         projeto_alvo: _projetoAlvo,
